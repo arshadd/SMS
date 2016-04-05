@@ -38,4 +38,26 @@ class classes_m extends CI_Model
         return false;
     }
 
+    function save($school_id, $class_id, $class)
+    {
+        if ($class_id > 0) {
+
+            //Update
+            $this->db->where('class_id', $class_id);
+
+            //array_push($class, 'updated_at='.date('Y-m-d H:i:s'));
+            //$class = array('updated_at'=> date('Y-m-d H:i:s'), $class);
+
+            $result = $this->db->update('classes', $class);
+        } else {
+            //Insert
+            $result = $this->db->insert('classes', $class);
+
+            //$result = $this->db->insert('classes', array('created_at' =>  date('Y-m-d H:i:s'), $class));
+
+            //$result = $this->school_m->insert(array('class_id' => $class_id, $class));
+        }
+
+        return $result;
+    }
 }

@@ -38,7 +38,36 @@ class classes extends REST_Controller {
             $this->response(array("status" => "success", "message" => "", "data" => $class));
         }
     }
+    
+    function save_post()
+    {
+        //Get logged school id
+        $school_id = $this->session->userdata('school_id');
 
+        //Get primary key
+        $class_id = $this->post('class_id');
+
+        //Make array
+        $class = array(
+            'code' => $this->post('code'),
+            'name' => $this->post('name'),
+            'section_name' => $this->post('section_name'),
+            'school_id' => $school_id
+        );
+        //$this->response(array("status" => "success", "message" => "Class information saved successfully", "data" => $class));
+
+        //return $class;
+
+
+        //Save
+        $result = $this->classes_m->save($school_id, $class_id, $class);
+
+        if ($result === FALSE) {
+            $this->response(array("status" => "failed", "message" => "Failed to save.", "data" => $result));
+        } else {
+            $this->response(array("status" => "success", "message" => "Class information saved successfully", "data" => $result));
+        }
+    }
     /*function save_post()
     {
 

@@ -1,21 +1,21 @@
 var ClassModule = function () {
 
     //Create Class
-    var Class = { ClassId: 0, Code: '', FirstName: '', LastName: '', DateOfBirth: '', Gender: '', DateOfJoining: '', DepartmentId: 0, DesignationId: 0, Qualification: '', TotalExperience: '', PresentAddress: '', PermanentAddress: '', Country: '', State: '', City: '', Mobile: '', Phone: '', Email: '', Photo: '', Status: '' };
+    var Class = { class_id: 0, code: '', name: '', section_name: ''};
 
     //Field Declaration Section
     
-    var ClassIdFld = $('#ClassId');
-    var CodeFld = $('#Code');
-    var NameFld = $('#Name');
-    var GradingSystemFld = $('#GradingSystem');
+    var ClassIdFld = $('#Form_Class #class_id');
+    var CodeFld = $('#Form_Class #code');
+    var NameFld = $('#Form_Class #name');
+    var SectionNameFld = $('#Form_Class #section_name');
     
 
-    var loadGridUrl = baseApiUrl + "Class/List";
-    var editUrl = baseApiUrl + "Class/Find/";
-    var saveUrl = baseApiUrl + "Class/Save";
-    var deleteUrl = baseApiUrl + "Class/Delete/";
-    var listUrl = baseAppUrl + "Class/List";
+    var loadGridUrl = baseApiUrl + "classes/all_classes";
+    var editUrl = baseApiUrl + "classes/find_class/";
+    var saveUrl = baseApiUrl + "classes/save";
+    var deleteUrl = baseApiUrl + "classes/delete/";
+    var listUrl = baseAppUrl + "classes/all_classes";
 
     var handleValidation = function () {
         //load All dropdowns
@@ -38,13 +38,13 @@ var ClassModule = function () {
             rules: {
                 //Field Validation Rule
                 
-                Code: {
+                code: {
                     required: true
                 }, 
-                Name: {
+                name: {
                     required: true
                 }, 
-                GradingSystem: {
+                section_name: {
                     required: true
                 }, 
             },
@@ -89,15 +89,15 @@ var ClassModule = function () {
 
     function save() {
        
-        var Class = Class;
+        var cls = Class;
         debugger;
 
         //Get values
-        
-        Class.ClassId = ClassIdFld.val();
-        Class.Code = CodeFld.val();
-        Class.Name = NameFld.val();
-        Class.GradingSystem = GradingSystemFld.val();
+
+        cls.class_id = ClassIdFld.val();
+        cls.code = CodeFld.val();
+        cls.name = NameFld.val();
+        cls.section_name = SectionNameFld.val();
 
         var url = saveUrl;
         $.ajax({
@@ -105,18 +105,34 @@ var ClassModule = function () {
             accepts: 'application/json',
             cache: false,
             type: 'POST',
-            data : Class,
+            data : cls,
             dataType: 'jsonp',
-            complete: function (result) {
+            success : function(result){
+                debugger;
+                if(result.status == "success"){
+                    ShowMessage("success", result.message);
+                }else {
+                    ShowMessage("error", result.message);
+                }
+                //alert('success'+result);
+            },
+            failed : function(result){
+                if(result.status == "failed") {
+                    ShowMessage("error", result.message);
+                }
+            },
+            /*complete: function (result) {
+                debugger;
+                alert('complete'+result);
                 // Handle the complete event
-                var obj = JSON.parse(result.responseText);
+                /!*var obj = JSON.parse(result.responseText);
                 debugger;
                 if (obj.Success == true) {
                     window.location = listUrl + "?message=Class Information Saved";
                 } else {
                     ShowMessage("error", obj.Message);
-                }
-            }
+                }*!/
+            }*/
         });
     }
 
@@ -171,8 +187,8 @@ var ClassModule = function () {
     function ShowMessage(type, message){
         if (message == 'undefined') return;
 
-        var error = $('.alert-danger');
-        var success = $('.alert-success');
+        var error = $('#mdlCreateClass .alert-danger');
+        var success = $('#mdlCreateClass .alert-success');
 
         message = '<button data-close="alert" class="close"></button>'+ message;
         
@@ -199,30 +215,14 @@ var ClassModule = function () {
 
         var newTable = $('#ClassGrid').DataTable({
             //dom: "Bfrtip",
-            //ajax: loadGridUrl,
+            ajax: loadGridUrl,
             columns: [
                 //Table Column Header Collection
                 
-                { data: "Code" }, 
-                { data: "FirstName" }, 
-                { data: "LastName" }, 
-                { data: "DateOfBirth" }, 
-                { data: "Gender" }, 
-                { data: "DateOfJoining" }, 
-                { data: "DepartmentId" }, 
-                { data: "DesignationId" }, 
-                { data: "Qualification" }, 
-                { data: "TotalExperience" }, 
-                { data: "PresentAddress" }, 
-                { data: "PermanentAddress" }, 
-                { data: "Country" }, 
-                { data: "State" }, 
-                { data: "City" }, 
-                { data: "Mobile" }, 
-                { data: "Phone" }, 
-                { data: "Email" }, 
-                { data: "Photo" }, 
-                { data: "Status" }, 
+                { data: "code" },
+                { data: "name" },
+                { data: "section_name" },
+                { data: "section_name" },
                 {
                     data: null, render: function (data, type, row) {
                         // Combine the first and last names into a single table field
@@ -231,7 +231,7 @@ var ClassModule = function () {
 
                         //return '<a href="Edit/' + data.ClassId + '" class="btn btn-default btn-xs purple"><i class="fa fa-edit"></i> Edit</a>';
 
-                        return '<a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.ClassId + '"><i class="fa fa-edit"></i> Edit</a>';
+                        return '<a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.class_id + '"><i class="fa fa-edit"></i> Edit</a>';
                     }
                 },
 
@@ -251,6 +251,7 @@ var ClassModule = function () {
         jQuery('#ClassGrid_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
         jQuery('#ClassGrid_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
     }
+/*
 
     var loadGrid2 = function () {
         ShowSuccessMessage();
@@ -264,6 +265,7 @@ var ClassModule = function () {
         jQuery('#ClassGrid_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
         jQuery('#ClassGrid_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
     }
+*/
 
 
     var edit = function (id) {
@@ -277,8 +279,8 @@ var ClassModule = function () {
             type: 'GET',
             dataType: 'jsonp',
             success: function (data) {
-                //debugger;
-                showEdit(data.data);
+                debugger;
+                showEdit(data.data[0]);
             },
             fail: function (result) {
             }
@@ -287,30 +289,12 @@ var ClassModule = function () {
 
     function showEdit(data) {
         if (data == null) return;
-        
+
         //Set values
-        
-        ClassIdFld.val(data.ClassId);
-        CodeFld.val(data.Code);
-        FirstNameFld.val(data.FirstName);
-        LastNameFld.val(data.LastName);
-        DateOfBirthFld.val(data.DateOfBirth);
-        GenderFld.val(data.Gender);
-        DateOfJoiningFld.val(data.DateOfJoining);
-        DepartmentIdFld.val(data.DepartmentId);
-        DesignationIdFld.val(data.DesignationId);
-        QualificationFld.val(data.Qualification);
-        TotalExperienceFld.val(data.TotalExperience);
-        PresentAddressFld.val(data.PresentAddress);
-        PermanentAddressFld.val(data.PermanentAddress);
-        CountryFld.val(data.Country);
-        StateFld.val(data.State);
-        CityFld.val(data.City);
-        MobileFld.val(data.Mobile);
-        PhoneFld.val(data.Phone);
-        EmailFld.val(data.Email);
-        PhotoFld.val(data.Photo);
-        StatusFld.val(data.Status);
+        ClassIdFld.val(data.class_id);
+        CodeFld.val(data.code);
+        NameFld.val(data.name);
+        SectionNameFld.val(data.section_name);
     }
 
     function showPopup() {
@@ -318,61 +302,7 @@ var ClassModule = function () {
         $('.modal-title').html("Create Class");
         $('#mdlCreateClass').modal('show');
     }
-    //var view = function () {
-    //    var pathname = window.location.pathname;
-
-    //    var params = pathname.split('/');
-    //    var id = params[params.length - 1];
-
-    //    //alert(id);
-
-    //    var url = editUrl + id;
-    //    $.ajax({
-    //        url: url,
-    //        accepts: 'application/json',
-    //        cache: false,
-    //        type: 'GET',
-    //        dataType: 'jsonp',
-    //        success: function (data) {
-    //            //debugger;
-    //            showView(data.data);
-    //        },
-    //        fail: function (result) {
-    //        }
-    //    });
-    //}
-    
-    //function showView(data) {
-    //    debugger;
-    //    if (data == null) return;
-
-    //    //Set values
-        
-    //    ClassIdFld.text(data.ClassId);
-    //    CodeFld.text(data.Code);
-    //    FirstNameFld.text(data.FirstName);
-    //    LastNameFld.text(data.LastName);
-    //    DateOfBirthFld.text(data.DateOfBirth);
-    //    GenderFld.text(data.Gender);
-    //    DateOfJoiningFld.text(data.DateOfJoining);
-    //    DepartmentIdFld.text(data.DepartmentId);
-    //    DesignationIdFld.text(data.DesignationId);
-    //    QualificationFld.text(data.Qualification);
-    //    TotalExperienceFld.text(data.TotalExperience);
-    //    PresentAddressFld.text(data.PresentAddress);
-    //    PermanentAddressFld.text(data.PermanentAddress);
-    //    CountryFld.text(data.Country);
-    //    StateFld.text(data.State);
-    //    CityFld.text(data.City);
-    //    MobileFld.text(data.Mobile);
-    //    PhoneFld.text(data.Phone);
-    //    EmailFld.text(data.Email);
-    //    PhotoFld.text(data.Photo);
-    //    StatusFld.text(data.Status);
-        
-    //    $(".edit").attr("href", "../Edit/" + data.ClassId);
-    //};
-
+   
     //function deleteData() {
     //    var pathname = window.location.pathname;
 
@@ -419,12 +349,12 @@ var ClassModule = function () {
             }
             loadGrid();
         },
-        loadGrid2: function () {
+        /*loadGrid2: function () {
             if (!jQuery().dataTable) {
                 return;
             }
             loadGrid2();
-        },
+        },*/
         addView: function () {
             showPopup();
         },

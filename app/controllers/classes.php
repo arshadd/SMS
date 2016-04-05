@@ -18,17 +18,8 @@ class classes extends CI_Controller{
    * application screen is set up.
    */
   function index() {
-	$this->load->model('classes_m');
 
-    // Load all of the logged-in user's posts
-    $classes = $this->classes_m->all_classes( 10 );
-
-    // If employee were fetched from the database, assign them to $data
-    // so they can be passed into the view.
-    if ($classes) {
-      $data['classes'] = $classes;
-    }
-    $this->load->view('class/list', $data);
+    $this->load->view('class/list');
   }
 
   function edit($id) {

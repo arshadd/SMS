@@ -80,30 +80,6 @@
                   </thead>
                   <tbody>
 
-                    <?php foreach($classes as $class){?>
-                      <tr>
-                        <td><?php echo $class->code;?></td>
-                        <td><a href="<?php echo base_url();?>/index.php/classes/edit/<?php echo $class->class_id;?>"><?php echo $class->name;?></a></td>'
-                        <td>
-                          <span class="label label-danger"><?php echo $class->section_name;?></span>
-                        <td>
-                          <?php echo $class->batch_names;?>
-                          <!--<span class="label label-default">2016-2017</span>
-                          <br/>
-                          <br/>
-                          <span class="label label-primary">2015-2016</span>-->
-                        </td>
-
-                        <td>
-                          <a href="<?php echo base_url();?>/index.php/classes/edit/<?php echo $class->class_id;?>" class="btn btn-default btn-xs purple">
-                            <i class="fa fa-edit"></i> Manage Class
-                          </a> |
-                          <a href="#" class="btn btn-default btn-xs black">
-                            <i class="fa fa-trash-o"></i> Delete
-                          </a>
-                        </td>
-                      </tr>
-                         <?php } ?>
                   </tbody>
                 </table>
                 
@@ -125,6 +101,11 @@
           <h4 class="modal-title">Create Class</h4>
         </div>
         <div class="portlet-body form">
+          <div class="alert alert-success display-hide">
+            <button data-close="alert" class="close"></button>
+            Class Information saved successfully.
+          </div>
+
           <div class="scroller" style="height: 400px; width:100px" data-always-visible="1" data-rail-visible1="1">
             <div class="portlet-body form">
               <form id="Form_Class" class="form-horizontal" method="post">
@@ -155,7 +136,7 @@
       );
       
     $pageJsCalls  = array(
-      'ClassModule.loadGrid2();'
+      'ClassModule.loadGrid();'
       ,'ClassModule.validate();'
     );
     
