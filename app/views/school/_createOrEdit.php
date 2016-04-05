@@ -19,7 +19,7 @@
 
     
     
-    <input type="hidden" id="SchoolId" name="SchoolId" value="<?php echo $school->school_id ;?>" class="form-control" />
+    <input type="hidden" id="school_id" name="school_id" value="<?php echo $school->school_id ;?>" class="form-control" />
     <div class="form-group">
       <label class="control-label col-md-3">
         Name:<span class="required">*</span>

@@ -68,7 +68,7 @@ class school extends CI_Controller{
 
   function save()
   {
-    $id = $this->input->post('SchoolId');
+    $id = $this->input->post('school_id');
     $photo = $this->input->post('Photo');
 
 
@@ -108,7 +108,7 @@ class school extends CI_Controller{
 
     } else {
       //Insert
-      $result = $this->school_m->insert(array('SchoolId' => $id, $school));
+      $result = $this->school_m->insert(array('school_id' => $id, $school));
     }
 
     if ($result === FALSE) {
@@ -117,7 +117,11 @@ class school extends CI_Controller{
       $data['success'] = "School information saved successfully.";
     }
 
-    $result = $this->school_m->get_school_info();
+    //Get logged school id
+    $school_id = $this->session->userdata('school_id');
+
+    $result = $this->school_m->get_school_info($school_id);
+
     $data['school'] =$result[0];
     $this->load->view('school/edit', $data);
 
