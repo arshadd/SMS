@@ -2,19 +2,15 @@
 
 class classes_m extends CI_Model
 {
- /*   protected $_table = 'studentattendances';
-    protected $primary_key = 'StudentAttendanceId';
-    protected $return_type = 'array';*/
+    /*$query = $this->db->query("SELECT c.class_id, c.name, c.code, c.section_name, GROUP_CONCAT(b.name) AS batch_names
+                FROM CLASSES C
+                INNER JOIN BATCHES B ON B.CLASS_ID = C.CLASS_ID
+                GROUP BY c.class_id
+                ORDER BY c.created_at desc;");
+    $classes = $query->result();*/
 
-    function all($school_id)
+    function all_classes($school_id)
     {
-        /*$query = $this->db->query("SELECT c.class_id, c.name, c.code, c.section_name, GROUP_CONCAT(b.name) AS batch_names
-                                    FROM CLASSES C
-                                    INNER JOIN BATCHES B ON B.CLASS_ID = C.CLASS_ID
-                                    GROUP BY c.class_id
-                                    ORDER BY c.created_at desc;");
-        $classes = $query->result();*/
-
         $this->db->from('classes');
         $this->db->where('school_id', $school_id);
         $this->db->order_by('created_at', 'desc');
@@ -28,10 +24,10 @@ class classes_m extends CI_Model
         return false;
     }
 
-    function find($school_id, $id)
+    function find_class($school_id, $class_id)
     {
         $this->db->from('classes');
-        $this->db->where('class_id', $id);
+        $this->db->where('class_id', $class_id);
 
         $class = $this->db->get()->result();
 

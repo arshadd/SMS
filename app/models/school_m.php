@@ -1,9 +1,7 @@
 <?php
 
-class school_m extends CI_Model {
-
-
-
+class school_m extends CI_Model
+{
     function update($id, $data)
     {
         $this->db->where('school_id', $id);
@@ -15,18 +13,17 @@ class school_m extends CI_Model {
     }
 
 
- function get_school_info($id) {
+    function find_school($school_id)
+    {
+        $this->db->from('schools');
+        $this->db->where('school_id', $school_id);
+        $school = $this->db->get()->result();
 
-     $this->db->from('schools');
-     $this->db->where('school_id', $id);
-     $school = $this->db->get()->result();
+        if (is_array($school) && count($school) > 0) {
+            return $school;
+        }
 
-    if( is_array($school) && count($school) > 0 ) {
-		return $school;
+        return false;
     }
-
-    return false;
-  }
-
 
 }

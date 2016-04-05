@@ -2,43 +2,59 @@
     
 require APPPATH.'/libraries/REST_Controller.php';
 
-class classes extends REST_Controller {
+class batches extends REST_Controller {
 
     public function __construct()
     {
         parent::__construct();
 
         $this->load->library('session');
-        $this->load->model('classes_m');
+        $this->load->model('batches_m');
 
         if( !$this->session->userdata('isLoggedIn') ) {
             redirect('/login/show_login');
         }
     }
 
-    function all_classes_get()
+    function all_batches_get()
     {
         //Get logged school id
         $school_id = $this->session->userdata('school_id');
 
-        $classes = $this->classes_m->all_classes($school_id);
+        $classes = $this->batches_m->all_batches($school_id);
         $this->response(array("status" => "success", "message" => "", "data" => $classes));
     }
 
-    function find_class_get($class_id)
+    function all_class_batches_get($class_id = null)
     {
         //Validation
         if (is_null($class_id)) {
             $this->response(array("status" => "false", "message" => "Invalid class id", "data" => null));
         } else {
+
             //Get logged school id
             $school_id = $this->session->userdata('school_id');
 
-            $class = $this->classes_m->find_class($school_id, $class_id);
+            $class = $this->batches_m->all_class_batches($school_id, $class_id);
             $this->response(array("status" => "success", "message" => "", "data" => $class));
         }
     }
 
+    function find_batch_get($batch_id = null)
+    {
+        //Validation
+        if (is_null($batch_id)) {
+            $this->response(array("status" => "false", "message" => "Invalid batch id", "data" => null));
+        } else {
+
+            //Get logged school id
+            $school_id = $this->session->userdata('school_id');
+
+            $class = $this->batches_m->find_batch($school_id, $batch_id);
+            $this->response(array("status" => "success", "message" => "", "data" => $class));
+        }
+    }
+    
     /*function save_post()
     {
 

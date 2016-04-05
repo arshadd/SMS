@@ -16,12 +16,12 @@ class school extends REST_Controller {
         }
     }
 
-   function item_get()
+   function find_school_get()
    {
        //Get logged school id
        $school_id = $this->session->userdata('school_id');
 
-       $school = $this->school_m->get_school_info($school_id);
+       $school = $this->school_m->find_school($school_id);
        $this->response(array("status" => "success", "message" => "", "data" => $school));
    }
 
