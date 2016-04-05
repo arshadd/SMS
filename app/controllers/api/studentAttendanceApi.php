@@ -7,7 +7,7 @@ class studentAttendanceApi extends REST_Controller {
    
     function listAll_get()
     {
-        
+        //test comment
         // respond with information about a user
         $this->load->model('studentattendance_m');
         $studentAttendances = $this->studentattendance_m->get_listAll();
