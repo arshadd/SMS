@@ -2,19 +2,24 @@
 
 class classes_m extends CI_Model
 {
-    function all_classes($num_posts = 10)
+ /*   protected $_table = 'studentattendances';
+    protected $primary_key = 'StudentAttendanceId';
+    protected $return_type = 'array';*/
+
+    function all($school_id)
     {
-        $query = $this->db->query("SELECT c.class_id, c.name, c.code, c.section_name, GROUP_CONCAT(b.name) AS batch_names
+        /*$query = $this->db->query("SELECT c.class_id, c.name, c.code, c.section_name, GROUP_CONCAT(b.name) AS batch_names
                                     FROM CLASSES C
                                     INNER JOIN BATCHES B ON B.CLASS_ID = C.CLASS_ID
                                     GROUP BY c.class_id
                                     ORDER BY c.created_at desc;");
+        $classes = $query->result();*/
 
-        //$this->db->from('classes');
-        //$this->db->limit($num_posts);
-        //$this->db->order_by('created_at', 'desc');
+        $this->db->from('classes');
+        $this->db->where('school_id', $school_id);
+        $this->db->order_by('created_at', 'desc');
 
-        $classes = $query->result();
+        $classes = $this->db->get()->result();
 
         if (is_array($classes) && count($classes) > 0) {
             return $classes;
@@ -23,7 +28,7 @@ class classes_m extends CI_Model
         return false;
     }
 
-    function class_info($id)
+    function find($school_id, $id)
     {
         $this->db->from('classes');
         $this->db->where('class_id', $id);

@@ -2,29 +2,37 @@
     
 require APPPATH.'/libraries/REST_Controller.php';
 
-class school extends REST_Controller {
+class classes extends REST_Controller {
 
     public function __construct()
     {
         parent::__construct();
 
         $this->load->library('session');
-        $this->load->model('school_m');
+        $this->load->model('classes_m');
 
         if( !$this->session->userdata('isLoggedIn') ) {
             redirect('/login/show_login');
         }
     }
 
-   function item_get()
-   {
-       //Get logged school id
-       $school_id = $this->session->userdata('school_id');
+    function all_get()
+    {
+        //Get logged school id
+        $school_id = $this->session->userdata('school_id');
 
-       $school = $this->school_m->get_school_info($school_id);
-       $this->response(array("status" => "success", "message" => "", "data" => $school));
-   }
+        $classes = $this->classes_m->all($school_id);
+        $this->response(array("status" => "success", "message" => "", "data" => $classes));
+    }
 
+    function find_get($id)
+    {
+        //Get logged school id
+        $school_id = $this->session->userdata('school_id');
+
+        $class = $this->classes_m->find($school_id, $id);
+        $this->response(array("status" => "success", "message" => "", "data" => $class));
+    }
 
     /*function save_post()
     {
