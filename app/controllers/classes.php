@@ -23,7 +23,7 @@ class classes extends CI_Controller{
   }
 
   function edit($id) {
-	$this->load->model('classes_m');
+	/*$this->load->model('classes_m');
 
     // Load all of the logged-in user's posts
     $class = $this->classes_m->class_info($id);
@@ -33,9 +33,9 @@ class classes extends CI_Controller{
     // so they can be passed into the view.
     if ($class) {
       $data['class'] = $class[0];
-    }
+    }*/
 
-    $this->load->view('class/edit', $data);
+    $this->load->view('class/edit');
   }
 
   function view($id) {

@@ -14,8 +14,8 @@ var ClassModule = function () {
     var loadGridUrl = baseApiUrl + "classes/all_classes";
     var editUrl = baseApiUrl + "classes/find_class/";
     var saveUrl = baseApiUrl + "classes/save";
-    var deleteUrl = baseApiUrl + "classes/delete/";
-    var listUrl = baseAppUrl + "classes/all_classes";
+    var deleteUrl = baseApiUrl + "classes/delete";
+    var listUrl = baseAppUrl + "classes/index";
 
     var handleValidation = function () {
         //load All dropdowns
@@ -220,18 +220,22 @@ var ClassModule = function () {
                 //Table Column Header Collection
                 
                 { data: "code" },
-                { data: "name" },
+                {
+                    data: null, render: function (data, type, row) {
+                        return '<a href="edit/'+ data.class_id +'" >'+ data.name +'</a>';
+                    }
+                },
                 { data: "section_name" },
                 { data: "section_name" },
                 {
                     data: null, render: function (data, type, row) {
                         // Combine the first and last names into a single table field
-                        //return '<a href="Edit/' + data.Class Id + '" class="btn btn-default btn-xs purple"><i class="fa fa-edit"></i> Edit</a>' +
-                        //    '| <a href="#" class="btn btn-default btn-xs black"><i class="fa fa-trash-o"></i> Delete</a>';
+                        return '<a href="edit/'+ data.class_id +'" class="btn btn-default btn-xs purple"><i class="fa fa-key"></i> Manage</a>'+
+                                '| <a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.class_id + '"><i class="fa fa-edit"></i> Edit</a>'+
+                                '| <a href="#" class="btn btn-default btn-xs purple deleteView" data-id="' + data.class_id + '"><i class="fa fa-delete"></i> Delete</a>';
 
-                        //return '<a href="Edit/' + data.ClassId + '" class="btn btn-default btn-xs purple"><i class="fa fa-edit"></i> Edit</a>';
 
-                        return '<a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.class_id + '"><i class="fa fa-edit"></i> Edit</a>';
+                    //return '<a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.class_id + '"><i class="fa fa-edit"></i> Edit</a>';
                     }
                 },
 
@@ -243,6 +247,16 @@ var ClassModule = function () {
                     edit(id);
                     $('.modal-title').html("Edit Class");
                     $('#mdlCreateClass').modal('show');
+                });
+                $(".deleteView").click(function () {
+                    if (confirm("Are you sure want to delete?")) {
+                        var id = $(this).data('id');
+                        deleteData(id);
+                    }
+                    /*var id = $(this).data('id');
+                    edit(id);
+                    $('.modal-title').html("Edit Class");
+                    $('#mdlCreateClass').modal('show');*/
                 });
             }
         });
@@ -303,40 +317,57 @@ var ClassModule = function () {
         $('#mdlCreateClass').modal('show');
     }
    
-    //function deleteData() {
-    //    var pathname = window.location.pathname;
+    function deleteData(id) {
+       //var pathname = window.location.pathname;
 
-    //    var params = pathname.split('/');
-    //    var id = params[params.length - 1];
+       //var params = pathname.split('/');
+       //var id = params[params.length - 1];
 
-    //    //alert(id);
+       //alert(id);
 
-    //    var url = deleteUrl + id;
-    //    $.ajax({
-    //        url: url,
-    //        accepts: 'application/json',
-    //        cache: false,
-    //        type: 'POST',
-    //        dataType: 'jsonp',
-    //        complete: function (result) {
-    //            // Handle the complete event
-    //            var obj = JSON.parse(result.responseText);
+        var cls = Class;
+        //debugger;
 
-    //            if (obj.Success == true) {
-    //                window.location = listUrl + "?message=Class Information Deleted";
-    //            } else {
-    //                ShowMessage("error", obj.Message);
-    //            }
-    //        }
-    //    });
-    //}
-    //var del = function () {
-    //    $(".delete").on("click", function () {
-    //        if (confirm("Are you sure want to delete?")) {
-    //            deleteData();
-    //        }
-    //    });
-    //};
+        //Get values
+        cls.class_id = id;
+
+       var url = deleteUrl;
+       $.ajax({
+           url: url,
+           accepts: 'application/json',
+           cache: false,
+           type: 'POST',
+           data : cls,
+           dataType: 'jsonp',
+           success : function(result){
+               debugger;
+
+               parent.location.reload();
+               alert(result.message);
+               /*if(result.status == "success"){
+                   window.location = listUrl + "?message="+result.message;
+               }*/
+               /*else {
+                   ShowMessage("error", result.message);
+               }*/
+               //alert('success'+result);
+           },
+           failed : function(result){
+               alert(result.message);
+
+               /*if(result.status == "failed") {
+                   ShowMessage("error", result.message);
+               }*/
+           },
+       });
+    }
+    var del = function () {
+       $(".delete").on("click", function () {
+           if (confirm("Are you sure want to delete?")) {
+               deleteData();
+           }
+       });
+    };
 
     return {
         //main function to initiate the module

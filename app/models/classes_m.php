@@ -13,6 +13,7 @@ class classes_m extends CI_Model
     {
         $this->db->from('classes');
         $this->db->where('school_id', $school_id);
+        $this->db->where('is_active', true);
         $this->db->order_by('created_at', 'desc');
 
         $classes = $this->db->get()->result();
@@ -28,6 +29,7 @@ class classes_m extends CI_Model
     {
         $this->db->from('classes');
         $this->db->where('class_id', $class_id);
+        $this->db->where('is_active', true);
 
         $class = $this->db->get()->result();
 
@@ -43,21 +45,42 @@ class classes_m extends CI_Model
         if ($class_id > 0) {
 
             //Update
+
+            //Updated_at date
+            $class = array_merge($class, array('updated_at'=> date('Y-m-d H:i:s')));
+
+            //update
             $this->db->where('class_id', $class_id);
-
-            //array_push($class, 'updated_at='.date('Y-m-d H:i:s'));
-            //$class = array('updated_at'=> date('Y-m-d H:i:s'), $class);
-
             $result = $this->db->update('classes', $class);
         } else {
             //Insert
+
+            //Created_at date
+            $class = array_merge($class, array('created_at'=> date('Y-m-d H:i:s')));
+
+            //Insert
             $result = $this->db->insert('classes', $class);
-
-            //$result = $this->db->insert('classes', array('created_at' =>  date('Y-m-d H:i:s'), $class));
-
-            //$result = $this->school_m->insert(array('class_id' => $class_id, $class));
         }
 
         return $result;
     }
+
+    function delete($school_id, $class_id)
+    {
+        if ($class_id > 0) {
+
+            //Delete
+
+            //Is_active set to false
+            $class = array('is_active'=> false);
+
+            //update
+            $this->db->where('class_id', $class_id);
+            $result = $this->db->update('classes', $class);
+
+            return $result;
+        }
+        return false;
+    }
+
 }

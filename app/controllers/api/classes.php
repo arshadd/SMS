@@ -54,10 +54,6 @@ class classes extends REST_Controller {
             'section_name' => $this->post('section_name'),
             'school_id' => $school_id
         );
-        //$this->response(array("status" => "success", "message" => "Class information saved successfully", "data" => $class));
-
-        //return $class;
-
 
         //Save
         $result = $this->classes_m->save($school_id, $class_id, $class);
@@ -68,6 +64,25 @@ class classes extends REST_Controller {
             $this->response(array("status" => "success", "message" => "Class information saved successfully", "data" => $result));
         }
     }
+
+    function delete_post()
+    {
+        //Get logged school id
+        $school_id = $this->session->userdata('school_id');
+
+        //Get primary key
+        $class_id = $this->post('class_id');
+
+        //Delete
+        $result = $this->classes_m->delete($school_id, $class_id);
+
+        if ($result === FALSE) {
+            $this->response(array("status" => "failed", "message" => "Failed to delete.", "data" => $result));
+        } else {
+            $this->response(array("status" => "success", "message" => "Class information deleted successfully", "data" => $result));
+        }
+    }
+
     /*function save_post()
     {
 

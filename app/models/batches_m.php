@@ -6,6 +6,7 @@ class batches_m extends CI_Model
     {
         $this->db->from('batches');
         $this->db->where('school_id', $school_id);
+        $this->db->where('is_active', true);
         $this->db->order_by('created_at', 'desc');
 
         $batches = $this->db->get()->result();
@@ -22,6 +23,7 @@ class batches_m extends CI_Model
         $this->db->from('batches');
         $this->db->where('school_id', $school_id);
         $this->db->where('class_id', $class_id);
+        $this->db->where('is_active', true);
         $this->db->order_by('created_at', 'desc');
 
         $batches = $this->db->get()->result();
@@ -37,6 +39,7 @@ class batches_m extends CI_Model
     {
         $this->db->from('batches');
         $this->db->where('batch_id', $batch_id);
+        $this->db->where('is_active', true);
 
         $batch = $this->db->get()->result();
 

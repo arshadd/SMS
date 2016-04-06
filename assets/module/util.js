@@ -17,7 +17,7 @@ function getIdParam() {
 }
 
 var baseApiUrl = "http://localhost/myschool/sms/index.php/api/";
-var baseAppUrl = "http://localhost/myschool/sms/";
+var baseAppUrl = "http://localhost/myschool/sms/index.php/";
 
 function GetDateFormatOnly(date) {
     //debugger
