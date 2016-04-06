@@ -19,6 +19,75 @@ var ClassModule = function () {
     var deleteUrl = baseApiUrl + "classes/delete";
     var listUrl = baseAppUrl + "classes/index";
 
+
+    //--------------------Grid Functions-----------------------//
+    var dataTable = null;
+    var loadGrid = function () {
+        //ShowSuccessMessage();
+
+        var dataSet = [];
+
+        dataTable = $('#ClassGrid').DataTable({
+            //dom: "Bfrtip",
+            ajax: loadGridUrl,
+            columns: [
+                //Table Column Header Collection
+
+                { data: "code" },
+                {
+                    data: null, render: function (data, type, row) {
+                    return '<a href="edit/'+ data.class_id +'" >'+ data.name +'</a>';
+                }
+                },
+                { data: "section_name" },
+                { data: "section_name" },
+                {
+                    data: null, render: function (data, type, row) {
+                    // Combine the first and last names into a single table field
+                    return '<a href="edit/'+ data.class_id +'" class="btn btn-default btn-xs purple"><i class="fa fa-key"></i> Manage</a>'+
+                        '| <a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.class_id + '"><i class="fa fa-edit"></i> Edit</a>'+
+                        '| <a href="#" class="btn btn-default btn-xs purple deleteView" data-id="' + data.class_id + '"><i class="fa fa-trash-o"></i> Delete</a>';
+
+                    //return '<a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.class_id + '"><i class="fa fa-edit"></i> Edit</a>';
+                }
+                },
+                //{ data: "salary", render: $.fn.dataTable.render.number(',', '.', 0, '$') }
+            ],
+        });
+
+        jQuery('#ClassGrid_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
+        jQuery('#ClassGrid_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
+        jQuery('#ClassGrid_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
+    }
+
+    // Edit record
+    $('#ClassGrid').on( 'click', 'a.editView', function (e) {
+        //alert('my edit'+id);
+
+        var id = $(this).data('id');
+        edit(id);
+        $('.modal-title').html("Edit Class");
+        $('#mdlCreateClass').modal('show');
+    });
+
+    // Delete record
+    $('#ClassGrid').on( 'click', 'a.deleteView', function (e) {
+        var id = $(this).data('id');
+
+        showDelete(id);
+        $('#mdlDeleteClass').modal('show');
+
+        //deleteData(id);
+    });
+
+    var reloadGrid = function(){
+        //debugger;
+        dataTable.ajax.reload(null, false);
+    }
+    //--------------------End Grid Functions-----------------------//
+
+
+    //--------------------Form Validation Functions-----------------------//
     var handleValidation = function () {
         //load All dropdowns
         //loadAll();
@@ -88,7 +157,6 @@ var ClassModule = function () {
         });
     }
 
-
     function save() {
         loader.show();
 
@@ -114,9 +182,9 @@ var ClassModule = function () {
                 loader.hide();
 
                 if(result.status == "success"){
-                    var save_id = result.data.class_id;
+                    /*var save_id = result.data.class_id;
                     //alert(save_id);
-                    ClassIdFld.val(save_id);
+                    ClassIdFld.val(save_id);*/
 
                     reloadGrid();
                     $('#mdlCreateClass').modal('hide');
@@ -136,16 +204,12 @@ var ClassModule = function () {
         });
     }
 
-    function loadAll() {
+    /*function loadAll() {
         //Todo
-        
         fillDropDownDepartment();
-        
         fillDropDownDesignation();
-        
     }
 
-    
     function fillDropDownDepartment() {
         var loadDDUrl = baseApiUrl + "Department/List";
 
@@ -181,8 +245,8 @@ var ClassModule = function () {
                 });
             }
         });
-    }
-    
+    }*/
+
 
     function ShowMessage(type, message){
         if (message == 'undefined') return;
@@ -201,79 +265,6 @@ var ClassModule = function () {
             success.show();
         }
         
-    }
-
-    function ShowSuccessMessage() {
-        var message = decodeURIComponent(getUrlVars()["message"]);
-        ShowMessage("success", message);
-    }
-
-    var dataTable = null;
-    var loadGrid = function () {
-        ShowSuccessMessage();
-
-        var dataSet = [];
-
-        dataTable = $('#ClassGrid').DataTable({
-            //dom: "Bfrtip",
-            ajax: loadGridUrl,
-            columns: [
-                //Table Column Header Collection
-                
-                { data: "code" },
-                {
-                    data: null, render: function (data, type, row) {
-                        return '<a href="edit/'+ data.class_id +'" >'+ data.name +'</a>';
-                    }
-                },
-                { data: "section_name" },
-                { data: "section_name" },
-                {
-                    data: null, render: function (data, type, row) {
-                        // Combine the first and last names into a single table field
-                        return '<a href="edit/'+ data.class_id +'" class="btn btn-default btn-xs purple"><i class="fa fa-key"></i> Manage</a>'+
-                                '| <a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.class_id + '"><i class="fa fa-edit"></i> Edit</a>'+
-                                '| <a href="#" class="btn btn-default btn-xs purple deleteView" data-id="' + data.class_id + '"><i class="fa fa-trash-o"></i> Delete</a>';
-
-                    //return '<a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.class_id + '"><i class="fa fa-edit"></i> Edit</a>';
-                    }
-                },
-                //{ data: "salary", render: $.fn.dataTable.render.number(',', '.', 0, '$') }
-            ],
-        });
-
-        jQuery('#ClassGrid_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
-        jQuery('#ClassGrid_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
-        jQuery('#ClassGrid_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
-    }
-
-    // Edit record
-    $('#ClassGrid').on( 'click', 'a.editView', function (e) {
-        //alert('my edit'+id);
-
-        var id = $(this).data('id');
-        edit(id);
-        $('.modal-title').html("Edit Class");
-        $('#mdlCreateClass').modal('show');
-
-        /*e.preventDefault();
-
-        editor
-            .title( 'Edit record' )
-            .buttons( { "label": "Update", "fn": function () { editor.submit() } } )
-            .edit( $(this).closest('tr') );*/
-    });
-
-    // Delete record
-    $('#ClassGrid').on( 'click', 'a.deleteView', function (e) {
-        if (confirm("Are you sure want to delete?")) {
-            var id = $(this).data('id');
-            deleteData(id);
-        }
-    });
-    var reloadGrid = function(){
-        //debugger;
-        dataTable.ajax.reload(null, false );
     }
 
     var edit = function (id) {
@@ -305,20 +296,32 @@ var ClassModule = function () {
         SectionNameFld.val(data.section_name);
     }
 
+    $('#btnDelete').click(function(){
+        deleteData(ClassIdFld.val());
+    });
+
+
+    function showDelete(id) {
+        if (id == null) return;
+
+        //Set values
+        ClassIdFld.val(id);
+    }
+
     function showPopup() {
         $('#Form_Class').trigger("reset");
         $('.modal-title').html("Create Class");
         $('#mdlCreateClass').modal('show');
     }
-   
+
     function deleteData(id) {
         loader.show();
-       //var pathname = window.location.pathname;
+        //var pathname = window.location.pathname;
 
-       //var params = pathname.split('/');
-       //var id = params[params.length - 1];
+        //var params = pathname.split('/');
+        //var id = params[params.length - 1];
 
-       //alert(id);
+        //alert(id);
 
         var cls = Class;
         //debugger;
@@ -326,46 +329,59 @@ var ClassModule = function () {
         //Get values
         cls.class_id = id;
 
-       var url = deleteUrl;
-       $.ajax({
-           url: url,
-           accepts: 'application/json',
-           cache: false,
-           type: 'POST',
-           data : cls,
-           dataType: 'jsonp',
-           success : function(result){
-               //debugger;
-               loader.hide();
-               reloadGrid();
-               //$('#mdlCreateClass').modal('hide');
-               //alert(result.message);
-               /*if(result.status == "success"){
-                   window.location = listUrl + "?message="+result.message;
-               }*/
-               /*else {
-                   ShowMessage("error", result.message);
-               }*/
-               //alert('success'+result);
-           },
-           failed : function(result){
-               loader.hide();
-               alert(result.message);
+        var url = deleteUrl;
+        $.ajax({
+            url: url,
+            accepts: 'application/json',
+            cache: false,
+            type: 'POST',
+            data : cls,
+            dataType: 'jsonp',
+            success : function(result){
+                //debugger;
+                loader.hide();
 
-               /*if(result.status == "failed") {
-                   ShowMessage("error", result.message);
-               }*/
-           },
-       });
+                if(result.status == "success"){
+                    /*var save_id = result.data.class_id;
+                     //alert(save_id);
+                     ClassIdFld.val(save_id);*/
+
+                    reloadGrid();
+                    $('#mdlDeleteClass').modal('hide');
+                }else {
+                    ShowMessage("error", result.message);
+                }
+
+                //$('#mdlCreateClass').modal('hide');
+                //alert(result.message);
+                /*if(result.status == "success"){
+                 window.location = listUrl + "?message="+result.message;
+                 }*/
+                /*else {
+                 ShowMessage("error", result.message);
+                 }*/
+                //alert('success'+result);
+            },
+            /*failed : function(result){
+                loader.hide();
+                alert(result.message);
+
+                /!*if(result.status == "failed") {
+                 ShowMessage("error", result.message);
+                 }*!/
+            },*/
+        });
     }
-    var del = function () {
-       $(".delete").on("click", function () {
-           if (confirm("Are you sure want to delete?")) {
-               deleteData();
-           }
-       });
-    };
+    /*var del = function () {
+     $(".delete").on("click", function () {
 
+     if (confirm("Are you sure want to delete?")) {
+     deleteData();
+     }
+     });
+     };*/
+
+    //--------------------End Form Validation Functions-----------------------//
     return {
         //main function to initiate the module
 

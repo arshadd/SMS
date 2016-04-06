@@ -56,12 +56,12 @@ class classes extends REST_Controller {
         );
 
         //Save
-        $return = $this->classes_m->save($school_id, $class_id, $class);
+        $response = $this->classes_m->save($school_id, $class_id, $class);
 
-        if ($return['result'] === FALSE) {
-            $this->response(array("status" => "failed", "message" => "Failed to save.", "data" => $return['data']));
+        if ($response['result'] === FALSE) {
+            $this->response(array("status" => "failed", "message" => $response['message'], "data" => null));
         } else {
-            $this->response(array("status" => "success", "message" => "Class information saved successfully", "data" => $return['data']));
+            $this->response(array("status" => "success",  "message" => $response['message'], "data" => null));
         }
     }
 
@@ -74,12 +74,12 @@ class classes extends REST_Controller {
         $class_id = $this->post('class_id');
 
         //Delete
-        $result = $this->classes_m->delete($school_id, $class_id);
+        $response = $this->classes_m->delete($school_id, $class_id);
 
-        if ($result === FALSE) {
-            $this->response(array("status" => "failed", "message" => "Failed to delete.", "data" => $class_id));
+        if ($response['result']=== FALSE) {
+            $this->response(array("status" => "failed", "message" => $response['message'], "data" => $class_id));
         } else {
-            $this->response(array("status" => "success", "message" => "Class information deleted successfully", "data" => $class_id));
+            $this->response(array("status" => "success", "message" => $response['message'], "data" => $class_id));
         }
     }
 
