@@ -9,7 +9,9 @@ var ClassModule = function () {
     var CodeFld = $('#Form_Class #code');
     var NameFld = $('#Form_Class #name');
     var SectionNameFld = $('#Form_Class #section_name');
-    
+
+    var loader = $("#Form_Class #loader");
+    loader.hide();
 
     var loadGridUrl = baseApiUrl + "classes/all_classes";
     var editUrl = baseApiUrl + "classes/find_class/";
@@ -88,7 +90,8 @@ var ClassModule = function () {
 
 
     function save() {
-       
+        loader.show();
+
         var cls = Class;
         debugger;
 
@@ -108,29 +111,26 @@ var ClassModule = function () {
             data : cls,
             dataType: 'jsonp',
             success : function(result){
-                debugger;
+                loader.hide();
+
                 if(result.status == "success"){
-                    ShowMessage("success", result.message);
+                    var save_id = result.data.class_id;
+                    //alert(save_id);
+                    ClassIdFld.val(save_id);
+
+                    reloadGrid();
+                    $('#mdlCreateClass').modal('hide');
                 }else {
                     ShowMessage("error", result.message);
                 }
+                //parent.location.reload();
                 //alert('success'+result);
             },
-            failed : function(result){
-                if(result.status == "failed") {
+            /*failed : function(result){
+                alert('failed');
+                loader.hide();
+                /!*if(result.status == "failed") {
                     ShowMessage("error", result.message);
-                }
-            },
-            /*complete: function (result) {
-                debugger;
-                alert('complete'+result);
-                // Handle the complete event
-                /!*var obj = JSON.parse(result.responseText);
-                debugger;
-                if (obj.Success == true) {
-                    window.location = listUrl + "?message=Class Information Saved";
-                } else {
-                    ShowMessage("error", obj.Message);
                 }*!/
             }*/
         });
@@ -207,13 +207,14 @@ var ClassModule = function () {
         var message = decodeURIComponent(getUrlVars()["message"]);
         ShowMessage("success", message);
     }
-   
+
+    var dataTable = null;
     var loadGrid = function () {
         ShowSuccessMessage();
 
         var dataSet = [];
 
-        var newTable = $('#ClassGrid').DataTable({
+        dataTable = $('#ClassGrid').DataTable({
             //dom: "Bfrtip",
             ajax: loadGridUrl,
             columns: [
@@ -232,55 +233,48 @@ var ClassModule = function () {
                         // Combine the first and last names into a single table field
                         return '<a href="edit/'+ data.class_id +'" class="btn btn-default btn-xs purple"><i class="fa fa-key"></i> Manage</a>'+
                                 '| <a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.class_id + '"><i class="fa fa-edit"></i> Edit</a>'+
-                                '| <a href="#" class="btn btn-default btn-xs purple deleteView" data-id="' + data.class_id + '"><i class="fa fa-delete"></i> Delete</a>';
-
+                                '| <a href="#" class="btn btn-default btn-xs purple deleteView" data-id="' + data.class_id + '"><i class="fa fa-trash-o"></i> Delete</a>';
 
                     //return '<a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.class_id + '"><i class="fa fa-edit"></i> Edit</a>';
                     }
                 },
-
                 //{ data: "salary", render: $.fn.dataTable.render.number(',', '.', 0, '$') }
             ],
-            "fnInitComplete": function () {
-                $(".editView").click(function () {
-                    var id = $(this).data('id');
-                    edit(id);
-                    $('.modal-title').html("Edit Class");
-                    $('#mdlCreateClass').modal('show');
-                });
-                $(".deleteView").click(function () {
-                    if (confirm("Are you sure want to delete?")) {
-                        var id = $(this).data('id');
-                        deleteData(id);
-                    }
-                    /*var id = $(this).data('id');
-                    edit(id);
-                    $('.modal-title').html("Edit Class");
-                    $('#mdlCreateClass').modal('show');*/
-                });
-            }
         });
 
         jQuery('#ClassGrid_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
         jQuery('#ClassGrid_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
         jQuery('#ClassGrid_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
     }
-/*
 
-    var loadGrid2 = function () {
-        ShowSuccessMessage();
+    // Edit record
+    $('#ClassGrid').on( 'click', 'a.editView', function (e) {
+        //alert('my edit'+id);
 
-        var dataSet = [];
+        var id = $(this).data('id');
+        edit(id);
+        $('.modal-title').html("Edit Class");
+        $('#mdlCreateClass').modal('show');
 
-        var newTable = $('#ClassGrid').DataTable({
-        });
+        /*e.preventDefault();
 
-        jQuery('#ClassGrid_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
-        jQuery('#ClassGrid_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
-        jQuery('#ClassGrid_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
+        editor
+            .title( 'Edit record' )
+            .buttons( { "label": "Update", "fn": function () { editor.submit() } } )
+            .edit( $(this).closest('tr') );*/
+    });
+
+    // Delete record
+    $('#ClassGrid').on( 'click', 'a.deleteView', function (e) {
+        if (confirm("Are you sure want to delete?")) {
+            var id = $(this).data('id');
+            deleteData(id);
+        }
+    });
+    var reloadGrid = function(){
+        //debugger;
+        dataTable.ajax.reload(null, false );
     }
-*/
-
 
     var edit = function (id) {
         //alert(id);
@@ -318,6 +312,7 @@ var ClassModule = function () {
     }
    
     function deleteData(id) {
+        loader.show();
        //var pathname = window.location.pathname;
 
        //var params = pathname.split('/');
@@ -340,10 +335,11 @@ var ClassModule = function () {
            data : cls,
            dataType: 'jsonp',
            success : function(result){
-               debugger;
-
-               parent.location.reload();
-               alert(result.message);
+               //debugger;
+               loader.hide();
+               reloadGrid();
+               //$('#mdlCreateClass').modal('hide');
+               //alert(result.message);
                /*if(result.status == "success"){
                    window.location = listUrl + "?message="+result.message;
                }*/
@@ -353,6 +349,7 @@ var ClassModule = function () {
                //alert('success'+result);
            },
            failed : function(result){
+               loader.hide();
                alert(result.message);
 
                /*if(result.status == "failed") {
@@ -371,6 +368,7 @@ var ClassModule = function () {
 
     return {
         //main function to initiate the module
+
         validate : function(){
             handleValidation();
         },

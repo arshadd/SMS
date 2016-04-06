@@ -5,14 +5,12 @@
 
         <div class="form-body">
 
-          <?php if (isset($error) && $error): ?>
-            <div class="alert alert-danger display">
+            <div class="alert alert-danger display-hide">
               <button class="close" data-close="alert"></button>
               <span>
                  You have some form errors. Please check below.
               </span>
             </div>
-          <?php endif; ?>
 
           <input type="hidden" id="class_id" name="class_id" class="form-control" />
           <div class="form-group">
@@ -57,15 +55,16 @@
             </div>
           </div>
 -->
-
+          <!--onclick="parent.location.reload();" -->
           <div class="form-actions fluid">
             <div class="col-md-offset-3 col-md-9">
-              <a href="#" data-dismiss="modal" onclick="parent.location.reload();" class="btn btn-default">
+              <a href="#" data-dismiss="modal" class="btn btn-default">
                 <i class="fa fa-mail-reply"></i> Close
               </a>
               <button class="btn btn-success" type="submit">
                 <i class="fa fa-save"></i> Save
               </button>
+              <label ><div id="loader"><img  src="<?php echo base_url().'/assets/img/input-spinner.gif' ;?>"/></div></label>
             </div>
           </div>
 

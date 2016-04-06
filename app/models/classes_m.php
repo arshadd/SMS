@@ -52,6 +52,8 @@ class classes_m extends CI_Model
             //update
             $this->db->where('class_id', $class_id);
             $result = $this->db->update('classes', $class);
+
+            //$result = false;
         } else {
             //Insert
 
@@ -60,9 +62,20 @@ class classes_m extends CI_Model
 
             //Insert
             $result = $this->db->insert('classes', $class);
+
+            //newly inserted id
+            $class_id = $this->db->insert_id();
         }
 
-        return $result;
+        //build object
+        $class = array_merge($class, array('class_id'=> $class_id));
+
+        $return = array(
+            'result' => $result,
+            'data' => $class
+        );
+
+        return $return;
     }
 
     function delete($school_id, $class_id)

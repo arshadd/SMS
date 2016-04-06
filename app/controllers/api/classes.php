@@ -56,12 +56,12 @@ class classes extends REST_Controller {
         );
 
         //Save
-        $result = $this->classes_m->save($school_id, $class_id, $class);
+        $return = $this->classes_m->save($school_id, $class_id, $class);
 
-        if ($result === FALSE) {
-            $this->response(array("status" => "failed", "message" => "Failed to save.", "data" => $result));
+        if ($return['result'] === FALSE) {
+            $this->response(array("status" => "failed", "message" => "Failed to save.", "data" => $return['data']));
         } else {
-            $this->response(array("status" => "success", "message" => "Class information saved successfully", "data" => $result));
+            $this->response(array("status" => "success", "message" => "Class information saved successfully", "data" => $return['data']));
         }
     }
 
@@ -77,9 +77,9 @@ class classes extends REST_Controller {
         $result = $this->classes_m->delete($school_id, $class_id);
 
         if ($result === FALSE) {
-            $this->response(array("status" => "failed", "message" => "Failed to delete.", "data" => $result));
+            $this->response(array("status" => "failed", "message" => "Failed to delete.", "data" => $class_id));
         } else {
-            $this->response(array("status" => "success", "message" => "Class information deleted successfully", "data" => $result));
+            $this->response(array("status" => "success", "message" => "Class information deleted successfully", "data" => $class_id));
         }
     }
 

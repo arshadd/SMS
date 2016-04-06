@@ -106,7 +106,7 @@
             Class Information saved successfully.
           </div>
 
-          <div class="scroller" style="height: 400px; width:100px" data-always-visible="1" data-rail-visible1="1">
+          <div class="scroller" style="height: 350px; width:100px" data-always-visible="1" data-rail-visible1="1">
             <div class="portlet-body form">
               <form id="Form_Class" class="form-horizontal" method="post">
                 <?php include('_createOrEdit.php');?>
