@@ -101,14 +101,14 @@
           <h4 class="modal-title">Create Class</h4>
         </div>
         <div class="portlet-body form">
-          <div class="alert alert-success display-hide">
+          <!--<div class="alert alert-success display-hide">
             <button data-close="alert" class="close"></button>
             Class Information saved successfully.
-          </div>
+          </div>-->
 
           <div class="scroller" style="height: 350px; width:100px" data-always-visible="1" data-rail-visible1="1">
             <div class="portlet-body form">
-                <?php include('_createOrEdit.php');?>
+                <?php include('_createOrEditClass.php');?>
             </div>
           </div>
         </div>

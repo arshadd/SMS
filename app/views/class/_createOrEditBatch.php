@@ -15,6 +15,24 @@
     </div>
   </div>
 
+  <div class="form-group">
+    <label class="control-label col-md-3">
+      Start Date:<span class='required'>*</span>
+    </label>
+    <div class="col-md-9">
+      <input type="text" class="form-control" placeholder="dd/mm/yyyy"/>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label col-md-3">
+      End Date:<span class='required'>*</span>
+    </label>
+    <div class="col-md-9">
+      <input type="text" class="form-control" placeholder="dd/mm/yyyy"/>
+    </div>
+  </div>
+
 
   <div class='form-actions fluid'>
     <div class='col-md-offset-3 col-md-9'>

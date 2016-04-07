@@ -66,7 +66,7 @@
               </div>
               <div class="portlet-body form">
                 <form id="Form_Class" class="form-horizontal" method="post">
-                  <?php include('_createOrEdit.php');?>
+                  <?php include('_createOrEditClass.php');?>
                 </form>
               </div>
             </div>

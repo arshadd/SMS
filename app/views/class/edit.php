@@ -71,11 +71,7 @@
                     <i class="fa fa-leaf"></i>Overview
                   </a>
                 </li>
-                <!--<li>
-                  <a href="#tab_1_2" data-toggle="tab">
-                    <i class="fa fa-trophy"></i> Sections
-                  </a>
-                </li>-->
+
                 <li>
                   <a href="#tab_1_3" data-toggle="tab">
                     <i class="fa fa-th-list"></i> Batches
@@ -117,13 +113,7 @@
               <div class="tab-content">
                 <div class="tab-pane active" id="tab_1_1">
 
-                  <?php include('_createOrEdit.php');?>
-
-                </div>
-                <!--tab_1_2-->
-                <div class="tab-pane" id="tab_1_2">
-
-                  <?php include('_section.php');?>
+                  <?php include('_createOrEditClass.php');?>
 
                 </div>
                 <!--end tab-pane-->
@@ -200,21 +190,18 @@
       ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/custom-datatable/DT_bootstrap.js" ></script>'
       ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/jquery-validation/dist/jquery.validate.min.js" ></script>'
       ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/select2/select2.min.js" ></script>'
-      
-      
+
       ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-daterangepicker/moment.min.js" ></script>'
       ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-daterangepicker/daterangepicker.js" ></script>'
       ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" ></script>'
-
-      
     );
     
     $pageJsScript  = array(
 
       '<script type="text/javascript" src="' . base_url() . 'assets/module/util.js" ></script>'
       ,'<script type="text/javascript" src="' . base_url() . 'assets/module/ClassModule.js" ></script>'
-      ,'<script type="text/javascript" src="' . base_url() . 'assets/module/SectionModule.js" ></script>'
       ,'<script type="text/javascript" src="' . base_url() . 'assets/module/BatchModule.js" ></script>'
+      /*,'<script type="text/javascript" src="' . base_url() . 'assets/module/SectionModule.js" ></script>'*/
       ,'<script type="text/javascript" src="' . base_url() . 'assets/module/SubjectModule.js" ></script>'
       ,'<script type="text/javascript" src="' . base_url() . 'assets/module/StudentModule.js" ></script>'
       ,'<script type="text/javascript" src="' . base_url() . 'assets/module/AttendanceModule.js" ></script>'
@@ -223,21 +210,18 @@
      
     $pageJsCalls  = array(
       'ClassModule.validate();'
-      
-      ,'SectionModule.loadGrid2();'
-      ,'SectionModule.validate();'
-      
-      ,'BatchModule.loadGrid2();'
+
+      ,'BatchModule.loadGrid();'
       ,'BatchModule.validate();'
-      
+
       ,'SubjectModule.loadGrid2();'
       ,'SubjectModule.validate();'
       
-      ,'StudentModule.loadGrid2();'
+      /*,'StudentModule.loadGrid2();'
       ,'StudentModule.validate();'
       
       ,'AttendanceModule.loadGrid2();'      
-      ,'AttendanceModule.validate();'
+      ,'AttendanceModule.validate();'*/
 
 
     );

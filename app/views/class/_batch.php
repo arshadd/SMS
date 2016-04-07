@@ -10,7 +10,7 @@
         <div class="portlet">
           <div class="portlet-title">
             <div class="caption">
-              <i class="fa fa-cogs"></i>Class's Batches
+              Batches List
             </div>
             <div class="actions">
               <a href="#" class="btn btn-primary" onclick="BatchModule.addView();">
@@ -23,64 +23,12 @@
               <thead>
                 <tr>
                   <th class='hidden-xs'>Batch Name</th>
-                  <th class='hidden-xs'>Default</th>
+                  <th class='hidden-xs'>Start Date</th>
+                  <th class='hidden-xs'>End Date</th>
                   <th class="hidden-xs">Manage</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>2014 - 2015</td>
-                  <td>
-                    <span class="label label-danger">No</span>
-                  </td>
-                  <td>
-                    <a href=""
-                      <?php echo base_url();?>/index.php/classes/edit/1" class="btn btn-default btn-xs purple">
-                      <i class="fa fa-edit"></i> Edit
-                    </a> |
-                    <a href="#" class="btn btn-default btn-xs black">
-                      <i class="fa fa-trash-o"></i> Delete
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2015 - 2016</td>
-                  <td>
-                    <span class="label label-danger">No</span>
-                  </td>
-                  <td>
-                    <a href="#" class="btn btn-default btn-xs purple">
-                      <i class="fa fa-edit"></i> Edit
-                    </a> |
-                    <a href="#" class="btn btn-default btn-xs black">
-                      <i class="fa fa-trash-o"></i> Delete
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>2016 - 2017</td>
-                  <td>
-                    <span class="label label-success">Yes</span>
-                  </td>
-                  <td >
-                    <a href="#" class="btn btn-default btn-xs purple">
-                      <i class="fa fa-edit"></i> Edit
-                    </a> |
-                    <a href="#" class="btn btn-default btn-xs black">
-                      <i class="fa fa-trash-o"></i> Delete
-                    </a>
-                  </td>
-                </tr>
-                <!--<?php foreach($Batch as $employee){?>
-                          <tr>
-                            <td>
-                              <?php echo $employee->BatchId;?>
-                            </td>
-                            <td>
-                              <?php echo $employee->FirstName;?>
-                            </td>
-                          </tr>
-                         <?php } ?>-->
               </tbody>
             </table>
 

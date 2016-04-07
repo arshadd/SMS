@@ -1,22 +1,95 @@
 var BatchModule = function () {
 
     //Create Batch
-    var Batch = { BatchId: 0, Code: '', FirstName: '', LastName: '', DateOfBirth: '', Gender: '', DateOfJoining: '', DepartmentId: 0, DesignationId: 0, Qualification: '', TotalExperience: '', PresentAddress: '', PermanentAddress: '', Country: '', State: '', City: '', Mobile: '', Phone: '', Email: '', Photo: '', Status: '' };
+    var Batch = { batch_id: 0, code: '', name: '', section_name: ''};
 
     //Field Declaration Section
-    
-    var BatchIdFld = $('#BatchId');
-    var CodeFld = $('#Code');
-    var NameFld = $('#Name');
-    var GradingSystemFld = $('#GradingSystem');
-    
 
-    var loadGridUrl = baseApiUrl + "Batch/List";
-    var editUrl = baseApiUrl + "Batch/Find/";
-    var saveUrl = baseApiUrl + "Batch/Save";
-    var deleteUrl = baseApiUrl + "Batch/Delete/";
-    var listUrl = baseAppUrl + "Batch/List";
+    var BatchIdFld = $('#Form_Batch #batch_id');
+    var CodeFld = $('#Form_Batch #code');
+    var NameFld = $('#Form_Batch #name');
+    var SectionNameFld = $('#Form_Batch #section_name');
 
+    var loader = $("#Form_Batch #loader");
+    loader.hide();
+
+    var loadGridUrl = baseApiUrl + "batches/all_class_batches/";
+    var editUrl = baseApiUrl + "batches/find_batch/";
+    var saveUrl = baseApiUrl + "batches/save";
+    var deleteUrl = baseApiUrl + "batches/delete";
+    var listUrl = baseAppUrl + "batches/index";
+
+
+    //--------------------Grid Functions-----------------------//
+    var dataTable = null;
+    var loadGrid = function () {
+        //ShowSuccessMessage();
+
+        //Get class id from parameter
+        var pathname = window.location.pathname;
+        var params = pathname.split('/');
+        var class_id = params[params.length - 1];
+
+        loadGridUrl = loadGridUrl + class_id;
+        var dataSet = [];
+
+        dataTable = $('#BatchGrid').DataTable({
+            //dom: "Bfrtip",
+            ajax: loadGridUrl,
+            /*language: {
+                emptyTable: "No records available - Got it?",
+            },*/
+            columns: [
+                //Table Column Header Collection
+                {data: "name"},
+                {data: "start_date"},
+                {data: "end_date"},
+                {
+                    data: null, render: function (data, type, row) {
+                    // Combine the first and last names into a single table field
+                    return '<a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.batch_id + '"><i class="fa fa-edit"></i> Edit</a>' +
+                        '| <a href="#" class="btn btn-default btn-xs purple deleteView" data-id="' + data.batch_id + '"><i class="fa fa-trash-o"></i> Delete</a>';
+
+                    //return '<a href="#" batch="btn btn-default btn-xs purple editView" data-id="' + data.batch_id + '"><i batch="fa fa-edit"></i> Edit</a>';
+                }
+                },
+                //{ data: "salary", render: $.fn.dataTable.render.number(',', '.', 0, '$') }
+            ],
+        });
+
+        jQuery('#BatchGrid_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
+        jQuery('#BatchGrid_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
+        jQuery('#BatchGrid_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
+    }
+
+    // Edit record
+    $('#BatchGrid').on( 'click', 'a.editView', function (e) {
+        //alert('my edit'+id);
+
+        var id = $(this).data('id');
+        edit(id);
+        $('.modal-title').html("Edit Batch");
+        $('#mdlCreateBatch').modal('show');
+    });
+
+    // Delete record
+    $('#BatchGrid').on( 'click', 'a.deleteView', function (e) {
+        var id = $(this).data('id');
+
+        showDelete(id);
+        $('#mdlDeleteBatch').modal('show');
+
+        //deleteData(id);
+    });
+
+    var reloadGrid = function(){
+        //debugger;
+        dataTable.ajax.reload(null, false);
+    }
+    //--------------------End Grid Functions-----------------------//
+
+
+    //--------------------Form Validation Functions-----------------------//
     var handleValidation = function () {
         //load All dropdowns
         //loadAll();
@@ -32,21 +105,21 @@ var BatchModule = function () {
         //debugger;
         form1.validate({
             errorElement: 'span', //default input error message container
-            errorBatch: 'help-block', // default input error message class
+            errorBatch: 'help-block', // default input error message batch
             focusInvalid: false, // do not focus the last invalid input
             ignore: "",
             rules: {
                 //Field Validation Rule
-                
-                Code: {
+
+                code: {
                     required: true
-                }, 
-                Name: {
+                },
+                name: {
                     required: true
-                }, 
-                GradingSystem: {
+                },
+                section_name: {
                     required: true
-                }, 
+                },
             },
 
             invalidHandler: function (event, validator) { //display error alert on form submit              
@@ -57,17 +130,17 @@ var BatchModule = function () {
 
             highlight: function (element) { // hightlight error inputs
                 $(element)
-                    .closest('.form-group').addBatch('has-error'); // set error class to the control group
+                    .closest('.form-group').addBatch('has-error'); // set error batch to the control group
             },
 
             unhighlight: function (element) { // revert the change done by hightlight
                 $(element)
-                    .closest('.form-group').removeBatch('has-error'); // set error class to the control group
+                    .closest('.form-group').removeBatch('has-error'); // set error batch to the control group
             },
 
             success: function (label) {
                 label
-                    .closest('.form-group').removeBatch('has-error'); // set success class to the control group
+                    .closest('.form-group').removeBatch('has-error'); // set success batch to the control group
             },
 
             submitHandler: function (form) {
@@ -79,25 +152,25 @@ var BatchModule = function () {
                 save();
             }
         });
-        
+
         //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.
         $('.select2me', form1).change(function () {
             form1.validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
         });
     }
 
-
     function save() {
-       
-        var Batch = Batch;
+        loader.show();
+
+        var batch = Batch;
         debugger;
 
         //Get values
-        
-        Batch.BatchId = BatchIdFld.val();
-        Batch.Code = CodeFld.val();
-        Batch.Name = NameFld.val();
-        Batch.GradingSystem = GradingSystemFld.val();
+
+        batch.batch_id = BatchIdFld.val();
+        batch.code = CodeFld.val();
+        batch.name = NameFld.val();
+        batch.section_name = SectionNameFld.val();
 
         var url = saveUrl;
         $.ajax({
@@ -105,77 +178,86 @@ var BatchModule = function () {
             accepts: 'application/json',
             cache: false,
             type: 'POST',
-            data : Batch,
+            data : batch,
             dataType: 'jsonp',
-            complete: function (result) {
-                // Handle the complete event
-                var obj = JSON.parse(result.responseText);
-                debugger;
-                if (obj.Success == true) {
-                    window.location = listUrl + "?message=Batch Information Saved";
-                } else {
-                    ShowMessage("error", obj.Message);
+            success : function(result){
+                loader.hide();
+
+                if(result.status == "success"){
+                    /*var save_id = result.data.batch_id;
+                     //alert(save_id);
+                     BatchIdFld.val(save_id);*/
+
+                    reloadGrid();
+                    $('#mdlCreateBatch').modal('hide');
+                }else {
+                    ShowMessage("error", result.message);
                 }
-            }
+                //parent.location.reload();
+                //alert('success'+result);
+            },
+            /*failed : function(result){
+             alert('failed');
+             loader.hide();
+             /!*if(result.status == "failed") {
+             ShowMessage("error", result.message);
+             }*!/
+             }*/
         });
     }
 
-    function loadAll() {
-        //Todo
-        
-        fillDropDownDepartment();
-        
-        fillDropDownDesignation();
-        
-    }
+    /*function loadAll() {
+     //Todo
+     fillDropDownDepartment();
+     fillDropDownDesignation();
+     }
 
-    
-    function fillDropDownDepartment() {
-        var loadDDUrl = baseApiUrl + "Department/List";
+     function fillDropDownDepartment() {
+     var loadDDUrl = baseApiUrl + "Department/List";
 
-        var url = loadDDUrl;
-        $.ajax({
-            url: url,
-            accepts: 'application/json',
-            cache: false,
-            type: 'GET',
-            dataType: 'jsonp',
-            success: function (result) {
-                // Handle the complete event
-                $.each(result.data, function () {
-                    $("#DepartmentId").append($("<option     />").val(this.DepartmentId).text(this.Name));
-                });
-            }
-        });
-    }
-    function fillDropDownDesignation() {
-        var loadDDUrl = baseApiUrl + "Designation/List";
+     var url = loadDDUrl;
+     $.ajax({
+     url: url,
+     accepts: 'application/json',
+     cache: false,
+     type: 'GET',
+     dataType: 'jsonp',
+     success: function (result) {
+     // Handle the complete event
+     $.each(result.data, function () {
+     $("#DepartmentId").append($("<option     />").val(this.DepartmentId).text(this.Name));
+     });
+     }
+     });
+     }
+     function fillDropDownDesignation() {
+     var loadDDUrl = baseApiUrl + "Designation/List";
 
-        var url = loadDDUrl;
-        $.ajax({
-            url: url,
-            accepts: 'application/json',
-            cache: false,
-            type: 'GET',
-            dataType: 'jsonp',
-            success: function (result) {
-                // Handle the complete event
-                $.each(result.data, function () {
-                    $("#DesignationId").append($("<option     />").val(this.DesignationId).text(this.Name));
-                });
-            }
-        });
-    }
-    
+     var url = loadDDUrl;
+     $.ajax({
+     url: url,
+     accepts: 'application/json',
+     cache: false,
+     type: 'GET',
+     dataType: 'jsonp',
+     success: function (result) {
+     // Handle the complete event
+     $.each(result.data, function () {
+     $("#DesignationId").append($("<option     />").val(this.DesignationId).text(this.Name));
+     });
+     }
+     });
+     }*/
+
 
     function ShowMessage(type, message){
         if (message == 'undefined') return;
 
-        var error = $('.alert-danger');
-        var success = $('.alert-success');
+        var error = $('#mdlCreateBatch .alert-danger');
+        var success = $('#mdlCreateBatch .alert-success');
 
-        message = '<button data-close="alert" class="close"></button>'+ message;
-        
+        message = '<button data-close="alert" batch="close"></button>'+ message;
+
         if (type == "error") {
             error.html(message);
             error.show();
@@ -184,87 +266,8 @@ var BatchModule = function () {
             success.html(message);
             success.show();
         }
-        
+
     }
-
-    function ShowSuccessMessage() {
-        var message = decodeURIComponent(getUrlVars()["message"]);
-        ShowMessage("success", message);
-    }
-   
-    var loadGrid = function () {
-        ShowSuccessMessage();
-
-        var dataSet = [];
-
-        var newTable = $('#BatchGrid').DataTable({
-            //dom: "Bfrtip",
-            //ajax: loadGridUrl,
-            columns: [
-                //Table Column Header Collection
-                
-                { data: "Code" }, 
-                { data: "FirstName" }, 
-                { data: "LastName" }, 
-                { data: "DateOfBirth" }, 
-                { data: "Gender" }, 
-                { data: "DateOfJoining" }, 
-                { data: "DepartmentId" }, 
-                { data: "DesignationId" }, 
-                { data: "Qualification" }, 
-                { data: "TotalExperience" }, 
-                { data: "PresentAddress" }, 
-                { data: "PermanentAddress" }, 
-                { data: "Country" }, 
-                { data: "State" }, 
-                { data: "City" }, 
-                { data: "Mobile" }, 
-                { data: "Phone" }, 
-                { data: "Email" }, 
-                { data: "Photo" }, 
-                { data: "Status" }, 
-                {
-                    data: null, render: function (data, type, row) {
-                        // Combine the first and last names into a single table field
-                        //return '<a href="Edit/' + data.Batch Id + '" class="btn btn-default btn-xs purple"><i class="fa fa-edit"></i> Edit</a>' +
-                        //    '| <a href="#" class="btn btn-default btn-xs black"><i class="fa fa-trash-o"></i> Delete</a>';
-
-                        //return '<a href="Edit/' + data.BatchId + '" class="btn btn-default btn-xs purple"><i class="fa fa-edit"></i> Edit</a>';
-
-                        return '<a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.BatchId + '"><i class="fa fa-edit"></i> Edit</a>';
-                    }
-                },
-
-                //{ data: "salary", render: $.fn.dataTable.render.number(',', '.', 0, '$') }
-            ],
-            "fnInitComplete": function () {
-                $(".editView").click(function () {
-                    var id = $(this).data('id');
-                    edit(id);
-                    $('.modal-title').html("Edit Batch");
-                    $('#mdlCreateBatch').modal('show');
-                });
-            }
-        });
-
-        jQuery('#BatchGrid_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
-        jQuery('#BatchGrid_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
-        jQuery('#BatchGrid_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
-    }
-
-    var loadGrid2 = function () {
-        ShowSuccessMessage();
-
-        var dataSet = [];
-
-        var newTable = $('#BatchGrid').DataTable({
-        });
-
-        jQuery('#BatchGrid_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
-        jQuery('#BatchGrid_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
-        jQuery('#BatchGrid_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
-    }
-
 
     var edit = function (id) {
         //alert(id);
@@ -277,8 +280,8 @@ var BatchModule = function () {
             type: 'GET',
             dataType: 'jsonp',
             success: function (data) {
-                //debugger;
-                showEdit(data.data);
+                debugger;
+                showEdit(data.data[0]);
             },
             fail: function (result) {
             }
@@ -287,30 +290,24 @@ var BatchModule = function () {
 
     function showEdit(data) {
         if (data == null) return;
-        
+
         //Set values
-        
-        BatchIdFld.val(data.BatchId);
-        CodeFld.val(data.Code);
-        FirstNameFld.val(data.FirstName);
-        LastNameFld.val(data.LastName);
-        DateOfBirthFld.val(data.DateOfBirth);
-        GenderFld.val(data.Gender);
-        DateOfJoiningFld.val(data.DateOfJoining);
-        DepartmentIdFld.val(data.DepartmentId);
-        DesignationIdFld.val(data.DesignationId);
-        QualificationFld.val(data.Qualification);
-        TotalExperienceFld.val(data.TotalExperience);
-        PresentAddressFld.val(data.PresentAddress);
-        PermanentAddressFld.val(data.PermanentAddress);
-        CountryFld.val(data.Country);
-        StateFld.val(data.State);
-        CityFld.val(data.City);
-        MobileFld.val(data.Mobile);
-        PhoneFld.val(data.Phone);
-        EmailFld.val(data.Email);
-        PhotoFld.val(data.Photo);
-        StatusFld.val(data.Status);
+        BatchIdFld.val(data.batch_id);
+        CodeFld.val(data.code);
+        NameFld.val(data.name);
+        SectionNameFld.val(data.section_name);
+    }
+
+    $('#btnDelete').click(function(){
+        deleteData(BatchIdFld.val());
+    });
+
+
+    function showDelete(id) {
+        if (id == null) return;
+
+        //Set values
+        BatchIdFld.val(id);
     }
 
     function showPopup() {
@@ -318,100 +315,94 @@ var BatchModule = function () {
         $('.modal-title').html("Create Batch");
         $('#mdlCreateBatch').modal('show');
     }
-    //var view = function () {
-    //    var pathname = window.location.pathname;
 
-    //    var params = pathname.split('/');
-    //    var id = params[params.length - 1];
+    function deleteData(id) {
+        loader.show();
+        //var pathname = window.location.pathname;
 
-    //    //alert(id);
+        //var params = pathname.split('/');
+        //var id = params[params.length - 1];
 
-    //    var url = editUrl + id;
-    //    $.ajax({
-    //        url: url,
-    //        accepts: 'application/json',
-    //        cache: false,
-    //        type: 'GET',
-    //        dataType: 'jsonp',
-    //        success: function (data) {
-    //            //debugger;
-    //            showView(data.data);
-    //        },
-    //        fail: function (result) {
-    //        }
-    //    });
-    //}
-    
-    //function showView(data) {
-    //    debugger;
-    //    if (data == null) return;
+        //alert(id);
 
-    //    //Set values
-        
-    //    BatchIdFld.text(data.BatchId);
-    //    CodeFld.text(data.Code);
-    //    FirstNameFld.text(data.FirstName);
-    //    LastNameFld.text(data.LastName);
-    //    DateOfBirthFld.text(data.DateOfBirth);
-    //    GenderFld.text(data.Gender);
-    //    DateOfJoiningFld.text(data.DateOfJoining);
-    //    DepartmentIdFld.text(data.DepartmentId);
-    //    DesignationIdFld.text(data.DesignationId);
-    //    QualificationFld.text(data.Qualification);
-    //    TotalExperienceFld.text(data.TotalExperience);
-    //    PresentAddressFld.text(data.PresentAddress);
-    //    PermanentAddressFld.text(data.PermanentAddress);
-    //    CountryFld.text(data.Country);
-    //    StateFld.text(data.State);
-    //    CityFld.text(data.City);
-    //    MobileFld.text(data.Mobile);
-    //    PhoneFld.text(data.Phone);
-    //    EmailFld.text(data.Email);
-    //    PhotoFld.text(data.Photo);
-    //    StatusFld.text(data.Status);
-        
-    //    $(".edit").attr("href", "../Edit/" + data.BatchId);
-    //};
+        var batch = Batch;
+        //debugger;
 
-    //function deleteData() {
-    //    var pathname = window.location.pathname;
+        //Get values
+        batch.batch_id = id;
 
-    //    var params = pathname.split('/');
-    //    var id = params[params.length - 1];
+        var url = deleteUrl;
+        $.ajax({
+            url: url,
+            accepts: 'application/json',
+            cache: false,
+            type: 'POST',
+            data : batch,
+            dataType: 'jsonp',
+            success : function(result){
+                //debugger;
+                loader.hide();
 
-    //    //alert(id);
+                if(result.status == "success"){
+                    /*var save_id = result.data.batch_id;
+                     //alert(save_id);
+                     BatchIdFld.val(save_id);*/
 
-    //    var url = deleteUrl + id;
-    //    $.ajax({
-    //        url: url,
-    //        accepts: 'application/json',
-    //        cache: false,
-    //        type: 'POST',
-    //        dataType: 'jsonp',
-    //        complete: function (result) {
-    //            // Handle the complete event
-    //            var obj = JSON.parse(result.responseText);
+                    reloadGrid();
+                    $('#mdlDeleteBatch').modal('hide');
+                }else {
+                    ShowMessage("error", result.message);
+                }
 
-    //            if (obj.Success == true) {
-    //                window.location = listUrl + "?message=Batch Information Deleted";
-    //            } else {
-    //                ShowMessage("error", obj.Message);
-    //            }
-    //        }
-    //    });
-    //}
-    //var del = function () {
-    //    $(".delete").on("click", function () {
-    //        if (confirm("Are you sure want to delete?")) {
-    //            deleteData();
-    //        }
-    //    });
-    //};
+                //$('#mdlCreateBatch').modal('hide');
+                //alert(result.message);
+                /*if(result.status == "success"){
+                 window.location = listUrl + "?message="+result.message;
+                 }*/
+                /*else {
+                 ShowMessage("error", result.message);
+                 }*/
+                //alert('success'+result);
+            },
+            /*failed : function(result){
+             loader.hide();
+             alert(result.message);
+
+             /!*if(result.status == "failed") {
+             ShowMessage("error", result.message);
+             }*!/
+             },*/
+        });
+    }
+    /*var del = function () {
+     $(".delete").on("click", function () {
+
+     if (confirm("Are you sure want to delete?")) {
+     deleteData();
+     }
+     });
+     };*/
+
+    //--------------------End Form Validation Functions-----------------------//
+
+    var handleDateTime = function () {
+        if (jQuery().datepicker) {
+            $('.date-picker').datepicker({
+                rtl: App.isRTL(),
+                //format: 'dd-MM-yyyy',
+                autoclose: true
+            });
+            $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
+        }
+    }
 
     return {
         //main function to initiate the module
+
         validate : function(){
             handleValidation();
+
+            handleDateTime();
         },
         loadGrid: function () {
             if (!jQuery().dataTable) {
@@ -419,12 +410,12 @@ var BatchModule = function () {
             }
             loadGrid();
         },
-        loadGrid2: function () {
-            if (!jQuery().dataTable) {
-                return;
-            }
-            loadGrid2();
-        },
+        /*loadGrid2: function () {
+         if (!jQuery().dataTable) {
+         return;
+         }
+         loadGrid2();
+         },*/
         addView: function () {
             showPopup();
         },

@@ -61,14 +61,14 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+               <!-- <tr>
                   <td>SUB-0001</td>
                   <td>
                     <span class="label label-success">Math</span>
                   </td>
                   <td>
                     <a href=""
-                      <?php echo base_url();?>/index.php/classes/edit/1" class="btn btn-default btn-xs purple">
+                      <?php /*echo base_url();*/?>/index.php/classes/edit/1" class="btn btn-default btn-xs purple">
                       <i class="fa fa-edit"></i> Edit
                     </a> |
                     <a href="#" class="btn btn-default btn-xs black">
@@ -103,17 +103,8 @@
                       <i class="fa fa-trash-o"></i> Delete
                     </a>
                   </td>
-                </tr>
-                <!--<?php foreach($Subject as $employee){?>
-                          <tr>
-                            <td>
-                              <?php echo $employee->SubjectId;?>
-                            </td>
-                            <td>
-                              <?php echo $employee->FirstName;?>
-                            </td>
-                          </tr>
-                         <?php } ?>-->
+                </tr>-->
+
               </tbody>
             </table>
 
