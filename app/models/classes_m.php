@@ -42,6 +42,7 @@ class classes_m extends CI_Model
 
     function save($school_id, $class_id, $class)
     {
+
         if ($class_id > 0) {
 
             //Update
@@ -64,18 +65,21 @@ class classes_m extends CI_Model
             $result = $this->db->insert('classes', $class);
 
             //newly inserted id
-            $class_id = $this->db->insert_id();
+            //$class_id = $this->db->insert_id();
         }
 
-        //build object
-        $class = array_merge($class, array('class_id'=> $class_id));
+        if($result===TRUE){
+            $message ="Class information saved";
+        }else{
+            $message ="Error for saving class information";
+        }
 
-        $return = array(
+        $response = array(
             'result' => $result,
-            'data' => $class
+            'message' => $message
         );
 
-        return $return;
+        return $response;
     }
 
     function delete($school_id, $class_id)
@@ -91,9 +95,21 @@ class classes_m extends CI_Model
             $this->db->where('class_id', $class_id);
             $result = $this->db->update('classes', $class);
 
-            return $result;
+            //return $result;
         }
-        return false;
+
+        if($result===TRUE){
+            $message ="Class deleted";
+        }else{
+            $message ="Error for deleting class information";
+        }
+
+        $response = array(
+            'result' => $result,
+            'message' => $message
+        );
+
+        return $response;
     }
 
 }
