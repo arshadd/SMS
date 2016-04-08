@@ -120,17 +120,43 @@ CREATE TABLE `batches` (
 	`updated_at` datetime DEFAULT NULL,
 	`school_id` int(11) NOT NULL,
 	PRIMARY KEY (`batch_id`),
-    
+
     -- KEY `fk_batch_class_id` (`class_id`),
 	CONSTRAINT `fk_batch_class_id` FOREIGN KEY (`class_id`) REFERENCES `classes` (`class_id`),
-    
+
     -- KEY `fk_batch_employee_id` (`employee_id`),
 	CONSTRAINT `fk_batch_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`),
-    
+
     -- KEY `fk_batch_school_id` (`school_id`),
 	CONSTRAINT `fk_batch_school_id` FOREIGN KEY (`school_id`) REFERENCES `schools` (`school_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+
+DROP TABLE IF EXISTS `subjects`;
+CREATE TABLE `subjects` (
+	`subject_id` int(11) NOT NULL AUTO_INCREMENT,
+	`code` varchar(10) DEFAULT NULL,
+	`name` varchar(50) DEFAULT NULL,
+	`max_weekly_classes` int(2) DEFAULT NULL,
+	`credit_hours` DECIMAL(5,2) DEFAULT NULL,
+
+    `batch_id` int(11) NOT NULL,
+
+	`is_active` bool DEFAULT true,
+	`created_at` datetime DEFAULT NULL,
+	`updated_at` datetime DEFAULT NULL,
+	`school_id` int(11) NOT NULL,
+	PRIMARY KEY (`subject_id`),
+
+    -- KEY `fk_subject_batch_id` (`batch_id`),
+	CONSTRAINT `fk_subject_batch_id` FOREIGN KEY (`batch_id`) REFERENCES `batches` (`batch_id`),
+
+    -- KEY `fk_subject_school_id` (`school_id`),
+	CONSTRAINT `fk_subject_school_id` FOREIGN KEY (`school_id`) REFERENCES `schools` (`school_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+---Inserting DATA
 LOCK TABLES `schools` WRITE;
 INSERT INTO `schools`
 VALUES (1,'Testing School','SCH-01','','','','', '', './assets/resource/school/logo.png', true, current_date(), current_date());

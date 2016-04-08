@@ -1,17 +1,25 @@
 var BatchModule = function () {
 
     //Create Batch
-    var Batch = { batch_id: 0, code: '', name: '', section_name: ''};
+    var Batch = { batch_id: 0, class_id: 0, name: '', start_date: '', end_date: ''};
 
     //Field Declaration Section
 
     var BatchIdFld = $('#Form_Batch #batch_id');
-    var CodeFld = $('#Form_Batch #code');
+    var ClassIdFld = $('#Form_Batch #class_id');
     var NameFld = $('#Form_Batch #name');
-    var SectionNameFld = $('#Form_Batch #section_name');
+    var StartDateFld = $('#Form_Batch #start_date');
+    var EndDateFld = $('#Form_Batch #end_date');
+
+
+    var BatchGrid = $('#BatchGrid');
+    var ModalCreateBatch = $('#mdlCreateBatch');
+    var ModalDeleteBatch = $('#mdlDeleteBatch');
+
 
     var loader = $("#Form_Batch #loader");
     loader.hide();
+
 
     var loadGridUrl = baseApiUrl + "batches/all_class_batches/";
     var editUrl = baseApiUrl + "batches/find_batch/";
@@ -25,25 +33,31 @@ var BatchModule = function () {
     var loadGrid = function () {
         //ShowSuccessMessage();
 
-        //Get class id from parameter
-        var pathname = window.location.pathname;
-        var params = pathname.split('/');
-        var class_id = params[params.length - 1];
+        var class_id = ClassIdFld.val();
 
         loadGridUrl = loadGridUrl + class_id;
         var dataSet = [];
 
-        dataTable = $('#BatchGrid').DataTable({
+        dataTable = BatchGrid.DataTable({
             //dom: "Bfrtip",
             ajax: loadGridUrl,
+            aaSorting: [], //disabled initial sorting
             /*language: {
                 emptyTable: "No records available - Got it?",
             },*/
             columns: [
                 //Table Column Header Collection
                 {data: "name"},
-                {data: "start_date"},
-                {data: "end_date"},
+                {
+                    data: "start_date", render: function (data, type, row) {
+                        return (moment(data).format("DD-MMM-YYYY"));
+                    }
+                },
+                {
+                    data: "end_date", render: function (data, type, row) {
+                        return (moment(data).format("DD-MMM-YYYY"));
+                    }
+                },
                 {
                     data: null, render: function (data, type, row) {
                     // Combine the first and last names into a single table field
@@ -63,21 +77,21 @@ var BatchModule = function () {
     }
 
     // Edit record
-    $('#BatchGrid').on( 'click', 'a.editView', function (e) {
+    BatchGrid.on( 'click', 'a.editView', function (e) {
         //alert('my edit'+id);
 
         var id = $(this).data('id');
         edit(id);
         $('.modal-title').html("Edit Batch");
-        $('#mdlCreateBatch').modal('show');
+        ModalCreateBatch.modal('show');
     });
 
     // Delete record
-    $('#BatchGrid').on( 'click', 'a.deleteView', function (e) {
+    BatchGrid.on( 'click', 'a.deleteView', function (e) {
         var id = $(this).data('id');
 
         showDelete(id);
-        $('#mdlDeleteBatch').modal('show');
+        ModalDeleteBatch.modal('show');
 
         //deleteData(id);
     });
@@ -96,7 +110,7 @@ var BatchModule = function () {
 
         // for more info visit the official plugin documentation: 
         // http://docs.jquery.com/Plugins/Validation
-
+        //debugger;
         var form1 = $('#Form_Batch');
         var error1 = $('.alert-danger', form1);
         var success1 = $('.alert-success', form1);
@@ -111,15 +125,15 @@ var BatchModule = function () {
             rules: {
                 //Field Validation Rule
 
-                code: {
-                    required: true
-                },
                 name: {
                     required: true
                 },
-                section_name: {
+                start_date: {
                     required: true
                 },
+                end_date: {
+                    required: true
+                }
             },
 
             invalidHandler: function (event, validator) { //display error alert on form submit              
@@ -130,17 +144,17 @@ var BatchModule = function () {
 
             highlight: function (element) { // hightlight error inputs
                 $(element)
-                    .closest('.form-group').addBatch('has-error'); // set error batch to the control group
+                    .closest('.form-group').addClass('has-error'); // set error batch to the control group
             },
 
             unhighlight: function (element) { // revert the change done by hightlight
                 $(element)
-                    .closest('.form-group').removeBatch('has-error'); // set error batch to the control group
+                    .closest('.form-group').removeClass('has-error'); // set error batch to the control group
             },
 
             success: function (label) {
                 label
-                    .closest('.form-group').removeBatch('has-error'); // set success batch to the control group
+                    .closest('.form-group').removeClass('has-error'); // set success batch to the control group
             },
 
             submitHandler: function (form) {
@@ -168,9 +182,10 @@ var BatchModule = function () {
         //Get values
 
         batch.batch_id = BatchIdFld.val();
-        batch.code = CodeFld.val();
+        batch.class_id = ClassIdFld.val();
         batch.name = NameFld.val();
-        batch.section_name = SectionNameFld.val();
+        batch.start_date = StartDateFld.val();
+        batch.end_date = EndDateFld.val()
 
         var url = saveUrl;
         $.ajax({
@@ -181,6 +196,7 @@ var BatchModule = function () {
             data : batch,
             dataType: 'jsonp',
             success : function(result){
+                debugger;
                 loader.hide();
 
                 if(result.status == "success"){
@@ -189,66 +205,15 @@ var BatchModule = function () {
                      BatchIdFld.val(save_id);*/
 
                     reloadGrid();
-                    $('#mdlCreateBatch').modal('hide');
+                    ModalCreateBatch.modal('hide');
                 }else {
                     ShowMessage("error", result.message);
                 }
                 //parent.location.reload();
                 //alert('success'+result);
             },
-            /*failed : function(result){
-             alert('failed');
-             loader.hide();
-             /!*if(result.status == "failed") {
-             ShowMessage("error", result.message);
-             }*!/
-             }*/
         });
     }
-
-    /*function loadAll() {
-     //Todo
-     fillDropDownDepartment();
-     fillDropDownDesignation();
-     }
-
-     function fillDropDownDepartment() {
-     var loadDDUrl = baseApiUrl + "Department/List";
-
-     var url = loadDDUrl;
-     $.ajax({
-     url: url,
-     accepts: 'application/json',
-     cache: false,
-     type: 'GET',
-     dataType: 'jsonp',
-     success: function (result) {
-     // Handle the complete event
-     $.each(result.data, function () {
-     $("#DepartmentId").append($("<option     />").val(this.DepartmentId).text(this.Name));
-     });
-     }
-     });
-     }
-     function fillDropDownDesignation() {
-     var loadDDUrl = baseApiUrl + "Designation/List";
-
-     var url = loadDDUrl;
-     $.ajax({
-     url: url,
-     accepts: 'application/json',
-     cache: false,
-     type: 'GET',
-     dataType: 'jsonp',
-     success: function (result) {
-     // Handle the complete event
-     $.each(result.data, function () {
-     $("#DesignationId").append($("<option     />").val(this.DesignationId).text(this.Name));
-     });
-     }
-     });
-     }*/
-
 
     function ShowMessage(type, message){
         if (message == 'undefined') return;
@@ -256,7 +221,7 @@ var BatchModule = function () {
         var error = $('#mdlCreateBatch .alert-danger');
         var success = $('#mdlCreateBatch .alert-success');
 
-        message = '<button data-close="alert" batch="close"></button>'+ message;
+        message = '<button data-close="alert" class="close"></button>'+ message;
 
         if (type == "error") {
             error.html(message);
@@ -293,9 +258,9 @@ var BatchModule = function () {
 
         //Set values
         BatchIdFld.val(data.batch_id);
-        CodeFld.val(data.code);
         NameFld.val(data.name);
-        SectionNameFld.val(data.section_name);
+        StartDateFld.val(GetDateFormatOnly(data.start_date));
+        EndDateFld.val(GetDateFormatOnly(data.end_date));
     }
 
     $('#btnDelete').click(function(){
@@ -309,11 +274,14 @@ var BatchModule = function () {
         //Set values
         BatchIdFld.val(id);
     }
-
+    $('.modal').on('hidden.bs.modal', function(){
+        $(this).find('form')[0].reset();
+    });
     function showPopup() {
         $('#Form_Batch').trigger("reset");
+        BatchIdFld.val("0");
         $('.modal-title').html("Create Batch");
-        $('#mdlCreateBatch').modal('show');
+        ModalCreateBatch.modal('show');
     }
 
     function deleteData(id) {
@@ -349,29 +317,11 @@ var BatchModule = function () {
                      BatchIdFld.val(save_id);*/
 
                     reloadGrid();
-                    $('#mdlDeleteBatch').modal('hide');
+                    ModalDeleteBatch.modal('hide');
                 }else {
                     ShowMessage("error", result.message);
                 }
-
-                //$('#mdlCreateBatch').modal('hide');
-                //alert(result.message);
-                /*if(result.status == "success"){
-                 window.location = listUrl + "?message="+result.message;
-                 }*/
-                /*else {
-                 ShowMessage("error", result.message);
-                 }*/
-                //alert('success'+result);
             },
-            /*failed : function(result){
-             loader.hide();
-             alert(result.message);
-
-             /!*if(result.status == "failed") {
-             ShowMessage("error", result.message);
-             }*!/
-             },*/
         });
     }
     /*var del = function () {
@@ -389,44 +339,37 @@ var BatchModule = function () {
         if (jQuery().datepicker) {
             $('.date-picker').datepicker({
                 rtl: App.isRTL(),
-                //format: 'dd-MM-yyyy',
+                format: 'dd-MM-yyyy',
                 autoclose: true
             });
             $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
         }
     }
 
+    var fetchClassId = function(){
+        var pathname = window.location.pathname;
+        var params = pathname.split('/');
+        var class_id = params[params.length - 1];
+        ClassIdFld.val(class_id);
+    }
+
     return {
         //main function to initiate the module
-
-        validate : function(){
+        init : function(){
+            //Form validation
+            handleDateTime();
+            fetchClassId();
             handleValidation();
 
-            handleDateTime();
-        },
-        loadGrid: function () {
+            //Grid loading
             if (!jQuery().dataTable) {
                 return;
             }
+            fetchClassId();
             loadGrid();
         },
-        /*loadGrid2: function () {
-         if (!jQuery().dataTable) {
-         return;
-         }
-         loadGrid2();
-         },*/
         addView: function () {
             showPopup();
         },
-        //edit: function () {
-        //    edit();
-        //},
-        //view: function () {
-        //    view();
-        //},
-        //del: function () {
-        //    del();
-        //}
     };
 }();

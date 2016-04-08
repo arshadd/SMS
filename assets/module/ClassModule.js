@@ -30,6 +30,7 @@ var ClassModule = function () {
         dataTable = $('#ClassGrid').DataTable({
             //dom: "Bfrtip",
             ajax: loadGridUrl,
+            aaSorting: [], //disabled initial sorting
             columns: [
                 //Table Column Header Collection
 
@@ -75,7 +76,7 @@ var ClassModule = function () {
         var id = $(this).data('id');
 
         showDelete(id);
-        $('#mdlDeleteClass').modal('show');
+        $('#mdlDelete').modal('show');
 
         //deleteData(id);
     });
@@ -310,6 +311,7 @@ var ClassModule = function () {
 
     function showPopup() {
         $('#Form_Class').trigger("reset");
+        ClassIdFld.val("0");
         $('.modal-title').html("Create Class");
         $('#mdlCreateClass').modal('show');
     }
@@ -347,7 +349,7 @@ var ClassModule = function () {
                      ClassIdFld.val(save_id);*/
 
                     reloadGrid();
-                    $('#mdlDeleteClass').modal('hide');
+                    $('#mdlDelete').modal('hide');
                 }else {
                     ShowMessage("error", result.message);
                 }
@@ -384,8 +386,17 @@ var ClassModule = function () {
     //--------------------End Form Validation Functions-----------------------//
     return {
         //main function to initiate the module
+        init : function(){
+            //Form validation
+            handleValidation();
 
-        validate : function(){
+            //Grid loading
+            if (!jQuery().dataTable) {
+                return;
+            }
+            loadGrid();
+        },
+        /*validate : function(){
             handleValidation();
         },
         loadGrid: function () {
@@ -393,7 +404,7 @@ var ClassModule = function () {
                 return;
             }
             loadGrid();
-        },
+        },*/
         /*loadGrid2: function () {
             if (!jQuery().dataTable) {
                 return;

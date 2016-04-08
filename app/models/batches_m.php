@@ -50,4 +50,76 @@ class batches_m extends CI_Model
         return false;
     }
 
+    function save($batch_id, $batch)
+    {
+        if ($batch_id > 0) {
+
+            //Update
+
+            //Updated_at date
+            $batch = array_merge($batch, array('updated_at'=> date('Y-m-d H:i:s')));
+
+            //update
+            $this->db->where('batch_id', $batch_id);
+            $result = $this->db->update('batches', $batch);
+
+            //$result = false;
+        } else {
+            //Insert
+
+            //Created_at date
+            $batch = array_merge($batch, array('created_at'=> date('Y-m-d H:i:s')));
+
+            //Insert
+            $result = $this->db->insert('batches', $batch);
+
+            //newly inserted id
+            $batch_id = $this->db->insert_id();
+        }
+
+        if($result===TRUE){
+            $message ="Batch information saved";
+        }else{
+            $message ="Error for saving batch information";
+        }
+
+        $response = array(
+            'result' => $result,
+            'message' => $message,
+            'data' => array('batch_id' => $batch_id)
+        );
+
+        return $response;
+    }
+
+    function delete($batch_id)
+    {
+        if ($batch_id > 0) {
+
+            //Delete
+
+            //Is_active set to false
+            $batch = array('is_active'=> false);
+
+            //update
+            $this->db->where('batch_id', $batch_id);
+            $result = $this->db->update('batches', $batch);
+
+            //return $result;
+        }
+
+        if($result===TRUE){
+            $message ="Class deleted";
+        }else{
+            $message ="Error for deleting class information";
+        }
+
+        $response = array(
+            'result' => $result,
+            'message' => $message
+        );
+
+        return $response;
+    }
+
 }

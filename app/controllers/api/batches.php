@@ -9,6 +9,8 @@ class batches extends REST_Controller {
         parent::__construct();
 
         $this->load->library('session');
+        $this->load->helper('date');
+
         $this->load->model('batches_m');
 
         if( !$this->session->userdata('isLoggedIn') ) {
@@ -21,8 +23,8 @@ class batches extends REST_Controller {
         //Get logged school id
         $school_id = $this->session->userdata('school_id');
 
-        $classes = $this->batches_m->all_batches($school_id);
-        $this->response(array("status" => "success", "message" => "", "data" => $classes));
+        $batches = $this->batches_m->all_batches($school_id);
+        $this->response(array("status" => "success", "message" => "", "data" => $batches));
     }
 
     function all_class_batches_get($class_id = null)
@@ -35,8 +37,8 @@ class batches extends REST_Controller {
             //Get logged school id
             $school_id = $this->session->userdata('school_id');
 
-            $class = $this->batches_m->all_class_batches($school_id, $class_id);
-            $this->response(array("status" => "success", "message" => "", "data" => $class));
+            $batches = $this->batches_m->all_class_batches($school_id, $class_id);
+            $this->response(array("status" => "success", "message" => "", "data" => $batches));
         }
     }
 
@@ -50,11 +52,60 @@ class batches extends REST_Controller {
             //Get logged school id
             $school_id = $this->session->userdata('school_id');
 
-            $class = $this->batches_m->find_batch($school_id, $batch_id);
-            $this->response(array("status" => "success", "message" => "", "data" => $class));
+            $batch = $this->batches_m->find_batch($school_id, $batch_id);
+            $this->response(array("status" => "success", "message" => "", "data" => $batch));
         }
     }
-    
+
+    function save_post()
+    {
+        //Get logged school id
+        $school_id = $this->session->userdata('school_id');
+
+        //Get primary key
+        $batch_id = $this->post('batch_id');
+
+/*
+        $this->post('end_date')    */
+
+        //Make array
+        $batch = array(
+            'name' => $this->post('name'),
+            'start_date' => date('Y-m-d', strtotime($this->post('start_date'))),
+            'end_date' => date('Y-m-d', strtotime($this->post('end_date'))),
+            'class_id' => $this->post('class_id'),
+            'school_id' => $school_id
+        );
+
+        //Save
+        $response = $this->batches_m->save($batch_id, $batch);
+
+        if ($response['result'] === FALSE) {
+            $this->response(array("status" => "failed", "message" => $response['message'], "data" => null));
+        } else {
+            $this->response(array("status" => "success",  "message" => $response['message'], "data" => $response['data']));
+        }
+    }
+
+    function delete_post()
+    {
+        //Get logged school id
+        //$school_id = $this->session->userdata('school_id');
+
+        //Get primary key
+        $batch_id = $this->post('batch_id');
+
+        //Delete
+        $response = $this->batches_m->delete($batch_id);
+
+        if ($response['result']=== FALSE) {
+            $this->response(array("status" => "failed", "message" => $response['message'], "data" => null));
+        } else {
+            $this->response(array("status" => "success", "message" => $response['message'], "data" => $batch_id));
+        }
+    }
+
+
     /*function save_post()
     {
 

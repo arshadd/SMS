@@ -118,32 +118,10 @@
     <!-- /.modal-dialog -->
   </div>
 
-  <div class="modal fade" id="mdlDeleteClass" tabindex="-1" role="basic" aria-hidden="true">
-    <div class="modal-dialog modal-small">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-          <h4 class="modal-title">Confirm Delete</h4>
-        </div>
-        <div class="portlet-body form">
-          <div class="alert alert-success display-hide">
-            <button data-close="alert" class="close"></button>
-            Class Information saved successfully.
-          </div>
+  <?php include('_deletePopup.php');?>
 
-          <div class="scroller" style="height: 180px; width:100px" data-always-visible="1" data-rail-visible1="1">
-            <div class="portlet-body form">
-                <?php include('_deleteClass.php');?>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
 
-<?php
+  <?php
 
     $pagePlugin  = array(
       '<script type="text/javascript" src="' . base_url() . 'assets/plugins/custom-datatable/jquery.dataTables.min.js" ></script>'
@@ -158,8 +136,7 @@
       );
       
     $pageJsCalls  = array(
-      'ClassModule.loadGrid();'
-      ,'ClassModule.validate();'
+      'ClassModule.init();'
     );
     
     include(VIEW_PATH.'footer.php');

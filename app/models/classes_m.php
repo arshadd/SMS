@@ -76,7 +76,8 @@ class classes_m extends CI_Model
 
         $response = array(
             'result' => $result,
-            'message' => $message
+            'message' => $message,
+            'data' => array('batch_id' => $class_id)
         );
 
         return $response;
@@ -106,7 +107,8 @@ class classes_m extends CI_Model
 
         $response = array(
             'result' => $result,
-            'message' => $message
+            'message' => $message,
+            'data' => array('batch_id' => $class_id)
         );
 
         return $response;

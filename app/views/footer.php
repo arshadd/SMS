@@ -16,14 +16,14 @@
 <script src="<?php echo base_url();?>assets/plugins/respond.min.js"></script>
 <script src="<?php echo base_url();?>assets/plugins/excanvas.min.js"></script> 
 <![endif]-->
-<script src="<?php echo base_url();?>assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/plugins/jquery.cokie.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/jquery-1.10.2.min.js" ></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/jquery.blockui.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/jquery.cokie.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/uniform/jquery.uniform.min.js"></script>
 <!-- END CORE PLUGINS -->
 
 <!-- BEGIN PAGE LEVEL PLUGINS -->
@@ -36,7 +36,7 @@
 
 
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script src="<?php echo base_url();?>assets/scripts/app.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo base_url();?>assets/scripts/app.js"></script>
 <?php foreach ($pageJsScript as $jsScript)
 {
     echo $jsScript.PHP_EOL;

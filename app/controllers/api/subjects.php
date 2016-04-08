@@ -2,61 +2,82 @@
     
 require APPPATH.'/libraries/REST_Controller.php';
 
-class classes extends REST_Controller {
+class subjects extends REST_Controller {
 
     public function __construct()
     {
         parent::__construct();
 
         $this->load->library('session');
-        $this->load->model('classes_m');
+        $this->load->model('subjects_m');
 
         if( !$this->session->userdata('isLoggedIn') ) {
             redirect('/login/show_login');
         }
     }
 
-    function all_classes_get()
+    function all_subjects_get()
     {
         //Get logged school id
         $school_id = $this->session->userdata('school_id');
 
-        $classes = $this->classes_m->all_classes($school_id);
-        $this->response(array("status" => "success", "message" => "", "data" => $classes));
+        $subjects = $this->subjects_m->all_subjects($school_id);
+        $this->response(array("status" => "success", "message" => "", "data" => $subjects));
     }
 
-    function find_class_get($class_id)
+    function all_batch_subjects_get($subject_id = null)
     {
         //Validation
-        if (is_null($class_id)) {
-            $this->response(array("status" => "false", "message" => "Invalid class id", "data" => null));
+        if (is_null($subject_id)) {
+            $this->response(array("status" => "false", "message" => "Invalid batch id", "data" => null));
         } else {
+
             //Get logged school id
             $school_id = $this->session->userdata('school_id');
 
-            $class = $this->classes_m->find_class($school_id, $class_id);
-            $this->response(array("status" => "success", "message" => "", "data" => $class));
+            $subjects = $this->subjects_m->all_batch_subjects($school_id, $subject_id);
+            $this->response(array("status" => "success", "message" => "", "data" => $subjects));
         }
     }
-    
+
+    function find_subject_get($subject_id = null)
+    {
+        //Validation
+        if (is_null($subject_id)) {
+            $this->response(array("status" => "false", "message" => "Invalid subject id", "data" => null));
+        } else {
+
+            //Get logged school id
+            $school_id = $this->session->userdata('school_id');
+
+            $subject = $this->subjects_m->find_subject($school_id, $subject_id);
+            $this->response(array("status" => "success", "message" => "", "data" => $subject));
+        }
+    }
+
     function save_post()
     {
         //Get logged school id
         $school_id = $this->session->userdata('school_id');
 
         //Get primary key
-        $class_id = $this->post('class_id');
+        $subject_id = $this->post('subject_id');
+
+/*
+        $this->post('end_date')    */
 
         //Make array
-        $class = array(
+        $subject = array(
             'code' => $this->post('code'),
             'name' => $this->post('name'),
-            'section_name' => $this->post('section_name'),
+            'max_weekly_classes' => $this->post('max_weekly_classes'),
+            'credit_hours' => $this->post('credit_hours'),
+            'batch_id' => $this->post('batch_id'),
             'school_id' => $school_id
         );
 
         //Save
-        $response = $this->classes_m->save($school_id, $class_id, $class);
+        $response = $this->subjects_m->save($subject_id, $subject);
 
         if ($response['result'] === FALSE) {
             $this->response(array("status" => "failed", "message" => $response['message'], "data" => null));
@@ -68,20 +89,21 @@ class classes extends REST_Controller {
     function delete_post()
     {
         //Get logged school id
-        $school_id = $this->session->userdata('school_id');
+        //$school_id = $this->session->userdata('school_id');
 
         //Get primary key
-        $class_id = $this->post('class_id');
+        $subject_id = $this->post('subject_id');
 
         //Delete
-        $response = $this->classes_m->delete($school_id, $class_id);
+        $response = $this->subjects_m->delete($subject_id);
 
         if ($response['result']=== FALSE) {
             $this->response(array("status" => "failed", "message" => $response['message'], "data" => null));
         } else {
-            $this->response(array("status" => "success", "message" => $response['message'], "data" => $response['data']));
+            $this->response(array("status" => "success", "message" => $response['message'], "data" => $subject_id));
         }
     }
+
 
     /*function save_post()
     {

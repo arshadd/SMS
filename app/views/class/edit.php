@@ -45,7 +45,7 @@
               <i class="fa fa-angle-right"></i>
             </li>
             <li>
-              <a href="~/Classes/Index">Class</a>
+              <a href="<?php echo base_url() .'/index.php/classes/index' ?>">Class</a>
               <i class="fa fa-angle-right"></i>
             </li>
             <li>
@@ -66,7 +66,7 @@
             <!--BEGIN TABS-->
             <div class="tabbable tabbable-custom">
               <ul class="nav nav-tabs">
-                <li class="active">
+                <li class="">
                   <a href="#tab_1_1" data-toggle="tab">
                     <i class="fa fa-leaf"></i>Overview
                   </a>
@@ -77,7 +77,7 @@
                     <i class="fa fa-th-list"></i> Batches
                   </a>
                 </li>
-                <li>
+                <li class="active">
                   <a href="#tab_1_4" data-toggle="tab">
                     <i class="fa fa-sitemap"></i> Subjects
                   </a>
@@ -111,7 +111,7 @@
                 </li>
               </ul>
               <div class="tab-content">
-                <div class="tab-pane active" id="tab_1_1">
+                <div class="tab-pane " id="tab_1_1">
 
                   <?php include('_createOrEditClass.php');?>
 
@@ -123,7 +123,7 @@
 
                 </div>
                 <!--end tab-pane-->
-                <div class="tab-pane" id="tab_1_4">
+                <div class="tab-pane active" id="tab_1_4">
 
                   <?php include('_subject.php');?>
 
@@ -132,21 +132,21 @@
                 <!--end tab-pane-->
                 <div class="tab-pane" id="tab_1_5">
 
-                  <?php include('_teacherSubject.php');?>
+<!--                  --><?php /*include('_teacherSubject.php');*/?>
 
                 </div>
                 
                 <!--end tab-pane-->
                 <div class="tab-pane" id="tab_1_6">
 
-                  <?php include('_student.php');?>
+<!--                  --><?php /*include('_student.php');*/?>
 
                 </div>
                 <!--end tab-pane-->
 
                 <div class="tab-pane" id="tab_1_7">
 
-                  <?php include('_rollnumber.php');?>
+<!--                  --><?php /*include('_rollnumber.php');*/?>
 
                 </div>
                 <!--end tab-pane-->
@@ -154,13 +154,13 @@
                 
                 <!--end tab-pane-->
                 <div class="tab-pane" id="tab_1_8">
-                  <?php include('_timetable.php');?>
+<!--                  --><?php /*include('_timetable.php');*/?>
 
                 </div>
                 <!--end tab-pane-->
                 <div class="tab-pane" id="tab_1_9">
 
-                  <?php include('_attendance.php');?>
+<!--                  --><?php /*include('_attendance.php');*/?>
 
                 </div>
                 <!--end tab-pane-->
@@ -180,8 +180,6 @@
 
   </div>
   <!-- END CONTAINER -->
-
-
 
   <?php
 
@@ -209,14 +207,12 @@
       );
      
     $pageJsCalls  = array(
-      'ClassModule.validate();'
+      //'ClassModule.validate();'
 
-      ,'BatchModule.loadGrid();'
-      ,'BatchModule.validate();'
+      'BatchModule.init();'
 
-      ,'SubjectModule.loadGrid2();'
-      ,'SubjectModule.validate();'
-      
+      ,'SubjectModule.init();'
+
       /*,'StudentModule.loadGrid2();'
       ,'StudentModule.validate();'
       
