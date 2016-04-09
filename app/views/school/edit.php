@@ -61,7 +61,7 @@
                 </div>
               </div>
               <div class="portlet-body form">
-                  <?php include('_createOrEdit.php');?>
+                  <?php include('_createOrEditSchool.php');?>
               </div>
             </div>
           </div>
@@ -92,8 +92,7 @@
     );
       
     $pageJsCalls  = array(
-      'SchoolModule.validate();'
-      //,'SchoolModule.edit();'
+      'SchoolModule.init();'
     );
     
     include(VIEW_PATH.'footer.php');

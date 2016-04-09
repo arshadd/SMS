@@ -179,7 +179,7 @@
   </div>
   <!-- END CONTAINER -->
 
-  <div class="modal fade" id="mdlCreateStudent" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal fade" id="mdlCreateStudent" tabindex="-1" data-backdrop="static" data-keyboard="false" data-attention-animation="true">
     <div class="modal-dialog modal-wide">
       <div class="modal-content">
         <div class="modal-header">
@@ -209,6 +209,10 @@
       ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/custom-datatable/DT_bootstrap.js" ></script>'
       ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/jquery-validation/dist/jquery.validate.min.js" ></script>'
       ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/select2/select2.min.js" ></script>'
+
+    ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" ></script>'
+    ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-modal/js/bootstrap-modal.js"" ></script>'
+
     );
     
     $pageJsScript  = array(

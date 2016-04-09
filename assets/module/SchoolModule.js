@@ -1,285 +1,220 @@
 var SchoolModule = function () {
 
-    //Create Class
-    var School = { SchoolId: 0, Name: '', Description: '', Address: '', Phone: '', Email:'', Website:'', Photo: ''};
+    //Create Batch
+    var School = { school_id: 0, code: '', name: '', description: '', address: '', phone:'', email:'', website:'', logo:''};
 
     //Field Declaration Section
-    
-    var SchoolIdFld = $('#SchoolId');
-    var NameFld = $('#Name');
-    var DescriptionFld = $('#Description');
-    var AddressFld = $('#Address');
-    var PhoneFld = $('#Phone');
-    var EmailFld = $('#Email');
-    var WebsiteFld = $('#Website');
-    var PhotoFld = $('#Photo');
-    var LogoFld = $('#Logo');
+
+    var SchoolIdFld = $('#Form_School #school_id');
+    var CodeFld = $('#Form_School #code');
+    var NameFld = $('#Form_School #name');
+    var DescriptionFld = $('#Form_School #description');
+    var AddressFld = $('#Form_School #address');
+    var PhoneFld = $('#Form_School #phone');
+    var EmailFld = $('#Form_School #email');
+    var WebsiteFld = $('#Form_School #website');
+    var LogoFld = $('#Form_School #logo');
+
+    var loader = $("#Form_School #loader");
+    loader.hide();
 
 
-    var loadGridUrl = baseApiUrl + "School/List";
-    var editUrl = baseApiUrl + "school/item";
-    var saveUrl = baseApiUrl + "school/save";
-    var deleteUrl = baseApiUrl + "School/Delete/";
-    var listUrl = baseAppUrl + "School/List";
+    var ModalUploadFile = $('#mdlFileUpload');
+
+    var editUrl = baseApiUrl + "schools/find_school";
+    var saveUrl = baseApiUrl + "schools/save";
+    var deleteUrl = baseApiUrl + "schools/delete";
+    var listUrl = baseAppUrl + "schools/index";
 
 
-    
+    //--------------------Grid Functions-----------------------//
 
+    //--------------------End Grid Functions-----------------------//
+    var form1 = $('#Form_School');
+    var error1 = $('.alert-danger', form1);
+    var success1 = $('.alert-success', form1);
+
+    //--------------------Form Validation Functions-----------------------//
     var handleValidation = function () {
         //load All dropdowns
         //loadAll();
-        //alert('dd')
-        // for more info visit the official plugin documentation: 
+
+        // for more info visit the official plugin documentation:
         // http://docs.jquery.com/Plugins/Validation
-        
+        //debugger;
 
-        var form = $('#Form_School');
-        var error = $('.alert-danger', form);
-        var success = $('.alert-success', form);
 
-        form.validate({
-            doNotHideMessage: true, //this option enables to show the error/success messages on tab switch.
+        if (form1.validate == null) return;
+        //debugger;
+        form1.validate({
             errorElement: 'span', //default input error message container
-            errorClass: 'help-block', // default input error message class
+            errorBatch: 'help-block', // default input error message school
             focusInvalid: false, // do not focus the last invalid input
+            ignore: "",
             rules: {
+                //Field Validation Rule
 
-                //Personal Info
-                Photo: {
+                code: {
+                    required: true
+                },
+                name: {
+                    required: true
+                },
+                address: {
+                    required: true
+                },
+                phone: {
                     required: true
                 }
-
-
             },
 
-            messages: { // custom messages for radio buttons and checkboxes
-                'payment[]': {
-                    required: "Please select at least one option",
-                    minlength: jQuery.format("Please select at least one option")
-                }
-            },
-
-            errorPlacement: function (error, element) { // render error placement for each input type
-                if (element.attr("name") == "gender") { // for uniform radio buttons, insert the after the given container
-                    error.insertAfter("#form_gender_error");
-                } else if (element.attr("name") == "payment[]") { // for uniform radio buttons, insert the after the given container
-                    error.insertAfter("#form_payment_error");
-                } else if (element.attr("type") == "file") { // for uniform radio buttons, insert the after the given container
-                    error.insertAfter("#fileupload");
-                } else {
-                    error.insertAfter(element); // for other inputs, just perform default behavior
-                }
-            },
-
-            invalidHandler: function (event, validator) { //display error alert on form submit   
-                success.hide();
-                error.show();
-                App.scrollTo(error, -200);
+            invalidHandler: function (event, validator) { //display error alert on form submit
+                success1.hide();
+                error1.show();
+                App.scrollTo(error1, -200);
             },
 
             highlight: function (element) { // hightlight error inputs
                 $(element)
-                    .closest('.form-group').removeClass('has-success').addClass('has-error'); // set error class to the control group
+                    .closest('.form-group').addClass('has-error'); // set error school to the control group
             },
 
             unhighlight: function (element) { // revert the change done by hightlight
                 $(element)
-                    .closest('.form-group').removeClass('has-error'); // set error class to the control group
+                    .closest('.form-group').removeClass('has-error'); // set error school to the control group
             },
 
             success: function (label) {
-                if (label.attr("for") == "gender" || label.attr("for") == "payment[]") { // for checkboxes and radio buttons, no need to show OK icon
-                    label
-                        .closest('.form-group').removeClass('has-error').addClass('has-success');
-                    label.remove(); // remove error label here
-                } else { // display success icon for other inputs
-                    label
-                        .addClass('valid') // mark the current input as valid and display OK icon
-                    .closest('.form-group').removeClass('has-error').addClass('has-success'); // set success class to the control group
-                }
+                label
+                    .closest('.form-group').removeClass('has-error'); // set success school to the control group
             },
+
             submitHandler: function (form) {
-                success.show();
-                error.hide();
+                //success1.show();
+                error1.hide();
+                //form.submit();
 
-                form.submit();
-
-                //save();
-                //add here some ajax code to submit your form or just call form.submit() if you want to submit the form without ajax
+                //Save data
+                save();
             }
         });
-        
+
         //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.
-        $('.select2me', form).change(function () {
-            form.validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
+        $('.select2me', form1).change(function () {
+            form1.validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
         });
     }
 
-
     function save() {
-        //alert(saveUrl);
-        var school = School;
-        debugger;
+        loader.show();
+
+        //var school = School;
+
 
         //Get values
 
-        school.SchoolId = SchoolIdFld.val();
-        school.Name = NameFld.val();
-        school.Description = DescriptionFld.val();
-        school.Address = AddressFld.val();
-        school.Phone = PhoneFld.val();
-        school.Email = EmailFld.val();
-        school.Website = WebsiteFld.val();
-        school.Photo = PhotoFld.val();
-
-        //alert(school.Photo);
-
-        var form = $("#Form_School");
-        form.attr("action", saveUrl);
-        form.post();
-
-
-        var url = saveUrl;
-        /*$.getJSON({
-            type: "POST",
-            crossDomain: true,
-            dataType: "jsonp",
-            url: url,
-            data: school,
-            success: function(data)
-            {
-                alert("workings");
-            }
-        });
+       /* school.school_id = SchoolIdFld.val();
+        school.code = CodeFld.val();
+        school.name = NameFld.val();
+        school.description = DescriptionFld.val();
+        school.address = AddressFld.val()
+        school.phone = PhoneFld.val();
+        school.email = EmailFld.val()
+        school.website = WebsiteFld.val();
+        school.logo = LogoFld.val()
 */
+        //var school = $("#Form_School").serialize();
 
-   /* $.ajax({
+        //USAGE: $("#form").serializefiles();
+        var school = $("#Form_School").serializefiles();
+
+
+
+        /*var files = $('#file')[0].files;
+        //debugger;
+        $.each(files, function(i, fl) {
+            //debugger;
+            try {
+                school.append('file[]', fl);
+            }catch(ex){
+                alert(ex.toString());
+            }
+        });*/
+
+        //var data = new FormData( this);
+        //debugger;
+
+        /*$.each( obj, function( key, value ) {
+            alert( key + ": " + value );
+        });*/
+
+        //var data = new FormData(jQuery('form')[0]);
+
+        //var data = new FormData($("#Form_School"));
+
+        //debugger;
+        //alert(school);
+        var url = saveUrl;
+        $.ajax({
             url: url,
             accepts: 'application/json',
             cache: false,
             type: 'POST',
-            dataType: 'json',
             data : school,
-            success: function (data) {
-                alert('Result:'+data.message);
-                //alert('Result:'+data.data);
+            dataType: 'jsonp',
+            processData: false,
+            contentType: false, //'multipart/form-data',
+
+            success : function(result){
                 debugger;
-                // Handle the complete event
-                /!*var obj = JSON.parse(result.responseText);
-                debugger;
-                if (obj.Success == true) {
-                    window.location = listUrl + "?message=School Information Saved";
-                } else {
-                    ShowMessage("error", obj.Message);
-                }*!/
+                loader.hide();
+
+                //alert(result.data);
+
+                if(result.status == "success"){
+                    var logo = result.data['logo'];
+                    if(logo != null)
+                        LogoFld.attr("src", baseAppImageUrl+ logo);
+
+                    ShowMessage("success", result.message);
+                }else {
+                    //alert(result.message);
+                    ShowMessage("error", result.message);
+                }
+
+                App.scrollTo($('.page-title'));
+                //parent.location.reload();
+                //alert('success'+result);
             },
-            fail:function(){
+            failed : function(result){
                 alert('failed');
-            },
-        });*/
-
-
-    }
-
-    function loadAll() {
-        //Todo
-        
+            }
+        });
     }
 
     function ShowMessage(type, message){
         if (message == 'undefined') return;
 
-        var error = $('.alert-danger');
-        var success = $('.alert-success');
+        /*var error = $('#Form_School .alert-danger');
+        var success = $('#Form_School .alert-success');*/
 
         message = '<button data-close="alert" class="close"></button>'+ message;
-        
+
         if (type == "error") {
-            error.html(message);
-            error.show();
+            error1.html(message);
+            error1.show();
         }else if(type=="success")
         {
-            success.html(message);
-            success.show();
+            success1.html(message);
+            success1.show();
         }
-        
+
     }
 
-    function ShowSuccessMessage() {
-        var message = decodeURIComponent(getUrlVars()["message"]);
-        ShowMessage("success", message);
-    }
-   
-    var loadGrid = function () {
-        ShowSuccessMessage();
-
-        var dataSet = [];
-
-        var newTable = $('#SchoolGrid').DataTable({
-            //dom: "Bfrtip",
-            ajax: loadGridUrl,
-            columns: [
-                //Table Column Header Collection
-                
-                { data: "RegisterNumber", defaultContent: "" },
-                { data: "FirstName", defaultContent: "" },
-                { data: "LastName", defaultContent: "" },
-                { data: "Gender", defaultContent: "" },
-                { data: "BloodGroup", defaultContent: "" },
-                { data: "GuardianName", defaultContent: "" },
-                { data: "GuardianMobile", defaultContent: "" },
-                { data: "FatherMobile", defaultContent: "" },
-                { data: "Status", defaultContent: "" },
-                {
-                    data: null, render: function (data, type, row) {
-                        // Combine the first and last names into a single table field
-                        //return '<a href="Edit/' + data.School Id + '" class="btn btn-default btn-xs purple"><i class="fa fa-edit"></i> Edit</a>' +
-                        //    '| <a href="#" class="btn btn-default btn-xs black"><i class="fa fa-trash-o"></i> Delete</a>';
-
-                        return '<a href="Edit/' + data.SchoolId + '" class="btn btn-default btn-xs purple"><i class="fa fa-edit"></i> Edit</a>';
-
-                        //return '<a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.SchoolId + '"><i class="fa fa-edit"></i> Edit</a>';
-                    }
-                },
-                //{ data: "salary", render: $.fn.dataTable.render.number(',', '.', 0, '$') }
-            ],
-            "fnInitComplete": function () {
-                $(".editView").click(function () {
-                    var id = $(this).data('id');
-                    edit(id);
-                    $('.modal-title').html("Edit School");
-                    $('#mdlCreateSchool').modal('show');
-                });
-            }
-        });
-
-        jQuery('#SchoolGrid_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
-        jQuery('#SchoolGrid_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
-        jQuery('#SchoolGrid_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
-    }
-
-    var loadGrid2 = function () {
-        ShowSuccessMessage();
-
-        var dataSet = [];
-
-        var newTable = $('#SchoolGrid').DataTable({
-            filter: false
-            ,lengthChange:false
-        });
-
-        jQuery('#SchoolGrid_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
-        jQuery('#SchoolGrid_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
-        jQuery('#SchoolGrid_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
-    }
-
-
-    var edit = function (id) {
+    var edit = function () {
         //alert(id);
 
-        var url = editUrl + id;
-
-        //debugger;
+        var url = editUrl;
         $.ajax({
             url: url,
             accepts: 'application/json',
@@ -295,65 +230,126 @@ var SchoolModule = function () {
         });
     }
 
-    
-
     function showEdit(data) {
         if (data == null) return;
-        
+
+        $.each(data, function(key, val){
+            //console.log("key:"+key, ", val:"+val);
+            $('#'+key).val(val);
+        });
+
+        LogoFld.attr("src",baseAppImageUrl+ data.logo);
+
         //Set values
-        //alert(data.Logo);
-
-        var Logo = baseAppUrl + data.Logo;
-
-        SchoolIdFld.val(data.SchoolId);
-        NameFld.val(data.Name);
-        DescriptionFld.val(data.Description);
-        LogoFld.attr("src",Logo);
+        /*SchoolIdFld.val(data.school_id);
+        CodeFld.val(data.code);
+        NameFld.val(data.name);
+        DescriptionFld.val(data.description);
+        AddressFld.val(data.address);
+        PhoneFld.val(data.phone);
+        EmailFld.val(data.email);
+        WebsiteFld.val(data.website);*/
     }
 
+    $('#btnUpload').click(function(){
+        ModalUploadFile.modal('show');
+    });
 
+
+   /* function showDelete(id) {
+        if (id == null) return;
+
+        //Set values
+        BatchIdFld.val(id);
+    }
+    $('.modal').on('hidden.bs.modal', function(){
+        $(this).find('form')[0].reset();
+    });*/
     function showPopup() {
         $('#Form_School').trigger("reset");
-        $('.modal-title').html("Create School");
-        $('#mdlCreateSchool').modal('show');
+        BatchIdFld.val("0");
+        $('.modal-title').html("Create Batch");
+        ModalCreateBatch.modal('show');
     }
-   
-    var handleDateTime = function () {
+
+    /*function deleteData(id) {
+        loader.show();
+        //var pathname = window.location.pathname;
+
+        //var params = pathname.split('/');
+        //var id = params[params.length - 1];
+
+        //alert(id);
+
+        var school = Batch;
+        //debugger;
+
+        //Get values
+        school.school_id = id;
+
+        var url = deleteUrl;
+        $.ajax({
+            url: url,
+            accepts: 'application/json',
+            cache: false,
+            type: 'POST',
+            data : school,
+            dataType: 'jsonp',
+            success : function(result){
+                //debugger;
+                loader.hide();
+
+                if(result.status == "success"){
+                    /!*var save_id = result.data.school_id;
+                     //alert(save_id);
+                     BatchIdFld.val(save_id);*!/
+
+                    reloadGrid();
+                    ModalDeleteBatch.modal('hide');
+                }else {
+                    ShowMessage("error", result.message);
+                }
+            },
+        });
+    }*/
+    /*var del = function () {
+     $(".delete").on("click", function () {
+
+     if (confirm("Are you sure want to delete?")) {
+     deleteData();
+     }
+     });
+     };*/
+
+    //--------------------End Form Validation Functions-----------------------//
+
+    /*var handleDateTime = function () {
         if (jQuery().datepicker) {
             $('.date-picker').datepicker({
                 rtl: App.isRTL(),
-                //format: 'dd-MM-yyyy',
+                format: 'dd-MM-yyyy',
                 autoclose: true
             });
             $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
         }
     }
+
+    var fetchClassId = function(){
+        var pathname = window.location.pathname;
+        var params = pathname.split('/');
+        var class_id = params[params.length - 1];
+        ClassIdFld.val(class_id);
+    }
+*/
     return {
         //main function to initiate the module
-        validate: function () {
-           handleValidation();
-        },
-        loadGrid: function () {
-            if (!jQuery().dataTable) {
-                return;
-            }
-            loadGrid();
-        },
-        loadGrid2: function () {
-            if (!jQuery().dataTable) {
-                return;
-            }
-            loadGrid2();
+        init : function(){
+            //Form validation
+            handleValidation();
+            edit();
         },
         addView: function () {
             showPopup();
-        },
-        edit: function () {
-            //var pathname = window.location.pathname;
-            //var params = pathname.split('/');
-            //var id = params[params.length - 1];
-
-            edit('');
         },
     };
 }();

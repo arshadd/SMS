@@ -2,7 +2,7 @@
     
 require APPPATH.'/libraries/REST_Controller.php';
 
-class school extends REST_Controller {
+class schools extends REST_Controller {
 
     public function __construct()
     {
@@ -10,6 +10,7 @@ class school extends REST_Controller {
 
         $this->load->library('session');
         $this->load->model('school_m');
+        $this->load->helper('url');
 
         if( !$this->session->userdata('isLoggedIn') ) {
             redirect('/login/show_login');
@@ -26,6 +27,85 @@ class school extends REST_Controller {
    }
 
 
+    function save_post()
+    {
+        //Get logged school id
+        $school_id = $this->session->userdata('school_id');
+
+        //Make array
+        /*$school = array(
+            'code' => $this->post('code'),
+            'name' => $this->post('name'),
+            'description' => $this->post('description'),
+            'address' => $this->post('address'),
+            'phone' => $this->post('phone'),
+            'email' => $this->post('email'),
+            'website' => $this->post('website'),
+            'logo' => $this->post('logo')
+        );*/
+
+        //$_POST['description']= 'Updated value';
+        //$school =    $_POST;
+
+        //$file = $_FILES[0];
+
+        $config['upload_path'] = './assets/resource/school/';
+        $config['allowed_types'] = 'png|jpg|jpeg|gif|bmp';
+        $config['max_size'] = '2048000';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '768';
+        $config['overwrite'] = TRUE;
+        $config['encrypt_name'] = FALSE;
+        $config['remove_spaces'] = TRUE;
+
+       // $photo = $_POST['Photo'];
+
+        //if (!is_dir($config['upload_path'])) die("THE UPLOAD DIRECTORY DOES NOT EXIST");
+        //$this->response(array("status" => "success", "message" => '', "data" => empty($_FILES['Photo'])));
+
+        if (empty($_FILES['Photo'])===FALSE) {
+           // if(isset($_FILES['Photo'])) {
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('Photo')) {
+                $error = array('error' => $this->upload->display_errors());
+                //$this->load->view('upload_form', $error);
+
+                $this->response(array("status" => "failed", "message" => $error['error'], "data" => null));
+
+            } else {
+                $data = $this->upload->data();
+
+                //Build logo Path
+                $logo = $config['upload_path'] . $data['file_name'];
+
+                $_POST['logo'] = $logo;
+            }
+        }
+       /* if (!$this->upload->do_upload('file')) {
+            $data['error'] = $this->upload->display_errors();
+        } else {
+            $data = $this->upload->data();
+            $logo = $config['upload_path'] . $data['file_name'];
+            $data['error']=$logo;
+
+            $_POST['logo'] =$logo;
+        }*/
+
+
+        //Save
+        $response = $this->school_m->save($school_id, $_POST);
+
+        //$file = $this->post('file');
+
+        //$this->response(array("status" => "success", "message" => "", "data" => $error['error']));
+
+        if ($response['result'] === FALSE) {
+            $this->response(array("status" => "failed", "message" => $response['message'], "data" => null));
+        } else {
+            $this->response(array("status" => "success",  "message" => $response['message'], "data" => $response['data']));
+        }
+    }
+    
     /*function save_post()
     {
 

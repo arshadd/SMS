@@ -96,8 +96,12 @@
 
     clear: function(e) {
       this.$hidden.val('')
+      this.$hidden.attr('name', '')
+      this.$input.attr('name', this.name)
+
+      /*this.$hidden.val('')
       this.$hidden.attr('name', this.name)
-      this.$input.attr('name', '')
+      this.$input.attr('name', '')*/
 
       //ie8+ doesn't support changing the value of input with type=file so clone instead
       if($.browser.msie){

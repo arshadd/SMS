@@ -205,6 +205,7 @@ var BatchModule = function () {
                      BatchIdFld.val(save_id);*/
 
                     reloadGrid();
+                    SubjectModule.refreshBatchDropDown();
                     ModalCreateBatch.modal('hide');
                 }else {
                     ShowMessage("error", result.message);

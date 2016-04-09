@@ -1,40 +1,49 @@
-<?php $attributes = array("class" => "form-horizontal", "Id" => "Form_School");
-      echo form_open_multipart("school/save", $attributes);?>
+<form id="Form_School"  enctype="multipart/form-data" class="form-horizontal" method="post">
 
   <div class="form-body">
-    <!-- Error Message will show up here -->
-    <?php if (isset($error) && $error): ?>
-      <div class="alert alert-danger display">
-        <button data-close="alert" class="close"></button>
-        <?php echo $error?>
-      </div>
-    <?php endif; ?>
 
-    <?php if (isset($success) && $success): ?>
-    <div class="alert alert-success display">
-      <button data-close="alert" class="close"></button>
-      <?php echo $success?>
+    <div class="alert alert-success display-hide">
+      <button class="close" data-close="alert"></button>
+      <span>
+         School information saved successfully.
+      </span>
     </div>
-    <?php endif; ?>
+    <div class="alert alert-danger display-hide">
+      <button class="close" data-close="alert"></button>
+      <span>
+         You have some form errors. Please check below.
+      </span>
+    </div>
 
-    
-    
-    <input type="hidden" id="school_id" name="school_id" value="<?php echo $school->school_id ;?>" class="form-control" />
+
+
+
+    <input type="hidden" id="school_id" name="school_id" class="form-control" />
+
+    <div class="form-group">
+      <label class="control-label col-md-3">
+        Code:<span class="required">*</span>
+      </label>
+      <div class="col-md-6">
+        <input type="text" id="code" name="code" class="form-control" />
+      </div>
+    </div>
+
     <div class="form-group">
       <label class="control-label col-md-3">
         Name:<span class="required">*</span>
       </label>
       <div class="col-md-6">
-        <input type="text" id="Name" name="Name" value="<?php echo $school->name ;?>" class="form-control" />
+        <input type="text" id="name" name="name" class="form-control" />
       </div>
     </div>
 
     <div class="form-group">
       <label class="control-label col-md-3">
-        Description:<span class="required">*</span>
+        Description:
       </label>
       <div class="col-md-6">
-        <textarea id="Description" name="Description" rows="4" class="form-control"><?php echo $school->description ;?></textarea>
+        <textarea id="description" name="description" rows="4" class="form-control"></textarea>
       </div>
     </div>
 
@@ -43,7 +52,7 @@
         Address:<span class="required">*</span>
       </label>
       <div class="col-md-6">
-        <input type="text" id="Address" name="Address" value="<?php echo $school->address ;?>" class="form-control" />
+        <input type="text" id="address" name="address" class="form-control" />
       </div>
     </div>
 
@@ -52,7 +61,7 @@
         Phone:<span class="required">*</span>
       </label>
       <div class="col-md-6">
-        <input type="text" id="Phone" name="Phone" value="<?php echo $school->phone ;?>" class="form-control" />
+        <input type="text" id="phone" name="phone" class="form-control" />
       </div>
     </div>
 
@@ -61,7 +70,7 @@
         Email:
       </label>
       <div class="col-md-6">
-        <input type="text" id="Email" name="Email" value="<?php echo $school->email ;?>" class="form-control" />
+        <input type="text" id="email" name="email" class="form-control" />
       </div>
     </div>
 
@@ -70,9 +79,24 @@
         Website:
       </label>
       <div class="col-md-6">
-        <input type="text" id="Website" name="Website" value="<?php echo $school->website ;?>" class="form-control" />
+        <input type="text" id="website" name="website" class="form-control" />
       </div>
     </div>
+
+   <!-- <div class="form-group">
+      <label class="control-label col-md-3">
+        Logo:
+      </label>
+      <div class="col-md-6">
+        <div class="thumbnail" style="width: 310px;">
+          <img id="logo" name="logo" alt="" />
+        </div>
+        <button class="btn btn-warning" id="btnUpload" type="button">
+          <i class="fa fa-upload"></i> File Upload
+        </button>
+      </div>
+    </div>-->
+
     <div class="form-group">
       <label class="control-label col-md-3">
         Photo:
@@ -81,8 +105,8 @@
         </span>
       </label>
       <div class="col-md-6">
-        <div class="thumbnail" style="width: 310px;">
-          <img id="Logo" name="Logo" src="<?php echo base_url().$school->logo ;?>" alt="" />
+        <div class="thumbnail" style="width: 150px;">
+          <img id="logo" name="logo" alt="" />
         </div>
         <div class="margin-top-10 fileupload fileupload-new" data-provides="fileupload" id="fileupload">
           <div class="input-group input-group-fixed">
@@ -129,8 +153,13 @@
         <button class="btn btn-success" type="submit">
           <i class="fa fa-save"></i> Save
         </button>
+        <label ><div id="loader"><img  src="<?php echo base_url()."/assets/img/input-spinner.gif" ;?>"/></div></label>
+
       </div>
     </div>
   </div>
   
 </form>
+
+
+<?php include(VIEW_PATH.'/custom/fileUpload.php');?>

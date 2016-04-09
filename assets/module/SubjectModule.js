@@ -389,6 +389,8 @@ var SubjectModule = function () {
         var class_id = fetchClassId();
         var loadDDUrl = baseApiUrl + "classes/all_classes/";
 
+        SubjectClassesFld.empty();
+        SubjectClassesFld.append($("<option     />").val(0).text("Select class"));
         var url = loadDDUrl;
         $.ajax({
             url: url,
@@ -412,6 +414,8 @@ var SubjectModule = function () {
         var class_id = fetchClassId();
         var loadDDUrl = baseApiUrl + "batches/all_class_batches/"+class_id;
 
+        SubjectBatchesFld.empty();
+        SubjectBatchesFld.append($("<option     />").val(0).text("Select batch"));
         var url = loadDDUrl;
         $.ajax({
             url: url,
@@ -501,6 +505,10 @@ var SubjectModule = function () {
         },
         addView: function () {
             showPopup();
+        },
+        refreshBatchDropDown : function(){
+            fillDropDownBatches();
+            SubjectBatchesFld.change();
         },
     };
 }();

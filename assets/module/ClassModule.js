@@ -76,7 +76,7 @@ var ClassModule = function () {
         var id = $(this).data('id');
 
         showDelete(id);
-        $('#mdlDelete').modal('show');
+        $('#mdlDeleteClass').modal('show');
 
         //deleteData(id);
     });
@@ -349,7 +349,7 @@ var ClassModule = function () {
                      ClassIdFld.val(save_id);*/
 
                     reloadGrid();
-                    $('#mdlDelete').modal('hide');
+                    $('#mdlDeleteClass').modal('hide');
                 }else {
                     ShowMessage("error", result.message);
                 }

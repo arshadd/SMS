@@ -1,20 +1,13 @@
 <?php
 
-class school extends CI_Controller{
+class uploader extends CI_Controller{
 
   public function __construct()
   {
     parent::__construct();
 	
 	$this->load->library('session');
-
-    $this->load->model('school_m');
-	$this->load->helper('form');
     $this->load->helper('url');
-
-    $this->load->library('curl');
-
-
 
     if( !$this->session->userdata('isLoggedIn') ) {
         redirect('/login/show_login');
@@ -27,7 +20,29 @@ class school extends CI_Controller{
    * application screen is set up.
    */
   
-  function edit() {
+  function upload() {
+
+    $type = $this->input->post('type');    //Do upload
+
+
+    $config['upload_path'] = './assets/resource/school/';
+    $config['allowed_types'] = 'gif|jpg|png';
+    $config['max_size'] = '2048000';
+    $config['max_width'] = '1024';
+    $config['max_height'] = '768';
+    $config['overwrite'] = TRUE;
+    $config['encrypt_name'] = FALSE;
+    $config['remove_spaces'] = TRUE;
+
+    if (!is_dir($config['upload_path'])) die("THE UPLOAD DIRECTORY DOES NOT EXIST");
+
+    $this->load->library('upload', $config);
+    if (!$this->upload->do_upload('Photo')) {
+      $data['error'] = $this->upload->display_errors();
+    } else {
+      $data = $this->upload->data();
+      $photo = $config['upload_path'] . $data['file_name'];
+    }
 
     /*$response = json_decode($this->curl->simple_get('http://localhost/myschool/index.php/api/school/item'));
     $school = $response->data;
@@ -54,7 +69,7 @@ class school extends CI_Controller{
     // Load all of the logged-in user's posts
     //$data['school']
 
-    $this->load->view('school/edit');
+    $this->load->view('custom/fileUpload');
   }
 
   function save()

@@ -77,7 +77,7 @@
                     <i class="fa fa-th-list"></i> Batches
                   </a>
                 </li>
-                <li class="active">
+                <li class="">
                   <a href="#tab_1_4" data-toggle="tab">
                     <i class="fa fa-sitemap"></i> Subjects
                   </a>
@@ -87,7 +87,7 @@
                     <i class="fa fa-female"></i> Teachers
                   </a>
                 </li>
-                <li>
+                <li class="active">
                   <a href="#tab_1_6" data-toggle="tab">
                     <i class="fa fa-group"></i> Students
                   </a>
@@ -123,7 +123,7 @@
 
                 </div>
                 <!--end tab-pane-->
-                <div class="tab-pane active" id="tab_1_4">
+                <div class="tab-pane " id="tab_1_4">
 
                   <?php include('_subject.php');?>
 
@@ -137,9 +137,9 @@
                 </div>
                 
                 <!--end tab-pane-->
-                <div class="tab-pane" id="tab_1_6">
+                <div class="tab-pane active" id="tab_1_6">
 
-<!--                  --><?php /*include('_student.php');*/?>
+                  <?php include('_student.php');?>
 
                 </div>
                 <!--end tab-pane-->

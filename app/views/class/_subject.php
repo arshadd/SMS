@@ -17,7 +17,6 @@
           <div class="form-group">
             <label for="subject_batches">Batch:</label>
             <select id="subject_batches" class='form-control input-medium'>
-              <option value="0">Select batch...</option>
             </select>
           </div>
 
