@@ -82,7 +82,7 @@
           </a>
           <ul class="sub-menu">
             <li>
-              <a href="<?php echo base_url();?>index.php/employee/index">
+              <a href="<?php echo base_url();?>index.php/employees/index">
               <span class="badge badge-succcess">
                 new
               </span>
