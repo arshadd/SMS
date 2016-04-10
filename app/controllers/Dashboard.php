@@ -20,7 +20,6 @@ class Dashboard extends CI_Controller{
    * application screen is set up.
    */
   function index() {
-    $this->load->model('post_m');
 
     // Get some data from the user's session
     $user_id = $this->session->userdata('id');
