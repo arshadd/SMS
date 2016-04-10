@@ -1,6 +1,6 @@
 <?php
 
-class school_m extends CI_Model
+class Schools_m extends CI_Model
 {
     function update($id, $data)
     {

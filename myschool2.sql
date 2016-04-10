@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `myschool1`;
 USE `myschool1`;
 
 
-DROP TABLE IF EXISTS `ci_sessions`;
+-- DROP TABLE IF EXISTS `ci_sessions`;
 CREATE TABLE `ci_sessions` (
   `session_id` varchar(40) NOT NULL DEFAULT '0',
   `ip_address` varchar(45) NOT NULL DEFAULT '0',
@@ -15,14 +15,14 @@ CREATE TABLE `ci_sessions` (
 
 
 
-DROP TABLE IF EXISTS `schools`;
+-- DROP TABLE IF EXISTS `schools`;
 CREATE TABLE `schools` (
 	`school_id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(50) DEFAULT NULL,
 	`code` varchar(10) DEFAULT NULL,
 	`description` varchar(500) DEFAULT NULL,
-	`address` varchar(100) DEFAULT NULL,
-	`phone` varchar(10) DEFAULT NULL,
+	`address` varchar(500) DEFAULT NULL,
+	`phone` varchar(12) DEFAULT NULL,
 	`email` varchar(50) DEFAULT NULL,
 	`website` varchar(500) DEFAULT NULL,
 	`logo` varchar(500) DEFAULT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `schools` (
 	PRIMARY KEY (`school_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `users`;
+-- DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
 	`user_id` int(11) NOT NULL AUTO_INCREMENT,
 	`username` varchar(50) DEFAULT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `classes`;
+-- DROP TABLE IF EXISTS `classes`;
 CREATE TABLE `classes` (
 	`class_id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(50) DEFAULT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE `classes` (
 	CONSTRAINT `fk_class_school_id` FOREIGN KEY (`school_id`) REFERENCES `schools` (`school_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `employees`;
+-- DROP TABLE IF EXISTS `employees`;
 CREATE TABLE `employees` (
 	`employee_id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(50) DEFAULT NULL,
@@ -104,7 +104,7 @@ CREATE TABLE `employees` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `batches`;
+-- DROP TABLE IF EXISTS `batches`;
 CREATE TABLE `batches` (
 	`batch_id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(50) DEFAULT NULL,
@@ -133,7 +133,7 @@ CREATE TABLE `batches` (
 
 
 
-DROP TABLE IF EXISTS `subjects`;
+-- DROP TABLE IF EXISTS `subjects`;
 CREATE TABLE `subjects` (
 	`subject_id` int(11) NOT NULL AUTO_INCREMENT,
 	`code` varchar(10) DEFAULT NULL,
@@ -155,6 +155,101 @@ CREATE TABLE `subjects` (
     -- KEY `fk_subject_school_id` (`school_id`),
 	CONSTRAINT `fk_subject_school_id` FOREIGN KEY (`school_id`) REFERENCES `schools` (`school_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- Students
+-- DROP TABLE IF EXISTS `students`;
+CREATE TABLE `students` (
+	`student_id` int(11) NOT NULL AUTO_INCREMENT,
+	`admission_no` varchar(10) DEFAULT NULL,
+	`class_roll_no` varchar(10) DEFAULT NULL,
+	`admission_date` datetime DEFAULT NULL,
+
+	`first_name` varchar(20) DEFAULT NULL,
+	`middle_name` varchar(20) DEFAULT NULL,
+	`last_name` varchar(20) DEFAULT NULL,
+
+  `batch_id` int(11) NOT NULL,
+	`enrollment_date` datetime DEFAULT NULL,
+
+	`date_of_birth` datetime DEFAULT NULL,
+	`gender` varchar(20) DEFAULT NULL,
+	`blood_group` varchar(20) DEFAULT NULL,
+	`birth_place` varchar(20) DEFAULT NULL,
+	`nationality` varchar(20) DEFAULT NULL,
+	`religion` varchar(20) DEFAULT NULL,
+
+	`address_line1` varchar(50) DEFAULT NULL,
+	`address_line2` varchar(50) DEFAULT NULL,
+
+	`phone1` varchar(12) DEFAULT NULL,
+	`phone2` varchar(12) DEFAULT NULL,
+	`email` varchar(50) DEFAULT NULL,
+
+	`photo` varchar(500) DEFAULT NULL,
+
+  `user_id` int(11) NOT NULL,
+
+	`passport_number` varchar(50) DEFAULT NULL,
+	`biometric_id` varchar(100) DEFAULT NULL,
+
+	`is_active` bool DEFAULT true,
+	`created_at` datetime DEFAULT NULL,
+	`updated_at` datetime DEFAULT NULL,
+	`school_id` int(11) NOT NULL,
+
+	PRIMARY KEY (`student_id`),
+
+  -- KEY `fk_student_batch_id` (`batch_id`),
+	CONSTRAINT `fk_student_batch_id` FOREIGN KEY (`batch_id`) REFERENCES `batches` (`batch_id`),
+
+    -- KEY `fk_student_school_id` (`school_id`),
+	CONSTRAINT `fk_student_school_id` FOREIGN KEY (`school_id`) REFERENCES `schools` (`school_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- batch_students
+-- DROP TABLE IF EXISTS `batch_students`;
+CREATE TABLE `batch_students` (
+	`batch_student_id` int(11) NOT NULL AUTO_INCREMENT,
+	`batch_id` int(11) NOT NULL,
+	`student_id` int(11) NOT NULL,
+	`school_id` int(11) NOT NULL,
+
+	PRIMARY KEY (`batch_student_id`),
+
+	-- KEY `fk_batch_students_batch_id` (`batch_id`),
+	CONSTRAINT `fk_batch_students_batch_id` FOREIGN KEY (`batch_id`) REFERENCES `batches` (`batch_id`),
+	-- KEY `fk_batch_students_student_id` (`student_id`),
+	CONSTRAINT `fk_batch_students_student_id` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`),
+  -- KEY `fk_batch_students_school_id` (`school_id`),
+	CONSTRAINT `fk_batch_students_school_id` FOREIGN KEY (`school_id`) REFERENCES `schools` (`school_id`)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---Inserting DATA
 LOCK TABLES `schools` WRITE;

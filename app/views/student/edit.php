@@ -95,7 +95,7 @@
               <div class="tab-content">
                 <div class="tab-pane active" id="tab_1_1">
 
-                  <?php include('_createOrEdit.php');?>
+                  <?php include('_createOrEditStudent.php');?>
 
                 </div>
                 <!--tab_1_2-->

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class employees_m extends CI_Model {
+class Employees_m extends CI_Model {
 
     function all_employees($school_id)
     {

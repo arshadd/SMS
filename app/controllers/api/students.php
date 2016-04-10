@@ -2,82 +2,120 @@
     
 require APPPATH.'/libraries/REST_Controller.php';
 
-class Subjects extends REST_Controller {
+class Students extends REST_Controller {
 
     public function __construct()
     {
         parent::__construct();
 
         $this->load->library('session');
-        $this->load->model('subjects_m');
+        $this->load->model('students_m');
+        $this->load->helper('url');
 
         if( !$this->session->userdata('isLoggedIn') ) {
             redirect('/login/show_login');
         }
     }
 
-    function all_subjects_get()
+    function all_students_get()
     {
         //Get logged school id
         $school_id = $this->session->userdata('school_id');
 
-        $subjects = $this->subjects_m->all_subjects($school_id);
-        $this->response(array("status" => "success", "message" => "", "data" => $subjects));
+        $students = $this->students_m->all_students($school_id);
+        $this->response(array("status" => "success", "message" => "", "data" => $students));
     }
 
-    function all_batch_subjects_get($subject_id = null)
+    function all_batch_students_get($batch_id)
     {
-        //Validation
-        if (is_null($subject_id)) {
-            $this->response(array("status" => "false", "message" => "Invalid batch id", "data" => null));
-        } else {
+        //Get logged school id
+        $school_id = $this->session->userdata('school_id');
 
-            //Get logged school id
-            $school_id = $this->session->userdata('school_id');
-
-            $subjects = $this->subjects_m->all_batch_subjects($school_id, $subject_id);
-            $this->response(array("status" => "success", "message" => "", "data" => $subjects));
-        }
+        $students = $this->students_m->all_batch_students($school_id, $batch_id);
+        $this->response(array("status" => "success", "message" => "", "data" => $students));
     }
 
-    function find_subject_get($subject_id = null)
-    {
-        //Validation
-        if (is_null($subject_id)) {
-            $this->response(array("status" => "false", "message" => "Invalid subject id", "data" => null));
-        } else {
+   function find_student_get($student_id)
+   {
+       //Get logged school id
+       $school_id = $this->session->userdata('school_id');
 
-            //Get logged school id
-            $school_id = $this->session->userdata('school_id');
+       $student = $this->school_m->find_student($student_id);
+       $this->response(array("status" => "success", "message" => "", "data" => $student));
+   }
 
-            $subject = $this->subjects_m->find_subject($school_id, $subject_id);
-            $this->response(array("status" => "success", "message" => "", "data" => $subject));
-        }
-    }
 
     function save_post()
     {
         //Get logged school id
         $school_id = $this->session->userdata('school_id');
 
-        //Get primary key
-        $subject_id = $this->post('subject_id');
-
-/*
-        $this->post('end_date')    */
-
         //Make array
-        $subject = array(
+        /*$school = array(
             'code' => $this->post('code'),
             'name' => $this->post('name'),
-            'max_weekly_classes' => $this->post('max_weekly_classes'),
-            'credit_hours' => $this->post('credit_hours'),
-            'batch_id' => $this->post('batch_id'),
-            'school_id' => $school_id
-        );
+            'description' => $this->post('description'),
+            'address' => $this->post('address'),
+            'phone' => $this->post('phone'),
+            'email' => $this->post('email'),
+            'website' => $this->post('website'),
+            'logo' => $this->post('logo')
+        );*/
+
+        //$_POST['description']= 'Updated value';
+        //$school =    $_POST;
+
+        //$file = $_FILES[0];
+
+        $config['upload_path'] = './assets/resource/school/';
+        $config['allowed_types'] = 'png|jpg|jpeg|gif|bmp';
+        $config['max_size'] = '2048000';
+        $config['max_width'] = '1024';
+        $config['max_height'] = '768';
+        $config['overwrite'] = TRUE;
+        $config['encrypt_name'] = FALSE;
+        $config['remove_spaces'] = TRUE;
+
+       // $photo = $_POST['Photo'];
+
+        //if (!is_dir($config['upload_path'])) die("THE UPLOAD DIRECTORY DOES NOT EXIST");
+        //$this->response(array("status" => "success", "message" => '', "data" => empty($_FILES['Photo'])));
+
+        if (empty($_FILES['Photo'])===FALSE) {
+           // if(isset($_FILES['Photo'])) {
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('Photo')) {
+                $error = array('error' => $this->upload->display_errors());
+                //$this->load->view('upload_form', $error);
+
+                $this->response(array("status" => "failed", "message" => $error['error'], "data" => null));
+
+            } else {
+                $data = $this->upload->data();
+
+                //Build logo Path
+                $logo = $config['upload_path'] . $data['file_name'];
+
+                $_POST['logo'] = $logo;
+            }
+        }
+       /* if (!$this->upload->do_upload('file')) {
+            $data['error'] = $this->upload->display_errors();
+        } else {
+            $data = $this->upload->data();
+            $logo = $config['upload_path'] . $data['file_name'];
+            $data['error']=$logo;
+
+            $_POST['logo'] =$logo;
+        }*/
+
 
         //Save
-        $response = $this->subjects_m->save($subject_id, $subject);
+        $response = $this->school_m->save($school_id, $_POST);
+
+        //$file = $this->post('file');
+
+        //$this->response(array("status" => "success", "message" => "", "data" => $error['error']));
 
         if ($response['result'] === FALSE) {
             $this->response(array("status" => "failed", "message" => $response['message'], "data" => null));
@@ -85,26 +123,7 @@ class Subjects extends REST_Controller {
             $this->response(array("status" => "success",  "message" => $response['message'], "data" => $response['data']));
         }
     }
-
-    function delete_post()
-    {
-        //Get logged school id
-        //$school_id = $this->session->userdata('school_id');
-
-        //Get primary key
-        $subject_id = $this->post('subject_id');
-
-        //Delete
-        $response = $this->subjects_m->delete($subject_id);
-
-        if ($response['result']=== FALSE) {
-            $this->response(array("status" => "failed", "message" => $response['message'], "data" => null));
-        } else {
-            $this->response(array("status" => "success", "message" => $response['message'], "data" => $subject_id));
-        }
-    }
-
-
+    
     /*function save_post()
     {
 

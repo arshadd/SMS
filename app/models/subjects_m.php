@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class subjects_m extends CI_Model
+class Subjects_m extends CI_Model
 {
     function all_subjects($school_id)
     {

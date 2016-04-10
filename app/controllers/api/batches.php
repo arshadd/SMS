@@ -2,7 +2,7 @@
     
 require APPPATH.'/libraries/REST_Controller.php';
 
-class batches extends REST_Controller {
+class Batches extends REST_Controller {
 
     public function __construct()
     {

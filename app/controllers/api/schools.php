@@ -2,14 +2,14 @@
     
 require APPPATH.'/libraries/REST_Controller.php';
 
-class schools extends REST_Controller {
+class Schools extends REST_Controller {
 
     public function __construct()
     {
         parent::__construct();
 
         $this->load->library('session');
-        $this->load->model('school_m');
+        $this->load->model('schools_m');
         $this->load->helper('url');
 
         if( !$this->session->userdata('isLoggedIn') ) {
@@ -22,7 +22,7 @@ class schools extends REST_Controller {
        //Get logged school id
        $school_id = $this->session->userdata('school_id');
 
-       $school = $this->school_m->find_school($school_id);
+       $school = $this->schools_m->find_school($school_id);
        $this->response(array("status" => "success", "message" => "", "data" => $school));
    }
 
@@ -93,7 +93,7 @@ class schools extends REST_Controller {
 
 
         //Save
-        $response = $this->school_m->save($school_id, $_POST);
+        $response = $this->schools_m->save($school_id, $_POST);
 
         //$file = $this->post('file');
 

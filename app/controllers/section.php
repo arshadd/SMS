@@ -1,6 +1,6 @@
 <?php
 
-class section extends CI_Controller{
+class Section extends CI_Controller{
 
   public function __construct()
   {

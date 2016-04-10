@@ -20,14 +20,21 @@
 
     <input type="hidden" id="school_id" name="school_id" class="form-control" />
 
-    <div class="form-group">
-      <label class="control-label col-md-3">
-        Code:<span class="required">*</span>
-      </label>
-      <div class="col-md-6">
-        <input type="text" id="code" name="code" class="form-control" />
+    <h4 >Person Info</h4>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label class="control-label col-md-3">
+            Code:<span class="required">*</span>
+          </label>
+          <div class="col-md-6">
+            <input type="text" id="code" name="code" class="form-control" />
+          </div>
+        </div>
       </div>
     </div>
+    <h4 class="form-section">Person Info</h4>
+
 
     <div class="form-group">
       <label class="control-label col-md-3">
@@ -37,7 +44,7 @@
         <input type="text" id="name" name="name" class="form-control" />
       </div>
     </div>
-
+    <h3 class="form-section">Person Info</h3>
     <div class="form-group">
       <label class="control-label col-md-3">
         Description:
@@ -83,19 +90,19 @@
       </div>
     </div>
 
-   <!-- <div class="form-group">
-      <label class="control-label col-md-3">
-        Logo:
-      </label>
-      <div class="col-md-6">
-        <div class="thumbnail" style="width: 310px;">
-          <img id="logo" name="logo" alt="" />
-        </div>
-        <button class="btn btn-warning" id="btnUpload" type="button">
-          <i class="fa fa-upload"></i> File Upload
-        </button>
-      </div>
-    </div>-->
+    <!-- <div class="form-group">
+       <label class="control-label col-md-3">
+         Logo:
+       </label>
+       <div class="col-md-6">
+         <div class="thumbnail" style="width: 310px;">
+           <img id="logo" name="logo" alt="" />
+         </div>
+         <button class="btn btn-warning" id="btnUpload" type="button">
+           <i class="fa fa-upload"></i> File Upload
+         </button>
+       </div>
+     </div>-->
 
     <div class="form-group">
       <label class="control-label col-md-3">
@@ -158,5 +165,5 @@
       </div>
     </div>
   </div>
-  
+
 </form>

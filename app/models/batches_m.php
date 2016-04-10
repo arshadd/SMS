@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class batches_m extends CI_Model
+class Batches_m extends CI_Model
 {
     function all_batches($school_id)
     {
