@@ -1,44 +1,37 @@
 var EmployeeModule = function () {
 
     //Create Class
-    var Employee = { EmployeeId: 0, Code: '', FirstName: '', LastName: '', DateOfBirth: '', Gender: '', DateOfJoining: '', DepartmentId: 0, DesignationId: 0, Qualification: '', TotalExperience: '', PresentAddress: '', PermanentAddress: '', Country: '', State: '', City: '', Mobile: '', Phone: '', Email: '', Photo: '', Status: '' };
+    var Employee = { employee_id: 0, code: '', name: '', first_name: '', middle_name: '', last_name:'', gender: '', joining_date: '', job_title: '', user_id: 0, is_active: 0, created_at: '', updated_at: '', school_id: ''};
 
     //Field Declaration Section
-    
-    var EmployeeIdFld = $('#EmployeeId');
-    var CodeFld = $('#Code');
-    var FirstNameFld = $('#FirstName');
-    var LastNameFld = $('#LastName');
-    var DateOfBirthFld = $('#DateOfBirth');
-    var GenderFld = $('#Gender');
-    var DateOfJoiningFld = $('#DateOfJoining');
-    var DepartmentIdFld = $('#DepartmentId');
-    var DesignationIdFld = $('#DesignationId');
-    var QualificationFld = $('#Qualification');
-    var TotalExperienceFld = $('#TotalExperience');
-    var PresentAddressFld = $('#PresentAddress');
-    var PermanentAddressFld = $('#PermanentAddress');
-    var CountryFld = $('#Country');
-    var StateFld = $('#State');
-    var CityFld = $('#City');
-    var MobileFld = $('#Mobile');
-    var PhoneFld = $('#Phone');
-    var EmailFld = $('#Email');
-    var PhotoFld = $('#Photo');
-    var StatusFld = $('#Status');
-    
 
-    var loadGridUrl = baseApiUrl + "Employee/List";
-    var editUrl = baseApiUrl + "Employee/Find/";
-    var saveUrl = baseApiUrl + "Employee/Save";
-    var deleteUrl = baseApiUrl + "Employee/Delete/";
-    var listUrl = baseAppUrl + "Employee/List";
+    var employee_idFld = $('#employee_id');
+    var codeFld = $('#code');
+    var nameFld = $('#name');
+    var first_nameFld = $('#first_name');
+    var middle_nameFld = $('#middle_name');
+    var last_nameFld = $('#last_name');
+    var genderFld = $('#gender');
+    var joining_dateFld = $('#joining_date');
+    var job_titleFld = $('#job_title');
+    var user_idFld = $('#user_id');
+    var is_activeFld = $('#is_active');
+    var created_atFld = $('#created_at');
+    var updated_atsFld = $('#updated_at');
+    var school_idFld = $('#school_id');
+
+
+    var loadGridUrl = baseApiUrl + "employees/all_employees";
+    var editUrl = baseApiUrl + "employees/find_employee/";
+    var saveUrl = baseApiUrl + "employees/save";
+    var deleteUrl = baseApiUrl + "employees/delete";
+    var listUrl = baseAppUrl + "employees/index";
 
     var handleValidation = function () {
         //load All dropdowns
         //loadAll();
 
-        // for more info visit the official plugin documentation: 
+        // for more info visit the official plugin documentation:
         // http://docs.jquery.com/Plugins/Validation
 
         var form1 = $('#Form_Employee');
@@ -54,70 +47,70 @@ var EmployeeModule = function () {
             ignore: "",
             rules: {
                 //Field Validation Rule
-                
+
                 Code: {
                     required: true
-                }, 
+                },
                 FirstName: {
                     required: true
-                }, 
+                },
                 LastName: {
                     required: true
-                }, 
+                },
                 DateOfBirth: {
                     required: true
-                }, 
+                },
                 Gender: {
                     required: true
-                }, 
+                },
                 DateOfJoining: {
                     required: true
-                }, 
+                },
                 DepartmentId: {
                     required: true
-                }, 
+                },
                 DesignationId: {
                     required: true
-                }, 
+                },
                 Qualification: {
                     required: true
-                }, 
+                },
                 TotalExperience: {
                     required: true
-                }, 
+                },
                 PresentAddress: {
                     required: true
-                }, 
+                },
                 PermanentAddress: {
                     required: true
-                }, 
+                },
                 Country: {
                     required: true
-                }, 
+                },
                 State: {
                     required: true
-                }, 
+                },
                 City: {
                     required: true
-                }, 
+                },
                 Mobile: {
                     required: true
-                }, 
+                },
                 Phone: {
                     required: true
-                }, 
+                },
                 Email: {
                     required: true
-                }, 
+                },
                 Photo: {
                     required: true
-                }, 
+                },
                 Status: {
                     required: true
-                }, 
+                },
             },
 
-            invalidHandler: function (event, validator) { //display error alert on form submit              
+            invalidHandler: function (event, validator) { //display error alert on form submit
                 success1.hide();
                 error1.show();
                 App.scrollTo(error1, -200);
@@ -147,7 +140,7 @@ var EmployeeModule = function () {
                 save();
             }
         });
-        
+
         //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.
         $('.select2me', form1).change(function () {
             form1.validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
@@ -156,12 +149,12 @@ var EmployeeModule = function () {
 
 
     function save() {
-       
+
         var employee = Employee;
         debugger;
 
         //Get values
-        
+
         employee.EmployeeId = EmployeeIdFld.val();
         employee.Code = CodeFld.val();
         employee.FirstName = FirstNameFld.val();
@@ -207,14 +200,14 @@ var EmployeeModule = function () {
 
     function loadAll() {
         //Todo
-        
+
         fillDropDownDepartment();
-        
+
         fillDropDownDesignation();
-        
+
     }
 
-    
+
     function fillDropDownDepartment() {
         var loadDDUrl = baseApiUrl + "Department/List";
 
@@ -251,7 +244,7 @@ var EmployeeModule = function () {
             }
         });
     }
-    
+
 
     function ShowMessage(type, message){
         if (message == 'undefined') return;
@@ -260,7 +253,7 @@ var EmployeeModule = function () {
         var success = $('.alert-success');
 
         message = '<button data-close="alert" class="close"></button>'+ message;
-        
+
         if (type == "error") {
             error.html(message);
             error.show();
@@ -269,14 +262,14 @@ var EmployeeModule = function () {
             success.html(message);
             success.show();
         }
-        
+
     }
 
     function ShowSuccessMessage() {
         var message = decodeURIComponent(getUrlVars()["message"]);
         ShowMessage("success", message);
     }
-   
+
     var loadGrid = function () {
         ShowSuccessMessage();
 
@@ -284,43 +277,27 @@ var EmployeeModule = function () {
 
         var newTable = $('#EmployeeGrid').DataTable({
             //dom: "Bfrtip",
-            //ajax: loadGridUrl,
+            ajax: loadGridUrl,
             columns: [
                 //Table Column Header Collection
-                
-                { data: "Code" }, 
-                { data: "FirstName" }, 
-                { data: "LastName" }, 
-                { data: "DateOfBirth" }, 
-                { data: "Gender" }, 
-                { data: "DateOfJoining" }, 
-                { data: "DepartmentId" }, 
-                { data: "DesignationId" }, 
-                { data: "Qualification" }, 
-                { data: "TotalExperience" }, 
-                { data: "PresentAddress" }, 
-                { data: "PermanentAddress" }, 
-                { data: "Country" }, 
-                { data: "State" }, 
-                { data: "City" }, 
-                { data: "Mobile" }, 
-                { data: "Phone" }, 
-                { data: "Email" }, 
-                { data: "Photo" }, 
-                { data: "Status" }, 
+                { data: "employee_id",
+                    visible: false,
+                    searchable: false },
+                { data: "code" },
                 {
                     data: null, render: function (data, type, row) {
-                        // Combine the first and last names into a single table field
-                        //return '<a href="Edit/' + data.Employee Id + '" class="btn btn-default btn-xs purple"><i class="fa fa-edit"></i> Edit</a>' +
-                        //    '| <a href="#" class="btn btn-default btn-xs black"><i class="fa fa-trash-o"></i> Delete</a>';
-
-                        //return '<a href="Edit/' + data.EmployeeId + '" class="btn btn-default btn-xs purple"><i class="fa fa-edit"></i> Edit</a>';
-
-                        return '<a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.EmployeeId + '"><i class="fa fa-edit"></i> Edit</a>';
-                    }
+                    return '<a href="edit/'+ data.employee_id +'" >'+ data.name +'</a>';
+                }
                 },
-
-                //{ data: "salary", render: $.fn.dataTable.render.number(',', '.', 0, '$') }
+                { data: "gender" },
+                { data: "job_title" },
+                {
+                    data: null, render: function (data, type, row) {
+                    return '<a href="edit/'+ data.employee_id +'" class="btn btn-default btn-xs purple"><i class="fa fa-key"></i> Manage</a>'+
+                        '| <a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.employee_id + '"><i class="fa fa-edit"></i> Edit</a>'+
+                        '| <a href="#" class="btn btn-default btn-xs purple deleteView" data-id="' + data.employee_id + '"><i class="fa fa-trash-o"></i> Delete</a>';
+                }
+                },
             ],
             "fnInitComplete": function () {
                 $(".editView").click(function () {
@@ -352,7 +329,7 @@ var EmployeeModule = function () {
 
 
     var edit = function (id) {
-        //alert(id);
+        alert(id);
 
         var url = editUrl + id;
         $.ajax({
@@ -372,9 +349,9 @@ var EmployeeModule = function () {
 
     function showEdit(data) {
         if (data == null) return;
-        
+
         //Set values
-        
+
         EmployeeIdFld.val(data.EmployeeId);
         CodeFld.val(data.Code);
         FirstNameFld.val(data.FirstName);
@@ -426,13 +403,13 @@ var EmployeeModule = function () {
     //        }
     //    });
     //}
-    
+
     //function showView(data) {
     //    debugger;
     //    if (data == null) return;
 
     //    //Set values
-        
+
     //    EmployeeIdFld.text(data.EmployeeId);
     //    CodeFld.text(data.Code);
     //    FirstNameFld.text(data.FirstName);
@@ -454,7 +431,7 @@ var EmployeeModule = function () {
     //    EmailFld.text(data.Email);
     //    PhotoFld.text(data.Photo);
     //    StatusFld.text(data.Status);
-        
+
     //    $(".edit").attr("href", "../Edit/" + data.EmployeeId);
     //};
 
