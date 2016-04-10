@@ -22,8 +22,6 @@ class Student extends CI_Controller{
   }
 
   function edit($id) {
-
-
     $this->load->view('student/edit');
   }
 
