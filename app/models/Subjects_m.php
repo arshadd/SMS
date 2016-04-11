@@ -18,11 +18,11 @@ class Subjects_m extends CI_Model
         return false;
     }
 
-    function all_batch_subjects($school_id, $subject_id)
+    function all_batch_subjects($school_id, $batch_id)
     {
         $this->db->from('subjects');
         $this->db->where('school_id', $school_id);
-        $this->db->where('batch_id', $subject_id);
+        $this->db->where('batch_id', $batch_id);
         $this->db->where('is_active', true);
         $this->db->order_by('created_at', 'desc');
 

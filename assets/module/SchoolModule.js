@@ -128,30 +128,6 @@ var SchoolModule = function () {
         //USAGE: $("#form").serializefiles();
         var school = $("#Form_School").serializefiles();
 
-
-
-        /*var files = $('#file')[0].files;
-        //debugger;
-        $.each(files, function(i, fl) {
-            //debugger;
-            try {
-                school.append('file[]', fl);
-            }catch(ex){
-                alert(ex.toString());
-            }
-        });*/
-
-        //var data = new FormData( this);
-        //debugger;
-
-        /*$.each( obj, function( key, value ) {
-            alert( key + ": " + value );
-        });*/
-
-        //var data = new FormData(jQuery('form')[0]);
-
-        //var data = new FormData($("#Form_School"));
-
         //debugger;
         //alert(school);
         var url = saveUrl;

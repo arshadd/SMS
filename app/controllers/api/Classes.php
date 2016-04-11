@@ -25,7 +25,7 @@ class Classes extends REST_Controller {
         $this->response(array("status" => "success", "message" => "", "data" => $classes));
     }
 
-    function find_class_get($class_id)
+    function find_class_get($class_id = null)
     {
         //Validation
         if (is_null($class_id)) {

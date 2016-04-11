@@ -387,7 +387,7 @@ var SubjectModule = function () {
 
     function fillDropDownClasses() {
         var class_id = fetchClassId();
-        var loadDDUrl = baseApiUrl + "classes/all_classes/";
+        var loadDDUrl = baseApiUrl + "classes/all_classes";
 
         SubjectClassesFld.empty();
         SubjectClassesFld.append($("<option     />").val(0).text("Select class"));

@@ -1,21 +1,48 @@
 var StudentModule = function () {
 
-    //Create Class
-    var Student = { student_id: 0};
+    //Create Batch
+    var School = { school_id: 0};
+
+
+    //Global
+    var batch_id=0;
 
     //Field Declaration Section
 
     var StudentIdFld = $('#Form_Student #student_id');
+    var UserIdFld = $('#Form_Student #user_id');
 
+    var PhotoFld = $('#Form_Student #photo');
+    var AdmissionNumberFld = $('#Form_Student #admission_no');
+    var AdmissionDateFld = $('#Form_Student #admission_date');
+    var DateOfBirthFld = $('#Form_Student #date_of_birth');
+
+    var StudentClassFld = $('#Form_Student #class_id');
+    var StudentBatchFld = $('#Form_Student #batch_id');
+
+
+
+    var StudentGrid = $('#StudentGrid');
+    var ModalCreateStudent = $('#mdlCreateStudent');
+    var ModalDeleteStudent = $('#mdlDeleteStudent');
+
+    var form1 = $('#Form_Student');
+    var error = $('#mdlCreateStudent .alert-danger');
+    var success = $('#mdlCreateStudent .alert-success');
+
+    error.hide();
+    success.hide();
 
     var loader = $("#Form_Student #loader");
     loader.hide();
 
+
     var loadGridUrl = baseApiUrl + "students/all_students";
-    var editUrl = baseApiUrl + "classes/find_class/";
-    var saveUrl = baseApiUrl + "classes/save";
-    var deleteUrl = baseApiUrl + "classes/delete";
-    var listUrl = baseAppUrl + "classes/index";
+    var editUrl = baseApiUrl + "students/find_student/";
+    var saveUrl = baseApiUrl + "students/save";
+    var deleteUrl = baseApiUrl + "students/delete";
+    var listUrl = baseAppUrl + "students/index";
+    var newUrl = baseApiUrl + "students/new_student";
 
 
     //--------------------Grid Functions-----------------------//
@@ -25,7 +52,7 @@ var StudentModule = function () {
 
         var dataSet = [];
 
-        dataTable = $('#StudentGrid').DataTable({
+        dataTable = StudentGrid.DataTable({
             //dom: "Bfrtip",
             ajax: loadGridUrl,
             aaSorting: [], //disabled initial sorting
@@ -39,7 +66,7 @@ var StudentModule = function () {
                 },
                 {
                     data: null, render: function (data, type, row) {
-                      return '<a href="edit/'+ data.student_id +'" >'+ data.first_name +', '+ data.last_name +'</a>';
+                    return '<a href="edit/'+ data.student_id +'" >'+ data.first_name +' '+data.middle_name +', '+ data.last_name +'</a>';
                 }
                 },
                 { data: "gender" },
@@ -67,21 +94,26 @@ var StudentModule = function () {
     }
 
     // Edit record
-    $('#StudentGrid').on( 'click', 'a.editView', function (e) {
+    StudentGrid.on( 'click', 'a.editView', function (e) {
         //alert('my edit'+id);
+        error.hide();
+        success.hide();
 
         var id = $(this).data('id');
         edit(id);
-        $('.modal-title').html("Edit Class");
-        $('#mdlCreateStudent').modal('show');
+        $('.modal-title').html("Edit Student");
+        ModalCreateStudent.modal('show');
     });
 
     // Delete record
-    $('#StudentGrid').on( 'click', 'a.deleteView', function (e) {
+    StudentGrid.on( 'click', 'a.deleteView', function (e) {
         var id = $(this).data('id');
 
+        error.hide();
+        success.hide();
+
         showDelete(id);
-        $('#mdlDeleteClass').modal('show');
+        ModalDeleteStudent.modal('show');
 
         //deleteData(id);
     });
@@ -92,9 +124,61 @@ var StudentModule = function () {
     }
     //--------------------End Grid Functions-----------------------//
 
-    var form1 = $('#Form_School');
-    var error1 = $('.alert-danger', form1);
-    var success1 = $('.alert-success', form1);
+    function loadAll() {
+        //Todo
+        fillDropDownClasses();
+    }
+    StudentClassFld.on('change', function(){
+        fillDropDownBatches();
+    });
+    function fillDropDownClasses() {
+
+        var loadDDUrl = baseApiUrl + "classes/all_classes";
+
+        StudentClassFld.empty();
+        StudentClassFld.append($("<option     />").val(0).text("Select class"));
+        var url = loadDDUrl;
+        $.ajax({
+            url: url,
+            accepts: 'application/json',
+            cache: false,
+            type: 'GET',
+            dataType: 'jsonp',
+            success: function (result) {
+                // Handle the complete event
+                $.each(result.data, function () {
+                    StudentClassFld.append($("<option />").val(this.class_id).text(this.name));
+                });
+            }
+        });
+    }
+
+    function fillDropDownBatches() {
+        var class_id = StudentClassFld.val();
+        var loadDDUrl = baseApiUrl + "batches/all_class_batches/"+class_id;
+
+        StudentBatchFld.empty();
+        StudentBatchFld.append($("<option     />").val(0).text("Select batch"));
+        var url = loadDDUrl;
+        $.ajax({
+            url: url,
+            accepts: 'application/json',
+            cache: false,
+            type: 'GET',
+            dataType: 'jsonp',
+            success: function (result) {
+                // Handle the complete event
+                $.each(result.data, function () {
+                    StudentBatchFld.append($("<option     />").val(this.batch_id).text(this.name));
+                });
+
+                StudentBatchFld.val(batch_id);
+            }
+        });
+    }
+
+
+
 
     //--------------------Form Validation Functions-----------------------//
     var handleValidation = function () {
@@ -103,46 +187,76 @@ var StudentModule = function () {
 
         // for more info visit the official plugin documentation:
         // http://docs.jquery.com/Plugins/Validation
+        //debugger;
+        //var form1 = $('#Form_Student');
+        //var error = $('.alert-danger', form1);
+        //var success = $('.alert-success', form1);
 
         if (form1.validate == null) return;
         //debugger;
         form1.validate({
             errorElement: 'span', //default input error message container
-            errorClass: 'help-block', // default input error message class
+            errorBatch: 'help-block', // default input error message batch
             focusInvalid: false, // do not focus the last invalid input
             ignore: "",
             rules: {
                 //Field Validation Rule
 
+                admission_no: {
+                    required: true
+                },
+                admission_date: {
+                    required: true
+                },
+
                 first_name: {
                     required: true
+                },
+                last_name: {
+                    required: true
+                },
+
+                batch_id: {
+                    required: true
+                },
+
+                date_of_birth: {
+                    required: true
+                },
+
+                address_line1: {
+                    required: true
+                },
+                phone1: {
+                    required: true
                 }
+
             },
 
             invalidHandler: function (event, validator) { //display error alert on form submit
-                success1.hide();
-                error1.show();
-                App.scrollTo(error1, -200);
+                success.hide();
+                error.show();
+                App.scrollTo(error, -200);
             },
 
             highlight: function (element) { // hightlight error inputs
                 $(element)
-                    .closest('.form-group').addClass('has-error'); // set error class to the control group
+                    .closest('.form-group').addClass('has-error'); // set error batch to the control group
             },
 
             unhighlight: function (element) { // revert the change done by hightlight
                 $(element)
-                    .closest('.form-group').removeClass('has-error'); // set error class to the control group
+                    .closest('.form-group').removeClass('has-error'); // set error batch to the control group
             },
 
             success: function (label) {
                 label
-                    .closest('.form-group').removeClass('has-error'); // set success class to the control group
+                    .closest('.form-group').removeClass('has-error'); // set success batch to the control group
             },
 
             submitHandler: function (form) {
-                success1.show();
-                error1.hide();
+                success.show();
+                error.hide();
                 //form.submit();
 
                 //Save data
@@ -159,18 +273,18 @@ var StudentModule = function () {
     function save() {
         loader.show();
 
-        //var cls = Class;
-        //debugger;
+        debugger;
 
         //Get values
 
-        var student = $("#Form_Student").serializefiles();
-
-       /* cls.student_id = ClassIdFld.val();
-        cls.code = CodeFld.val();
-        cls.name = NameFld.val();
-        cls.section_name = SectionNameFld.val();*/
-
+        var student = form1.serializefiles();
+        //alert(student);
+      /*  batch.batch_id = BatchIdFld.val();
+        batch.class_id = ClassIdFld.val();
+        batch.name = NameFld.val();
+        batch.start_date = StartDateFld.val();
+        batch.end_date = EndDateFld.val()
+*/
         var url = saveUrl;
         $.ajax({
             url: url,
@@ -179,15 +293,21 @@ var StudentModule = function () {
             type: 'POST',
             data : student,
             dataType: 'jsonp',
+            processData: false,
+            contentType: false, //'multipart/form-data',
+
             success : function(result){
+                debugger;
                 loader.hide();
 
                 if(result.status == "success"){
-                    var logo = result.data['logo'];
-                    if(logo != null)
-                        LogoFld.attr("src", baseAppImageUrl+ logo);
+                    /*var photo = result.data['photo'];
+                    if(photo != null)
+                        PhotoFld.attr("src", baseAppImageUrl + photo);
 
-                    ShowMessage("success", result.message);
+                    ShowMessage("success", result.message);*/
+                    reloadGrid();
+                    ModalCreateStudent.modal('hide');
                 }else {
                     //alert(result.message);
                     ShowMessage("error", result.message);
@@ -195,72 +315,28 @@ var StudentModule = function () {
 
                 App.scrollTo($('.page-title'));
             },
-            /*failed : function(result){
-             alert('failed');
-             loader.hide();
-             /!*if(result.status == "failed") {
-             ShowMessage("error", result.message);
-             }*!/
-             }*/
+            failed : function(result){
+                debugger;
+                loader.hide();
+                ShowMessage("error", result.message);
+            }
         });
     }
-
-    /*function loadAll() {
-     //Todo
-     fillDropDownDepartment();
-     fillDropDownDesignation();
-     }
-
-     function fillDropDownDepartment() {
-     var loadDDUrl = baseApiUrl + "Department/List";
-
-     var url = loadDDUrl;
-     $.ajax({
-     url: url,
-     accepts: 'application/json',
-     cache: false,
-     type: 'GET',
-     dataType: 'jsonp',
-     success: function (result) {
-     // Handle the complete event
-     $.each(result.data, function () {
-     $("#DepartmentId").append($("<option     />").val(this.DepartmentId).text(this.Name));
-     });
-     }
-     });
-     }
-     function fillDropDownDesignation() {
-     var loadDDUrl = baseApiUrl + "Designation/List";
-
-     var url = loadDDUrl;
-     $.ajax({
-     url: url,
-     accepts: 'application/json',
-     cache: false,
-     type: 'GET',
-     dataType: 'jsonp',
-     success: function (result) {
-     // Handle the complete event
-     $.each(result.data, function () {
-     $("#DesignationId").append($("<option     />").val(this.DesignationId).text(this.Name));
-     });
-     }
-     });
-     }*/
-
 
     function ShowMessage(type, message){
         if (message == 'undefined') return;
 
         message = '<button data-close="alert" class="close"></button>'+ message;
 
+        error.hide();
+        success.hide();
         if (type == "error") {
-            error1.html(message);
-            error1.show();
+            error.html(message);
+            error.show();
         }else if(type=="success")
         {
-            success1.html(message);
-            success1.show();
+            success.html(message);
+            success.show();
         }
 
     }
@@ -287,21 +363,34 @@ var StudentModule = function () {
     function showEdit(data) {
         if (data == null) return;
 
+        //This batch id will be set in dropdown list
+        batch_id = data.batch_id;
+
         //Set values
-        /*ClassIdFld.val(data.student_id);
-        CodeFld.val(data.code);
+        /*BatchIdFld.val(data.batch_id);
         NameFld.val(data.name);
-        SectionNameFld.val(data.section_name);*/
+        StartDateFld.val(GetDateFormatOnly(data.start_date));
+        EndDateFld.val(GetDateFormatOnly(data.end_date));*/
+
         $.each(data, function(key, val){
             //console.log("key:"+key, ", val:"+val);
             $('#'+key).val(val);
         });
 
-        //LogoFld.attr("src",baseAppImageUrl+ data.logo);
+        //Fire class on change, fills the batches
+        StudentClassFld.trigger('change');
+
+
+        PhotoFld.attr("src",baseAppImageUrl+ data.photo);
+        AdmissionDateFld.val(GetDateFormatOnly(data.admission_date));
+        DateOfBirthFld.val(GetDateFormatOnly(data.date_of_birth));
+
+        //Disabled some fields
+        disabledField(true);
     }
 
     $('#btnDelete').click(function(){
-        deleteData(ClassIdFld.val());
+        deleteData(StudentIdFld.val());
     });
 
 
@@ -311,12 +400,43 @@ var StudentModule = function () {
         //Set values
         StudentIdFld.val(id);
     }
-
     function showPopup() {
+
+        //Get Auto increment Admission number
+
+        var url = newUrl;
+        $.ajax({
+            url: url,
+            accepts: 'application/json',
+            cache: false,
+            type: 'GET',
+            dataType: 'jsonp',
+            success: function (data) {
+                debugger;
+
+                var newRecord = data.data[0];
+                AdmissionNumberFld.val(newRecord.new_student_id);
+            },
+            fail: function (result) {
+            }
+        });
+
+
         $('#Form_Student').trigger("reset");
+        error.hide();
+        success.hide();
+
         StudentIdFld.val("0");
+        UserIdFld.val("0");
+        batch_id = 0;
+
+        PhotoFld.attr("src", DEFAULT_STUDENT_IMAGE);
+        //Enables some fields
+        disabledField(false);
+
+
         $('.modal-title').html("Create Student");
-        $('#mdlCreateStudent').modal('show');
+        ModalCreateStudent.modal('show');
     }
 
     function deleteData(id) {
@@ -328,11 +448,11 @@ var StudentModule = function () {
 
         //alert(id);
 
-        var cls = Class;
+        var student = Student;
         //debugger;
 
         //Get values
-        cls.student_id = id;
+        student.student_id= id;
 
         var url = deleteUrl;
         $.ajax({
@@ -340,58 +460,56 @@ var StudentModule = function () {
             accepts: 'application/json',
             cache: false,
             type: 'POST',
-            data : cls,
+            data : student,
             dataType: 'jsonp',
             success : function(result){
                 //debugger;
                 loader.hide();
 
                 if(result.status == "success"){
-                    /*var save_id = result.data.student_id;
+                    /*var save_id = result.data.batch_id;
                      //alert(save_id);
-                     ClassIdFld.val(save_id);*/
+                     BatchIdFld.val(save_id);*/
 
                     reloadGrid();
-                    $('#mdlDeleteClass').modal('hide');
+                    ModalDeleteBatch.modal('hide');
                 }else {
                     ShowMessage("error", result.message);
                 }
-
-                //$('#mdlCreateStudent').modal('hide');
-                //alert(result.message);
-                /*if(result.status == "success"){
-                 window.location = listUrl + "?message="+result.message;
-                 }*/
-                /*else {
-                 ShowMessage("error", result.message);
-                 }*/
-                //alert('success'+result);
             },
-            /*failed : function(result){
-             loader.hide();
-             alert(result.message);
-
-             /!*if(result.status == "failed") {
-             ShowMessage("error", result.message);
-             }*!/
-             },*/
         });
     }
-    /*var del = function () {
-     $(".delete").on("click", function () {
 
-     if (confirm("Are you sure want to delete?")) {
-     deleteData();
-     }
-     });
-     };*/
+    function disabledField(mark){
+        if(mark){
+            StudentClassFld.attr('disabled','disabled');
+            StudentBatchFld.attr('disabled','disabled');
 
+        }else {
+            StudentClassFld.removeAttrs('disabled');
+            StudentBatchFld.removeAttrs('disabled');
+        }
+    }
     //--------------------End Form Validation Functions-----------------------//
+
+    var handleDateTime = function () {
+        if (jQuery().datepicker) {
+            $('.date-picker').datepicker({
+                rtl: App.isRTL(),
+                format: 'dd-MM-yyyy',
+                autoclose: true
+            });
+            $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
+        }
+    }
+
     return {
         //main function to initiate the module
         init : function(){
             //Form validation
+            handleDateTime();
             handleValidation();
+            loadAll();
 
             //Grid loading
             if (!jQuery().dataTable) {
@@ -399,32 +517,8 @@ var StudentModule = function () {
             }
             loadGrid();
         },
-        /*validate : function(){
-         handleValidation();
-         },
-         loadGrid: function () {
-         if (!jQuery().dataTable) {
-         return;
-         }
-         loadGrid();
-         },*/
-        /*loadGrid2: function () {
-         if (!jQuery().dataTable) {
-         return;
-         }
-         loadGrid2();
-         },*/
         addView: function () {
             showPopup();
         },
-        //edit: function () {
-        //    edit();
-        //},
-        //view: function () {
-        //    view();
-        //},
-        //del: function () {
-        //    del();
-        //}
     };
 }();

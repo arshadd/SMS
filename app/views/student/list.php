@@ -9,6 +9,10 @@
     ,'<link href="' . base_url() . 'assets/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />'
     ,'<link href="' . base_url() . 'assets/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />'
 
+    ,'<link href="' . base_url() . 'assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" type="text/css" />'
+    ,'<link href="' . base_url() . 'assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />'
+
+
     );
 
     include(VIEW_PATH.'header.php');
@@ -63,8 +67,8 @@
                   Student List
                 </div>
                 <div class="actions">
-                  <a class="btn btn-default" data-target="#static1" data-toggle="modal">View Demo</a>
-
+<!--                  <a class="btn btn-default" data-target="#mdlCreateStudent" data-toggle="modal">View Demo</a>
+-->
                   <a href="#" class="btn btn-primary"  onclick="StudentModule.addView();">
                     <i class="fa fa-pencil-square-o"></i> Add New Student
                   </a>
@@ -99,10 +103,10 @@
   </div>
   <!-- END CONTAINER -->
 
-  <div id="static1" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="true" data-width="700">
+  <div id="mdlCreateStudent" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="true" data-width="850">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-      <h4 class="modal-title">Responsive & Scrollable</h4>
+      <h4 class="modal-title">Create Student</h4>
     </div>
     <div class="modal-body">
       <?php include('_createOrEditStudent.php');?>
@@ -131,6 +135,10 @@
 
     ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" ></script>'
     ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-modal/js/bootstrap-modal.js"" ></script>'
+
+    //,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-daterangepicker/moment.min.js" ></script>'
+    //,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-daterangepicker/daterangepicker.js" ></script>'
+    ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" ></script>'
     );
     
     $pageJsScript  = array(

@@ -25,17 +25,17 @@ class Subjects extends REST_Controller {
         $this->response(array("status" => "success", "message" => "", "data" => $subjects));
     }
 
-    function all_batch_subjects_get($subject_id = null)
+    function all_batch_subjects_get($batch_id = null)
     {
         //Validation
-        if (is_null($subject_id)) {
+        if (is_null($batch_id)) {
             $this->response(array("status" => "false", "message" => "Invalid batch id", "data" => null));
         } else {
 
             //Get logged school id
             $school_id = $this->session->userdata('school_id');
 
-            $subjects = $this->subjects_m->all_batch_subjects($school_id, $subject_id);
+            $subjects = $this->subjects_m->all_batch_subjects($school_id, $batch_id);
             $this->response(array("status" => "success", "message" => "", "data" => $subjects));
         }
     }

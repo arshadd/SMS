@@ -4,9 +4,9 @@ class Students_m extends CI_Model
 {
     function all_students($school_id)
     {
-        $this->db->select('students.*, batches.name as batch_name, classes.name as class_name');
+        $this->db->select('students.*, batches.name as batch_name, classes.class_id, classes.name as class_name');
         $this->db->from('students');
-        $this->db->join('batches', 'batches.batch_id = students.student_id');
+        $this->db->join('batches', 'batches.batch_id = students.batch_id');
         $this->db->join('classes', 'classes.class_id = batches.class_id');
 
         $this->db->where('students.school_id', $school_id);
@@ -41,9 +41,13 @@ class Students_m extends CI_Model
 
     function find_student($student_id)
     {
+        $this->db->select('students.*, batches.name as batch_name, classes.class_id, classes.name as class_name');
         $this->db->from('students');
+        $this->db->join('batches', 'batches.batch_id = students.batch_id');
+        $this->db->join('classes', 'classes.class_id = batches.class_id');
+
         $this->db->where('student_id', $student_id);
-        $this->db->where('is_active', true);
+        $this->db->where('students.is_active', true);
 
         $student = $this->db->get()->result();
 
@@ -54,44 +58,126 @@ class Students_m extends CI_Model
         return false;
     }
 
+    function new_student($school_id)
+    {
+        $this->db->select('CONCAT("S", IFNULL(max(student_id) ,0)+1) as new_student_id');
+        $this->db->from('students');
+        $this->db->where('school_id', $school_id);
+
+        $student = $this->db->get()->result();
+
+        if (is_array($student) && count($student) > 0) {
+            return $student;
+        }
+
+        return false;
+    }
+
+    function already_exists($student_id, $admission_no)
+    {
+        $this->db->from('students');
+        $this->db->where('student_id !=', $student_id);
+        $this->db->where('admission_no', $admission_no);
+
+        $result = $this->db->get()->result();
+
+        if (is_array($result) && count($result) > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
     function save($school_id, $student_id, $student)
     {
-        if ($student_id > 0) {
-
-            //Update
-
-            //Updated_at date
-            $student = array_merge($student, array('updated_at'=> date('Y-m-d H:i:s')));
-
-            //update
-            $this->db->where('student_id', $student_id);
-            $result = $this->db->update('students', $student);
-
-            //$result = false;
-        } else {
-            //Insert
-
-            //Created_at date
-            $student = array_merge($student, array('created_at'=> date('Y-m-d H:i:s')));
-
-            //Insert
-            $result = $this->db->insert('students', $student);
-
-            //newly inserted id
-            $student_id = $this->db->insert_id();
-        }
-
+        //Validation
+        $result = $this->already_exists($student_id, $student['admission_no']);
         if($result===TRUE){
-            $message ="Student information saved";
-        }else{
-            $message ="Error for saving student information";
-        }
 
-        $response = array(
-            'result' => $result,
-            'message' => $message,
-            'data' => $student
-        );
+            $response = array(
+                'result' => false,
+                'message' => 'This admission no is already taken, try another.',
+                'data' => $student
+            );
+
+        }else {
+
+            $user = array(
+                "first_name" =>$student['first_name'],
+                "last_name" =>$student['last_name'],
+                "email" =>"",
+                "student" =>"1",
+                "school_id" =>$school_id
+            );
+            //Logic
+            if ($student_id > 0) {
+
+                //Update
+
+                //-----------Update User's Info---------------//
+                $user_id = $student['user_id'];
+                $user = array_merge($user, array('updated_at' => date('Y-m-d H:i:s')));
+
+                $this->db->where('user_id', $user_id);
+                $result = $this->db->update('users', $user);
+                //-----------End Update User's Info---------------//
+
+                //-----------Update Student's Info---------------//
+                //Updated_at date
+                $student = array_merge($student, array('updated_at' => date('Y-m-d H:i:s')));
+
+                //update
+                $this->db->where('student_id', $student_id);
+                $result = $this->db->update('students', $student);
+                //-----------End Update Student's Info---------------//
+                //$result = false;
+            } else {
+                //Insert
+
+                //-----------Insert User's Info---------------//
+                $user = array_merge($user, array('username' => $student['admission_no']));
+                $user = array_merge($user, array('password_hash' => DEFAULT_PASSWORD));
+                $user = array_merge($user, array('created_at' => date('Y-m-d H:i:s')));
+
+                $result = $this->db->insert('users', $user);
+
+                //newly inserted id
+                $user_id = $this->db->insert_id();
+                //-----------End Insert User's Info---------------//
+
+                //-----------Insert Student's Info---------------//
+                //Created_at date
+                $student = array_merge($student, array('created_at' => date('Y-m-d H:i:s')));
+                //School Id
+                $student = array_merge($student, array('school_id' => $school_id));
+                //Add user id
+                $student['user_id'] = $user_id;
+
+                
+
+                $result = $this->db->insert('students', $student);
+
+                //newly inserted id
+                $student_id = $this->db->insert_id();
+
+                $student = array_merge($student, array('student_id' => $student_id));
+                //-----------End Insert Student's Info---------------//
+            }
+
+            if ($result === TRUE) {
+                $message = "Student information saved";
+            } else {
+                $message = "Error for saving student information";
+            }
+
+            $response = array(
+                'result' => $result,
+                'message' => $message,
+                'data' => $student
+            );
+        }//
+
+
 
         return $response;
     }

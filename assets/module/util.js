@@ -20,6 +20,11 @@ var baseApiUrl = "http://localhost/myschool/sms/index.php/api/";
 var baseAppUrl = "http://localhost/myschool/sms/index.php/";
 var baseAppImageUrl = "http://localhost/myschool/sms/";
 
+var DEFAULT_SCHOOL_IMAGE = baseAppImageUrl + "/assets/resource/default/school.png";
+var DEFAULT_STUDENT_IMAGE = baseAppImageUrl + "/assets/resource/default/student.png";
+var DEFAULT_EMPLOYEE_IMAGE = baseAppImageUrl + "/assets/resource/default/employee.png";
+
+
 function GetDateFormatOnly(date) {
     //debugger
     //var dateSplit = date.substring(0, 4) + "/" + date.substring(5, 7) + "/" + date.substring(8, 10);

@@ -25,7 +25,7 @@ class Employees extends REST_Controller
         $this->response(array("status" => "success", "message" => "", "data" => $employees));
     }
 
-    function find_employee_get($employee_id)
+    function find_employee_get($employee_id = null)
     {
         //Validation
         if (is_null($employee_id)) {

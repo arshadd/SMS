@@ -49,14 +49,7 @@ class Schools extends REST_Controller {
 
         //$file = $_FILES[0];
 
-        $config['upload_path'] = './assets/resource/school/';
-        $config['allowed_types'] = 'png|jpg|jpeg|gif|bmp';
-        $config['max_size'] = '2048000';
-        $config['max_width'] = '1024';
-        $config['max_height'] = '768';
-        $config['overwrite'] = TRUE;
-        $config['encrypt_name'] = FALSE;
-        $config['remove_spaces'] = TRUE;
+
 
        // $photo = $_POST['Photo'];
 
@@ -64,6 +57,16 @@ class Schools extends REST_Controller {
         //$this->response(array("status" => "success", "message" => '', "data" => empty($_FILES['Photo'])));
 
         if (empty($_FILES['Photo'])===FALSE) {
+            
+            $config['upload_path'] = './assets/resource/school/';
+            $config['allowed_types'] = 'png|jpg|jpeg|gif|bmp';
+            $config['max_size'] = '2048000';
+            $config['max_width'] = '1024';
+            $config['max_height'] = '768';
+            $config['overwrite'] = TRUE;
+            $config['encrypt_name'] = FALSE;
+            $config['remove_spaces'] = TRUE;
+
            // if(isset($_FILES['Photo'])) {
             $this->load->library('upload', $config);
             if (!$this->upload->do_upload('Photo')) {

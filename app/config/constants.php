@@ -83,3 +83,9 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+define('DEFAULT_PASSWORD', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8');
+
+define('SCHOOL_DEFAULT_IMAGE', '/assets/resource/default/school.png');
+define('STUDENT_DEFAULT_IMAGE', '/assets/resource/default/student.png');
+define('EMPLOYEE_DEFAULT_IMAGE', '/assets/resource/default/employee.png');
