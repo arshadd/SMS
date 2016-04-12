@@ -203,6 +203,9 @@ CREATE TABLE `students` (
   -- KEY `fk_student_batch_id` (`batch_id`),
 	CONSTRAINT `fk_student_batch_id` FOREIGN KEY (`batch_id`) REFERENCES `batches` (`batch_id`),
 
+  -- KEY `fk_student_user_id` (`user_id`),
+	CONSTRAINT `fk_student_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+
     -- KEY `fk_student_school_id` (`school_id`),
 	CONSTRAINT `fk_student_school_id` FOREIGN KEY (`school_id`) REFERENCES `schools` (`school_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -201,7 +201,7 @@
       ,'<script type="text/javascript" src="' . base_url() . 'assets/module/BatchModule.js" ></script>'
       /*,'<script type="text/javascript" src="' . base_url() . 'assets/module/SectionModule.js" ></script>'*/
       ,'<script type="text/javascript" src="' . base_url() . 'assets/module/SubjectModule.js" ></script>'
-      ,'<script type="text/javascript" src="' . base_url() . 'assets/module/StudentModule.js" ></script>'
+      ,'<script type="text/javascript" src="' . base_url() . 'assets/module/ClassStudentModule.js" ></script>'
       ,'<script type="text/javascript" src="' . base_url() . 'assets/module/AttendanceModule.js" ></script>'
 
       );
@@ -210,13 +210,11 @@
       //'ClassModule.validate();'
 
       'BatchModule.init();'
-
       ,'SubjectModule.init();'
+      ,'ClassStudentModule.init();'
 
-      /*,'StudentModule.loadGrid2();'
-      ,'StudentModule.validate();'
-      
-      ,'AttendanceModule.loadGrid2();'      
+      /*
+      ,'AttendanceModule.loadGrid2();'
       ,'AttendanceModule.validate();'*/
 
 

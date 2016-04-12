@@ -24,11 +24,16 @@ class Students_m extends CI_Model
 
     function all_batch_students($school_id, $batch_id)
     {
+        $this->db->select('students.*, batches.name as batch_name, classes.class_id, classes.name as class_name');
         $this->db->from('students');
-        $this->db->where('school_id', $school_id);
-        $this->db->where('batch_id', $batch_id);
-        $this->db->where('is_active', true);
-        $this->db->order_by('created_at', 'desc');
+        $this->db->join('batches', 'batches.batch_id = students.batch_id');
+        $this->db->join('classes', 'classes.class_id = batches.class_id');
+
+        $this->db->where('students.school_id', $school_id);
+        $this->db->where('students.batch_id', $batch_id);
+        $this->db->where('students.is_active', true);
+        $this->db->order_by('students.created_at', 'desc');
+
 
         $students = $this->db->get()->result();
 
@@ -109,11 +114,14 @@ class Students_m extends CI_Model
                 "student" =>"1",
                 "school_id" =>$school_id
             );
+
+            //-------Begin Transaction----------//
+            $this->db->trans_begin();
+
             //Logic
             if ($student_id > 0) {
 
                 //Update
-
                 //-----------Update User's Info---------------//
                 $user_id = $student['user_id'];
                 $user = array_merge($user, array('updated_at' => date('Y-m-d H:i:s')));
@@ -130,6 +138,7 @@ class Students_m extends CI_Model
                 $this->db->where('student_id', $student_id);
                 $result = $this->db->update('students', $student);
                 //-----------End Update Student's Info---------------//
+
                 //$result = false;
             } else {
                 //Insert
@@ -153,8 +162,6 @@ class Students_m extends CI_Model
                 //Add user id
                 $student['user_id'] = $user_id;
 
-                
-
                 $result = $this->db->insert('students', $student);
 
                 //newly inserted id
@@ -162,12 +169,37 @@ class Students_m extends CI_Model
 
                 $student = array_merge($student, array('student_id' => $student_id));
                 //-----------End Insert Student's Info---------------//
+
+                //-----------Insert Batch Student's Info---------------//
+                $batch_student = array(
+                    "student_id" =>$student_id,
+                    "batch_id" =>$student['batch_id'],
+                    "school_id" =>$school_id
+                );
+                $result = $this->db->insert('batch_students', $batch_student);
+                //-----------End Insert Batch Student's Info---------------//
             }
 
+            $this->db->trans_complete();
+
+            if ($this->db->trans_status() === FALSE)
+            {
+                $this->db->trans_rollback();
+                $result = FALSE;
+            }
+            else
+            {
+                $this->db->trans_commit();
+                $result = TRUE;
+            }
+            //-------End Transaction----------//
+
             if ($result === TRUE) {
+                $result = "success";
                 $message = "Student information saved";
             } else {
-                $message = "Error for saving student information";
+                $result = "failed";
+                $message = $this->db->_error_message();//"Error for saving student information";
             }
 
             $response = array(

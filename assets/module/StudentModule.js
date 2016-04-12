@@ -78,8 +78,8 @@ var StudentModule = function () {
                     data: null, render: function (data, type, row) {
                     // Combine the first and last names into a single table field
                     return '<a href="edit/'+ data.student_id +'" class="btn btn-default btn-xs purple"><i class="fa fa-key"></i> Manage</a>'+
-                        '| <a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.student_id + '"><i class="fa fa-edit"></i> Edit</a>'+
-                        '| <a href="#" class="btn btn-default btn-xs purple deleteView" data-id="' + data.student_id + '"><i class="fa fa-trash-o"></i> Delete</a>';
+                        '| <a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.student_id + '"><i class="fa fa-edit"></i> Edit</a>';
+                        //'| <a href="#" class="btn btn-default btn-xs purple deleteView" data-id="' + data.student_id + '"><i class="fa fa-trash-o"></i> Delete</a>';
 
                     //return '<a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.student_id + '"><i class="fa fa-edit"></i> Edit</a>';
                 }
@@ -255,7 +255,7 @@ var StudentModule = function () {
             },
 
             submitHandler: function (form) {
-                success.show();
+                success.hide();
                 error.hide();
                 //form.submit();
 
@@ -429,7 +429,9 @@ var StudentModule = function () {
         StudentIdFld.val("0");
         UserIdFld.val("0");
         batch_id = 0;
-
+        var d = new Date();
+        AdmissionDateFld.val(GetDateFormatOnly(d.yyyymmdd()));
+        
         PhotoFld.attr("src", DEFAULT_STUDENT_IMAGE);
         //Enables some fields
         disabledField(false);

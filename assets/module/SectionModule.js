@@ -120,7 +120,7 @@ var SectionModule = function () {
         });
     }
 
-    function loadAll() {
+    /*function loadAll() {
         //Todo
         
         fillDropDownDepartment();
@@ -165,7 +165,7 @@ var SectionModule = function () {
                 });
             }
         });
-    }
+    }*/
     
 
     function ShowMessage(type, message){
