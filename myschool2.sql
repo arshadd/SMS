@@ -229,7 +229,55 @@ CREATE TABLE `batch_students` (
 );
 
 
+CREATE TABLE `student_attendances` (
+  `student_attendance_id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
+  `batch_id` int(11) NOT NULL,
 
+  `attendance_status` varchar(10) DEFAULT NULL,
+  `reason` varchar(100) DEFAULT NULL,
+  `attendance_date` datetime DEFAULT NULL,
+
+  `school_id` int(11) NOT NULL,
+
+  PRIMARY KEY (`student_attendance_id`),
+
+  KEY `fk_student_attendances_school_id` (`school_id`),
+  CONSTRAINT `fk_student_attendances_school_id` FOREIGN KEY (`school_id`) REFERENCES `schools` (`school_id`),
+
+  KEY `fk_student_attendances_batch_id` (`batch_id`),
+  CONSTRAINT `fk_student_attendances_batch_id` FOREIGN KEY (`batch_id`) REFERENCES `batches` (`batch_id`),
+
+  KEY `fk_student_attendances_student_id` (`student_id`),
+  CONSTRAINT `fk_student_attendances_student_id` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`)
+
+)ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `employee_attendances` (
+  `employee_attendance_id` int(11) NOT NULL AUTO_INCREMENT,
+
+  `employee_id` int(11) NOT NULL,
+   `attendance_status` varchar(10) DEFAULT NULL,
+
+  `attendance_date` datetime DEFAULT NULL,
+  `employee_leave_type_id` int(11) DEFAULT NULL,
+
+  `reason` varchar(100) DEFAULT NULL,
+
+  `is_half_day` tinyint(1) DEFAULT '1',
+
+  `school_id` int(11) NOT NULL,
+
+  PRIMARY KEY (`employee_attendance_id`),
+
+  KEY `fk_employee_attendance_school_id` (`school_id`),
+  CONSTRAINT `fk_employee_attendance_school_id` FOREIGN KEY (`school_id`) REFERENCES `schools` (`school_id`),
+
+  KEY `fk_employee_attendance_employee_id` (`employee_id`),
+  CONSTRAINT `fk_employee_attendance_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`)
+
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 
 
 

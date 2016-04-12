@@ -43,7 +43,7 @@ var ClassStudentModule = function () {
                 },
                 {
                     data: null, render: function (data, type, row) {
-                    return '<a href="edit/'+ data.student_id +'" >'+ data.first_name +' '+data.middle_name +', '+ data.last_name +'</a>';
+                    return data.first_name +' '+data.middle_name +', '+ data.last_name;
                 }
                 },
                 { data: "gender" },

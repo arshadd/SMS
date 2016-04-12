@@ -78,7 +78,7 @@ var SubjectModule = function () {
 
         var id = $(this).data('id');
         edit(id);
-        $('.modal-title').html("Edit Subject");
+        $('#mdlCreateSubject .modal-title').html("Edit Subject");
         ModalCreateSubject.modal('show');
     });
 
@@ -324,7 +324,7 @@ var SubjectModule = function () {
     function showPopup() {
         $('#Form_Subject').trigger("reset");
         SubjectIdFld.val("0");
-        $('.modal-title').html("Create Subject");
+        $('#mdlCreateSubject .modal-title').html("Create Subject");
         ModalCreateSubject.modal('show');
     }
 

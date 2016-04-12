@@ -4,6 +4,10 @@
     $pageCss  = array(
         '<link href="' . base_url() . 'assets/plugins/select2/select2_conquer.css" rel="stylesheet" type="text/css" />'
         ,'<link href="' . base_url() . 'assets/plugins/custom-datatable/DT_bootstrap.css" rel="stylesheet" type="text/css" />'
+
+    ,'<link href="' . base_url() . 'assets/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />'
+    ,'<link href="' . base_url() . 'assets/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />'
+
     );
 
     
@@ -93,72 +97,47 @@
   </div>
   <!-- END CONTAINER -->
 
-  <div class="modal fade" id="mdlCreateClass" tabindex="-1" role="basic" aria-hidden="true">
-    <div class="modal-dialog modal-small">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-          <h4 class="modal-title">Create Class</h4>
-        </div>
-        <div class="portlet-body form">
-          <!--<div class="alert alert-success display-hide">
-            <button data-close="alert" class="close"></button>
-            Class Information saved successfully.
-          </div>-->
-
-          <div class="scroller" style="height: 350px; width:100px" data-always-visible="1" data-rail-visible1="1">
-            <div class="portlet-body form">
-                <?php include('_createOrEditClass.php');?>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- /.modal-content -->
+  <div id="mdlCreateClass" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="true" data-width="400">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+      <h4 class="modal-title">Create Class</h4>
     </div>
-    <!-- /.modal-dialog -->
+    <div class="modal-body">
+      <?php include('_createOrEditClass.php');?>
+    </div>
   </div>
 
-  <div class="modal fade" id="mdlDeleteClass" tabindex="-1" role="basic" aria-hidden="true">
-    <div class="modal-dialog modal-small">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-          <h4 class="modal-title">Confirm Delete</h4>
-        </div>
-        <div class="scroller" style="height: 180px; width:100px" data-always-visible="1" data-rail-visible1="1">
-          <div class="portlet-body form">
-            <form id="Form_Class" class="form-horizontal" method="post">
-
-              <div class="form-body">
-                <div class="alert alert-info display">
+  <div id="mdlDeleteClass" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="true" data-width="400">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+      <h4 class="modal-title">Confirm Delete</h4>
+    </div>
+    <div class="modal-body">
+      <form id="Form_Class" class="form-horizontal" method="post">
+        <div class="form-body">
+          <div class="alert alert-info display">
               <span>
                  Are you sure want to delete?
               </span>
-                </div>
-                <input type="hidden" id="class_id" name="class_id" class="form-control"/>
-                <div class="form-actions fluid">
-                  <div class="col-md-offset-3 col-md-9">
-                    <a href="#" data-dismiss="modal" class="btn btn-default">
-                      <i class="fa fa-mail-reply"></i> Close
-                    </a>
-                    <button class="btn btn-success" id="btnDelete" type="button">
-                      <i class="fa fa-trash-o"></i> Delete
-                    </button>
-                    <label>
-                      <div id="loader"><img src="<?php echo base_url() . '/assets/img/input-spinner.gif'; ?>"/></div>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </form>
+          </div>
+          <input type="hidden" id="class_id" name="class_id" class="form-control"/>
+          <div class="form-actions fluid">
+            <div class="col-md-offset-3 col-md-9">
+              <a href="#" data-dismiss="modal" class="btn btn-default">
+                <i class="fa fa-mail-reply"></i> Close
+              </a>
+              <button class="btn btn-success" id="btnDelete" type="button">
+                <i class="fa fa-trash-o"></i> Delete
+              </button>
+              <label>
+                <div id="loader"><img src="<?php echo base_url() . '/assets/img/input-spinner.gif'; ?>"/></div>
+              </label>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- /.modal-content -->
+      </form>
     </div>
-    <!-- /.modal-dialog -->
   </div>
-
 
   <?php
 
@@ -167,6 +146,10 @@
       ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/custom-datatable/DT_bootstrap.js" ></script>'
       ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/jquery-validation/dist/jquery.validate.min.js" ></script>'
       ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/select2/select2.min.js" ></script>'
+
+    ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" ></script>'
+    ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-modal/js/bootstrap-modal.js"" ></script>'
+
     );
     
     $pageJsScript  = array(

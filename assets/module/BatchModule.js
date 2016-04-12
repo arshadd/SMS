@@ -82,7 +82,7 @@ var BatchModule = function () {
 
         var id = $(this).data('id');
         edit(id);
-        $('.modal-title').html("Edit Batch");
+        $('#mdlCreateBatch .modal-title').html("Edit Batch");
         ModalCreateBatch.modal('show');
     });
 
@@ -275,13 +275,13 @@ var BatchModule = function () {
         //Set values
         BatchIdFld.val(id);
     }
-    $('.modal').on('hidden.bs.modal', function(){
-        $(this).find('form')[0].reset();
-    });
+
     function showPopup() {
         $('#Form_Batch').trigger("reset");
         BatchIdFld.val("0");
-        $('.modal-title').html("Create Batch");
+
+        $('#mdlCreateBatch .modal-title').html("Create Batch");
+
         ModalCreateBatch.modal('show');
     }
 
