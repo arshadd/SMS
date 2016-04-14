@@ -18,7 +18,7 @@ class Employees_m extends CI_Model {
         return false;
     }
 
-    function find_employees($school_id, $employee_id)
+    function find_employee($school_id, $employee_id)
     {
         $this->db->from('employees');
         $this->db->where('employee_id', $employee_id);
@@ -33,42 +33,108 @@ class Employees_m extends CI_Model {
         return false;
     }
 
-    function save($school_id, $employee_id, $employees)
+    function new_employee($school_id)
     {
+        $this->db->select('CONCAT("E", IFNULL(max(employee_id) ,0)+1) as new_employee_id');
+        $this->db->from('employees');
+        $this->db->where('school_id', $school_id);
+
+        $employee = $this->db->get()->result();
+
+        if (is_array($employee) && count($employee) > 0) {
+            return $employee;
+        }
+
+        return false;
+    }
+
+    function save($school_id, $employee_id, $employee)
+    {
+
+        $user = array(
+            "first_name" =>$employee['first_name'],
+            "last_name" =>$employee['last_name'],
+            "email" =>"",
+            "employee" =>"1",
+            "school_id" =>$school_id);
+
+        //-------Begin Transaction----------//
+        $this->db->trans_begin();
+
+        //Logic
         if ($employee_id > 0) {
 
-            //Update
-
+            //-----------Update Employee's Info---------------//
             //Updated_at date
-            $employees = array_merge($employees, array('updated_at'=> date('Y-m-d H:i:s')));
-
+            $employee = array_merge($employee, array('updated_at' => date('Y-m-d H:i:s')));
+            //Remove unnecessary elements
+            unset($_POST['code']);
             //update
             $this->db->where('employee_id', $employee_id);
-            $result = $this->db->update('employees', $employees);
+            $result = $this->db->update('employees', $employee);
+            //-----------End Update Employee's Info---------------//
 
             //$result = false;
         } else {
             //Insert
 
+            //-----------Insert User's Info---------------//
+            $user = array_merge($user, array('username' => $employee['code']));
+            $user = array_merge($user, array('password_hash' => $employee['date_of_birth']));
+            $user = array_merge($user, array('created_at' => date('Y-m-d H:i:s')));
+
+            $result = $this->db->insert('users', $user);
+
+            //newly inserted id
+            $user_id = $this->db->insert_id();
+            //-----------End Insert User's Info---------------//
+
+            //-----------Insert Employee's Info---------------//
             //Created_at date
-            $employees = array_merge($employees, array('created_at'=> date('Y-m-d H:i:s')));
-            $employees = array_merge($employees, array('updated_at'=> date('Y-m-d H:i:s')));
-            //Insert
-            $result = $this->db->insert('employees', $employees);
+            $employee = array_merge($employee, array('created_at' => date('Y-m-d H:i:s')));
+            //School Id
+            $employee = array_merge($employee, array('school_id' => $school_id));
+            //Add user id
+            $employee['user_id'] = $user_id;
+
+            $result = $this->db->insert('employees', $employee);
 
             //newly inserted id
             $employee_id = $this->db->insert_id();
+
+            $employee = array_merge($employee, array('employee_id' => $employee_id));
+            //-----------End Insert Employee's Info---------------//
+        }
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->trans_rollback();
+            $result = FALSE;
+        }
+        else
+        {
+            $this->db->trans_commit();
+            $result = TRUE;
+        }
+        //-------End Transaction----------//
+
+        if ($result === TRUE) {
+            $result = "success";
+            $message = "Employee information saved";
+        } else {
+            $result = "failed";
+            $message = $this->db->_error_message();//"Error for saving employee information";
         }
 
-        //build object
-        $employees = array_merge($employees, array('employee_id'=> $employee_id));
-
-        $return = array(
+        $response = array(
             'result' => $result,
-            'data' => $employees
+            'message' => $message,
+            'data' => $employee
         );
 
-        return $return;
+        return $response;
+
     }
 
     function delete($school_id, $employee_id)
