@@ -297,7 +297,7 @@ var StudentModule = function () {
             contentType: false, //'multipart/form-data',
 
             success : function(result){
-                debugger;
+                //debugger;
                 loader.hide();
 
                 if(result.status == "success"){
@@ -316,7 +316,7 @@ var StudentModule = function () {
                 App.scrollTo($('.page-title'));
             },
             failed : function(result){
-                debugger;
+                //debugger;
                 loader.hide();
                 ShowMessage("error", result.message);
             }
@@ -352,7 +352,7 @@ var StudentModule = function () {
             type: 'GET',
             dataType: 'jsonp',
             success: function (data) {
-                debugger;
+                // debugger;
                 showEdit(data.data[0]);
             },
             fail: function (result) {
@@ -412,7 +412,7 @@ var StudentModule = function () {
             type: 'GET',
             dataType: 'jsonp',
             success: function (data) {
-                debugger;
+                // debugger;
 
                 var newRecord = data.data[0];
                 AdmissionNumberFld.val(newRecord.new_student_id);
