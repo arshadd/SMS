@@ -4,6 +4,12 @@ $title = "Employee List";
 $pageCss  = array(
     '<link href="' . base_url() . 'assets/plugins/select2/select2_conquer.css" rel="stylesheet" type="text/css" />'
 ,'<link href="' . base_url() . 'assets/plugins/custom-datatable/DT_bootstrap.css" rel="stylesheet" type="text/css" />'
+,'<link href="' . base_url() . 'assets/plugins/bootstrap-fileupload/bootstrap-fileupload.css" rel="stylesheet" type="text/css" />'
+,'<link href="' . base_url() . 'assets/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />'
+,'<link href="' . base_url() . 'assets/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />'
+,'<link href="' . base_url() . 'assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" type="text/css" />'
+,'<link href="' . base_url() . 'assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />'
+
 );
 
 
@@ -49,16 +55,7 @@ include(VIEW_PATH.'header.php');
         <button data-close="alert" class="close"></button>
         Employee Information saved successfully.
       </div>
-      <!--<div class="row">
-        <div class="col-md-12">
-          <div class="portlet-body util-btn-margin-bottom-5">
-            <button class="btn btn-primary" onclick="EmployeeModule.addView();">
-              <i class="fa fa-pencil-square-o"></i>&nbsp;Add New Employee
-            </button>
-          </div>
-        </div>
-      </div>-->
-
+      
       <div class="row">
         <div class="col-md-12">
           <div class="portlet">
@@ -100,28 +97,17 @@ include(VIEW_PATH.'header.php');
 </div>
 <!-- END CONTAINER -->
 
-<div class="modal fade" id="mdlCreateEmployee" tabindex="-1" role="basic" aria-hidden="true">
-  <div class="modal-dialog modal-wide">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">Create Employee</h4>
-      </div>
-      <div class="portlet-body form">
-        <div class="scroller" style="height: 550px; width:100px" data-always-visible="1" data-rail-visible1="1">
-          <div class="portlet-body form">
-            <form id="Form_Employee" class="form-horizontal" method="post">
-              <?php include('_createOrEdit.php');?>
-
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /.modal-content -->
+<div id="mdlCreateEmployee" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="true" data-width="850">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    <h4 class="modal-title">Create Employee</h4>
   </div>
-  <!-- /.modal-dialog -->
+  <div class="modal-body">
+    <?php include('_createOrEdit.php');?>
+  </div>
+
 </div>
+
 
 <?php
 
@@ -130,6 +116,11 @@ $pagePlugin  = array(
 ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/custom-datatable/DT_bootstrap.js" ></script>'
 ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/jquery-validation/dist/jquery.validate.min.js" ></script>'
 ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/select2/select2.min.js" ></script>'
+,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-fileupload/bootstrap-fileupload.js" ></script>'
+
+,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" ></script>'
+,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-modal/js/bootstrap-modal.js"" ></script>'
+,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" ></script>'
 );
 
 $pageJsScript  = array(
@@ -138,8 +129,7 @@ $pageJsScript  = array(
 );
 
 $pageJsCalls  = array(
-    'EmployeeModule.loadGrid();'
-,'EmployeeModule.validate();'
+    'EmployeeModule.init();'
 );
 
 include(VIEW_PATH.'footer.php');
