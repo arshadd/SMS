@@ -55,7 +55,7 @@ include(VIEW_PATH.'header.php');
         <button data-close="alert" class="close"></button>
         Employee Information saved successfully.
       </div>
-      
+
       <div class="row">
         <div class="col-md-12">
           <div class="portlet">
@@ -75,7 +75,7 @@ include(VIEW_PATH.'header.php');
                 <thead>
                 <tr>
                   <th class='hidden-xs'>employee_id</th>
-                  <th class='hidden-xs'>Code</th>
+                  <th class='hidden-xs'>Photo</th>
                   <th class='hidden-xs'>Full Name</th>
                   <th class='hidden-xs'>Gender</th>
                   <th class='hidden-xs'>Job Title</th>
