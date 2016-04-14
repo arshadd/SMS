@@ -16,6 +16,14 @@ class Employees extends REST_Controller
         }
     }
 
+    function new_employee_get()
+    {
+        //Get logged school id
+        $school_id = $this->session->userdata('school_id');
+
+        $employee = $this->employees_m->new_employee($school_id);
+        $this->response(array("status" => "success", "message" => "", "data" => $employee));
+    }
     function all_employees_get()
     {
         //Get logged school id
@@ -47,28 +55,49 @@ class Employees extends REST_Controller
         //Get primary key
         $employee_id = $this->post('employee_id');
 
-        //Make array
-        $employee = array(
-            'code' => $this->post('code'),
-            'name' => $this->post('name'),
-            'first_name' => $this->post('first_name'),
-            'middle_name' => $this->post('middle_name'),
-            'last_name' => $this->post('last_name'),
-            'joining_date' => $this->post('joining_date'),
-            'job_title' => $this->post('job_title'),
-            'gender' => $this->post('gender'),
-            'user_id' => $this->post('user_id'),
-            'is_active' => $this->post('is_active'),
-            'school_id' => $school_id
-        );
+        $_POST['photo'] = EMPLOYEE_DEFAULT_IMAGE;
+        //-------------File uploading---------------//
+        //if (!is_dir($config['upload_path'])) die("THE UPLOAD DIRECTORY DOES NOT EXIST");
+        if (empty($_FILES['employeePhoto'])===FALSE) {
+
+            $config['upload_path'] = './assets/resource/employees/';
+            $config['allowed_types'] = 'png|jpg|jpeg|gif|bmp';
+            $config['max_size'] = '2048000';
+            $config['max_width'] = '1024';
+            $config['max_height'] = '768';
+            $config['overwrite'] = TRUE;
+            $config['encrypt_name'] = FALSE;
+            $config['remove_spaces'] = TRUE;
+
+            // if(isset($_FILES['Photo'])) {
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('employeePhoto')) {
+                $error = array('error' => $this->upload->display_errors());
+                //$this->load->view('upload_form', $error);
+
+                $this->response(array("status" => "failed", "message" => $error['error'], "data" => null));
+            } else {
+                $data = $this->upload->data();
+
+                //Build logo Path
+                $photo = $config['upload_path'] . $data['file_name'];
+
+                $_POST['photo'] = $photo;
+            }
+        }
+        //-------------------------------------------------------//
+
+        //Save date in date format
+        $_POST['joining_date'] = date('Y-m-d', strtotime($this->post('joining_date')));
+        $_POST['date_of_birth'] = date('Y-m-d', strtotime($this->post('date_of_birth')));
 
         //Save
-        $return = $this->employees_m->save($school_id, $employee_id, $employee);
+        $response = $this->employees_m->save($school_id, $employee_id, $_POST);
 
-        if ($return['result'] === FALSE) {
-            $this->response(array("status" => "failed", "message" => "Failed to save.", "data" => $return['data']));
+        if ($response['result'] === FALSE) {
+            $this->response(array("status" => "failed", "message" => $response['message'], "data" => null));
         } else {
-            $this->response(array("status" => "success", "message" => "employee information saved successfully", "data" => $return['data']));
+            $this->response(array("status" => "success",  "message" => $response['message'], "data" => $response['data']));
         }
     }
 
