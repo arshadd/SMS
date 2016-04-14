@@ -220,7 +220,7 @@ var ClassAttendanceModule = function () {
             contentType: false,
 
             success : function(result){
-                debugger;
+                //debugger;
                 loader.hide();
                 $("#lblAttendanceDate").text(attendance_date);
 
@@ -238,7 +238,7 @@ var ClassAttendanceModule = function () {
                 App.scrollTo($('.page-title'));
             },
             failed : function(result){
-                debugger;
+                //debugger;
                 loader.hide();
                 ShowMessage("error", result.message);
             }
@@ -246,7 +246,7 @@ var ClassAttendanceModule = function () {
     }
     function save() {
 
-        debugger;
+        //debugger;
         var attendance_form = $('#Form_Attendance');
 
         //Get values
@@ -264,7 +264,7 @@ var ClassAttendanceModule = function () {
             contentType: false,
 
             success : function(result){
-                debugger;
+                //debugger;
                 loader.hide();
                 if(result.status == "success"){
 
@@ -278,7 +278,7 @@ var ClassAttendanceModule = function () {
                 App.scrollTo($('.page-title'));
             },
             failed : function(result){
-                debugger;
+                //debugger;
                 loader.hide();
                 ShowMessage("error", result.message);
             }
