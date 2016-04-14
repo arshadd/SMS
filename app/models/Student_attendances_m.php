@@ -31,7 +31,7 @@ class Student_attendances_m extends CI_Model
                     SUM(CASE WHEN ATTENDANCE_STATUS = 'P' THEN 1 ELSE 0 END) present_count,
                     SUM(CASE WHEN ATTENDANCE_STATUS = 'A' THEN 1 ELSE 0 END) absent_count,
                     SUM(CASE WHEN ATTENDANCE_STATUS = 'L' THEN 1 ELSE 0 END) leave_count
-                    FROM STUDENT_ATTENDANCES
+                    FROM student_attendances
                     WHERE ATTENDANCE_DATE = ?
                     AND SCHOOL_ID = ?
                     AND BATCH_ID = ?
