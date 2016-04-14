@@ -57,35 +57,8 @@
           </div>
         </div>
         
-        <!--<h3 class="page-title">
-          Students
-        </h3>
-        <div class="page-bar">
-          <ul class="page-breadcrumb breadcrumb">
-            <li>
-              <i class="fa fa-cogs"></i>
-              <a href="#">Acadamic</a>
-              <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-              <a href="#">Student</a>
-            </li>
-          </ul>
-        </div>-->
         <!-- END PAGE HEADER-->
-        <div class="alert alert-success display-hide">
-          <button data-close="alert" class="close"></button>
-          Student Information saved successfully.
-        </div>
-        <!--<div class="row">
-          <div class="col-md-12">
-            <div class="portlet-body util-btn-margin-bottom-5">
-              <button class="btn btn-primary" onclick="StudentModule.addView();">
-                <i class="fa fa-pencil-square-o"></i>&nbsp;Add New Student
-              </button>
-            </div>
-          </div>
-        </div>-->
+
 
         <div class="row hidden-print">
           <div class="col-md-12">

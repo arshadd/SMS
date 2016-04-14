@@ -109,6 +109,7 @@ $.fn.clearForm = function() {
         });
         var params = $(obj).serializeArray();
         $.each(params, function (i, val) {
+            //debugger;
             formData.append(val.name, val.value);
         });
         //debugger;

@@ -1,7 +1,7 @@
-<div class="">
+<div class="invoice">
   <div class="row invoice-logo">
     <div class="col-xs-6 invoice-logo-space">
-      <img src=""<?php echo base_url();?>/assets/img/invoice/walmart.png" alt="" />
+      <img src="<?php echo base_url();?>/assets/img/Loginlogo.png" style="width:300px;height:85px;" alt="" />
     </div>
     <div class="col-xs-6">
       <p>

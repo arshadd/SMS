@@ -3,22 +3,16 @@ var ClassStudentModule = function () {
     //Create Batch
     var School = { school_id: 0};
 
-
-    //Global
-    var class_id=0;
-    var batch_id=0;
-
     //Field Declaration Section
-
-
     var StudentGrid = $('#StudentGrid');
 
     var ClassFld = $('#Form_Class_Student_Search #class_id');
     var BatchFld = $('#Form_Class_Student_Search #batch_id');
-
+    //Global
+    var class_id=0;
+    var batch_id=0;
 
     var loadGridUrl = baseApiUrl + "students/all_batch_students/";
-
 
     //--------------------Grid Functions-----------------------//
     var dataTable = null;
@@ -63,6 +57,7 @@ var ClassStudentModule = function () {
 
     //--------------------End Grid Functions-----------------------//
 
+    //--------------------Dropdown Functions-----------------------//
     function loadAll() {
         //Todo
         fillDropDownClasses();
@@ -118,17 +113,6 @@ var ClassStudentModule = function () {
         });
     }
 
-    var fetchClassId = function(){
-        var pathname = window.location.pathname;
-        var params = pathname.split('/');
-        var class_id = params[params.length - 1];
-        if(class_id =='' || class_id == null)
-            class_id=0;
-
-        return class_id;
-    }
-
-
     BatchFld.on('change', function(){
         var batch_id = this.value;
 
@@ -139,7 +123,17 @@ var ClassStudentModule = function () {
 
         //loadGrid(batch_id);
     });
+    var fetchClassId = function(){
+        var pathname = window.location.pathname;
+        var params = pathname.split('/');
+        var class_id = params[params.length - 1];
+        if(class_id =='' || class_id == null)
+            class_id=0;
 
+        return class_id;
+    }
+
+    //--------------------End Dropdown Functions-----------------------//
 
     return {
         //main function to initiate the module

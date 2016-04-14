@@ -68,6 +68,14 @@
                 Manage Class
               </a>
             </li>
+            <li>
+              <a href="<?php echo base_url();?>index.php/report/classes">
+                <span class="badge badge-warning">
+                  new
+                </span>
+                Report
+              </a>
+            </li>
           </ul>
         </li>
         

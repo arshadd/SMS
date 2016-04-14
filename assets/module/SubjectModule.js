@@ -13,8 +13,12 @@ var SubjectModule = function () {
     var MaxWeeklyClassesFld = $('#Form_Subject #max_weekly_classes');
     var CreditHoursFld = $('#Form_Subject #credit_hours');
 
-    var SubjectClassesFld = $('#Form_Subject_Search #subject_classes')
-    var SubjectBatchesFld = $('#Form_Subject_Search #subject_batches');
+    var ClassFld = $('#Form_Subject_Search #class_id')
+    var BatchFld = $('#Form_Subject_Search #batch_id');
+    //Global
+    var class_id=0;
+    var batch_id=0;
+
 
     var SubjectGrid = $('#SubjectGrid');
     var ModalCreateSubject = $('#mdlCreateSubject');
@@ -23,6 +27,8 @@ var SubjectModule = function () {
     var loader = $("#Form_Subject #loader");
     loader.hide();
 
+
+    
 
     var loadGridUrl = baseApiUrl + "subjects/all_batch_subjects/";
     var editUrl = baseApiUrl + "subjects/find_subject/";
@@ -214,50 +220,6 @@ var SubjectModule = function () {
         });
     }
 
-    /*function loadAll() {
-     //Todo
-     fillDropDownDepartment();
-     fillDropDownDesignation();
-     }
-
-     function fillDropDownDepartment() {
-     var loadDDUrl = baseApiUrl + "Department/List";
-
-     var url = loadDDUrl;
-     $.ajax({
-     url: url,
-     accepts: 'application/json',
-     cache: false,
-     type: 'GET',
-     dataType: 'jsonp',
-     success: function (result) {
-     // Handle the complete event
-     $.each(result.data, function () {
-     $("#DepartmentId").append($("<option     />").val(this.DepartmentId).text(this.Name));
-     });
-     }
-     });
-     }
-     function fillDropDownDesignation() {
-     var loadDDUrl = baseApiUrl + "Designation/List";
-
-     var url = loadDDUrl;
-     $.ajax({
-     url: url,
-     accepts: 'application/json',
-     cache: false,
-     type: 'GET',
-     dataType: 'jsonp',
-     success: function (result) {
-     // Handle the complete event
-     $.each(result.data, function () {
-     $("#DesignationId").append($("<option     />").val(this.DesignationId).text(this.Name));
-     });
-     }
-     });
-     }*/
-
-
     function ShowMessage(type, message){
         if (message == 'undefined') return;
 
@@ -318,9 +280,7 @@ var SubjectModule = function () {
         //Set values
         SubjectIdFld.val(id);
     }
-    /*$('.modal').on('hidden.bs.modal', function(){
-        $(this).find('form')[0].reset();
-    });*/
+
     function showPopup() {
         $('#Form_Subject').trigger("reset");
         SubjectIdFld.val("0");
@@ -368,29 +328,22 @@ var SubjectModule = function () {
             },
         });
     }
-    /*var del = function () {
-     $(".delete").on("click", function () {
-
-     if (confirm("Are you sure want to delete?")) {
-     deleteData();
-     }
-     });
-     };*/
-
     //--------------------End Form Validation Functions-----------------------//
-
+    //--------------------Dropdown Functions-----------------------//
     function loadAll() {
         //Todo
         fillDropDownClasses();
-        fillDropDownBatches();
     }
-
+    ClassFld.on('change', function(){
+        class_id = ClassFld.val();
+        fillDropDownBatches();
+    });
     function fillDropDownClasses() {
-        var class_id = fetchClassId();
+
         var loadDDUrl = baseApiUrl + "classes/all_classes";
 
-        SubjectClassesFld.empty();
-        SubjectClassesFld.append($("<option     />").val(0).text("Select class"));
+        ClassFld.empty();
+        ClassFld.append($("<option     />").val(0).text("Select class"));
         var url = loadDDUrl;
         $.ajax({
             url: url,
@@ -401,21 +354,21 @@ var SubjectModule = function () {
             success: function (result) {
                 // Handle the complete event
                 $.each(result.data, function () {
-                    if(this.class_id == class_id){
-                        SubjectClassesFld.append($("<option selected='selected'/>").val(this.class_id).text(this.name));
-                    }else {
-                        SubjectClassesFld.append($("<option />").val(this.class_id).text(this.name));
-                    }
+                    ClassFld.append($("<option />").val(this.class_id).text(this.name));
                 });
+
+                class_id = fetchClassId();
+                ClassFld.val(class_id);
+                ClassFld.trigger('change');
             }
         });
     }
+
     function fillDropDownBatches() {
-        var class_id = fetchClassId();
         var loadDDUrl = baseApiUrl + "batches/all_class_batches/"+class_id;
 
-        SubjectBatchesFld.empty();
-        SubjectBatchesFld.append($("<option     />").val(0).text("Select batch"));
+        BatchFld.empty();
+        BatchFld.append($("<option     />").val(0).text("Select batch"));
         var url = loadDDUrl;
         $.ajax({
             url: url,
@@ -426,13 +379,11 @@ var SubjectModule = function () {
             success: function (result) {
                 // Handle the complete event
                 $.each(result.data, function () {
-                    SubjectBatchesFld.append($("<option     />").val(this.batch_id).text(this.name));
+                    BatchFld.append($("<option     />").val(this.batch_id).text(this.name));
                 });
             }
         });
     }
-
-
 
     function disabledField(mark){
         if(mark){
@@ -441,7 +392,7 @@ var SubjectModule = function () {
             $('#btnAddSubject').removeAttrs('disabled');
         }
     }
-    SubjectBatchesFld.on('change', function(){
+    BatchFld.on('change', function(){
         var batch_id = this.value;
 
         if(batch_id==0){
@@ -456,25 +407,13 @@ var SubjectModule = function () {
 
         //loadGrid(batch_id);
     });
-
-    var handleDateTime = function () {
-        if (jQuery().datepicker) {
-            $('.date-picker').datepicker({
-                rtl: App.isRTL(),
-                format: 'dd-MM-yyyy',
-                autoclose: true
-            });
-            $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
-        }
-    }
-
     var fetchBatchId = function(){
         /*var pathname = window.location.pathname;
-        var params = pathname.split('/');
-        var class_id = params[params.length - 1];*/
+         var params = pathname.split('/');
+         var class_id = params[params.length - 1];*/
         //ClassIdFld.val(class_id);
         //BatchIdFld.val("1");
-        batch_id = SubjectBatchesFld.val();
+        batch_id = BatchFld.val();
         if(batch_id =='' || batch_id == null)
             batch_id="0";
 
@@ -490,6 +429,20 @@ var SubjectModule = function () {
 
         return class_id;
     }
+    //--------------------End Dropdown Functions-----------------------//
+
+    //--------------------Other Functions-----------------------//
+    var handleDateTime = function () {
+        if (jQuery().datepicker) {
+            $('.date-picker').datepicker({
+                rtl: App.isRTL(),
+                format: 'dd-MM-yyyy',
+                autoclose: true
+            });
+            $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
+        }
+    }
+    //--------------------End Other Functions-----------------------//
 
 
     return {
@@ -508,7 +461,7 @@ var SubjectModule = function () {
         },
         refreshBatchDropDown : function(){
             fillDropDownBatches();
-            SubjectBatchesFld.change();
+            BatchFld.change();
         },
     };
 }();

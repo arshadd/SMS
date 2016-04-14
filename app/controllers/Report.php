@@ -18,31 +18,12 @@ class Report extends CI_Controller{
    * application screen is set up.
    */
   function classes() {
-	$this->load->model('employee_m');
-
-    // Load all of the logged-in user's posts
-    $employees = $this->employee_m->all_employee( 5 );
-
-    // If employee were fetched from the database, assign them to $data
-    // so they can be passed into the view.
-    if ($employees) {
-      $data['employees'] = $employees;
-    }
-    $this->load->view('report/class/class', $data);
+    $this->load->view('report/class/class');
   }
 
   function edit($id) {
-	$this->load->model('employee_m');
 
-    // Load all of the logged-in user's posts
-    $employees = $this->employee_m->all_employee( 5 );
-
-    // If employee were fetched from the database, assign them to $data
-    // so they can be passed into the view.
-    if ($employees) {
-      $data['employees'] = $employees;
-    }
-    $this->load->view('class/edit', $data);
+    $this->load->view('class/edit');
   }
 
   function view($id) {

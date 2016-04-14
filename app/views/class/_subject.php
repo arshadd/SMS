@@ -9,14 +9,14 @@
       <div class="portlet-body text-center">
         <form id="Form_Subject_Search"  class="form-inline" role="form">
           <div class="form-group">
-            <label for="subject_classes">Class:</label>
-            <select id="subject_classes" name="subject_classes" class='form-control input-medium' disabled="disabled">
+            <label for="class_id">Class:</label>
+            <select id="class_id" name="class_id" class='form-control input-medium' disabled="disabled">
             </select>
           </div>
 
           <div class="form-group">
-            <label for="subject_batches">Batch:</label>
-            <select id="subject_batches" class='form-control input-medium'>
+            <label for="batch_id">Batch:</label>
+            <select id="batch_id"  name="batch_id" class='form-control input-medium'>
             </select>
           </div>
 

@@ -88,7 +88,7 @@
                     <i class="fa fa-female"></i> Teachers
                   </a>
                 </li>
-                <li class="active">
+                <li class="">
                   <a href="#tab_1_6" data-toggle="tab">
                     <i class="fa fa-group"></i> Students
                   </a>
@@ -105,7 +105,7 @@
                     <i class="fa fa-calendar"></i> Timetable
                   </a>
                 </li>
-                <li>
+                <li class="active">
                   <a href="#tab_1_9" data-toggle="tab">
                     <i class="fa fa-thumb-tack"></i> Attendance
                   </a>
@@ -138,7 +138,7 @@
                 </div>
                 
                 <!--end tab-pane-->
-                <div class="tab-pane active" id="tab_1_6">
+                <div class="tab-pane " id="tab_1_6">
 
                   <?php include('_student.php');?>
 
@@ -159,9 +159,9 @@
 
                 </div>
                 <!--end tab-pane-->
-                <div class="tab-pane" id="tab_1_9">
+                <div class="tab-pane active" id="tab_1_9">
 
-<!--                  --><?php /*include('_attendance.php');*/?>
+                  <?php include('_attendance.php');?>
 
                 </div>
                 <!--end tab-pane-->
@@ -206,7 +206,7 @@
       /*,'<script type="text/javascript" src="' . base_url() . 'assets/module/SectionModule.js" ></script>'*/
       ,'<script type="text/javascript" src="' . base_url() . 'assets/module/SubjectModule.js" ></script>'
       ,'<script type="text/javascript" src="' . base_url() . 'assets/module/ClassStudentModule.js" ></script>'
-      ,'<script type="text/javascript" src="' . base_url() . 'assets/module/AttendanceModule.js" ></script>'
+      ,'<script type="text/javascript" src="' . base_url() . 'assets/module/ClassAttendanceModule.js" ></script>'
 
       );
      
@@ -217,9 +217,8 @@
       ,'SubjectModule.init();'
       ,'ClassStudentModule.init();'
 
-      /*
-      ,'AttendanceModule.loadGrid2();'
-      ,'AttendanceModule.validate();'*/
+
+      ,'ClassAttendanceModule.init();'
 
 
     );
