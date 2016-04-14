@@ -123,7 +123,7 @@ jQuery(document).ready(function() {
         var path = window.location.pathname;
         var uri = path.split("/");
 
-        debugger
+        //debugger
         var controller = uri[uri.length - 2];
         var action = uri[uri.length - 1];
 
