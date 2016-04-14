@@ -176,7 +176,7 @@ class Students_m extends CI_Model
                     "batch_id" =>$student['batch_id'],
                     "school_id" =>$school_id
                 );
-                $result = $this->db->insert('batch_students', $batch_student);
+                $result = $this->db->insert('batch_student', $batch_student);
                 //-----------End Insert Batch Student's Info---------------//
             }
 

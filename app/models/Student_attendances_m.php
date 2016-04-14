@@ -6,7 +6,7 @@ class Student_attendances_m extends CI_Model
     function all_batch_students($school_id, $batch_id, $attendance_date)
     {
         $sql = "SELECT sa.*, s.photo, s.class_roll_no, s.student_id, concat(s.first_name, ' ', s.middle_name, ', ', s.last_name) As full_name 
-                    FROM `batch_students` `bs`
+                    FROM `batch_student` `bs`
                      LEFT JOIN `student_attendances` `sa` ON `bs`.`student_id` = `sa`.`student_id`
                          and `bs`.`batch_id` = `sa`.`batch_id`
                          and `sa`.`attendance_date` = ?
