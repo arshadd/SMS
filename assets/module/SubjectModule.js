@@ -181,7 +181,7 @@ var SubjectModule = function () {
         loader.show();
 
         var subject = Subject;
-        debugger;
+        // debugger;
 
         //Get values
 
@@ -201,7 +201,7 @@ var SubjectModule = function () {
             data : subject,
             dataType: 'jsonp',
             success : function(result){
-                debugger;
+                // debugger;
                 loader.hide();
 
                 if(result.status == "success"){
@@ -250,7 +250,7 @@ var SubjectModule = function () {
             type: 'GET',
             dataType: 'jsonp',
             success: function (data) {
-                debugger;
+                // debugger;
                 showEdit(data.data[0]);
             },
             fail: function (result) {
