@@ -117,3 +117,24 @@ $.fn.clearForm = function() {
     };
 })(jQuery);
 
+jQuery(document).ready(function() {
+
+    function MenuSelection() {
+        var path = window.location.pathname;
+        var uri = path.split("/");
+
+        debugger
+        var controller = uri[uri.length - 2];
+        var action = uri[uri.length - 1];
+
+        $('li[data-menu]').attr("class", "");
+        $('li[data-menu] span[class="title"]').attr("class", "title arrow down");
+
+        $('li[data-menu="' + controller + '"]').attr("class", "active");
+        $('li[data-menu="' + controller + '"] span[class="title arrow down"]').attr("class", "title arrow open selected");
+
+        $('li[data-menu-item="' + action + '"]').attr("class", "active");
+    }
+
+    MenuSelection();
+});

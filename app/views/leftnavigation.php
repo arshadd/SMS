@@ -20,27 +20,25 @@
             </div>
           </form>
         </li>
-        <li class="start active ">
+        <li class="start" data-menu="dashboard">
           <a href="<?php echo base_url();?>">
             <i class="fa fa-home"></i>
             <span class="title">
               Dashboard
             </span>
-            <span class="selected">
-            </span>
+            <!--<span class="selected"></span>-->
           </a>
         </li>
-        <li class="">
+        <li class="" data-menu="school">
           <a href="javascript:;">
             <i class="fa fa-cogs"></i>
             <span class="title">
               Settings
             </span>
-            <span class="arrow ">
-            </span>
+            <!--<span class="arrow "></span>-->
           </a>
           <ul class="sub-menu">
-            <li>
+            <li  class="" data-menu-item="edit">
               <a href="<?php echo base_url();?>index.php/school/edit">
                 <span class="badge badge-success">
                   new
@@ -50,17 +48,16 @@
             </li>
           </ul>
         </li>
-        <li class="">
+        <li class="" data-menu="classes">
           <a href="javascript:;">
             <i class="fa fa-bookmark"></i>
             <span class="title">
               Class
             </span>
-            <span class="arrow ">
-            </span>
+            <!--<span class="arrow "></span>-->
           </a>
           <ul class="sub-menu">
-            <li>
+            <li class="" data-menu-item ="index">
               <a href="<?php echo base_url();?>index.php/classes/index">
                 <span class="badge badge-warning">
                   new
@@ -68,50 +65,39 @@
                 Manage Class
               </a>
             </li>
-            <li>
-              <a href="<?php echo base_url();?>index.php/report/classes">
-                <span class="badge badge-warning">
-                  new
-                </span>
-                Report
-              </a>
-            </li>
           </ul>
         </li>
         
-        <li class="">
+        <li class="" data-menu="employees">
           <a href="javascript:;">
             <i class="fa fa-female"></i>
             <span class="title">
               Employee 
             </span>
-            <span class="arrow ">
-            </span>
+            <!--<span class="arrow "></span>-->
           </a>
           <ul class="sub-menu">
-            <li>
+            <li class="" data-menu-item ="index">
               <a href="<?php echo base_url();?>index.php/employees/index">
               <span class="badge badge-succcess">
                 new
               </span>
-
                 Manage Employee
               </a>
             </li>
           </ul>
         </li>
         
-        <li class="">
+        <li class="" data-menu="student">
           <a href="javascript:;">
             <i class="fa fa-group"></i>
             <span class="title">
               Student
             </span>
-            <span class="arrow ">
-            </span>
+            <!--<span class="arrow "></span>-->
           </a>
           <ul class="sub-menu">
-            <li>
+            <li class="" data-menu-item="index">
               <a href="<?php echo base_url();?>index.php/student/index">
                 <span class="badge badge-danger">
                   new
@@ -122,22 +108,21 @@
           </ul>
         </li>
 
-        <li class="">
+        <li class="" data-menu="fees">
           <a href="javascript:;">
             <i class="fa fa-dollar"></i>
             <span class="title">
               Fees
             </span>
-            <span class="arrow ">
-            </span>
+            <!--<span class="arrow "></span>-->
           </a>
           <ul class="sub-menu">
-            <li>
+            <li  class="" data-menu-item ="ddfsdfs">
               <a href="#">
                 Fee Types
               </a>
             </li>
-            <li>
+            <li  class="" data-menu-item ="asdfsdd">
               <a href="#">
                 Manage Fee
               </a>
@@ -145,22 +130,21 @@
           </ul>
         </li>
 
-        <li class="">
+        <li class="" data-menu="expense">
           <a href="javascript:;">
             <i class="fa fa-money"></i>
             <span class="title">
               Expense
             </span>
-            <span class="arrow ">
-            </span>
+            <!--<span class="arrow "></span>-->
           </a>
           <ul class="sub-menu">
-            <li>
+            <li class="" data-menu-item ="ddsd">
               <a href="#">
                 Expense Types
               </a>
             </li>
-            <li>
+            <li class="" data-menu-item ="dd">
               <a href="#">
                 Manage Expense
               </a>
@@ -170,34 +154,20 @@
 
         
 
-        <li class="">
+        <li id="lnkReport" class="" data-menu="report">
           <a href="javascript:;">
             <i class="fa fa-table"></i>
             <span class="title">
               Reports
             </span>
-            <span class="arrow ">
-            </span>
+            <!--<span class="arrow "></span>-->
           </a>
           <ul class="sub-menu">
-            <li>
-              <a href="#">
-                <span class="title">
-                  Class
-                </span>
-                <span class="arrow ">
-                </span>
+            <li class="" data-menu-item ="attendance">
+              <a href="<?php echo base_url();?>index.php/report/attendance">
+                Attendances
               </a>
-              <ul class="sub-menu">
-                <li>
-                  <a href="<?php echo base_url();?>index.php/report/classes">
-                    Manage Class
-                  </a>
-                </li>
-              </ul>
-              
             </li>
-            
           </ul>
         </li>
       </ul>

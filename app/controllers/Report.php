@@ -17,8 +17,8 @@ class Report extends CI_Controller{
    * After a user logs in, show_main() is called and the main
    * application screen is set up.
    */
-  function classes() {
-    $this->load->view('report/class/class');
+  function attendance() {
+    $this->load->view('report/attendance/attendance');
   }
 
   function edit($id) {
