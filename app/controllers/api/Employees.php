@@ -63,8 +63,8 @@ class Employees extends REST_Controller
             $config['upload_path'] = './assets/resource/employees/';
             $config['allowed_types'] = 'png|jpg|jpeg|gif|bmp';
             $config['max_size'] = '2048000';
-            $config['max_width'] = '1024';
-            $config['max_height'] = '768';
+            /*$config['max_width'] = '1024';
+            $config['max_height'] = '768';*/
             $config['overwrite'] = TRUE;
             $config['encrypt_name'] = FALSE;
             $config['remove_spaces'] = TRUE;
