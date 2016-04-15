@@ -55,6 +55,36 @@ class Student_attendances extends REST_Controller {
         }
     }
 
+
+    function all_batch_students_pivot_get($batch_id = null, $from_date = null, $to_date = null)
+    {
+        $from_date =  date('Y-m-d', strtotime($this->get('from_date')));
+        $to_date =  date('Y-m-d', strtotime($this->get('to_date')));
+
+        //$this->response(array("status" => "false", "message" => "Invalid attendance date", "data" => $attendance_date));
+
+        if (is_null($batch_id) || $batch_id == 0) {
+            $this->response(array("status" => "false", "message" => "Invalid batch id", "data" => null));
+        }
+        else if (is_null($from_date) || is_null($to_date)) {
+            $this->response(array("status" => "false", "message" => "Invalid from-date or to-date", "data" => null));
+        }
+        else {
+            //Get logged school id
+            $school_id = $this->session->userdata('school_id');
+
+            $batch_students_pivot = $this->student_attendances_m->all_batch_students_pivot($school_id, $batch_id, $from_date, $to_date);
+
+            //$batch_students_summary = $this->student_attendances_m->all_batch_students_summary($school_id, $batch_id, $attendance_date);
+
+            $this->response(array(
+                "status" => "success"
+                , "message" => ""
+                //, "summary" =>$batch_students_summary
+                , "data" => $batch_students_pivot));
+        }
+    }
+
     function save_post()
     {
         //Get logged school id

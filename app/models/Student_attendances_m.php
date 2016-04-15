@@ -48,6 +48,20 @@ class Student_attendances_m extends CI_Model
     }
 
 
+    function all_batch_students_pivot($school_id, $batch_id, $from_date, $to_date)
+    {
+        $sql = "Call Student_attendance_pivot(?, ?, ?, ?)";
+
+        $query = $this->db->query($sql, array($school_id, $batch_id, $from_date, $to_date));
+
+        $batch_students_pivot = $query->result();
+
+        if (is_array($batch_students_pivot) && count($batch_students_pivot) > 0) {
+            return $batch_students_pivot;
+        }
+        return null;
+    }
+    
 
 
     function save($school_id, $student_attendance)

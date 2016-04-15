@@ -226,7 +226,7 @@ CREATE TABLE `batch_students` (
 	CONSTRAINT `fk_batch_students_student_id` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`),
   -- KEY `fk_batch_students_school_id` (`school_id`),
 	CONSTRAINT `fk_batch_students_school_id` FOREIGN KEY (`school_id`) REFERENCES `schools` (`school_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `student_attendances` (
