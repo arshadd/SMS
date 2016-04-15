@@ -107,7 +107,25 @@
             </li>
           </ul>
         </li>
-
+        <li class="" data-menu="employeeattendance">
+          <a href="javascript:;">
+            <i class="fa fa-female"></i>
+            <span class="title">
+              Attendance
+            </span>
+            <!--<span class="arrow "></span>-->
+          </a>
+          <ul class="sub-menu">
+            <li class="" data-menu-item ="index">
+              <a href="<?php echo base_url();?>index.php/employeeattendance/index">
+              <span class="badge badge-succcess">
+                new
+              </span>
+                Employee Attendance
+              </a>
+            </li>
+          </ul>
+        </li>
         <li class="" data-menu="fees">
           <a href="javascript:;">
             <i class="fa fa-dollar"></i>
