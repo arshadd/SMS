@@ -121,7 +121,7 @@
               <span class="badge badge-succcess">
                 new
               </span>
-                Employee Attendance
+                Employee
               </a>
             </li>
           </ul>
