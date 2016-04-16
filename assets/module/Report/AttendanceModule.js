@@ -4,7 +4,7 @@ var AttendanceModule = function () {
     var student = $('#student');
     var employee = $('#employee');
 
-    var type = $('#type');
+    var ReportType = $('#type');
 
     var loader = $("#Form_Report #loader");
     loader.hide();
@@ -12,11 +12,19 @@ var AttendanceModule = function () {
     var class_id =0;
     var batch_id =0;
 
-    var ClassFld = $('#Form_Report #class_id');
-    var BatchFld = $('#Form_Report #batch_id');
     var ReportRange = $('#Form_Report #reportrange');
 
-    var loadGridUrl = baseApiUrl + "student_attendances/all_batch_students_pivot/";
+
+    //Batch Student report
+    var ClassFld = $('#Form_Report #class_id');
+    var BatchFld = $('#Form_Report #batch_id');
+    var loadGrid_Batch_Students_Url = baseApiUrl + "student_attendances/all_batch_students_pivot/";
+
+
+
+    //Student report
+    var StudentFld = $('#Form_Report #student_id');
+    var load_Student_Url = baseApiUrl + "student_attendances/all_students_pivot/";
 
     //--------------------Form Validation Functions-----------------------//
 
@@ -36,16 +44,20 @@ var AttendanceModule = function () {
             errorElement: 'span', //default input error message container
             errorBatch: 'help-block', // default input error message batch
             focusInvalid: false, // do not focus the last invalid input
-            ignore: "",
+            ignore: ".ignore",
             rules: {
 
                 //Personal Info
-                class_id: {
+                /*class_id: {
                     required: true
                 },
                 batch_id: {
                     required: true
                 },
+
+                student_id: {
+                    required: true
+                },*/
             },
 
             invalidHandler: function (event, validator) { //display error alert on form submit
@@ -85,9 +97,33 @@ var AttendanceModule = function () {
     //--------------------End Form Validation Functions-----------------------//
 
      //--------------------Dropdown Functions-----------------------//
+    ReportType.on('change', function(){
+        var value = $(this).val();
+        //alert('d'+value)
+
+        $('.batch-class-selection').hide();
+        $('.student-selection').hide();
+
+        if(value == "class"){
+            $('.batch-class-selection').show();
+
+        }else if(value == "student"){
+
+            $('.student-selection').show();
+        }else if(value == "employee"){
+
+        }
+        //alert(value);
+        //fillDropDownBatches();
+    });
+
     function loadAll() {
         //Todo
         fillDropDownClasses();
+
+        fillDropDownStudents();
+
+        ReportType.change();
     }
     ClassFld.on('change', function(){
         class_id = ClassFld.val();
@@ -114,7 +150,6 @@ var AttendanceModule = function () {
             }
         });
     }
-
     function fillDropDownBatches() {
         var loadDDUrl = baseApiUrl + "batches/all_class_batches/"+class_id;
 
@@ -136,27 +171,50 @@ var AttendanceModule = function () {
         });
     }
 
+    function fillDropDownStudents() {
+
+        var loadDDUrl = baseApiUrl + "students/all_students";
+
+        StudentFld.empty();
+        StudentFld.append($("<option     />").val('').text("Select student"));
+        var url = loadDDUrl;
+        $.ajax({
+            url: url,
+            accepts: 'application/json',
+            cache: true,
+            type: 'GET',
+            dataType: 'jsonp',
+            success: function (result) {
+                // Handle the complete event
+                $.each(result.data, function () {
+                    StudentFld.append($("<option />").val(this.student_id).text(this.class_name +' ('+this.batch_name+') '+this.class_roll_no+' '+ this.full_name));
+                });
+            }
+        });
+    }
+
     //--------------------End Dropdown Functions-----------------------//
     
 
     //--------------------Other Functions-----------------------//
-
-
     function generateReport() {
         debugger;
 
         loader.show();
 
-
         hideAll();
 
-        if (type.val() == "class") {
+        if (ReportType.val() == "class") {
             classes.show();
-            generateClassAttendanceReport();
+            generateBatchStudentsAttendanceReport();
+        }
+        if (ReportType.val() == "student") {
+            student.show();
+            generateStudentsAttendanceReport();
         }
     }
 
-    function generateClassAttendanceReport(){
+    function generateBatchStudentsAttendanceReport(){
         debugger;
 
         $("#ClassAttendanceGrid").empty();
@@ -165,7 +223,7 @@ var AttendanceModule = function () {
         var from_date = dates[0];// ReportRange.start();// '2016-04-01';
         var to_date = dates[1];// ReportRange.end();//'2016-04-30';
 
-        var url = loadGridUrl + batch_id + '?from_date=' + from_date + '&to_date=' + to_date;
+        var url = loadGrid_Batch_Students_Url + batch_id + '?from_date=' + from_date + '&to_date=' + to_date;
 
 
         var className= $('#Form_Report #class_id option:selected').text();
@@ -213,8 +271,67 @@ var AttendanceModule = function () {
             },
         });
     }
-    hideAll();
 
+    function generateStudentsAttendanceReport(){
+        debugger;
+
+        $("#StudentAttendanceGrid").empty();
+        var dates = $('#reportrange span').html().split('-');
+
+        var student_id = StudentFld.val();
+
+        var from_date = dates[0];// ReportRange.start();// '2016-04-01';
+        var to_date = dates[1];// ReportRange.end();//'2016-04-30';
+
+        var url = load_Student_Url + student_id + '?from_date=' + from_date + '&to_date=' + to_date;
+
+
+        var className= $('#Form_Report #class_id option:selected').text();
+        var batchName= $('#Form_Report #batch_id option:selected').text();
+
+        //alert(url);
+
+        $.ajax({
+            url: url,
+            accepts: 'application/json',
+            cache: false,
+            type: 'GET',
+            dataType: 'jsonp',
+            success : function(result){
+                loader.hide();
+
+                //Show summary
+                $('#StudentAttendanceSummaryGrid .class_name').text(className+', '+batchName);
+                $('#StudentAttendanceSummaryGrid .date_ranges').text("From :"+from_date+", To :"+to_date);
+
+                debugger;
+                var tableHeaders="";
+                var columns = result.data[0];
+                $.each(columns, function (i, val) {
+                    //debugger;
+                    tableHeaders += "<th>" + i + "</th>";
+                });
+
+                var tableBody="";
+
+                $.each(result.data, function (i, val) {
+                    tableBody +="<tr>";
+
+                    debugger;
+                    $.each(result.data[i], function (j, val2) {
+                        val2 = val2==null?'':val2;
+
+                        tableBody += "<td>" + val2 + "</td>";
+                    });
+                    tableBody +="</tr>";
+                });
+
+
+                $("#StudentAttendanceGrid").append('<table id="displayTable" class="table table-striped table-advance2 table-bordered table-hover"><thead><tr>' + tableHeaders + '</tr></thead><tbody>'+ tableBody +'</tbody></table>');
+            },
+        });
+    }
+    
     function hideAll() {
         classes.hide();
         student.hide();
@@ -267,38 +384,16 @@ var AttendanceModule = function () {
         //Set the initial state of the picker label
         $('#reportrange span').html(moment().subtract('days', 29).format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
     }
-
-   /* var init = function () {
-        $('#btnGenerateReport').click(function () {
-
-            hideAll();
-
-            if (type.val() == "class") {
-                classes.show();
-                search();
-            }
-
-            if (type.val() == "student") {
-                student.show();
-            }
-
-            if (type.val() == "employee") {
-                employee.show();
-
-            }
-        });
-    }*/
     //--------------------End Other Functions-----------------------//
 
 
     return {
         //main function to initiate the module
         init: function () {
+            hideAll();
             loadAll();
             handleDateRange();
-            hideAll();
             handleValidation();
-
         }
     };
 }();

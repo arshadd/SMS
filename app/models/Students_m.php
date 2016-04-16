@@ -4,7 +4,7 @@ class Students_m extends CI_Model
 {
     function all_students($school_id)
     {
-        $this->db->select('students.*, batches.name as batch_name, classes.class_id, classes.name as class_name');
+        $this->db->select('students.*, concat(students.first_name," ", students.middle_name, " ", students.last_name) as full_name, batches.name as batch_name, classes.class_id, classes.name as class_name');
         $this->db->from('students');
         $this->db->join('batches', 'batches.batch_id = students.batch_id');
         $this->db->join('classes', 'classes.class_id = batches.class_id');
@@ -24,7 +24,7 @@ class Students_m extends CI_Model
 
     function all_batch_students($school_id, $batch_id)
     {
-        $this->db->select('students.*, batches.name as batch_name, classes.class_id, classes.name as class_name');
+        $this->db->select('students.*, concat(students.first_name," ", students.middle_name, " ", students.last_name) as full_name, batches.name as batch_name, classes.class_id, classes.name as class_name');
         $this->db->from('students');
         $this->db->join('batches', 'batches.batch_id = students.batch_id');
         $this->db->join('classes', 'classes.class_id = batches.class_id');
@@ -46,7 +46,7 @@ class Students_m extends CI_Model
 
     function find_student($student_id)
     {
-        $this->db->select('students.*, batches.name as batch_name, classes.class_id, classes.name as class_name');
+        $this->db->select('students.*, concat(students.first_name," ", students.middle_name, " ", students.last_name) as full_name, batches.name as batch_name, classes.class_id, classes.name as class_name');
         $this->db->from('students');
         $this->db->join('batches', 'batches.batch_id = students.batch_id');
         $this->db->join('classes', 'classes.class_id = batches.class_id');
