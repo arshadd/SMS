@@ -169,7 +169,7 @@ CREATE TABLE `students` (
 	`middle_name` varchar(20) DEFAULT NULL,
 	`last_name` varchar(20) DEFAULT NULL,
 
-  `batch_id` int(11) NOT NULL,
+  `batch_id` int(11) NULL, -- Allow null
 	`enrollment_date` datetime DEFAULT NULL,
 
 	`date_of_birth` datetime DEFAULT NULL,
@@ -281,10 +281,25 @@ CREATE TABLE `employee_attendances` (
 
 
 
+CREATE TABLE `employees_subjects` (
+  `employees_subjects_id` int(11) NOT NULL AUTO_INCREMENT,
 
+  `employee_id` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
 
+  PRIMARY KEY (`employees_subjects_id`),
 
+  KEY `fk_employees_subjects_school_id` (`school_id`),
+  CONSTRAINT `fk_employees_subjects_school_id` FOREIGN KEY (`school_id`) REFERENCES `schools` (`school_id`),
 
+  KEY `fk_employees_subjects_subject_id` (`subject_id`),
+  CONSTRAINT `fk_employees_subjects_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`subject_id`),
+
+  KEY `fk_employees_subjects_employee_id` (`school_id`),
+  CONSTRAINT `fk_employees_subjects_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`)
+
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 
 
 

@@ -22,6 +22,8 @@
             <table id="BatchGrid" class="table table-striped table-bordered table-hover table-full-width">
               <thead>
                 <tr>
+                  <th class='hidden-xs'>Class Name</th>
+
                   <th class='hidden-xs'>Batch Name</th>
                   <th class='hidden-xs'>Start Date</th>
                   <th class='hidden-xs'>End Date</th>
@@ -56,7 +58,7 @@
     <h4 class="modal-title">Confirm Delete</h4>
   </div>
   <div class="modal-body">
-    <form id="Form_Batch" class="form-horizontal" method="post">
+    <form class="form-horizontal" method="post">
       <div class="form-body">
         <div class="alert alert-info display">
               <span>

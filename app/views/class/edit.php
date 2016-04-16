@@ -83,7 +83,7 @@
                     <i class="fa fa-sitemap"></i> Subjects
                   </a>
                 </li>
-                <li>
+                <li class="active">
                   <a href="#tab_1_5" data-toggle="tab">
                     <i class="fa fa-female"></i> Teachers
                   </a>
@@ -105,7 +105,7 @@
                     <i class="fa fa-calendar"></i> Timetable
                   </a>
                 </li>
-                <li class="active">
+                <li class="">
                   <a href="#tab_1_9" data-toggle="tab">
                     <i class="fa fa-thumb-tack"></i> Attendance
                   </a>
@@ -131,9 +131,9 @@
                 </div>
 
                 <!--end tab-pane-->
-                <div class="tab-pane" id="tab_1_5">
+                <div class="tab-pane active" id="tab_1_5">
 
-<!--                  --><?php /*include('_teacherSubject.php');*/?>
+                  <?php include('_teacherSubject.php');?>
 
                 </div>
                 
@@ -159,7 +159,7 @@
 
                 </div>
                 <!--end tab-pane-->
-                <div class="tab-pane active" id="tab_1_9">
+                <div class="tab-pane " id="tab_1_9">
 
                   <?php include('_attendance.php');?>
 
@@ -201,10 +201,12 @@
     $pageJsScript  = array(
 
       '<script type="text/javascript" src="' . base_url() . 'assets/module/util.js" ></script>'
-      ,'<script type="text/javascript" src="' . base_url() . 'assets/module/ClassModule.js" ></script>'
+      //,'<script type="text/javascript" src="' . base_url() . 'assets/module/ClassModule.js" ></script>'
+
       ,'<script type="text/javascript" src="' . base_url() . 'assets/module/BatchModule.js" ></script>'
-      /*,'<script type="text/javascript" src="' . base_url() . 'assets/module/SectionModule.js" ></script>'*/
       ,'<script type="text/javascript" src="' . base_url() . 'assets/module/SubjectModule.js" ></script>'
+      ,'<script type="text/javascript" src="' . base_url() . 'assets/module/TeacherModule.js" ></script>'
+
       ,'<script type="text/javascript" src="' . base_url() . 'assets/module/ClassStudentModule.js" ></script>'
       ,'<script type="text/javascript" src="' . base_url() . 'assets/module/ClassAttendanceModule.js" ></script>'
 
@@ -215,12 +217,10 @@
 
       'BatchModule.init();'
       ,'SubjectModule.init();'
+      ,'TeacherModule.init();'
+
       ,'ClassStudentModule.init();'
-
-
       ,'ClassAttendanceModule.init();'
-
-
     );
     
     include(VIEW_PATH.'footer.php');

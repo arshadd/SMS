@@ -4,10 +4,12 @@ class Batches_m extends CI_Model
 {
     function all_batches($school_id)
     {
+        $this->db->select('batches.*, classes.name as class_name');
         $this->db->from('batches');
-        $this->db->where('school_id', $school_id);
-        $this->db->where('is_active', true);
-        $this->db->order_by('created_at', 'desc');
+        $this->db->join('classes', 'classes.class_id = batches.class_id');
+        $this->db->where('batches.school_id', $school_id);
+        $this->db->where('batches.is_active', true);
+        $this->db->order_by('batches.created_at', 'desc');
 
         $batches = $this->db->get()->result();
 
@@ -20,11 +22,11 @@ class Batches_m extends CI_Model
 
     function all_class_batches($school_id, $class_id)
     {
+        $this->db->select('batches.*, classes.name as class_name');
         $this->db->from('batches');
-        $this->db->where('school_id', $school_id);
-        $this->db->where('class_id', $class_id);
-        $this->db->where('is_active', true);
-        $this->db->order_by('created_at', 'desc');
+        $this->db->join('classes', 'classes.class_id = batches.class_id');
+        $this->db->where('batches.school_id', $school_id);
+        $this->db->where('batches.class_id', $class_id);
 
         $batches = $this->db->get()->result();
 
@@ -37,10 +39,12 @@ class Batches_m extends CI_Model
 
     function find_batch($school_id, $batch_id)
     {
+        $this->db->select('batches.*, classes.name as class_name');
         $this->db->from('batches');
-        $this->db->where('batch_id', $batch_id);
-        $this->db->where('is_active', true);
-
+        $this->db->join('classes', 'classes.class_id = batches.class_id');
+        $this->db->where('batches.school_id', $school_id);
+        $this->db->where('batches.batch_id', $batch_id);
+        
         $batch = $this->db->get()->result();
 
         if (is_array($batch) && count($batch) > 0) {

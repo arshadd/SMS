@@ -80,8 +80,9 @@ function RadioCheckedValue(radioName) {
     }
 }
 
-/*
+
 $.fn.clearForm = function() {
+    debugger;
     return this.each(function() {
         var type = this.type, tag = this.tagName.toLowerCase();
         if (tag == 'form')
@@ -93,7 +94,7 @@ $.fn.clearForm = function() {
         else if (tag == 'select')
             this.selectedIndex = -1;
     });
-};*/
+};
 
 
 (function($) {

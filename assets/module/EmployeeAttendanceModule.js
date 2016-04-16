@@ -72,7 +72,7 @@ var EmployeeAttendanceModule = function () {
                 { data: null, render: function ( data, type, full, meta ) {
 
                     var name = "attendance_status_"+ data.employee_id;
-                    var employee_attendance = "employeeattendance_id_"+ data.employee_id;
+                    var employee_attendance = "employee_attendance_id_"+ data.employee_id;
                     var checked1 = "";
                     var checked2 = "";
                     var checked3 = "";
@@ -248,7 +248,7 @@ var EmployeeAttendanceModule = function () {
         var attendance_form = $('#Form_Attendance');
 
         //Get values
-        var student = attendance_form.serializefiles();
+        var employees = attendance_form.serializefiles();
 
         var url = saveUrl;
         $.ajax({
@@ -256,7 +256,7 @@ var EmployeeAttendanceModule = function () {
             accepts: 'application/json',
             cache: false,
             type: 'POST',
-            data : student,
+            data : employees,
             dataType: 'jsonp',
             processData: false,
             contentType: false,

@@ -102,19 +102,19 @@ include(VIEW_PATH . 'header.php');
                                     </div>
 
                                     <div class="form-group batch-class-selection">
-                                        <label class="control-label col-md-2">
+                                        <!--<label class="control-label col-md-2">
                                             Class:<span class="required">*</span>
                                         </label>
                                         <div class="col-md-2">
                                             <select id="class_id" name="class_id" class="form-control input-medium">
                                             </select>
-                                        </div>
+                                        </div>-->
 
                                         <label class="control-label col-md-2">
-                                            Batch:<span class="required">*</span>
+                                            Class / Batch:<span class="required">*</span>
                                         </label>
-                                        <div class="col-md-6">
-                                            <select id="batch_id" name="batch_id" class="form-control input-medium">
+                                        <div class="col-md-10">
+                                            <select id="batch_id" name="batch_id" class="form-control select2me input-medium">
                                             </select>
                                         </div>
                                     </div>

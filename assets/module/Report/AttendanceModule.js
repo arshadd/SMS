@@ -119,13 +119,13 @@ var AttendanceModule = function () {
 
     function loadAll() {
         //Todo
-        fillDropDownClasses();
+        fillDropDownBatches();
 
         fillDropDownStudents();
 
         ReportType.change();
     }
-    ClassFld.on('change', function(){
+    /*ClassFld.on('change', function(){
         class_id = ClassFld.val();
         fillDropDownBatches();
     });
@@ -149,9 +149,9 @@ var AttendanceModule = function () {
                 });
             }
         });
-    }
+    }*/
     function fillDropDownBatches() {
-        var loadDDUrl = baseApiUrl + "batches/all_class_batches/"+class_id;
+        var loadDDUrl = baseApiUrl + "batches/all_batches/";
 
         BatchFld.empty();
         BatchFld.append($("<option     />").val('').text("Select batch"));
@@ -165,7 +165,7 @@ var AttendanceModule = function () {
             success: function (result) {
                 // Handle the complete event
                 $.each(result.data, function () {
-                    BatchFld.append($("<option     />").val(this.batch_id).text(this.name));
+                    BatchFld.append($("<option     />").val(this.batch_id).text(this.class_name+' / '+this.name));
                 });
             }
         });

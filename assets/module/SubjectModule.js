@@ -27,8 +27,9 @@ var SubjectModule = function () {
     var loader = $("#Form_Subject #loader");
     loader.hide();
 
+    var loaderDelete = $("#mdlDeleteSubject #loader");
+    loaderDelete.hide();
 
-    
 
     var loadGridUrl = baseApiUrl + "subjects/all_batch_subjects/";
     var editUrl = baseApiUrl + "subjects/find_subject/";
@@ -282,14 +283,14 @@ var SubjectModule = function () {
     }
 
     function showPopup() {
-        $('#Form_Subject').trigger("reset");
+        $('#Form_Subject').clearForm();
         SubjectIdFld.val("0");
         $('#mdlCreateSubject .modal-title').html("Create Subject");
         ModalCreateSubject.modal('show');
     }
 
     function deleteData(id) {
-        loader.show();
+        loaderDelete.show();
         //var pathname = window.location.pathname;
 
         //var params = pathname.split('/');
@@ -313,7 +314,7 @@ var SubjectModule = function () {
             dataType: 'jsonp',
             success : function(result){
                 //debugger;
-                loader.hide();
+                loaderDelete.hide();
 
                 if(result.status == "success"){
                     /*var save_id = result.data.subject_id;

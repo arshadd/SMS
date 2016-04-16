@@ -20,6 +20,9 @@ var BatchModule = function () {
     var loader = $("#Form_Batch #loader");
     loader.hide();
 
+    var loaderDelete = $("#mdlDeleteBatch #loader");
+    loaderDelete.hide();
+
 
     var loadGridUrl = baseApiUrl + "batches/all_class_batches/";
     var editUrl = baseApiUrl + "batches/find_batch/";
@@ -45,8 +48,13 @@ var BatchModule = function () {
             /*language: {
                 emptyTable: "No records available - Got it?",
             },*/
+            "columnDefs": [
+                { "visible": false, "targets": 0 }
+            ],
+
             columns: [
                 //Table Column Header Collection
+                {data: "class_name"},
                 {data: "name"},
                 {
                     data: "start_date", render: function (data, type, row) {
@@ -69,6 +77,27 @@ var BatchModule = function () {
                 },
                 //{ data: "salary", render: $.fn.dataTable.render.number(',', '.', 0, '$') }
             ],
+
+            /*"fnDrawCallback": function ( settings ) {
+                console.log("hello");
+                var api = this.api();//Had to change this from this.api();
+                var rows = api.rows({page:'current'}).nodes(); // Giving an error
+                var last = null;
+
+                debugger;
+                api.column(0, {page:'current'} ).data().each( function ( group, i ) {
+
+                    //debugger;
+                    if (last !== group) {
+                        $(rows).eq(i).before(
+                            '<tr class="group"><td colspan="4">' + group + '</td></tr>'
+                        );
+
+                        last = group;
+                    }
+                });
+            },*/
+
         });
 
         jQuery('#BatchGrid_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
@@ -277,7 +306,7 @@ var BatchModule = function () {
     }
 
     function showPopup() {
-        $('#Form_Batch').trigger("reset");
+        $('#Form_Batch').clearForm();
         BatchIdFld.val("0");
 
         $('#mdlCreateBatch .modal-title').html("Create Batch");
@@ -286,7 +315,7 @@ var BatchModule = function () {
     }
 
     function deleteData(id) {
-        loader.show();
+        loaderDelete.show();
         //var pathname = window.location.pathname;
 
         //var params = pathname.split('/');
@@ -310,7 +339,7 @@ var BatchModule = function () {
             dataType: 'jsonp',
             success : function(result){
                 //debugger;
-                loader.hide();
+                loaderDelete.hide();
 
                 if(result.status == "success"){
                     /*var save_id = result.data.batch_id;

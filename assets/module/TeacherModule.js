@@ -1,178 +1,155 @@
 var TeacherModule = function () {
 
-    //Create Class
-    var Teacher = { TeacherId: 0, RegisterNumber: '', DateOfJoining: '', FirstName: '', LastName: '', DateOfBirth: '', Gender: '', BloodGroup: '', PlaceOfBirth: '', Nationality: '', RollNumber: '', Religion: '', PresentAddress: '', PermanentAddress: '', Country: '', State: '', City: '', Mobile: '', Phone: '', Email: '', Photo: '', GuardianName: '', GuardianRelation: '', GuardianEducation: '', GuardianOccupation: '', GuardianIncome: '', GuardianCountry: '', GuardianState: '', GuardianCity: '', GuardianPhone: '', GuardianEmail: '', GuardianMobile: '', FatherName: '', FatherMobile: '', FatherJob: '', MotherName: '', MotherMobile: '', MotherJob: '', Status: '' };
+    //Create Teacher
+    var Teacher = { subject_id:0, batch_id: 0, code:'', name: '', max_weekly_classes: '', credit_hours: ''};
 
     //Field Declaration Section
-    
-    var TeacherIdFld = $('#TeacherId');
-    var RegisterNumberFld = $('#RegisterNumber');
-    var DateOfJoiningFld = $('#DateOfJoining');
-    var FirstNameFld = $('#FirstName');
-    var LastNameFld = $('#LastName');
-    var DateOfBirthFld = $('#DateOfBirth');
 
-    var GenderFld = $('#Gender');
+    var TeacherIdFld = $('#Form_Teacher #subject_id');
+    var BatchIdFld = $('#Form_Teacher #batch_id');
 
-    var BloodGroupFld = $('#BloodGroup');
-    var PlaceOfBirthFld = $('#PlaceOfBirth');
-    var NationalityFld = $('#Nationality');
-    var ReligionFld = $('#Religion');
-    var PresentAddressFld = $('#PresentAddress');
-    var PermanentAddressFld = $('#PermanentAddress');
-    var PhotoFld = $('#Photo');
+    var CodeFld = $('#Form_Teacher #code');
+    var NameFld = $('#Form_Teacher #name');
+    var MaxWeeklyClassesFld = $('#Form_Teacher #max_weekly_classes');
+    var CreditHoursFld = $('#Form_Teacher #credit_hours');
+
+    var ClassFld = $('#Form_Teacher_Search #class_id')
+    var BatchFld = $('#Form_Teacher_Search #batch_id');
+    //Global
+    var class_id=0;
+    var batch_id=0;
 
 
-    var GuardianNameFld = $('#GuardianName');
-    var GuardianRelationFld = $('#GuardianRelation');
-    var GuardianOccupationFld = $('#GuardianOccupation');
-    var GuardianIncomeFld = $('#GuardianIncome');
-    var GuardianPhoneFld = $('#GuardianPhone');
-    var GuardianEmailFld = $('#GuardianEmail');
-    var GuardianMobileFld = $('#GuardianMobile');
+    var TeacherGrid = $('#TeacherGrid');
+    var ModalCreateTeacher = $('#mdlCreateTeacher');
+    var ModalDeleteTeacher = $('#mdlDeleteTeacher');
 
-    var FatherNameFld = $('#FatherName');
-    var FatherMobileFld = $('#FatherMobile');
-    var FatherJobFld = $('#FatherJob');
+    var loader = $("#Form_Teacher #loader");
+    loader.hide();
 
-    var MotherNameFld = $('#MotherName');
-    var MotherMobileFld = $('#MotherMobile');
-    var MotherJobFld = $('#MotherJob');
-
-    var StatusFld = $('#Status');
-    
-
-    var loadGridUrl = baseApiUrl + "Teacher/List";
-    var editUrl = baseApiUrl + "Teacher/Find/";
-    var saveUrl = baseApiUrl + "Teacher/Save";
-    var deleteUrl = baseApiUrl + "Teacher/Delete/";
-    var listUrl = baseAppUrl + "Teacher/List";
+    var loaderDelete = $("#mdlDeleteTeacher #loader");
+    loaderDelete.hide();
 
 
-    
+    var loadGridUrl = baseApiUrl + "subjects/all_batch_subjects/";
+    var editUrl = baseApiUrl + "subjects/find_subject/";
+    var saveUrl = baseApiUrl + "subjects/save";
+    var deleteUrl = baseApiUrl + "subjects/delete";
+    var listUrl = baseAppUrl + "subjects/index";
 
+
+    //--------------------Grid Functions-----------------------//
+    var dataTable = null;
+    var loadGrid = function (batch_id) {
+        //ShowSuccessMessage();
+        //debugger;
+        // var batch_id = BatchIdFld.val();
+
+        loadGridUrl = loadGridUrl + batch_id;
+        var dataSet = [];
+
+        dataTable = TeacherGrid.DataTable({
+            //dom: "Bfrtip",
+            ajax: loadGridUrl,
+            aaSorting: [], //disabled initial sorting
+            //bDestroy: true,
+
+            /*language: {
+             emptyTable: "No records available - Got it?",
+             },*/
+            columns: [
+                //Table Column Header Collection
+                {data: "code"},
+                {data: "name"},
+                {data: "max_weekly_classes"},
+                {data: "credit_hours"},
+                {
+                    data: null, render: function (data, type, row) {
+                    // Combine the first and last names into a single table field
+                    return '<a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.subject_id + '"><i class="fa fa-edit"></i> Edit</a>' +
+                        '| <a href="#" class="btn btn-default btn-xs purple deleteView" data-id="' + data.subject_id + '"><i class="fa fa-trash-o"></i> Delete</a>';
+                }
+                },
+                //{ data: "salary", render: $.fn.dataTable.render.number(',', '.', 0, '$') }
+            ],
+        });
+
+        jQuery('#TeacherGrid_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
+        jQuery('#TeacherGrid_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
+        jQuery('#TeacherGrid_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
+    }
+
+    // Edit record
+    TeacherGrid.on( 'click', 'a.editView', function (e) {
+        //alert('my edit'+id);
+
+        var id = $(this).data('id');
+        edit(id);
+        $('#mdlCreateTeacher .modal-title').html("Edit Teacher");
+        ModalCreateTeacher.modal('show');
+    });
+
+    // Delete record
+    TeacherGrid.on( 'click', 'a.deleteView', function (e) {
+        var id = $(this).data('id');
+
+        showDelete(id);
+        ModalDeleteTeacher.modal('show');
+
+        //deleteData(id);
+    });
+
+    var reloadGrid = function(){
+        //debugger;
+        dataTable.ajax.reload(null, false);
+    }
+    //--------------------End Grid Functions-----------------------//
+
+
+    //--------------------Form Validation Functions-----------------------//
     var handleValidation = function () {
         //load All dropdowns
         //loadAll();
-        //alert('dd')
-        // for more info visit the official plugin documentation: 
+
+        // for more info visit the official plugin documentation:
         // http://docs.jquery.com/Plugins/Validation
-        
+        //debugger;
+        var form1 = $('#Form_Teacher');
+        var error1 = $('.alert-danger', form1);
+        var success1 = $('.alert-success', form1);
 
-        var form = $('#Form_Teacher');
-        var error = $('.alert-danger', form);
-        var success = $('.alert-success', form);
-
-        form.validate({
-            doNotHideMessage: true, //this option enables to show the error/success messages on tab switch.
+        if (form1.validate == null) return;
+        //debugger;
+        form1.validate({
             errorElement: 'span', //default input error message container
-            errorClass: 'help-block', // default input error message class
+            errorTeacher: 'help-block', // default input error message class
             focusInvalid: false, // do not focus the last invalid input
+            ignore: "",
             rules: {
-
-                //Personal Info
-                RegisterNumber: {
-                    required:true
-                },
-                DateOfJoining: {
-                    required: true
-                }, 
-                FirstName: {
-                    required: true
-                }, 
-                LastName: {
-                    required: true
-                }, 
-                DateOfBirth: {
-                    required: true
-                }, 
-                Gender: {
-                    required: true
-                }, 
-                BloodGroup: {
-                    required: true
-                }, 
-                PlaceOfBirth: {
-                    required: true
-                }, 
-                Nationality: {
-                    required: true
-                }, 
-                Religion: {
-                    required: true
-                }, 
-                PresentAddress: {
-                    required: true
-                }, 
-                PermanentAddress: {
-                    required: true
-                }, 
-                Photo: {
-                    required: true
-                }, 
-
-                //Guardian Info
-                GuardianName: {
-                    required:true
-                },
-                GuardianRelation: {
-                    required: true
-                }, 
-                GuardianOccupation: {
-                    required: true
-                }, 
-                GuardianIncome: {
-                    required: true
-                }, 
-                GuardianPhone: {
-                    required: true
-                }, 
-                GuardianMobile: {
-                    required: true
-                }, 
-                FatherName: {
+                //Field Validation Rule
+                code: {
                     required: true
                 },
-                FatherMobile: {
+                name: {
                     required: true
-                }, 
-
-                MotherName: {
+                },
+                max_weekly_classes: {
                     required: true
-                }, 
-                MotherMobile: {
+                },
+                credit_hours: {
                     required: true
                 }
             },
 
-            messages: { // custom messages for radio buttons and checkboxes
-                'payment[]': {
-                    required: "Please select at least one option",
-                    minlength: jQuery.format("Please select at least one option")
-                }
-            },
-
-            errorPlacement: function (error, element) { // render error placement for each input type
-                if (element.attr("name") == "gender") { // for uniform radio buttons, insert the after the given container
-                    error.insertAfter("#form_gender_error");
-                } else if (element.attr("name") == "payment[]") { // for uniform radio buttons, insert the after the given container
-                    error.insertAfter("#form_payment_error");
-                } else if (element.attr("type") == "file") { // for uniform radio buttons, insert the after the given container
-                    error.insertAfter("#fileupload");
-                } else {
-                    error.insertAfter(element); // for other inputs, just perform default behavior
-                }
-            },
-
-            invalidHandler: function (event, validator) { //display error alert on form submit   
-                success.hide();
-                error.show();
-                App.scrollTo(error, -200);
+            invalidHandler: function (event, validator) { //display error alert on form submit
+                success1.hide();
+                error1.show();
+                App.scrollTo(error1, -200);
             },
 
             highlight: function (element) { // hightlight error inputs
                 $(element)
-                    .closest('.form-group').removeClass('has-success').addClass('has-error'); // set error class to the control group
+                    .closest('.form-group').addClass('has-error'); // set error class to the control group
             },
 
             unhighlight: function (element) { // revert the change done by hightlight
@@ -181,170 +158,40 @@ var TeacherModule = function () {
             },
 
             success: function (label) {
-                if (label.attr("for") == "gender" || label.attr("for") == "payment[]") { // for checkboxes and radio buttons, no need to show OK icon
-                    label
-                        .closest('.form-group').removeClass('has-error').addClass('has-success');
-                    label.remove(); // remove error label here
-                } else { // display success icon for other inputs
-                    label
-                        .addClass('valid') // mark the current input as valid and display OK icon
-                    .closest('.form-group').removeClass('has-error').addClass('has-success'); // set success class to the control group
-                }
+                label
+                    .closest('.form-group').removeClass('has-error'); // set success class to the control group
             },
+
             submitHandler: function (form) {
-                success.show();
-                error.hide();
-                //add here some ajax code to submit your form or just call form.submit() if you want to submit the form without ajax
+                success1.show();
+                error1.hide();
+                //form.submit();
+
+                //Save data
+                save();
             }
         });
-        
+
         //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.
-        $('.select2me', form).change(function () {
-            form.validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
+        $('.select2me', form1).change(function () {
+            form1.validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
         });
-
-        var displayConfirm = function () {
-            $('#tab3 .form-control-static', form).each(function () {
-                var input = $('[name="' + $(this).attr("data-display") + '"]', form);
-                if (input.is(":text") || input.is("textarea")) {
-                    $(this).html(input.val());
-                } else if (input.is("select")) {
-                    $(this).html(input.find('option:selected').text());
-                } else if (input.is(":radio") && input.is(":checked")) {
-                    $(this).html(input.attr("data-title"));
-                } else if ($(this).attr("data-display") == 'payment') {
-                    var payment = [];
-                    $('[name="payment[]"]').each(function () {
-                        payment.push($(this).attr('data-title'));
-                    });
-                    $(this).html(payment.join("<br>"));
-                }
-            });
-        }
-
-        var handleTitle = function (tab, navigation, index) {
-            var total = navigation.find('li').length;
-            var current = index + 1;
-            // set wizard title
-            $('.step-title', $('#Form_Teacher_Wizard')).text('Step ' + (index + 1) + ' of ' + total);
-            // set done steps
-            jQuery('li', $('#Form_Teacher_Wizard')).removeClass("done");
-            var li_list = navigation.find('li');
-            for (var i = 0; i < index; i++) {
-                jQuery(li_list[i]).addClass("done");
-            }
-
-            if (current == 1) {
-                $('#Form_Teacher_Wizard').find('.button-previous').hide();
-            } else {
-                $('#Form_Teacher_Wizard').find('.button-previous').show();
-            }
-
-            if (current >= total) {
-                $('#Form_Teacher_Wizard').find('.button-next').hide();
-                $('#Form_Teacher_Wizard').find('.button-submit').show();
-                displayConfirm();
-            } else {
-                $('#Form_Teacher_Wizard').find('.button-next').show();
-                $('#Form_Teacher_Wizard').find('.button-submit').hide();
-            }
-            App.scrollTo($('.page-title'));
-        }
-
-        // default form wizard
-        $('#Form_Teacher_Wizard').bootstrapWizard({
-            'nextSelector': '.button-next',
-            'previousSelector': '.button-previous',
-            onTabClick: function (tab, navigation, index, clickedIndex) {
-                success.hide();
-                error.hide();
-                if (form.valid() == false) {
-                    return false;
-                }
-                handleTitle(tab, navigation, clickedIndex);
-            },
-            onNext: function (tab, navigation, index) {
-                success.hide();
-                error.hide();
-
-                if (form.valid() == false) {
-                    return false;
-                }
-
-                handleTitle(tab, navigation, index);
-            },
-            onPrevious: function (tab, navigation, index) {
-                success.hide();
-                error.hide();
-
-                handleTitle(tab, navigation, index);
-            },
-            onTabShow: function (tab, navigation, index) {
-                var total = navigation.find('li').length;
-                var current = index + 1;
-                var $percent = (current / total) * 100;
-                $('#Form_Teacher_Wizard').find('.progress-bar').css({
-                    width: $percent + '%'
-                });
-            }
-        });
-
-        $('#Form_Teacher_Wizard').find('.button-previous').hide();
-        $('#Form_Teacher_Wizard .button-submit').click(function () {
-            
-            save();
-
-            //alert('Finished! Hope you like it :)');
-        }).hide();
     }
 
-
     function save() {
-       
-        var student = Teacher;
-        debugger;
+        loader.show();
+
+        var subject = Teacher;
+        // debugger;
 
         //Get values
-        
-        student.TeacherId = TeacherIdFld.val();
-        student.RegisterNumber = RegisterNumberFld.val();
-        student.DateOfJoining = DateOfJoiningFld.val();
-        student.FirstName = FirstNameFld.val();
-        student.LastName = LastNameFld.val();
-        student.DateOfBirth = DateOfBirthFld.val();
 
-        //Get checked value
-        //student.Gender = RadioCheckedValue('Gender');
-        student.Gender = GenderFld.val();
-
-
-
-        student.BloodGroup = BloodGroupFld.val();
-        student.PlaceOfBirth = PlaceOfBirthFld.val();
-        student.Nationality = NationalityFld.val();
-        student.Religion = ReligionFld.val();
-        student.PresentAddress = PresentAddressFld.val();
-        student.PermanentAddress = PermanentAddressFld.val();
-        student.Photo = PhotoFld.val();
-
-        student.GuardianName = GuardianNameFld.val();
-        student.GuardianRelation = GuardianRelationFld.val();
-        student.GuardianOccupation = GuardianOccupationFld.val();
-        student.GuardianIncome = GuardianIncomeFld.val();
-
-        student.GuardianPhone = GuardianPhoneFld.val();
-        student.GuardianEmail = GuardianEmailFld.val();
-        student.GuardianMobile = GuardianMobileFld.val();
-
-        student.FatherName = FatherNameFld.val();
-        student.FatherMobile = FatherMobileFld.val();
-        student.FatherJob = FatherJobFld.val();
-
-        student.MotherName = MotherNameFld.val();
-        student.MotherMobile = MotherMobileFld.val();
-        student.MotherJob = MotherJobFld.val();
-
-        student.Status = StatusFld.val();
+        subject.subject_id = TeacherIdFld.val();
+        subject.batch_id = fetchBatchId();
+        subject.code = CodeFld.val();
+        subject.name = NameFld.val();
+        subject.max_weekly_classes =MaxWeeklyClassesFld.val();
+        subject.credit_hours = CreditHoursFld.val()
 
         var url = saveUrl;
         $.ajax({
@@ -352,34 +199,36 @@ var TeacherModule = function () {
             accepts: 'application/json',
             cache: false,
             type: 'POST',
-            data : student,
+            data : subject,
             dataType: 'jsonp',
-            complete: function (result) {
-                // Handle the complete event
-                var obj = JSON.parse(result.responseText);
-                debugger;
-                if (obj.Success == true) {
-                    window.location = listUrl + "?message=Teacher Information Saved";
-                } else {
-                    ShowMessage("error", obj.Message);
-                }
-            }
-        });
-    }
+            success : function(result){
+                // debugger;
+                loader.hide();
 
-    function loadAll() {
-        //Todo
-        
+                if(result.status == "success"){
+                    /*var save_id = result.data.subject_id;
+                     //alert(save_id);
+                     TeacherIdFld.val(save_id);*/
+
+                    reloadGrid();
+                    ModalCreateTeacher.modal('hide');
+                }else {
+                    ShowMessage("error", result.message);
+                }
+                //parent.location.reload();
+                //alert('success'+result);
+            },
+        });
     }
 
     function ShowMessage(type, message){
         if (message == 'undefined') return;
 
-        var error = $('.alert-danger');
-        var success = $('.alert-success');
+        var error = $('#mdlCreateTeacher .alert-danger');
+        var success = $('#mdlCreateTeacher .alert-success');
 
         message = '<button data-close="alert" class="close"></button>'+ message;
-        
+
         if (type == "error") {
             error.html(message);
             error.show();
@@ -388,77 +237,8 @@ var TeacherModule = function () {
             success.html(message);
             success.show();
         }
-        
+
     }
-
-    function ShowSuccessMessage() {
-        var message = decodeURIComponent(getUrlVars()["message"]);
-        ShowMessage("success", message);
-    }
-   
-    var loadGrid = function () {
-        ShowSuccessMessage();
-
-        var dataSet = [];
-
-        var newTable = $('#TeacherGrid').DataTable({
-            //dom: "Bfrtip",
-            ajax: loadGridUrl,
-            columns: [
-                //Table Column Header Collection
-                
-                { data: "RegisterNumber", defaultContent: "" },
-                { data: "FirstName", defaultContent: "" },
-                { data: "LastName", defaultContent: "" },
-                { data: "Gender", defaultContent: "" },
-                { data: "BloodGroup", defaultContent: "" },
-                { data: "GuardianName", defaultContent: "" },
-                { data: "GuardianMobile", defaultContent: "" },
-                { data: "FatherMobile", defaultContent: "" },
-                { data: "Status", defaultContent: "" },
-                {
-                    data: null, render: function (data, type, row) {
-                        // Combine the first and last names into a single table field
-                        //return '<a href="Edit/' + data.Teacher Id + '" class="btn btn-default btn-xs purple"><i class="fa fa-edit"></i> Edit</a>' +
-                        //    '| <a href="#" class="btn btn-default btn-xs black"><i class="fa fa-trash-o"></i> Delete</a>';
-
-                        return '<a href="Edit/' + data.TeacherId + '" class="btn btn-default btn-xs purple"><i class="fa fa-edit"></i> Edit</a>';
-
-                        //return '<a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.TeacherId + '"><i class="fa fa-edit"></i> Edit</a>';
-                    }
-                },
-                //{ data: "salary", render: $.fn.dataTable.render.number(',', '.', 0, '$') }
-            ],
-            "fnInitComplete": function () {
-                $(".editView").click(function () {
-                    var id = $(this).data('id');
-                    edit(id);
-                    $('.modal-title').html("Edit Teacher");
-                    $('#mdlCreateTeacher').modal('show');
-                });
-            }
-        });
-
-        jQuery('#TeacherGrid_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
-        jQuery('#TeacherGrid_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
-        jQuery('#TeacherGrid_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
-    }
-
-    var loadGrid2 = function () {
-        ShowSuccessMessage();
-
-        var dataSet = [];
-
-        var newTable = $('#TeacherGrid').DataTable({
-            filter: false
-            ,lengthChange:false
-        });
-
-        jQuery('#TeacherGrid_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
-        jQuery('#TeacherGrid_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
-        jQuery('#TeacherGrid_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
-    }
-
 
     var edit = function (id) {
         //alert(id);
@@ -471,112 +251,218 @@ var TeacherModule = function () {
             type: 'GET',
             dataType: 'jsonp',
             success: function (data) {
-                //debugger;
-                showEdit(data.data);
+                // debugger;
+                showEdit(data.data[0]);
             },
             fail: function (result) {
             }
         });
     }
 
-    
-
     function showEdit(data) {
         if (data == null) return;
-        
+
         //Set values
-        
-        TeacherIdFld.val(data.TeacherId);
-        RegisterNumberFld.val(data.RegisterNumber);
-
-        DateOfJoiningFld.val(GetDateFormatOnly(data.DateOfJoining));
-
-        FirstNameFld.val(data.FirstName);
-        LastNameFld.val(data.LastName);
-
-        DateOfBirthFld.val(GetDateFormatOnly(data.DateOfBirth));
-
-        GenderFld.select2("val", data.Gender);
-        BloodGroupFld.select2("val", data.BloodGroup);
-
-
-        PlaceOfBirthFld.val(data.PlaceOfBirth);
-        NationalityFld.val(data.Nationality);
-        ReligionFld.val(data.Religion);
-        PresentAddressFld.val(data.PresentAddress);
-        PermanentAddressFld.val(data.PermanentAddress);
-        //PhotoFld.val(data.Photo);
-
-        GuardianNameFld.val(data.GuardianName);
-        GuardianRelationFld.val(data.GuardianRelation);
-        GuardianOccupationFld.val(data.GuardianOccupation);
-        GuardianIncomeFld.val(data.GuardianIncome);
-        GuardianPhoneFld.val(data.GuardianPhone);
-        GuardianEmailFld.val(data.GuardianEmail);
-        GuardianMobileFld.val(data.GuardianMobile);
-
-        FatherNameFld.val(data.FatherName);
-        FatherMobileFld.val(data.FatherMobile);
-        FatherJobFld.val(data.FatherJob);
-
-        MotherNameFld.val(data.MotherName);
-        MotherMobileFld.val(data.MotherMobile);
-        MotherJobFld.val(data.MotherJob);
-
-        StatusFld.val(data.Status);
+        TeacherIdFld.val(data.subject_id);
+        CodeFld.val(data.code);
+        NameFld.val(data.name);
+        MaxWeeklyClassesFld.val(data.max_weekly_classes);
+        CreditHoursFld.val(data.credit_hours);
     }
 
+    $('#Form_Teacher #btnDelete').click(function(){
+        deleteData(TeacherIdFld.val());
+    });
+
+
+    function showDelete(id) {
+        if (id == null) return;
+
+        //Set values
+        TeacherIdFld.val(id);
+    }
 
     function showPopup() {
-        $('#Form_Teacher').trigger("reset");
-        $('.modal-title').html("Create Teacher");
-        $('#mdlCreateTeacher').modal('show');
+        $('#Form_Teacher').clearForm();
+        TeacherIdFld.val("0");
+        $('#mdlCreateTeacher .modal-title').html("Create Teacher");
+        ModalCreateTeacher.modal('show');
     }
-   
+
+    function deleteData(id) {
+        loaderDelete.show();
+        //var pathname = window.location.pathname;
+
+        //var params = pathname.split('/');
+        //var id = params[params.length - 1];
+
+        //alert(id);
+
+        var subject = Teacher;
+        //debugger;
+
+        //Get values
+        subject.subject_id = id;
+
+        var url = deleteUrl;
+        $.ajax({
+            url: url,
+            accepts: 'application/json',
+            cache: false,
+            type: 'POST',
+            data : subject,
+            dataType: 'jsonp',
+            success : function(result){
+                //debugger;
+                loaderDelete.hide();
+
+                if(result.status == "success"){
+                    /*var save_id = result.data.subject_id;
+                     //alert(save_id);
+                     TeacherIdFld.val(save_id);*/
+
+                    reloadGrid();
+                    ModalDeleteTeacher.modal('hide');
+                }else {
+                    ShowMessage("error", result.message);
+                }
+            },
+        });
+    }
+    //--------------------End Form Validation Functions-----------------------//
+    //--------------------Dropdown Functions-----------------------//
+    function loadAll() {
+        //Todo
+        fillDropDownClasses();
+    }
+    ClassFld.on('change', function(){
+        class_id = ClassFld.val();
+        fillDropDownBatches();
+    });
+    function fillDropDownClasses() {
+
+        var loadDDUrl = baseApiUrl + "classes/all_classes";
+
+        ClassFld.empty();
+        ClassFld.append($("<option     />").val(0).text("Select class"));
+        var url = loadDDUrl;
+        $.ajax({
+            url: url,
+            accepts: 'application/json',
+            cache: false,
+            type: 'GET',
+            dataType: 'jsonp',
+            success: function (result) {
+                // Handle the complete event
+                $.each(result.data, function () {
+                    ClassFld.append($("<option />").val(this.class_id).text(this.name));
+                });
+
+                class_id = fetchClassId();
+                ClassFld.val(class_id);
+                ClassFld.trigger('change');
+            }
+        });
+    }
+
+    function fillDropDownBatches() {
+        var loadDDUrl = baseApiUrl + "batches/all_class_batches/"+class_id;
+
+        BatchFld.empty();
+        BatchFld.append($("<option     />").val(0).text("Select batch"));
+        var url = loadDDUrl;
+        $.ajax({
+            url: url,
+            accepts: 'application/json',
+            cache: false,
+            type: 'GET',
+            dataType: 'jsonp',
+            success: function (result) {
+                // Handle the complete event
+                $.each(result.data, function () {
+                    BatchFld.append($("<option     />").val(this.batch_id).text(this.name));
+                });
+            }
+        });
+    }
+
+    function disabledField(mark){
+        if(mark){
+            $('#btnAddTeacher').attr('disabled','disabled');
+        }else {
+            $('#btnAddTeacher').removeAttrs('disabled');
+        }
+    }
+    BatchFld.on('change', function(){
+        var batch_id = this.value;
+
+        if(batch_id==0){
+            disabledField(true);
+        }else {
+            disabledField(false);
+        }
+        var url = loadGridUrl + batch_id;
+
+        //alert();
+        dataTable.ajax.url(url).load();
+
+        //loadGrid(batch_id);
+    });
+    var fetchBatchId = function(){
+        /*var pathname = window.location.pathname;
+         var params = pathname.split('/');
+         var class_id = params[params.length - 1];*/
+        //ClassIdFld.val(class_id);
+        //BatchIdFld.val("1");
+        batch_id = BatchFld.val();
+        if(batch_id =='' || batch_id == null)
+            batch_id="0";
+
+        //batch_id = "1";
+        return batch_id;
+    }
+    var fetchClassId = function(){
+        var pathname = window.location.pathname;
+        var params = pathname.split('/');
+        var class_id = params[params.length - 1];
+        if(class_id =='' || class_id == null)
+            class_id=0;
+
+        return class_id;
+    }
+    //--------------------End Dropdown Functions-----------------------//
+
+    //--------------------Other Functions-----------------------//
     var handleDateTime = function () {
         if (jQuery().datepicker) {
             $('.date-picker').datepicker({
                 rtl: App.isRTL(),
-                //format: 'dd-MM-yyyy',
+                format: 'dd-MM-yyyy',
                 autoclose: true
             });
             $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
         }
     }
+    //--------------------End Other Functions-----------------------//
+
+
     return {
         //main function to initiate the module
-        validate: function () {
-            if (!jQuery().bootstrapWizard) {
-                return;
-            }
-
-            handleValidation();
-
-            //Handle date time
+        init : function(){
             handleDateTime();
+            handleValidation();
+            loadAll();
 
-        },
-        loadGrid: function () {
-            if (!jQuery().dataTable) {
-                return;
-            }
-            loadGrid();
-        },
-        loadGrid2: function () {
-            if (!jQuery().dataTable) {
-                return;
-            }
-            loadGrid2();
+            //initially load grid
+            disabledField(true);
+            loadGrid(0);
         },
         addView: function () {
             showPopup();
         },
-        edit: function (id) {
-            //var pathname = window.location.pathname;
-            //var params = pathname.split('/');
-            //var id = params[params.length - 1];
-
-            edit(id);
+        refreshBatchDropDown : function(){
+            fillDropDownBatches();
+            BatchFld.change();
         },
     };
 }();

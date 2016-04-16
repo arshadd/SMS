@@ -13,6 +13,9 @@ var ClassModule = function () {
     var loader = $("#Form_Class #loader");
     loader.hide();
 
+    var loaderDelete = $("#loaderDelete");
+    loaderDelete.hide();
+
     var loadGridUrl = baseApiUrl + "classes/all_classes";
     var editUrl = baseApiUrl + "classes/find_class/";
     var saveUrl = baseApiUrl + "classes/save";
@@ -67,7 +70,7 @@ var ClassModule = function () {
 
         var id = $(this).data('id');
         edit(id);
-        $('.modal-title').html("Edit Class");
+        $('#mdlCreateClass .modal-title').html("Edit Class");
         $('#mdlCreateClass').modal('show');
     });
 
@@ -310,14 +313,14 @@ var ClassModule = function () {
     }
 
     function showPopup() {
-        $('#Form_Class').trigger("reset");
+        $('#Form_Class').clearForm();// .trigger("reset");
         ClassIdFld.val("0");
-        $('.modal-title').html("Create Class");
+        $('#mdlCreateClass .modal-title').html("Create Class");
         $('#mdlCreateClass').modal('show');
     }
 
     function deleteData(id) {
-        loader.show();
+        loaderDelete.show();
         //var pathname = window.location.pathname;
 
         //var params = pathname.split('/');
@@ -341,7 +344,7 @@ var ClassModule = function () {
             dataType: 'jsonp',
             success : function(result){
                 //debugger;
-                loader.hide();
+                loaderDelete.hide();
 
                 if(result.status == "success"){
                     /*var save_id = result.data.class_id;

@@ -94,7 +94,7 @@
     <h4 class="modal-title">Confirm Delete</h4>
   </div>
   <div class="modal-body">
-    <form id="Form_Subject" class="form-horizontal" method="post">
+    <form class="form-horizontal" method="post">
       <div class="form-body">
         <div class="alert alert-info display">
               <span>

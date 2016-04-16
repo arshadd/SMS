@@ -113,7 +113,7 @@
       <h4 class="modal-title">Confirm Delete</h4>
     </div>
     <div class="modal-body">
-      <form id="Form_Class" class="form-horizontal" method="post">
+      <form class="form-horizontal" method="post">
         <div class="form-body">
           <div class="alert alert-info display">
               <span>
@@ -130,7 +130,7 @@
                 <i class="fa fa-trash-o"></i> Delete
               </button>
               <label>
-                <div id="loader"><img src="<?php echo base_url() . '/assets/img/input-spinner.gif'; ?>"/></div>
+                <div id="loaderDelete"><img src="<?php echo base_url() . '/assets/img/input-spinner.gif'; ?>"/></div>
               </label>
             </div>
           </div>
