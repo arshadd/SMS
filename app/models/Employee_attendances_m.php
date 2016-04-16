@@ -5,23 +5,13 @@ class Employee_attendances_m extends CI_Model
 {
     function all_department_employees($school_id, $attendance_date)
     {
-        $sql = "SELECT ea.*, e.employee_id, e.photo, e.job_title, concat(e.first_name, ' ', e.middle_name, ', ', e.last_name) As full_name 
+        
+        $sql = "SELECT  IFNULL(ea.employee_attendance_id, 0) as employee_attendance_id, ea.attendance_date,ea.reason, ea.attendance_status, e.employee_id, e.photo, e.job_title, concat(e.first_name, ' ', e.middle_name, ', ', e.last_name) As full_name 
                 FROM employees e
-                LEFT JOIN employee_attendances ea ON e.employee_id = ea.employee_id and ea.attendance_date = ?
+                LEFT JOIN employee_attendances ea ON e.employee_id = ea.employee_id and date(ea.attendance_date) = ?
                 LEFT JOIN `employee_departments` d on d.employee_department_id = e.employee_department_id
                 WHERE `e`.`school_id` = ?;";
 
-
-        /*       $this->db->select('ea.*, e.photo, et.job_title, d.name, concat(e.first_name, \' \', e.middle_name, \', \', e.last_name) As full_name');
-               $this->db->from('employee_attendances as ea');
-               $this->db->join('employees as e', 'ea.employee_id = e.employee_id and date(ea.attendance_date) = ' + $attendance_date, 'right');
-               $this->db->join('employee_departments as d', 'd.employee_department_id = e.employee_department_id', 'left');
-               $this->db->where('e.school_id', $school_id);
-       //        $this->db->where('date(ea.attendance_date)', $attendance_date);
-               $this->db->where('e.is_active', true);
-               $this->db->order_by('e.created_at', 'desc');*/
-
-//        $query = $this->db->get()->result();
         $query = $this->db->query($sql, array($attendance_date, $school_id));
         $employees = $query->result();
         if (is_array($employees) && count($employees) > 0) {
@@ -55,6 +45,7 @@ class Employee_attendances_m extends CI_Model
 
         $employees_id = $employee_attendance['employee_id'];
         $attendance_date = $employee_attendance['attendance_date'];
+
 
         foreach ($employees_id as $employee_id) {
 

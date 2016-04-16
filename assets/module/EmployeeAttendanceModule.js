@@ -20,7 +20,7 @@ var EmployeeAttendanceModule = function () {
     var loader = $("#Form_Attendance #loader");
     loader.hide();
 
-    var loadGridUrl = baseApiUrl + "employee_attendances/all_employees/";
+    var loadGridUrl = baseApiUrl + "employee_attendances/all_employees";
     var editUrl = baseApiUrl + "student_attendances/find/";
     var saveUrl = baseApiUrl + "employee_attendances/save";
 
@@ -89,7 +89,7 @@ var EmployeeAttendanceModule = function () {
 
                     var list = '<div > '+
                         '<input type="hidden" name="employee_id[]" value="'+ data.employee_id +'"/>'+
-                        '<input type="hidden" name="'+ employee_attendance +'" value="'+ data.employee_id +'"/>'+
+                        '<input type="hidden" name="'+ employee_attendance +'" value="'+ data.employee_attendance_id +'"/>'+
                         '<input type="hidden" name="attendance_date" value="'+ AttendanceDateFld.val() +'"/>'+
                         '<label class="radio-inline"> '+
                         '<input type="radio" name="'+ name +'" '+ checked1 +' value="P"/> Present '+
@@ -197,7 +197,7 @@ var EmployeeAttendanceModule = function () {
 
         var attendance_date = AttendanceDateFld.val();
 
-        var url = loadGridUrl + attendance_date;
+        var url = loadGridUrl +'?attendance_date='+ attendance_date;
 
         //reset counter
         counter=0;
@@ -392,6 +392,7 @@ var EmployeeAttendanceModule = function () {
     return {
         //main function to initiate the module
         init : function(){
+            handleDateTime();
             handleValidation();
             loadAll();
             var d = new Date();

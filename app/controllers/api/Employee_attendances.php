@@ -20,18 +20,17 @@ class Employee_attendances extends REST_Controller {
     }
 
 
-    function all_employees_get($attendance_date = null)
+    function all_employees_get()
     {
-        //$attendance_date =  date('Y-m-d', strtotime($this->get('attendance_date')));
+
+        $attendance_date =  date('Y-m-d', strtotime($this->get('attendance_date')));
         //$this->response(array("status" => "false", "message" => "Invalid attendance date", "data" => $attendance_date));
 
-        /*if (is_null($batch_id) || $batch_id == 0) {
-            $this->response(array("status" => "false", "message" => "Invalid batch id", "data" => null));
-        }
-        else if (is_null($attendance_date) || $attendance_date == '') {
+
+        if (is_null($attendance_date) || $attendance_date == '') {
             $this->response(array("status" => "false", "message" => "Invalid attendance date", "data" => null));
         }
-        else {*/
+        else {
             //Get logged school id
             $school_id = $this->session->userdata('school_id');
 
@@ -44,7 +43,7 @@ class Employee_attendances extends REST_Controller {
             , "message" => ""
             , "summary" => $employees_summary
             , "data" => $department_employees));
-        /*}*/
+        }
     }
 
     function save_post()
@@ -62,7 +61,7 @@ class Employee_attendances extends REST_Controller {
             $this->response(array("status" => "success",  "message" => $response['message'], "data" => $response['data']));
         }
 
-        //$this->response(array("status" => "success", "message" => "", "data" => $_POST));
+//        $this->response(array("status" => "success", "message" => "", "data" => $response));
     }
 
 }
