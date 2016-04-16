@@ -101,7 +101,7 @@ include(VIEW_PATH . 'header.php');
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class="form-group batch-class-selection">
                                         <label class="control-label col-md-2">
                                             Class:<span class="required">*</span>
                                         </label>
@@ -135,17 +135,17 @@ include(VIEW_PATH . 'header.php');
                                         </div>
                                     </div>
 
-                                    <!--<div class="form-group">
+                                    <div class="form-group student-selection">
                                         <label class="control-label col-md-2">
                                             Student:<span class="required">*</span>
                                         </label>
                                         <div class="col-md-10">
-                                            <select id="student_id" name="student_id" class="form-control input-medium">
+                                            <select id="student_id" name="student_id" class="form-control select2me input-xlarge">
                                             </select>
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label class="control-label col-md-2">
                                             Employee:<span class="required">*</span>
                                         </label>
