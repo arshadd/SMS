@@ -135,14 +135,9 @@
             <!--<span class="arrow "></span>-->
           </a>
           <ul class="sub-menu">
-            <li  class="" data-menu-item ="ddfsdfs">
-              <a href="#">
-                Fee Types
-              </a>
-            </li>
             <li  class="" data-menu-item ="asdfsdd">
               <a href="#">
-                Manage Fee
+                Comming soon
               </a>
             </li>
           </ul>
@@ -164,7 +159,7 @@
             </li>
             <li class="" data-menu-item ="dd">
               <a href="#">
-                Manage Expense
+                Comming soorn
               </a>
             </li>
           </ul>
