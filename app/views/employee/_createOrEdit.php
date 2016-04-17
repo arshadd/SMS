@@ -330,7 +330,7 @@
             Spouse Name<span class="required">*</span>
           </label>
           <div class="col-md-8">
-            <input type="text" id="husband_name" name="husband_name" class="form-control" placeholder="Husband Name"/>
+            <input type="text" id="husband_name" name="husband_name" class="form-control" placeholder="Spouse Name"/>
           </div>
         </div>
       </div>
