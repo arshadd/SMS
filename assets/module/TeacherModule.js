@@ -13,8 +13,8 @@ var TeacherModule = function () {
     var MaxWeeklyClassesFld = $('#Form_Teacher #max_weekly_classes');
     var CreditHoursFld = $('#Form_Teacher #credit_hours');
 
-    var ClassFld = $('#Form_Teacher_Search #class_id')
-    var BatchFld = $('#Form_Teacher_Search #batch_id');
+    var ClassFld = $('#Form_Teacher_Search #teacher_class_id')
+    var BatchFld = $('#Form_Teacher_Search #teacher_batch_id');
     //Global
     var class_id=0;
     var batch_id=0;

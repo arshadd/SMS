@@ -19,7 +19,7 @@
       <!-- BEGIN TOP NAVIGATION MENU -->
       <ul class="nav navbar-nav pull-right">
         <!-- BEGIN NOTIFICATION DROPDOWN -->
-        <li class="dropdown" id="header_notification_bar">
+<!--        <li class="dropdown" id="header_notification_bar">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
             <i class="fa fa-warning"></i>
             <span class="badge badge-success">
@@ -142,9 +142,9 @@
             </li>
           </ul>
         </li>
-        <!-- END NOTIFICATION DROPDOWN -->
+-->        <!-- END NOTIFICATION DROPDOWN -->
         <!-- BEGIN INBOX DROPDOWN -->
-        <li class="dropdown" id="header_inbox_bar">
+<!--        <li class="dropdown" id="header_inbox_bar">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
             <i class="fa fa-envelope"></i>
             <span class="badge badge-info">
@@ -162,7 +162,7 @@
                 <li>
                   <a href="inbox14c8.html?a=view">
                     <span class="photo">
-                      <img src="<?php echo base_url();?>assets/img/avatar2.jpg" alt=""/>
+                      <img src="<?php /*echo base_url();*/?>assets/img/avatar2.jpg" alt=""/>
                     </span>
                     <span class="subject">
                       <span class="from">
@@ -180,7 +180,7 @@
                 <li>
                   <a href="inbox14c8.html?a=view">
                     <span class="photo">
-                      <img src="<?php echo base_url();?>assets/img/avatar3.jpg" alt=""/>
+                      <img src="<?php /*echo base_url();*/?>assets/img/avatar3.jpg" alt=""/>
                     </span>
                     <span class="subject">
                       <span class="from">
@@ -198,7 +198,7 @@
                 <li>
                   <a href="inbox14c8.html?a=view">
                     <span class="photo">
-                      <img src="<?php echo base_url();?>assets/img/avatar1.jpg" alt=""/>
+                      <img src="<?php /*echo base_url();*/?>assets/img/avatar1.jpg" alt=""/>
                     </span>
                     <span class="subject">
                       <span class="from">
@@ -216,7 +216,7 @@
                 <li>
                   <a href="inbox14c8.html?a=view">
                     <span class="photo">
-                      <img src="<?php echo base_url();?>assets/img/avatar2.jpg" alt=""/>
+                      <img src="<?php /*echo base_url();*/?>assets/img/avatar2.jpg" alt=""/>
                     </span>
                     <span class="subject">
                       <span class="from">
@@ -234,7 +234,7 @@
                 <li>
                   <a href="inbox14c8.html?a=view">
                     <span class="photo">
-                      <img src="<?php echo base_url();?>assets/img/avatar3.jpg" alt=""/>
+                      <img src="<?php /*echo base_url();*/?>assets/img/avatar3.jpg" alt=""/>
                     </span>
                     <span class="subject">
                       <span class="from">
@@ -258,9 +258,9 @@
             </li>
           </ul>
         </li>
-        <!-- END INBOX DROPDOWN -->
+-->        <!-- END INBOX DROPDOWN -->
         <!-- BEGIN TODO DROPDOWN -->
-        <li class="dropdown" id="header_task_bar">
+<!--        <li class="dropdown" id="header_task_bar">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
             <i class="fa fa-check"></i>
             <span class="badge badge-warning">
@@ -417,7 +417,7 @@
             </li>
           </ul>
         </li>
-        <!-- END TODO DROPDOWN -->
+-->        <!-- END TODO DROPDOWN -->
         <li class="devider">
           &nbsp;
         </li>
@@ -426,12 +426,12 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
             <img alt="" src="<?php echo base_url();?>assets/img/avatar3_small.jpg"/>
             <span class="username">
-              Nick
+              Admin
             </span>
             <i class="fa fa-angle-down"></i>
           </a>
           <ul class="dropdown-menu">
-            <li>
+            <!--<li>
               <a href="extra_profile.html">
                 <i class="fa fa-user"></i> My Profile
               </a>
@@ -458,7 +458,7 @@
               </a>
             </li>
             <li class="divider">
-            </li>
+            </li>-->
           </li>
         <li>
           <a href="<?php echo base_url() ?>/index.php/login/logout_user"><i class="icon-key"></i> Logout

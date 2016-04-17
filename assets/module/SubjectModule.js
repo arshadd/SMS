@@ -13,8 +13,8 @@ var SubjectModule = function () {
     var MaxWeeklyClassesFld = $('#Form_Subject #max_weekly_classes');
     var CreditHoursFld = $('#Form_Subject #credit_hours');
 
-    var ClassFld = $('#Form_Subject_Search #class_id')
-    var BatchFld = $('#Form_Subject_Search #batch_id');
+    var ClassFld = $('#Form_Subject_Search #subject_class_id')
+    var BatchFld = $('#Form_Subject_Search #subject_batch_id');
     //Global
     var class_id=0;
     var batch_id=0;

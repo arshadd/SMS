@@ -44,7 +44,7 @@ class Batches_m extends CI_Model
         $this->db->join('classes', 'classes.class_id = batches.class_id');
         $this->db->where('batches.school_id', $school_id);
         $this->db->where('batches.batch_id', $batch_id);
-        
+
         $batch = $this->db->get()->result();
 
         if (is_array($batch) && count($batch) > 0) {
@@ -54,7 +54,7 @@ class Batches_m extends CI_Model
         return false;
     }
 
-    function save($batch_id, $batch)
+    function save($school_id, $batch_id, $batch)
     {
         if ($batch_id > 0) {
 
@@ -70,6 +70,7 @@ class Batches_m extends CI_Model
             //$result = false;
         } else {
             //Insert
+            $batch = array_merge($batch, array('school_id'=> $school_id));
 
             //Created_at date
             $batch = array_merge($batch, array('created_at'=> date('Y-m-d H:i:s')));
@@ -78,7 +79,7 @@ class Batches_m extends CI_Model
             $result = $this->db->insert('batches', $batch);
 
             //newly inserted id
-            $batch_id = $this->db->insert_id();
+            //$batch_id = $this->db->insert_id();
         }
 
         if($result===TRUE){

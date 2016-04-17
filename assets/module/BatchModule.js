@@ -1,20 +1,36 @@
 var BatchModule = function () {
 
-    //Create Batch
-    var Batch = { batch_id: 0, class_id: 0, name: '', start_date: '', end_date: ''};
+    var Batch = { batch_id:0 };
+
+    //Global
+   /* var class_id=0;
+    var batch_id=0;*/
 
     //Field Declaration Section
-
+    var ClassIdFld = $('#Form_Batch #class_id');
     var BatchIdFld = $('#Form_Batch #batch_id');
+
+    var StartDateFld = $('#Form_Batch #start_date');
+    var EndDateFld = $('#Form_Batch #end_date')
+
+    /*var BatchIdFld = $('#Form_Batch #batch_id');
     var ClassIdFld = $('#Form_Batch #class_id');
     var NameFld = $('#Form_Batch #name');
     var StartDateFld = $('#Form_Batch #start_date');
-    var EndDateFld = $('#Form_Batch #end_date');
+    var EndDateFld = $('#Form_Batch #end_date');*/
 
 
     var BatchGrid = $('#BatchGrid');
     var ModalCreateBatch = $('#mdlCreateBatch');
     var ModalDeleteBatch = $('#mdlDeleteBatch');
+
+
+    var form1 = $('#Form_Batch');
+    var error = $('#mdlCreateBatch .alert-danger');
+    var success = $('#mdlCreateBatch .alert-success');
+
+    error.hide();
+    success.hide();
 
 
     var loader = $("#Form_Batch #loader");
@@ -36,7 +52,7 @@ var BatchModule = function () {
     var loadGrid = function () {
         //ShowSuccessMessage();
 
-        var class_id = ClassIdFld.val();
+        var class_id = fetchClassId();
 
         loadGridUrl = loadGridUrl + class_id;
         var dataSet = [];
@@ -205,17 +221,17 @@ var BatchModule = function () {
     function save() {
         loader.show();
 
-        var batch = Batch;
+        var batch = form1.serializefiles();
 
-        fetchClassId();
+        debugger;
+        //fetchClassId();
 
         //Get values
-
-        batch.batch_id = BatchIdFld.val();
-        batch.class_id = ClassIdFld.val();
-        batch.name = NameFld.val();
-        batch.start_date = StartDateFld.val();
-        batch.end_date = EndDateFld.val()
+        /* batch.batch_id = BatchIdFld.val();
+         batch.class_id = ClassIdFld.val();
+         batch.name = NameFld.val();
+         batch.start_date = StartDateFld.val();
+         batch.end_date = EndDateFld.val()*/
 
         var url = saveUrl;
         $.ajax({
@@ -223,13 +239,16 @@ var BatchModule = function () {
             accepts: 'application/json',
             cache: false,
             type: 'POST',
-            data : batch,
+            data: batch,
             dataType: 'jsonp',
-            success : function(result){
+            processData: false,
+            contentType: false, //'multipart/form-data',
+
+            success: function (result) {
                 debugger;
                 loader.hide();
 
-                if(result.status == "success"){
+                if (result.status == "success") {
                     /*var save_id = result.data.batch_id;
                      //alert(save_id);
                      BatchIdFld.val(save_id);*/
@@ -237,13 +256,14 @@ var BatchModule = function () {
                     reloadGrid();
                     SubjectModule.refreshBatchDropDown();
                     ModalCreateBatch.modal('hide');
-                }else {
+                } else {
                     ShowMessage("error", result.message);
                 }
                 //parent.location.reload();
                 //alert('success'+result);
             },
         });
+
     }
 
     function ShowMessage(type, message){
@@ -287,11 +307,25 @@ var BatchModule = function () {
     function showEdit(data) {
         if (data == null) return;
 
+
+        //This batch id will be set in dropdown list
+        //BatchIdFld.val(data.batch_id);
+
         //Set values
-        BatchIdFld.val(data.batch_id);
-        NameFld.val(data.name);
+
+        $.each(data, function(key, val){
+            //console.log("key:"+key, ", val:"+val);
+            $('#Form_Batch #'+key).val(val);
+        });
+
         StartDateFld.val(GetDateFormatOnly(data.start_date));
         EndDateFld.val(GetDateFormatOnly(data.end_date));
+
+        //Set values
+        /*BatchIdFld.val(data.batch_id);
+        NameFld.val(data.name);
+        StartDateFld.val(GetDateFormatOnly(data.start_date));
+        EndDateFld.val(GetDateFormatOnly(data.end_date));*/
     }
 
     $('#btnDelete').click(function(){
@@ -308,6 +342,7 @@ var BatchModule = function () {
 
     function showPopup() {
         $('#Form_Batch').clearForm();
+        ClassIdFld.val(fetchClassId());
         BatchIdFld.val("0");
 
         $('#mdlCreateBatch .modal-title').html("Create Batch");
@@ -324,7 +359,7 @@ var BatchModule = function () {
 
         //alert(id);
 
-        var batch = Batch;
+        //var batch = Batch;
         //debugger;
 
         //Get values
@@ -355,14 +390,6 @@ var BatchModule = function () {
             },
         });
     }
-    /*var del = function () {
-     $(".delete").on("click", function () {
-
-     if (confirm("Are you sure want to delete?")) {
-     deleteData();
-     }
-     });
-     };*/
 
     //--------------------End Form Validation Functions-----------------------//
 
@@ -380,8 +407,10 @@ var BatchModule = function () {
     var fetchClassId = function(){
         var pathname = window.location.pathname;
         var params = pathname.split('/');
+
+        //set in global
         var class_id = params[params.length - 1];
-        ClassIdFld.val(class_id);
+        return class_id;
     }
 
     return {
@@ -389,14 +418,12 @@ var BatchModule = function () {
         init : function(){
             //Form validation
             handleDateTime();
-            fetchClassId();
             handleValidation();
 
             //Grid loading
             if (!jQuery().dataTable) {
                 return;
             }
-            fetchClassId();
             loadGrid();
         },
         addView: function () {
