@@ -15,10 +15,15 @@ function getIdParam() {
     var id = params[params.length - 1];
     return id;
 }
-
+/*
 var baseApiUrl = "http://localhost/myschool/sms/index.php/api/";
 var baseAppUrl = "http://localhost/myschool/sms/index.php/";
 var baseAppImageUrl = "http://localhost/myschool/sms/";
+*/
+
+var baseApiUrl = window.location.href.substring(0, window.location.href.indexOf("index"))+"index.php/api/";
+var baseAppUrl = window.location.href.substring(0, window.location.href.indexOf("index"))+"index.php/api/";
+var baseAppImageUrl = window.location.href.substring(0, window.location.href.indexOf("index"));
 
 var DEFAULT_SCHOOL_IMAGE = baseAppImageUrl + "/assets/resource/default/school.png";
 var DEFAULT_STUDENT_IMAGE = baseAppImageUrl + "/assets/resource/default/student.png";
