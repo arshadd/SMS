@@ -206,7 +206,8 @@ var BatchModule = function () {
         loader.show();
 
         var batch = Batch;
-        debugger;
+
+        fetchClassId();
 
         //Get values
 
