@@ -69,16 +69,22 @@ class Batches extends REST_Controller {
         $this->post('end_date')    */
 
         //Make array
-        $batch = array(
+        /*$batch = array(
             'name' => $this->post('name'),
             'start_date' => date('Y-m-d', strtotime($this->post('start_date'))),
             'end_date' => date('Y-m-d', strtotime($this->post('end_date'))),
             'class_id' => $this->post('class_id'),
             'school_id' => $school_id
-        );
+        );*/
+
+        $_POST['start_date'] =  date('Y-m-d', strtotime($_POST['start_date']));
+        $_POST['end_date'] =  date('Y-m-d', strtotime($_POST['end_date']));
+
+        //$this->response(array("status" => "success", "message" => "testing", "data" => $_POST));
+
 
         //Save
-        $response = $this->batches_m->save($batch_id, $batch);
+        $response = $this->batches_m->save($school_id, $batch_id, $_POST);
 
         if ($response['result'] === FALSE) {
             $this->response(array("status" => "failed", "message" => $response['message'], "data" => null));

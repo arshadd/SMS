@@ -73,7 +73,7 @@
                   </a>
                 </li>
 
-                <li>
+                <li class="active">
                   <a href="#tab_1_3" data-toggle="tab">
                     <i class="fa fa-th-list"></i> Batches
                   </a>
@@ -83,7 +83,7 @@
                     <i class="fa fa-sitemap"></i> Subjects
                   </a>
                 </li>
-                <li class="active">
+                <li class="">
                   <a href="#tab_1_5" data-toggle="tab">
                     <i class="fa fa-female"></i> Teachers
                   </a>
@@ -94,7 +94,7 @@
                   </a>
                 </li>
 
-                <li>
+                <!--<li>
                   <a href="#tab_1_7" data-toggle="tab">
                     <i class="fa fa-superscript"></i> Roll Number
                   </a>
@@ -104,7 +104,7 @@
                   <a href="#tab_1_8" data-toggle="tab">
                     <i class="fa fa-calendar"></i> Timetable
                   </a>
-                </li>
+                </li>-->
                 <li class="">
                   <a href="#tab_1_9" data-toggle="tab">
                     <i class="fa fa-thumb-tack"></i> Attendance
@@ -118,7 +118,7 @@
 
                 </div>
                 <!--end tab-pane-->
-                <div class="tab-pane" id="tab_1_3">
+                <div class="tab-pane active" id="tab_1_3">
 
                   <?php include('_batch.php');?>
 
@@ -131,7 +131,7 @@
                 </div>
 
                 <!--end tab-pane-->
-                <div class="tab-pane active" id="tab_1_5">
+                <div class="tab-pane " id="tab_1_5">
 
                   <?php include('_teacherSubject.php');?>
 

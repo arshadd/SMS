@@ -78,7 +78,6 @@
                       <th class='hidden-xs'>Code</th>
                       <th class='hidden-xs'>Class Name</th>
                       <th class='hidden-xs'>Sections</th>
-                      <th class='hidden-xs'>Batches</th>
                       <th class="hidden-xs">Manage</th>
                     </tr>
                   </thead>

@@ -44,7 +44,6 @@ var ClassModule = function () {
                 }
                 },
                 { data: "section_name" },
-                { data: "section_name" },
                 {
                     data: null, render: function (data, type, row) {
                     // Combine the first and last names into a single table field

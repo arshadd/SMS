@@ -87,7 +87,6 @@ function RadioCheckedValue(radioName) {
 
 
 $.fn.clearForm = function() {
-    debugger;
     return this.each(function() {
         var type = this.type, tag = this.tagName.toLowerCase();
         if (tag == 'form')
@@ -104,15 +103,18 @@ $.fn.clearForm = function() {
 
 (function($) {
     $.fn.serializefiles = function() {
+        //debugger;
+
         var obj = $(this);
         /* ADD FILE TO PARAM AJAX */
         var formData = new FormData();
-        //debugger;
+
         $.each($(obj).find("input[type='file']"), function(i, tag) {
             $.each($(tag)[0].files, function(i, file) {
                 formData.append(tag.name, file);
             });
         });
+
         var params = $(obj).serializeArray();
         $.each(params, function (i, val) {
             //debugger;
