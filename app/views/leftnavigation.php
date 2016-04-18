@@ -152,11 +152,6 @@
             <!--<span class="arrow "></span>-->
           </a>
           <ul class="sub-menu">
-            <li class="" data-menu-item ="ddsd">
-              <a href="#">
-                Expense Types
-              </a>
-            </li>
             <li class="" data-menu-item ="dd">
               <a href="#">
                 Comming soorn
