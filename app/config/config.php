@@ -24,8 +24,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'http://localhost/myschool/sms/';
-$config['base_url'] = substr('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],0, stripos('http;//'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],'index'));
+if(stripos('http;//'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],'index'))
+{
+    $config['base_url'] = substr('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],0, stripos('http;//'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],'index'));
+}
 
+else
+{
+    $config['base_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+}
 /*
 |--------------------------------------------------------------------------
 | Index File
