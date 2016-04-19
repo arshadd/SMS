@@ -4,14 +4,14 @@ class Students_m extends CI_Model
 {
     function all_students($school_id)
     {
-        $this->db->select('students.*, concat(students.first_name," ", students.middle_name, " ", students.last_name) as full_name, batches.name as batch_name, classes.class_id, classes.name as class_name');
-        $this->db->from('students');
-        $this->db->join('batches', 'batches.batch_id = students.batch_id');
-        $this->db->join('classes', 'classes.class_id = batches.class_id');
+        $this->db->select('s.*, concat(s.first_name," ", s.middle_name, " ", s.last_name) as full_name, b.name as batch_name, c.class_id, c.name as class_name, c.code');
+        $this->db->from('students s');
+        $this->db->join('batches b', 'b.batch_id = s.batch_id', 'left');
+        $this->db->join('classes c', 'c.class_id = b.class_id', 'left');
 
-        $this->db->where('students.school_id', $school_id);
-        $this->db->where('students.is_active', true);
-        $this->db->order_by('students.created_at', 'desc');
+        $this->db->where('s.school_id', $school_id);
+        $this->db->where('s.is_active', true);
+        $this->db->order_by('s.created_at', 'desc');
 
         $students = $this->db->get()->result();
 
@@ -24,15 +24,21 @@ class Students_m extends CI_Model
 
     function all_batch_students($school_id, $batch_id)
     {
+        $this->db->select('s.*, concat(s.first_name," ", s.middle_name, " ", s.last_name) as full_name, b.name as batch_name, c.class_id, c.name as class_name, c.code');
+        $this->db->from('students s');
+        $this->db->join('batches b', 'b.batch_id = s.batch_id', 'left');
+        $this->db->join('classes c', 'c.class_id = b.class_id', 'left');
+
+        /*
         $this->db->select('students.*, concat(students.first_name," ", students.middle_name, " ", students.last_name) as full_name, batches.name as batch_name, classes.class_id, classes.name as class_name');
         $this->db->from('students');
         $this->db->join('batches', 'batches.batch_id = students.batch_id');
-        $this->db->join('classes', 'classes.class_id = batches.class_id');
+        $this->db->join('classes', 'classes.class_id = batches.class_id');*/
 
-        $this->db->where('students.school_id', $school_id);
-        $this->db->where('students.batch_id', $batch_id);
-        $this->db->where('students.is_active', true);
-        $this->db->order_by('students.created_at', 'desc');
+        $this->db->where('s.school_id', $school_id);
+        $this->db->where('s.batch_id', $batch_id);
+        $this->db->where('s.is_active', true);
+        $this->db->order_by('s.created_at', 'desc');
 
 
         $students = $this->db->get()->result();
@@ -46,13 +52,18 @@ class Students_m extends CI_Model
 
     function find_student($student_id)
     {
-        $this->db->select('students.*, concat(students.first_name," ", students.middle_name, " ", students.last_name) as full_name, batches.name as batch_name, classes.class_id, classes.name as class_name');
+        $this->db->select('s.*, concat(s.first_name," ", s.middle_name, " ", s.last_name) as full_name, b.name as batch_name, c.class_id, c.name as class_name, c.code');
+        $this->db->from('students s');
+        $this->db->join('batches b', 'b.batch_id = s.batch_id', 'left');
+        $this->db->join('classes c', 'c.class_id = b.class_id', 'left');
+
+        /*$this->db->select('students.*, concat(students.first_name," ", students.middle_name, " ", students.last_name) as full_name, batches.name as batch_name, classes.class_id, classes.name as class_name');
         $this->db->from('students');
         $this->db->join('batches', 'batches.batch_id = students.batch_id');
-        $this->db->join('classes', 'classes.class_id = batches.class_id');
+        $this->db->join('classes', 'classes.class_id = batches.class_id');*/
 
-        $this->db->where('student_id', $student_id);
-        $this->db->where('students.is_active', true);
+        $this->db->where('s.student_id', $student_id);
+        $this->db->where('s.is_active', true);
 
         $student = $this->db->get()->result();
 
@@ -76,6 +87,24 @@ class Students_m extends CI_Model
         }
 
         return false;
+    }
+    function new_roll_no($school_id, $batch_id){
+
+        $this->db->select('concat(c.code, IFNULL(roll_no_prefix,"")) as prefix, LPAD(IFNULL(max(s.class_roll_no),0)+1,3, "0") as new_roll_no');
+        $this->db->from('students s');
+        $this->db->join('batches b', 's.batch_id = b.batch_id');
+        $this->db->join('classes c', 'c.class_id = b.class_id');
+        $this->db->where('s.school_id', $school_id);
+        $this->db->where('s.batch_id', $batch_id);
+
+        $new_student_rollno = $this->db->get()->result();
+
+        if (is_array($new_student_rollno) && count($new_student_rollno) > 0) {
+            return $new_student_rollno;
+        }
+
+        return false;
+
     }
 
     function already_exists($student_id, $admission_no)

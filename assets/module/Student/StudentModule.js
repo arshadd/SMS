@@ -1,9 +1,5 @@
 var StudentModule = function () {
 
-    //Create Batch
-    var School = { school_id: 0};
-
-
     //Global
     var batch_id=0;
 
@@ -43,6 +39,7 @@ var StudentModule = function () {
     var deleteUrl = baseApiUrl + "students/delete";
     var listUrl = baseAppUrl + "students/index";
     var newUrl = baseApiUrl + "students/new_student";
+    var newRollNoUrl = baseApiUrl + "students/new_roll_no/";
 
 
     //--------------------Grid Functions-----------------------//
@@ -126,9 +123,10 @@ var StudentModule = function () {
 
     function loadAll() {
         //Todo
-        fillDropDownClasses();
+        //fillDropDownClasses();
+        fillDropDownBatches();
     }
-    StudentClassFld.on('change', function(){
+    /*StudentClassFld.on('change', function(){
         fillDropDownBatches();
     });
     function fillDropDownClasses() {
@@ -151,14 +149,35 @@ var StudentModule = function () {
                 });
             }
         });
-    }
+    }*/
+
+    StudentBatchFld.on('change', function(){
+        var batch_id = $(this).select2('val');
+
+        debugger;
+
+        var url = newRollNoUrl+batch_id;
+        $.ajax({
+            url: url,
+            accepts: 'application/json',
+            cache: false,
+            type: 'GET',
+            dataType: 'jsonp',
+            success: function (data) {
+
+                var newRollNo = data.data[0];
+
+                $('#roll_no_prefix').text(newRollNo.prefix);
+                $('#class_roll_no').val(newRollNo.new_roll_no);
+            }
+        });
+     });
 
     function fillDropDownBatches() {
-        var class_id = StudentClassFld.val();
-        var loadDDUrl = baseApiUrl + "batches/all_class_batches/"+class_id;
+        var loadDDUrl = baseApiUrl + "batches/all_batches/";
 
         StudentBatchFld.empty();
-        StudentBatchFld.append($("<option     />").val(0).text("Select batch"));
+        StudentBatchFld.append($("<option     />").val('').text("Select batch"));
         var url = loadDDUrl;
         $.ajax({
             url: url,
@@ -169,7 +188,7 @@ var StudentModule = function () {
             success: function (result) {
                 // Handle the complete event
                 $.each(result.data, function () {
-                    StudentBatchFld.append($("<option     />").val(this.batch_id).text(this.name));
+                    StudentBatchFld.append($("<option     />").val(this.batch_id).text(this.class_name+' / '+this.name));
                 });
 
                 StudentBatchFld.val(batch_id);
@@ -213,6 +232,20 @@ var StudentModule = function () {
                     required: true
                 },
                 last_name: {
+                    required: true
+                },
+
+                father_name: {
+                    required: true
+                },
+                father_contact: {
+                    required: true
+                },
+
+                mother_name: {
+                    required: true
+                },
+                mother_contact: {
                     required: true
                 },
 
@@ -378,8 +411,8 @@ var StudentModule = function () {
         });
 
         //Fire class on change, fills the batches
-        StudentClassFld.trigger('change');
-
+        //StudentClassFld.trigger('change');
+        StudentBatchFld.select2('val', data.batch_id);
 
         PhotoFld.attr("src",baseAppImageUrl+ data.photo);
         AdmissionDateFld.val(GetDateFormatOnly(data.admission_date));
@@ -427,6 +460,8 @@ var StudentModule = function () {
         success.hide();
 
         StudentIdFld.val("0");
+        StudentBatchFld.select2('val','0');
+
         UserIdFld.val("0");
         batch_id = 0;
         var d = new Date();
@@ -484,11 +519,9 @@ var StudentModule = function () {
 
     function disabledField(mark){
         if(mark){
-            StudentClassFld.attr('disabled','disabled');
             StudentBatchFld.attr('disabled','disabled');
 
         }else {
-            StudentClassFld.removeAttrs('disabled');
             StudentBatchFld.removeAttrs('disabled');
         }
     }

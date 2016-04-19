@@ -76,6 +76,7 @@
                     <th class='hidden-xs'>Batch Name</th>
                     <th class='hidden-xs'>Start Date</th>
                     <th class='hidden-xs'>End Date</th>
+                    <th class='hidden-xs'>RollNo Refix</th>
                     <th class="hidden-xs">Manage</th>
                   </tr>
                   </thead>

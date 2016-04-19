@@ -213,35 +213,75 @@
             </div>
         </div>
 
+        <h4 class="form-section">Guardian Detail</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-4">
+                        Father name:<span class="required">*</span>
+                    </label>
+                    <div class="col-md-8">
+                        <input type="text" id="father_name" name="father_name" class="form-control" placeholder="Father name"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-4">
+                        Father contact:<span class="required">*</span>
+                    </label>
+                    <div class="col-md-8">
+                        <input type="text" id="father_contact" name="father_contact" class="form-control" placeholder="Father contact"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-4">
+                        Mother name:<span class="required">*</span>
+                    </label>
+                    <div class="col-md-8">
+                        <input type="text" id="mother_name" name="mother_name" class="form-control" placeholder="Mother name"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-4">
+                        Mother contact:<span class="required">*</span>
+                    </label>
+                    <div class="col-md-8">
+                        <input type="text" id="mother_contact" name="mother_contact" class="form-control" placeholder="Mother contact"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <h4 class="form-section">Class & Batch Detail</h4>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label class="control-label col-md-4">
-                        Class:<span class="required">*</span>
+                        Class / Batch:<span class="required">*</span>
                     </label>
                     <div class="col-md-8">
-                        <select id="class_id" name="class_id" class='form-control'></select>
+                        <select id="batch_id" name="batch_id" class='form-control select2me'></select>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label class="control-label col-md-4">
-                        Batch:<span class="required">*</span>
-                    </label>
-                    <div class="col-md-8">
-                        <select id="batch_id" name="batch_id" class='form-control'></select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label class="control-label col-md-4">
                         Roll #:
                     </label>
-                    <div class="col-md-8">
-                        <input type="text" id="class_roll_no" name="class_roll_no" class="form-control"
+                    <label id="roll_no_prefix"  class="control-label col-md-1">
+                    </label>
+                    <div class="col-md-7">
+                        <input type="text" id="class_roll_no" name="class_roll_no" class="form-control input-small"
                                placeholder="Roll #"/>
                     </div>
                 </div>

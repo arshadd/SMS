@@ -86,6 +86,7 @@ var BatchModule = function () {
                         return (moment(data).format("DD-MMM-YYYY"));
                     }
                 },
+                {data:'roll_no_prefix'},
                 {
                     data: null, render: function (data, type, row) {
                     // Combine the first and last names into a single table field
