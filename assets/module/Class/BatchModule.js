@@ -409,6 +409,10 @@ var BatchModule = function () {
         //debugger;
         var batch_id = fetchBatchId();
 
+        //Set batch List url
+        $('#lnkBatchList').attr("href","../../classes/batches/"+batch_id);
+        //end
+
         var loadDDUrl = baseApiUrl + "batches/find_batch/"+batch_id;
 
         var url = loadDDUrl;
@@ -464,6 +468,7 @@ var BatchModule = function () {
         },
         edit : function(){
             setBatchName();
+
         },
         addView: function () {
             showPopup();

@@ -34,17 +34,17 @@
       <div class="page-content">
         <!-- BEGIN PAGE HEADER-->
         <h3 class="page-title">
-          Classes
+          Class / Batch
         </h3>
         <div class="page-bar">
           <ul class="page-breadcrumb breadcrumb">
             <li>
               <i class="fa fa-cogs"></i>
-              <a href="#">Acadamic</a>
+              <a href="#">Class / Batch</a>
               <i class="fa fa-angle-right"></i>
             </li>
             <li>
-              <a href="#">Classes</a>
+              <a href="#">Class List</a>
             </li>
           </ul>
         </div>
