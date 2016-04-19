@@ -6,30 +6,19 @@
 
           <div class='alert alert-success display-hide'>
             <button data-close='alert' class='close'></button>
-            Student attendance saved successfully.
-          </div>
-          <div class='alert alert-danger display-hide'>
-            <button data-close='alert' class='close'></button>
-            You have some form errors. Please check below.
           </div>
 
-
-          <div class="form-group">
-            <label for="attendance_class_id">Class:</label>
-            <select id="attendance_class_id" name="attendance_class_id" class='form-control input-medium' disabled="disabled">
-            </select>
+          <div class="alert alert-danger display-hide">
+              <button class="close" data-close="alert"></button>
+              <span>
+                 You have some form errors. Please check below.
+              </span>
           </div>
 
           <div class="form-group">
-            <label for="attendance_batch_id">Batch:</label>
-            <select id="attendance_batch_id" name="attendance_batch_id" class='form-control input-medium'>
-            </select>
-          </div>
+            <label for="section">Attendance Date :</label>
 
-          <div class="form-group">
-            <label for="section">Date</label>
-            <input class="form-control input-medium date-picker" id="attendance_date" name="attendance_date" size="16" type="text" data-date-format="dd-MM-yyyy" />
-          </div>
+            <input class="form-control input-medium date-picker" id="attendance_date" name="attendance_date" size="16" type="text" data-date-format="dd-MM-yyyy" /></div>
 
           <button type="submit" class="btn btn-info">
             <i class="fa fa-search"></i> Search
@@ -48,10 +37,7 @@
           <i class="fa fa-reorder"></i> Mark Attendance
         </div>
         <div class="tools">
-          <a href="#" class="collapse"></a>
-          <a href="#portlet-config" data-toggle="modal" class="config"></a>
-          <a href="#" class="reload"></a>
-          <a href="#" class="remove"></a>
+
         </div>
       </div>
 

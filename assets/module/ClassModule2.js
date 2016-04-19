@@ -46,6 +46,30 @@ var ClassModule = function () {
                 { data: "section_name" },
                 {
                     data: null, render: function (data, type, row) {
+
+                    var batches = data.batch_names.split(',');
+                    var batchesIds = data.batch_ids.split(',');
+
+                    var colors=["primary","default","info","success","danger","warning"]
+                    var html ='<table class="table table-striped table-bordered table-hover table-full-width">';
+                    $.each( batches, function( key, value ) {
+                        //alert( key + ": " + value );
+                        html +='<tr><td><a href="edit/'+ batchesIds[key]+'" ><span class="label label-'+ colors[key]+'">'+value+'</span></a></td><td><a href="edit/" class="btn btn-default btn-xs purple editView"><i class="fa fa-edit"></i> Edit</a></td></tr>';
+
+                        //html +='<a href="edit/'+ batchesIds[key]+'"><span class="">'+ value+'</span></a><br/>';
+                    });
+
+                    return html+='</table>';
+
+
+                    //return '<a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.class_id + '"><i class="fa fa-edit"></i> Edit</a>';
+                }
+                },
+
+                //{ data: "batch_names" },
+
+                {
+                    data: null, render: function (data, type, row) {
                     // Combine the first and last names into a single table field
                     return '<a href="edit/'+ data.class_id +'" class="btn btn-default btn-xs purple"><i class="fa fa-key"></i> Manage</a>'+
                         '| <a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.class_id + '"><i class="fa fa-edit"></i> Edit</a>'+

@@ -9,46 +9,28 @@
             You have some form errors. Please check below.
           </div>
 
-          <input type="hidden" id="employee_id" name="employee_id" class="form-control"/>
-          <input type="hidden" id="batch_id" name="batch_id" class="form-control"/>
+          <input type="hidden" id="employees_subjects_id" name="employees_subjects_id" class="form-control"/>
 
           <div class='form-group'>
             <label class='control-label col-md-3'>
-              Code:<span class='required'>*</span>
+              Employee name:<span class='required'>*</span>
             </label>
             <div class='col-md-9'>
-              <input type='text' id='code' name='code' class='form-control'/>
+              <select id="employee_id" name="employee_id" class="form-control select2me"></select>
             </div>
           </div>
 
 
           <div class='form-group'>
             <label class='control-label col-md-3'>
-              Name:<span class='required'>*</span>
+              Subject name:<span class='required'>*</span>
             </label>
             <div class='col-md-9'>
-              <input type='text' id='name' name='name' class='form-control'/>
+              <select id="subject_id1" name="subject_id1" class="form-control select2me"></select>
             </div>
           </div>
 
 
-          <div class='form-group'>
-            <label class='control-label col-md-3'>
-              Max weekly classes:<span class='required'>*</span>
-            </label>
-            <div class='col-md-9'>
-              <input type='text' id='max_weekly_classes' name='max_weekly_classes' class='form-control'/>
-            </div>
-          </div>
-
-          <div class='form-group'>
-            <label class='control-label col-md-3'>
-              Credit hours:<span class='required'>*</span>
-            </label>
-            <div class='col-md-9'>
-              <input type='text' id='credit_hours' name='credit_hours' class='form-control'/>
-            </div>
-          </div>
 
           <div class='form-actions fluid'>
             <div class='col-md-offset-3 col-md-9'>

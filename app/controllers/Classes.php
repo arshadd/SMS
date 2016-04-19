@@ -19,37 +19,22 @@ class Classes extends CI_Controller{
    */
   function index() {
 
-    $this->load->view('class/list');
+    $this->load->view('class/classList');
   }
 
+  function batches($id) {
+
+    $this->load->view('class/batchList');
+  }
   function edit($id) {
-	/*$this->load->model('classes_m');
-
-    // Load all of the logged-in user's posts
-    $class = $this->classes_m->class_info($id);
-
-    $data['class'] =null;
-    // If employee were fetched from the database, assign them to $data
-    // so they can be passed into the view.
-    if ($class) {
-      $data['class'] = $class[0];
-    }*/
-
     $this->load->view('class/edit');
   }
 
-  function view($id) {
-	$this->load->model('employee_m');
 
-    // Load all of the logged-in user's posts
-    $employees = $this->employee_m->all_employee( 5 );
+  function index2() {
 
-    // If employee were fetched from the database, assign them to $data
-    // so they can be passed into the view.
-    if ($employees) {
-      $data['employees'] = $employees;
-    }
-    $this->load->view('class/view', $data);
+    $this->load->view('class/list2');
   }
+
 
 }

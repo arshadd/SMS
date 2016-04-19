@@ -22,7 +22,7 @@ var baseAppImageUrl = "http://localhost/myschool/sms/";
 */
 
 var baseApiUrl = window.location.href.substring(0, window.location.href.indexOf("index"))+"index.php/api/";
-var baseAppUrl = window.location.href.substring(0, window.location.href.indexOf("index"))+"index.php/api/";
+var baseAppUrl = window.location.href.substring(0, window.location.href.indexOf("index"))+"index.php/";
 var baseAppImageUrl = window.location.href.substring(0, window.location.href.indexOf("index"));
 
 var DEFAULT_SCHOOL_IMAGE = baseAppImageUrl + "/assets/resource/default/school.png";
@@ -129,11 +129,16 @@ jQuery(document).ready(function() {
 
     function MenuSelection() {
         var path = window.location.pathname;
-        var uri = path.split("/");
+        var uri = path.split("index.php/");
 
+        uri = uri[1].split("/");
         //debugger
-        var controller = uri[uri.length - 2];
-        var action = uri[uri.length - 1];
+        var controller = "";
+        var action = "";
+
+        controller = uri[0];
+        action = uri[1];
+
 
         $('li[data-menu]').attr("class", "");
         $('li[data-menu] span[class="title"]').attr("class", "title arrow down");

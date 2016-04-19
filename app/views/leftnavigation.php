@@ -52,7 +52,7 @@
           <a href="javascript:;">
             <i class="fa fa-bookmark"></i>
             <span class="title">
-              Class
+              Class / Batch
             </span>
             <!--<span class="arrow "></span>-->
           </a>

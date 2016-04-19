@@ -1,37 +1,5 @@
 <div class="row">
   <div class="col-md-12">
-    <div class="portlet">
-      <!--<div class="portlet-title">
-        <div class="caption">
-          <i class="fa fa-cogs"></i>Search
-        </div>
-      </div>-->
-      <div class="portlet-body text-center">
-        <form id="Form_Teacher_Search"  class="form-inline" role="form">
-          <div class="form-group">
-            <label for="teacher_class_id">Class:</label>
-            <select id="teacher_class_id" name="teacher_class_id" class='form-control input-medium' disabled="disabled">
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="teacher_batch_id">Batch:</label>
-            <select id="teacher_batch_id"  name="teacher_batch_id" class='form-control input-medium'>
-            </select>
-          </div>
-
-          <!--<button type="submit" class="btn btn-info">
-            <i class="fa fa-search"></i> Search
-          </button>-->
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="row">
-  <div class="col-md-12">
 
     <div class="alert alert-success display-hide">
       <button data-close="alert" class="close"></button>
@@ -47,7 +15,7 @@
               <i class="fa fa-cogs"></i>Teacher's Subjects
             </div>
             <div class="actions">
-              <a href="#" class="btn btn-primary" id="btnAddSubject" onclick="SubjectModule.addView();">
+              <a href="#" class="btn btn-primary" id="btnAddSubject" onclick="ClassEmployeeModule.addView();">
                 <i class="fa fa-pencil-square-o"></i> Add New Subject
               </a>
             </div>
@@ -57,10 +25,8 @@
             <table id="TeacherGrid" class="table table-striped table-bordered table-hover table-full-width">
               <thead>
               <tr>
-                <th class='hidden-xs'>Code</th>
-                <th class='hidden-xs'>Subject Name</th>
-                <th class='hidden-xs'>Max Weekly Classes</th>
-                <th class='hidden-xs'>Credit Hours</th>
+                <th class='hidden-xs'>Employee</th>
+                <th class='hidden-xs'>Subject</th>
                 <th class="hidden-xs">Manage</th>
               </tr>
               </thead>

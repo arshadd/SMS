@@ -1,23 +1,11 @@
-var TeacherModule = function () {
-
-    //Create Teacher
-    var Teacher = { subject_id:0, batch_id: 0, code:'', name: '', max_weekly_classes: '', credit_hours: ''};
+var ClassEmployeeModule = function () {
 
     //Field Declaration Section
+    var EmployeeFld = $("#Form_Teacher #employee_id");
+    var SubjectFld = $("#Form_Teacher #subject_id1");
 
-    var TeacherIdFld = $('#Form_Teacher #subject_id');
-    var BatchIdFld = $('#Form_Teacher #batch_id');
 
-    var CodeFld = $('#Form_Teacher #code');
-    var NameFld = $('#Form_Teacher #name');
-    var MaxWeeklyClassesFld = $('#Form_Teacher #max_weekly_classes');
-    var CreditHoursFld = $('#Form_Teacher #credit_hours');
-
-    var ClassFld = $('#Form_Teacher_Search #teacher_class_id')
-    var BatchFld = $('#Form_Teacher_Search #teacher_batch_id');
-    //Global
-    var class_id=0;
-    var batch_id=0;
+    var EmployeeSubjectIdFld = $('#Form_Teacher #employees_subjects_id');
 
 
     var TeacherGrid = $('#TeacherGrid');
@@ -31,19 +19,18 @@ var TeacherModule = function () {
     loaderDelete.hide();
 
 
-    var loadGridUrl = baseApiUrl + "subjects/all_batch_subjects/";
-    var editUrl = baseApiUrl + "subjects/find_subject/";
-    var saveUrl = baseApiUrl + "subjects/save";
-    var deleteUrl = baseApiUrl + "subjects/delete";
-    var listUrl = baseAppUrl + "subjects/index";
+    var loadGridUrl = baseApiUrl + "employees_subjects/all_batch_employees_subjects/";
+    var editUrl = baseApiUrl + "employees_subjects/find_employee_subject/";
+    var saveUrl = baseApiUrl + "employees_subjects/save";
+    var deleteUrl = baseApiUrl + "employees_subjects/delete";
 
 
     //--------------------Grid Functions-----------------------//
     var dataTable = null;
-    var loadGrid = function (batch_id) {
+    var loadGrid = function () {
         //ShowSuccessMessage();
         //debugger;
-        // var batch_id = BatchIdFld.val();
+        var batch_id = fetchBatchId();
 
         loadGridUrl = loadGridUrl + batch_id;
         var dataSet = [];
@@ -59,15 +46,13 @@ var TeacherModule = function () {
              },*/
             columns: [
                 //Table Column Header Collection
-                {data: "code"},
-                {data: "name"},
-                {data: "max_weekly_classes"},
-                {data: "credit_hours"},
+                {data: "employee_name"},
+                {data: "subject_name"},
                 {
                     data: null, render: function (data, type, row) {
                     // Combine the first and last names into a single table field
-                    return '<a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.subject_id + '"><i class="fa fa-edit"></i> Edit</a>' +
-                        '| <a href="#" class="btn btn-default btn-xs purple deleteView" data-id="' + data.subject_id + '"><i class="fa fa-trash-o"></i> Delete</a>';
+                    return '<a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.employees_subjects_id + '"><i class="fa fa-edit"></i> Edit</a>' +
+                        '| <a href="#" class="btn btn-default btn-xs purple deleteView" data-id="' + data.employees_subjects_id + '"><i class="fa fa-trash-o"></i> Delete</a>';
                 }
                 },
                 //{ data: "salary", render: $.fn.dataTable.render.number(',', '.', 0, '$') }
@@ -105,38 +90,32 @@ var TeacherModule = function () {
     }
     //--------------------End Grid Functions-----------------------//
 
+    var form1 = $('#Form_Teacher');
+    var error1 = $('.alert-danger', form1);
+    var success1 = $('.alert-success', form1);
 
     //--------------------Form Validation Functions-----------------------//
     var handleValidation = function () {
-        //load All dropdowns
-        //loadAll();
 
         // for more info visit the official plugin documentation:
         // http://docs.jquery.com/Plugins/Validation
         //debugger;
-        var form1 = $('#Form_Teacher');
-        var error1 = $('.alert-danger', form1);
-        var success1 = $('.alert-success', form1);
+
 
         if (form1.validate == null) return;
         //debugger;
-        form1.validate({
+        var validator = form1.validate({
             errorElement: 'span', //default input error message container
-            errorTeacher: 'help-block', // default input error message class
+            errorClass: 'help-block', // default input error message class
             focusInvalid: false, // do not focus the last invalid input
             ignore: "",
+
             rules: {
                 //Field Validation Rule
-                code: {
+                employee_id: {
                     required: true
                 },
-                name: {
-                    required: true
-                },
-                max_weekly_classes: {
-                    required: true
-                },
-                credit_hours: {
+                subject_id1:{
                     required: true
                 }
             },
@@ -172,26 +151,31 @@ var TeacherModule = function () {
             }
         });
 
+        /*form1.validate();
+        $( "#Form_Teacher #subject_id" ).rules( "add", {
+            required: true
+        });*/
+
         //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.
         $('.select2me', form1).change(function () {
             form1.validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
         });
+
+
     }
 
     function save() {
         loader.show();
 
-        var subject = Teacher;
-        // debugger;
-
         //Get values
+        var employee_subject = form1.serializefiles();
 
-        subject.subject_id = TeacherIdFld.val();
+        /*subject.subject_id = TeacherIdFld.val();
         subject.batch_id = fetchBatchId();
         subject.code = CodeFld.val();
         subject.name = NameFld.val();
         subject.max_weekly_classes =MaxWeeklyClassesFld.val();
-        subject.credit_hours = CreditHoursFld.val()
+        subject.credit_hours = CreditHoursFld.val()*/
 
         var url = saveUrl;
         $.ajax({
@@ -199,24 +183,22 @@ var TeacherModule = function () {
             accepts: 'application/json',
             cache: false,
             type: 'POST',
-            data : subject,
+            data: employee_subject,
             dataType: 'jsonp',
+            processData: false,
+            contentType: false, //'multipart/form-data',
+
             success : function(result){
-                // debugger;
+                debugger;
                 loader.hide();
 
-                if(result.status == "success"){
-                    /*var save_id = result.data.subject_id;
-                     //alert(save_id);
-                     TeacherIdFld.val(save_id);*/
+                if (result.status == "success") {
 
                     reloadGrid();
                     ModalCreateTeacher.modal('hide');
-                }else {
+                } else {
                     ShowMessage("error", result.message);
                 }
-                //parent.location.reload();
-                //alert('success'+result);
             },
         });
     }
@@ -263,15 +245,23 @@ var TeacherModule = function () {
         if (data == null) return;
 
         //Set values
-        TeacherIdFld.val(data.subject_id);
+        $.each(data, function(key, val){
+            console.log("key:"+key, ", val:"+val);
+            $('#Form_Teacher #'+key).val(val);
+        });
+
+        $('#Form_Teacher #employee_id').select2("val", data.employee_id);
+        $('#Form_Teacher #subject_id1').select2("val", data.subject_id);
+
+        /*TeacherIdFld.val(data.subject_id);
         CodeFld.val(data.code);
         NameFld.val(data.name);
         MaxWeeklyClassesFld.val(data.max_weekly_classes);
-        CreditHoursFld.val(data.credit_hours);
+        CreditHoursFld.val(data.credit_hours);*/
     }
 
     $('#Form_Teacher #btnDelete').click(function(){
-        deleteData(TeacherIdFld.val());
+        deleteData(EmployeeSubjectIdFld.val());
     });
 
 
@@ -279,12 +269,16 @@ var TeacherModule = function () {
         if (id == null) return;
 
         //Set values
-        TeacherIdFld.val(id);
+        EmployeeSubjectIdFld.val(id);
     }
 
     function showPopup() {
         $('#Form_Teacher').clearForm();
-        TeacherIdFld.val("0");
+
+        EmployeeSubjectIdFld.val("0");
+        EmployeeFld.select2('val','');
+        SubjectFld.select2('val','');
+
         $('#mdlCreateTeacher .modal-title').html("Create Teacher");
         ModalCreateTeacher.modal('show');
     }
@@ -330,21 +324,18 @@ var TeacherModule = function () {
         });
     }
     //--------------------End Form Validation Functions-----------------------//
-    //--------------------Dropdown Functions-----------------------//
-    function loadAll() {
-        //Todo
-        fillDropDownClasses();
+
+    //--------------------Drop down Functions-----------------------//
+    function loadAll(){
+        fillDropDownEmployee();
+        fillDropDownSubject();
+
     }
-    ClassFld.on('change', function(){
-        class_id = ClassFld.val();
-        fillDropDownBatches();
-    });
-    function fillDropDownClasses() {
+    function fillDropDownEmployee() {
+        var loadDDUrl = baseApiUrl + "employees/all_employees";
 
-        var loadDDUrl = baseApiUrl + "classes/all_classes";
-
-        ClassFld.empty();
-        ClassFld.append($("<option     />").val(0).text("Select class"));
+        EmployeeFld.empty();
+        EmployeeFld.append($("<option     />").val(0).text("Select ..."));
         var url = loadDDUrl;
         $.ajax({
             url: url,
@@ -355,21 +346,17 @@ var TeacherModule = function () {
             success: function (result) {
                 // Handle the complete event
                 $.each(result.data, function () {
-                    ClassFld.append($("<option />").val(this.class_id).text(this.name));
+                    EmployeeFld.append($("<option     />").val(this.employee_id).text(this.department_name +' - '+this.full_name));
                 });
-
-                class_id = fetchClassId();
-                ClassFld.val(class_id);
-                ClassFld.trigger('change');
             }
         });
     }
+    function fillDropDownSubject() {
+        var batch_id = fetchBatchId();
+        var loadDDUrl = baseApiUrl + "subjects/all_batch_subjects/"+batch_id;
 
-    function fillDropDownBatches() {
-        var loadDDUrl = baseApiUrl + "batches/all_class_batches/"+class_id;
-
-        BatchFld.empty();
-        BatchFld.append($("<option     />").val(0).text("Select batch"));
+        SubjectFld.empty();
+        SubjectFld.append($("<option     />").val(0).text("Select ..."));
         var url = loadDDUrl;
         $.ajax({
             url: url,
@@ -380,59 +367,23 @@ var TeacherModule = function () {
             success: function (result) {
                 // Handle the complete event
                 $.each(result.data, function () {
-                    BatchFld.append($("<option     />").val(this.batch_id).text(this.name));
+                    SubjectFld.append($("<option     />").val(this.subject_id).text(this.name));
                 });
             }
         });
     }
-
-    function disabledField(mark){
-        if(mark){
-            $('#btnAddTeacher').attr('disabled','disabled');
-        }else {
-            $('#btnAddTeacher').removeAttrs('disabled');
-        }
-    }
-    BatchFld.on('change', function(){
-        var batch_id = this.value;
-
-        if(batch_id==0){
-            disabledField(true);
-        }else {
-            disabledField(false);
-        }
-        var url = loadGridUrl + batch_id;
-
-        //alert();
-        dataTable.ajax.url(url).load();
-
-        //loadGrid(batch_id);
-    });
-    var fetchBatchId = function(){
-        /*var pathname = window.location.pathname;
-         var params = pathname.split('/');
-         var class_id = params[params.length - 1];*/
-        //ClassIdFld.val(class_id);
-        //BatchIdFld.val("1");
-        batch_id = BatchFld.val();
-        if(batch_id =='' || batch_id == null)
-            batch_id="0";
-
-        //batch_id = "1";
-        return batch_id;
-    }
-    var fetchClassId = function(){
-        var pathname = window.location.pathname;
-        var params = pathname.split('/');
-        var class_id = params[params.length - 1];
-        if(class_id =='' || class_id == null)
-            class_id=0;
-
-        return class_id;
-    }
-    //--------------------End Dropdown Functions-----------------------//
+    //--------------------End Drop down Functions-----------------------//
 
     //--------------------Other Functions-----------------------//
+    var fetchBatchId = function(){
+        var pathname = window.location.pathname;
+        var params = pathname.split('/');
+
+        //set in global
+        var batch_id = params[params.length - 1];
+        return batch_id;
+    }
+
     var handleDateTime = function () {
         if (jQuery().datepicker) {
             $('.date-picker').datepicker({
@@ -454,15 +405,10 @@ var TeacherModule = function () {
             loadAll();
 
             //initially load grid
-            disabledField(true);
-            loadGrid(0);
+            loadGrid();
         },
         addView: function () {
             showPopup();
-        },
-        refreshBatchDropDown : function(){
-            fillDropDownBatches();
-            BatchFld.change();
         },
     };
 }();

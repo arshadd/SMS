@@ -1,37 +1,5 @@
 <div class="row">
   <div class="col-md-12">
-    <div class="portlet">
-      <!--<div class="portlet-title">
-        <div class="caption">
-          <i class="fa fa-cogs"></i>Search
-        </div>
-      </div>-->
-      <div class="portlet-body text-center">
-        <form id="Form_Subject_Search"  class="form-inline" role="form">
-          <div class="form-group">
-            <label for="subject_class_id">Class:</label>
-            <select id="subject_class_id" name="subject_class_id" class='form-control input-medium' disabled="disabled">
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="subject_batch_id">Batch:</label>
-            <select id="subject_batch_id"  name="subject_batch_id" class='form-control input-medium'>
-            </select>
-          </div>
-
-          <!--<button type="submit" class="btn btn-info">
-            <i class="fa fa-search"></i> Search
-          </button>-->
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="row">
-  <div class="col-md-12">
 
     <div class="alert alert-success display-hide">
       <button data-close="alert" class="close"></button>
@@ -47,7 +15,7 @@
               <i class="fa fa-cogs"></i>Class's Subjects
             </div>
             <div class="actions">
-              <a href="#" class="btn btn-primary" id="btnAddSubject" onclick="SubjectModule.addView();">
+              <a href="#" class="btn btn-primary" id="btnAddSubject" onclick="ClassSubjectModule.addView();">
                 <i class="fa fa-pencil-square-o"></i> Add New Subject
               </a>
             </div>

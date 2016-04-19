@@ -4,10 +4,13 @@ class Employees_m extends CI_Model {
 
     function all_employees($school_id)
     {
-        $this->db->from('employees');
-        $this->db->where('school_id', $school_id);
-        $this->db->where('is_active', true);
-        $this->db->order_by('created_at', 'desc');
+        $this->db->select('e.*, concat(e.first_name," ", e.middle_name, " ", e.last_name) as full_name, ed.name as department_name');
+        $this->db->from('employees e');
+        $this->db->join('employee_departments ed', 'ed.employee_department_id = e.employee_department_id');
+
+        $this->db->where('e.school_id', $school_id);
+        $this->db->where('e.is_active', true);
+        $this->db->order_by('e.created_at', 'desc');
 
         $employees = $this->db->get()->result();
 

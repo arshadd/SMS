@@ -8,9 +8,11 @@
     ,'<link href="' . base_url() . 'assets/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />'
     ,'<link href="' . base_url() . 'assets/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />'
 
+    , '<link href="' . base_url() . 'assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" type="text/css" />'
+    , '<link href="' . base_url() . 'assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />'
+
     );
 
-    
     include(VIEW_PATH.'header.php');
 ?>
 
@@ -44,23 +46,14 @@
               <i class="fa fa-angle-right"></i>
             </li>
             <li>
-              <a href="#">Classes</a>
+              <a href="#">Batches</a>
             </li>
           </ul>
         </div>
         <!-- END PAGE HEADER-->
         <div class="alert alert-success display-hide">
           <button data-close="alert" class="close"></button>
-          Class Information saved successfully.
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="portlet-body util-btn-margin-bottom-5">
-              <button class="btn btn-primary" onclick="ClassModule.addView();">
-                <i class="fa fa-pencil-square-o"></i>&nbsp;Add New Class
-              </button>
-            </div>
-          </div>
+          Batch Information saved successfully.
         </div>
 
         <div class="row">
@@ -68,21 +61,25 @@
             <div class="portlet">
               <div class="portlet-title">
                 <div class="caption">
-                  Class List
+                  Batches List for Class '<span id="class_name"></span>'
+                </div>
+                <div class="actions">
+                  <a href="#" class="btn btn-primary" onclick="BatchModule.addView();">
+                    <i class="fa fa-pencil-square-o"></i> Add New Batch
+                  </a>
                 </div>
               </div>
               <div class="portlet-body">
-                <table id="ClassGrid" class="table table-striped table-bordered table-hover table-full-width">
+                <table id="BatchGrid" class="table table-striped table-bordered table-hover table-full-width">
                   <thead>
-                    <tr>
-                      <th class='hidden-xs'>Code</th>
-                      <th class='hidden-xs'>Class Name</th>
-                      <th class='hidden-xs'>Sections</th>
-                      <th class="hidden-xs">Manage</th>
-                    </tr>
+                  <tr>
+                    <th class='hidden-xs'>Batch Name</th>
+                    <th class='hidden-xs'>Start Date</th>
+                    <th class='hidden-xs'>End Date</th>
+                    <th class="hidden-xs">Manage</th>
+                  </tr>
                   </thead>
                   <tbody>
-
                   </tbody>
                 </table>
                 
@@ -96,17 +93,19 @@
   </div>
   <!-- END CONTAINER -->
 
-  <div id="mdlCreateClass" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="true" data-width="400">
+  </div>
+
+  <div id="mdlCreateBatch" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="true" data-width="400">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-      <h4 class="modal-title">Create Class</h4>
+      <h4 class="modal-title">Create Batch</h4>
     </div>
     <div class="modal-body">
-      <?php include('_createOrEditClass.php');?>
+      <?php include('_createOrEditBatch.php');?>
     </div>
   </div>
 
-  <div id="mdlDeleteClass" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="true" data-width="400">
+  <div id="mdlDeleteBatch" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="true" data-width="400">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
       <h4 class="modal-title">Confirm Delete</h4>
@@ -129,7 +128,7 @@
                 <i class="fa fa-trash-o"></i> Delete
               </button>
               <label>
-                <div id="loaderDelete"><img src="<?php echo base_url() . '/assets/img/input-spinner.gif'; ?>"/></div>
+                <div id="loader"><img src="<?php echo base_url() . '/assets/img/input-spinner.gif'; ?>"/></div>
               </label>
             </div>
           </div>
@@ -137,6 +136,8 @@
       </form>
     </div>
   </div>
+
+
 
   <?php
 
@@ -146,6 +147,10 @@
       ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/jquery-validation/dist/jquery.validate.min.js" ></script>'
       ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/select2/select2.min.js" ></script>'
 
+    , '<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-daterangepicker/moment.min.js" ></script>'
+    , '<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-daterangepicker/daterangepicker.js" ></script>'
+    , '<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" ></script>'
+
     ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" ></script>'
     ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-modal/js/bootstrap-modal.js"" ></script>'
 
@@ -153,11 +158,11 @@
     
     $pageJsScript  = array(
       '<script type="text/javascript" src="' . base_url() . 'assets/module/util.js" ></script>'
-      ,'<script type="text/javascript" src="' . base_url() . 'assets/module/ClassModule.js" ></script>'
+      ,'<script type="text/javascript" src="' . base_url() . 'assets/module/Class/BatchModule.js" ></script>'
       );
       
     $pageJsCalls  = array(
-      'ClassModule.init();'
+      'BatchModule.init();'
     );
     
     include(VIEW_PATH.'footer.php');

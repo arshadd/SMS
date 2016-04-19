@@ -16,9 +16,10 @@ var ClassStudentModule = function () {
 
     //--------------------Grid Functions-----------------------//
     var dataTable = null;
-    var loadGrid = function (batch_id) {
+    var loadGrid = function () {
         //ShowSuccessMessage();
 
+        var batch_id = fetchBatchId();
         var dataSet = [];
 
         loadGridUrl = loadGridUrl + batch_id;
@@ -57,94 +58,27 @@ var ClassStudentModule = function () {
 
     //--------------------End Grid Functions-----------------------//
 
-    //--------------------Dropdown Functions-----------------------//
-    function loadAll() {
-        //Todo
-        fillDropDownClasses();
-    }
-    ClassFld.on('change', function(){
-        class_id = ClassFld.val();
-        fillDropDownBatches();
-    });
-    function fillDropDownClasses() {
-
-        var loadDDUrl = baseApiUrl + "classes/all_classes";
-
-        ClassFld.empty();
-        ClassFld.append($("<option     />").val(0).text("Select class"));
-        var url = loadDDUrl;
-        $.ajax({
-            url: url,
-            accepts: 'application/json',
-            cache: false,
-            type: 'GET',
-            dataType: 'jsonp',
-            success: function (result) {
-                // Handle the complete event
-                $.each(result.data, function () {
-                    ClassFld.append($("<option />").val(this.class_id).text(this.name));
-                });
-
-                class_id = fetchClassId();
-                ClassFld.val(class_id);
-                ClassFld.trigger('change');
-            }
-        });
-    }
-
-    function fillDropDownBatches() {
-        var loadDDUrl = baseApiUrl + "batches/all_class_batches/"+class_id;
-
-        BatchFld.empty();
-        BatchFld.append($("<option     />").val(0).text("Select batch"));
-        var url = loadDDUrl;
-        $.ajax({
-            url: url,
-            accepts: 'application/json',
-            cache: false,
-            type: 'GET',
-            dataType: 'jsonp',
-            success: function (result) {
-                // Handle the complete event
-                $.each(result.data, function () {
-                    BatchFld.append($("<option     />").val(this.batch_id).text(this.name));
-                });
-            }
-        });
-    }
-
-    BatchFld.on('change', function(){
-        var batch_id = this.value;
-
-        var url = loadGridUrl + batch_id;
-
-        //alert();
-        dataTable.ajax.url(url).load();
-
-        //loadGrid(batch_id);
-    });
-    var fetchClassId = function(){
+    //--------------------Other Functions-----------------------//
+    var fetchBatchId = function(){
         var pathname = window.location.pathname;
         var params = pathname.split('/');
-        var class_id = params[params.length - 1];
-        if(class_id =='' || class_id == null)
-            class_id=0;
 
-        return class_id;
+        //set in global
+        var batch_id = params[params.length - 1];
+        return batch_id;
     }
+    //--------------------End Other Functions-----------------------//
 
-    //--------------------End Dropdown Functions-----------------------//
 
     return {
         //main function to initiate the module
         init : function(){
-            loadAll();
 
             //Grid loading
             if (!jQuery().dataTable) {
                 return;
             }
-            loadGrid(0);
+            loadGrid();
         }
     };
 }();

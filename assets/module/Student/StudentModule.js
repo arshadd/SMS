@@ -1,5 +1,9 @@
 var StudentModule = function () {
 
+    //Create Batch
+    var School = { school_id: 0};
+
+
     //Global
     var batch_id=0;
 
@@ -15,6 +19,8 @@ var StudentModule = function () {
 
     var StudentClassFld = $('#Form_Student #class_id');
     var StudentBatchFld = $('#Form_Student #batch_id');
+
+
 
     var StudentGrid = $('#StudentGrid');
     var ModalCreateStudent = $('#mdlCreateStudent');
@@ -90,12 +96,12 @@ var StudentModule = function () {
     // Edit record
     StudentGrid.on( 'click', 'a.editView', function (e) {
         //alert('my edit'+id);
-        //error.hide();
-        //success.hide();
+        error.hide();
+        success.hide();
 
         var id = $(this).data('id');
         edit(id);
-        $('#mdlCreateStudent .modal-title').html("Edit Student");
+        $('.modal-title').html("Edit Student");
         ModalCreateStudent.modal('show');
     });
 

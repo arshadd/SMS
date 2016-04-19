@@ -11,10 +11,18 @@ class Classes_m extends CI_Model
 
     function all_classes($school_id)
     {
+       /* $this->db->select('c.*,GROUP_CONCAT(b.batch_id) AS batch_ids, GROUP_CONCAT(b.name) AS batch_names');
+        $this->db->from('classes c');
+        $this->db->join('batches b', 'b.class_id = c.class_id');
+        $this->db->where('c.school_id', $school_id);
+        $this->db->where('c.is_active', true);
+        $this->db->group_by('c.class_id');
+
+        $this->db->order_by('c.created_at', 'desc');*/
+
         $this->db->from('classes');
         $this->db->where('school_id', $school_id);
         $this->db->where('is_active', true);
-        $this->db->order_by('created_at', 'desc');
 
         $classes = $this->db->get()->result();
 

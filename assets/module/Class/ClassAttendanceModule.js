@@ -1,16 +1,7 @@
 var ClassAttendanceModule = function () {
 
-    //Create Class
-    var Attendance = { AttendanceId: 0, RegisterNumber: '', DateOfJoining: '', FirstName: '', LastName: '', DateOfBirth: '', Gender: '', BloodGroup: '', PlaceOfBirth: '', Nationality: '', RollNumber: '', Religion: '', PresentAddress: '', PermanentAddress: '', Country: '', State: '', City: '', Mobile: '', Phone: '', Email: '', Photo: '', GuardianName: '', GuardianRelation: '', GuardianEducation: '', GuardianOccupation: '', GuardianIncome: '', GuardianCountry: '', GuardianState: '', GuardianCity: '', GuardianPhone: '', GuardianEmail: '', GuardianMobile: '', FatherName: '', FatherMobile: '', FatherJob: '', MotherName: '', MotherMobile: '', MotherJob: '', Status: '' };
-
     //Field Declaration Section
     
-    var ClassFld = $('#Form_Class_Attendances_Search #attendance_class_id');
-    var BatchFld = $('#Form_Class_Attendances_Search #attendance_batch_id');
-    //Global
-    var class_id=0;
-    var batch_id=0;
-
     var AttendanceGrid = $('#AttendanceGrid');
 
     var AttendanceDateFld = $('#Form_Class_Attendances_Search #attendance_date');
@@ -70,13 +61,14 @@ var ClassAttendanceModule = function () {
                 },
                 {data: "full_name"},
                 {data: "class_roll_no"},
-                { data: null, render: function ( data, type, full, meta ) {
+                {data: null, render: function ( data, type, full, meta ) {
 
                     var name = "attendance_status_"+ data.student_id;
                     var student_attendance = "student_attendance_id_"+ data.student_id;
                     var checked1 = "";
                     var checked2 = "";
                     var checked3 = "";
+                    var batch_id = fetchBatchId();
 
                     if(data.attendance_status!=null) {
                         if (data.attendance_status == "P") {
@@ -92,7 +84,7 @@ var ClassAttendanceModule = function () {
                                 '<input type="hidden" name="student_id[]" value="'+ data.student_id +'"/>'+
                                 '<input type="hidden" name="'+ student_attendance +'" value="'+ data.student_attendance_id +'"/>'+
                                 '<input type="hidden" name="attendance_date" value="'+ AttendanceDateFld.val() +'"/>'+
-                                '<input type="hidden" name="batch_id" value="'+ BatchFld.val() +'"/>'+
+                                '<input type="hidden" name="batch_id" value="'+ batch_id +'"/>'+
                                 '<label class="radio-inline"> '+
                                 '<input type="radio" name="'+ name +'" '+ checked1 +' value="P"/> Present '+
                                 '</label> '+
@@ -196,7 +188,7 @@ var ClassAttendanceModule = function () {
     }
 
     function search(){
-        batch_id = BatchFld.val();
+        var batch_id = fetchBatchId();
         var attendance_date = AttendanceDateFld.val();
 
         var url = loadGridUrl + batch_id+'?attendance_date='+attendance_date;
@@ -301,79 +293,6 @@ var ClassAttendanceModule = function () {
     }
     //--------------------End Form Validation Functions-----------------------//
 
-
-    //--------------------Dropdown Functions-----------------------//
-    function loadAll() {
-        //Todo
-        fillDropDownClasses();
-    }
-    ClassFld.on('change', function(){
-        class_id = ClassFld.val();
-        fillDropDownBatches();
-    });
-    function fillDropDownClasses() {
-
-        var loadDDUrl = baseApiUrl + "classes/all_classes";
-
-        ClassFld.empty();
-        ClassFld.append($("<option     />").val('').text("Select class"));
-        var url = loadDDUrl;
-        $.ajax({
-            url: url,
-            accepts: 'application/json',
-            cache: false,
-            type: 'GET',
-            dataType: 'jsonp',
-            success: function (result) {
-                // Handle the complete event
-                $.each(result.data, function () {
-                    ClassFld.append($("<option />").val(this.class_id).text(this.name));
-                });
-
-                class_id = fetchClassId();
-                ClassFld.val(class_id);
-                ClassFld.trigger('change');
-            }
-        });
-    }
-
-    function fillDropDownBatches() {
-        var loadDDUrl = baseApiUrl + "batches/all_class_batches/"+class_id;
-
-        BatchFld.empty();
-        BatchFld.append($("<option     />").val('').text("Select batch"));
-        var url = loadDDUrl;
-        $.ajax({
-            url: url,
-            accepts: 'application/json',
-            cache: false,
-            type: 'GET',
-            dataType: 'jsonp',
-            success: function (result) {
-                // Handle the complete event
-                $.each(result.data, function () {
-                    BatchFld.append($("<option     />").val(this.batch_id).text(this.name));
-                });
-            }
-        });
-    }
-
-   /* BatchFld.on('change', function(){
-        batch_id = BatchFld.val();
-    });*/
-
-    var fetchClassId = function(){
-        var pathname = window.location.pathname;
-        var params = pathname.split('/');
-        var class_id = params[params.length - 1];
-        if(class_id =='' || class_id == null)
-            class_id=0;
-
-        return class_id;
-    }
-
-    //--------------------End Dropdown Functions-----------------------//
-
     //--------------------Other Functions-----------------------//
     var handleDateTime = function () {
         if (jQuery().datepicker) {
@@ -395,6 +314,16 @@ var ClassAttendanceModule = function () {
 
         $('input:radio').filter('[value="'+ v +'"]').attr('checked', "checked");
     });
+
+    var fetchBatchId = function(){
+        var pathname = window.location.pathname;
+        var params = pathname.split('/');
+
+        //set in global
+        var batch_id = params[params.length - 1];
+        return batch_id;
+    }
+
     //--------------------End Other Functions-----------------------//
 
 
@@ -402,7 +331,6 @@ var ClassAttendanceModule = function () {
         //main function to initiate the module
         init : function(){
             handleValidation();
-            loadAll();
             var d = new Date();
             AttendanceDateFld.val(GetDateFormatOnly(d.yyyymmdd()));
 

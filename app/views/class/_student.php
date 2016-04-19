@@ -1,37 +1,5 @@
 <div class="row">
   <div class="col-md-12">
-    <div class="portlet">
-      <!--<div class="portlet-title">
-        <div class="caption">
-          <i class="fa fa-cogs"></i>Search
-        </div>
-      </div>-->
-      <div class="portlet-body text-center">
-        <form id="Form_Class_Student_Search"  class="form-inline" role="form">
-          <div class="form-group">
-            <label for="class_id">Class:</label>
-            <select id="class_id" name="subject_classes" class='form-control input-medium' disabled="disabled">
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="batch_id">Batch:</label>
-            <select id="batch_id" class='form-control input-medium'>
-            </select>
-          </div>
-
-          <!--<button type="submit" class="btn btn-info">
-            <i class="fa fa-search"></i> Search
-          </button>-->
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="row">
-  <div class="col-md-12">
 
     <div class="alert alert-success display-hide">
       <button data-close="alert" class="close"></button>

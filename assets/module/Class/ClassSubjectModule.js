@@ -1,4 +1,4 @@
-var SubjectModule = function () {
+var ClassSubjectModule = function () {
 
     //Create Subject
     var Subject = { subject_id:0, batch_id: 0, code:'', name: '', max_weekly_classes: '', credit_hours: ''};
@@ -40,7 +40,8 @@ var SubjectModule = function () {
 
     //--------------------Grid Functions-----------------------//
     var dataTable = null;
-    var loadGrid = function (batch_id) {
+    var loadGrid = function () {
+        var batch_id = fetchBatchId();
         //ShowSuccessMessage();
         //debugger;
         // var batch_id = BatchIdFld.val();
@@ -331,7 +332,7 @@ var SubjectModule = function () {
     }
     //--------------------End Form Validation Functions-----------------------//
     //--------------------Dropdown Functions-----------------------//
-    function loadAll() {
+    /*function loadAll() {
         //Todo
         fillDropDownClasses();
     }
@@ -409,9 +410,9 @@ var SubjectModule = function () {
         //loadGrid(batch_id);
     });
     var fetchBatchId = function(){
-        /*var pathname = window.location.pathname;
+        /!*var pathname = window.location.pathname;
          var params = pathname.split('/');
-         var class_id = params[params.length - 1];*/
+         var class_id = params[params.length - 1];*!/
         //ClassIdFld.val(class_id);
         //BatchIdFld.val("1");
         batch_id = BatchFld.val();
@@ -429,6 +430,15 @@ var SubjectModule = function () {
             class_id=0;
 
         return class_id;
+    }*/
+
+    var fetchBatchId = function(){
+        var pathname = window.location.pathname;
+        var params = pathname.split('/');
+
+        //set in global
+        var batch_id = params[params.length - 1];
+        return batch_id;
     }
     //--------------------End Dropdown Functions-----------------------//
 
@@ -451,18 +461,18 @@ var SubjectModule = function () {
         init : function(){
             handleDateTime();
             handleValidation();
-            loadAll();
+            //loadAll();
 
             //initially load grid
-            disabledField(true);
-            loadGrid(0);
+            //disabledField(true);
+            loadGrid();
         },
         addView: function () {
             showPopup();
         },
-        refreshBatchDropDown : function(){
+        /*refreshBatchDropDown : function(){
             fillDropDownBatches();
             BatchFld.change();
-        },
+        },*/
     };
 }();
