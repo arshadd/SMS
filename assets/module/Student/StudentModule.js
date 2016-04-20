@@ -188,7 +188,9 @@ var StudentModule = function () {
             success: function (result) {
                 // Handle the complete event
                 $.each(result.data, function () {
-                    StudentBatchFld.append($("<option     />").val(this.batch_id).text(this.class_name+' / '+this.name));
+
+                    StudentBatchFld.append($("<option     />").val(this.batch_id).text(this.full_name));
+                    //StudentBatchFld.append($("<option     />").val(this.batch_id).text(this.class_name+' / '+this.name));
                 });
 
                 StudentBatchFld.val(batch_id);
@@ -468,6 +470,8 @@ var StudentModule = function () {
         AdmissionDateFld.val(GetDateFormatOnly(d.yyyymmdd()));
         
         PhotoFld.attr("src", DEFAULT_STUDENT_IMAGE);
+
+        //alert('default');
         //Enables some fields
         disabledField(false);
 

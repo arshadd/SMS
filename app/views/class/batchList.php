@@ -118,6 +118,14 @@
     <div class="modal-body">
       <form class="form-horizontal" method="post">
         <div class="form-body">
+          
+          <div class="alert alert-danger display-hide">
+            <button class="close" data-close="alert"></button>
+                <span>
+                   You have some form errors. Please check below.
+                </span>
+          </div>
+
           <div class="alert alert-info display">
               <span>
                  Are you sure want to delete?

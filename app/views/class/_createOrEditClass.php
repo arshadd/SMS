@@ -7,9 +7,9 @@
 
                     <div class="alert alert-danger display-hide">
                         <button class="close" data-close="alert"></button>
-              <span>
-                 You have some form errors. Please check below.
-              </span>
+                          <span>
+                             You have some form errors. Please check below.
+                          </span>
                     </div>
 
                     <input type="hidden" id="class_id" name="class_id" class="form-control"/>

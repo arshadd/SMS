@@ -407,6 +407,10 @@ var ClassEmployeeModule = function () {
             //initially load grid
             loadGrid();
         },
+        refresh : function(){
+            reloadGrid();
+            fillDropDownSubject();
+        },
         addView: function () {
             showPopup();
         },

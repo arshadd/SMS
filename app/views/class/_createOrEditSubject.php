@@ -34,7 +34,7 @@
 
                     <div class='form-group'>
                         <label class='control-label col-md-3'>
-                            Max weekly classes:<span class='required'>*</span>
+                            Max weekly classes:
                         </label>
                         <div class='col-md-9'>
                             <input type='text' id='max_weekly_classes' name='max_weekly_classes' class='form-control'/>
@@ -43,7 +43,7 @@
 
                     <div class='form-group'>
                         <label class='control-label col-md-3'>
-                            Credit hours:<span class='required'>*</span>
+                            Credit hours:
                         </label>
                         <div class='col-md-9'>
                             <input type='text' id='credit_hours' name='credit_hours' class='form-control'/>

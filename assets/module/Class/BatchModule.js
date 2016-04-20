@@ -263,6 +263,26 @@ var BatchModule = function () {
 
     }
 
+
+    function ShowDeleteMessage(type, message){
+        if (message == 'undefined') return;
+
+        var error = $('#mdlDeleteBatch .alert-danger');
+        var success = $('#mdlDeleteBatch .alert-success');
+
+        message = '<button data-close="alert" class="close"></button>'+ message;
+
+        if (type == "error") {
+            error.html(message);
+            error.show();
+        }else if(type=="success")
+        {
+            success.html(message);
+            success.show();
+        }
+    }
+
+
     var edit = function (id) {
         //alert(id);
 
@@ -314,6 +334,8 @@ var BatchModule = function () {
     function showDelete(id) {
         if (id == null) return;
 
+        var error = $('#mdlDeleteBatch .alert-danger');
+        error.hide();
         //Set values
         BatchIdFld.val(id);
     }
@@ -338,10 +360,10 @@ var BatchModule = function () {
         //alert(id);
 
         //var batch = Batch;
-        //debugger;
+        debugger;
 
         //Get values
-        batch.batch_id = id;
+        var batch = {batch_id:id};
 
         var url = deleteUrl;
         $.ajax({
@@ -352,7 +374,7 @@ var BatchModule = function () {
             data : batch,
             dataType: 'jsonp',
             success : function(result){
-                //debugger;
+                debugger;
                 loaderDelete.hide();
 
                 if(result.status == "success"){
@@ -363,7 +385,7 @@ var BatchModule = function () {
                     reloadGrid();
                     ModalDeleteBatch.modal('hide');
                 }else {
-                    ShowMessage("error", result.message);
+                    ShowDeleteMessage("error", result.message);
                 }
             },
         });
@@ -425,7 +447,8 @@ var BatchModule = function () {
             success: function (result) {
                 // Handle the complete event
                 var data = result.data[0];
-                ClassBatchFld.text(data.class_name +' - '+data.name+' ('+ GetDateFormatOnly(data.start_date) +' to '+ GetDateFormatOnly(data.end_date) +' )');
+                ClassBatchFld.text(data.full_name);
+                //ClassBatchFld.text(data.class_name +' - '+data.name+' ('+ GetDateFormatOnly(data.start_date) +' to '+ GetDateFormatOnly(data.end_date) +' )');
             }
         });
     }

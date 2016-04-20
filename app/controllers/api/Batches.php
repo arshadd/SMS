@@ -107,7 +107,7 @@ class Batches extends REST_Controller {
         if ($response['result']=== FALSE) {
             $this->response(array("status" => "failed", "message" => $response['message'], "data" => null));
         } else {
-            $this->response(array("status" => "success", "message" => $response['message'], "data" => $batch_id));
+            $this->response(array("status" => "success", "message" => $response['message'], "data" => $response['data']));
         }
     }
 

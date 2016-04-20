@@ -228,7 +228,8 @@
             Total Experience:
           </label>
           <div class="col-md-8">
-            <select id="experience_year" name="experience_year"><option value="">Year</option>
+            <select id="experience_year" class="form-control" name="experience_year">
+              <option value="">Year</option>
               <option value="0">0</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -281,7 +282,8 @@
               <option value="49">49</option>
               <option value="50">50</option></select>
 
-            <select id="experience_month" name="experience_month"><option value="">Month</option>
+            <select id="experience_month" name="experience_month" class="form-control">
+              <option value="">Month</option>
               <option value="0">0</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -445,52 +447,39 @@
     <h4 class="form-section">Upload Picture Detail</h4>
     <div class="row">
       <div class="col-md-12">
-        <div class="form-group">
-          <label class="control-label col-md-2">
-            Picture:<span class="required">*</span>
-          </label>
-          <div class="col-md-10">
-            <div class="thumbnail" style="width: 150px;">
-              <img id="photo" name="photo" alt="" src=""/>
-            </div>
-            <div class="margin-top-10 fileupload fileupload-new" data-provides="fileupload" id="fileupload">
-              <div class="input-group input-group-fixed">
-            <span class="input-group-btn">
-              <span class="uneditable-input">
-                <i class="fa fa-file fileupload-exists"></i>
-                <span class="fileupload-preview">
-                </span>
-              </span>
-            </span>
-            <span class="btn btn-default btn-file">
-              <span class="fileupload-new">
-                <i class="fa fa-paper-clip"></i> Select file
-              </span>
-              <span class="fileupload-exists">
-                <i class="fa fa-undo"></i> Change
-              </span>
-              <input type="file" class="default" id="employeePhoto" name="employeePhoto"/>
-
-            </span>
-                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">
-                  <i class="fa fa-trash-o"></i> Remove
-                </a>
+        <div class="form-group ">
+          <label class="control-label col-md-3">Photo</label>
+          <div class="col-md-9">
+            <div class="fileupload fileupload-new" data-provides="fileupload">
+              <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                <img id="photo" name="photo"  src="../../assets/resource/default/employee.png" alt=""/>
+              </div>
+              <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
+              </div>
+              <div>
+                            <span class="btn btn-default btn-file">
+                                <span class="fileupload-new">
+                                    <i class="fa fa-paper-clip"></i> Select image
+                                </span>
+                                <span class="fileupload-exists">
+                                    <i class="fa fa-undo"></i> Change
+                                </span>
+                                <input type="file" id="employeePhoto" name="employeePhoto" class="default"/>
+                            </span>
+                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
               </div>
             </div>
-        <span class="help-block">
-          Provide photo
-        </span>
-
-        <span class="label label-danger">
-          NOTE!
-        </span>
-        <span>
-          Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only
-        </span>
+                    <span class="label label-danger">
+                         NOTE!
+                    </span>
+                    <span>
+                         Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only
+                    </span>
           </div>
         </div>
       </div>
     </div>
+
 
 
     <div class="form-actions fluid">

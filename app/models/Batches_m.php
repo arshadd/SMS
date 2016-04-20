@@ -4,11 +4,13 @@ class Batches_m extends CI_Model
 {
     function all_batches($school_id)
     {
-        $this->db->select('batches.*, classes.name as class_name');
+        $this->db->select('batches.*, concat(classes.name," - ", classes.section_name, " / ", batches.name, " (", date_format(start_date, "%b %Y"), " - ", date_format(end_date, "%b %Y"), ")") as full_name, classes.name as class_name');
         $this->db->from('batches');
         $this->db->join('classes', 'classes.class_id = batches.class_id');
         $this->db->where('batches.school_id', $school_id);
         $this->db->where('batches.is_active', true);
+        $this->db->where('batches.is_deleted', false);
+
         $this->db->order_by('batches.created_at', 'desc');
 
         $batches = $this->db->get()->result();
@@ -22,11 +24,13 @@ class Batches_m extends CI_Model
 
     function all_class_batches($school_id, $class_id)
     {
-        $this->db->select('batches.*, classes.name as class_name');
+        $this->db->select('batches.*, concat(classes.name," - ", classes.section_name, " / ", batches.name, " (", date_format(start_date, "%b %Y"), " - ", date_format(end_date, "%b %Y"), ")") as full_name, classes.name as class_name');
         $this->db->from('batches');
         $this->db->join('classes', 'classes.class_id = batches.class_id');
         $this->db->where('batches.school_id', $school_id);
         $this->db->where('batches.class_id', $class_id);
+        $this->db->where('batches.is_active', true);
+        $this->db->where('batches.is_deleted', false);
 
         $batches = $this->db->get()->result();
 
@@ -39,11 +43,14 @@ class Batches_m extends CI_Model
 
     function find_batch($school_id, $batch_id)
     {
-        $this->db->select('batches.*, classes.name as class_name');
+        $this->db->select('batches.*, concat(classes.name," - ", classes.section_name, " / ", batches.name, " (", date_format(start_date, "%b %Y"), " - ", date_format(end_date, "%b %Y"), ")") as full_name, classes.name as class_name');
         $this->db->from('batches');
         $this->db->join('classes', 'classes.class_id = batches.class_id');
         $this->db->where('batches.school_id', $school_id);
         $this->db->where('batches.batch_id', $batch_id);
+        $this->db->where('batches.is_active', true);
+        $this->db->where('batches.is_deleted', false);
+
 
         $batch = $this->db->get()->result();
 
@@ -97,31 +104,60 @@ class Batches_m extends CI_Model
         return $response;
     }
 
+
+    function delete_check($batch_id)
+    {
+        $response = array('result' => TRUE, 'message'=>'');
+
+        //------------------ for check subject or students ----------------------//
+        $sql = "SELECT s.batch_id FROM subjects s WHERE s.batch_id = ?
+                UNION
+                SELECT st.batch_id FROM students st WHERE st.batch_id = ?";
+
+        $query = $this->db->query($sql, array($batch_id, $batch_id));
+
+        $result = $query->result();
+
+        if (is_array($result) && count($result) > 0) {
+            $response['result'] = FALSE;
+            $response['message'] = "Unable to delete batch. Please remove associated subjects or students.";
+        }
+        //----------------------------------------------------------//
+
+        return $response;
+    }
+
     function delete($batch_id)
     {
         if ($batch_id > 0) {
 
             //Delete
+            $response = $this->delete_check($batch_id);
+            if ($response['result'] === FALSE) {
+                $result = FALSE;
+                $message = $response['message'];
+            } else {
 
-            //Is_active set to false
-            $batch = array('is_active'=> false);
+                //Is_active set to false
+                $batch = array('is_deleted' => true);
 
-            //update
-            $this->db->where('batch_id', $batch_id);
-            $result = $this->db->update('batches', $batch);
+                //update
+                $this->db->where('batch_id', $batch_id);
+                $result = $this->db->update('batches', $batch);
 
+                if($result===TRUE){
+                    $message ="Class deleted";
+                }else{
+                    $message ="Error for deleting class information";
+                }
+            }
             //return $result;
-        }
-
-        if($result===TRUE){
-            $message ="Class deleted";
-        }else{
-            $message ="Error for deleting class information";
         }
 
         $response = array(
             'result' => $result,
-            'message' => $message
+            'message' => $message,
+            'data' => array('batch_id' => $batch_id)
         );
 
         return $response;

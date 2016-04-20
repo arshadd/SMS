@@ -67,6 +67,8 @@ CREATE TABLE `classes` (
 	`section_name` varchar(50) DEFAULT NULL,
 
 	`is_active` bool DEFAULT true,
+	`is_deleted` bool DEFAULT false,
+
 	`created_at` datetime DEFAULT NULL,
 	`updated_at` datetime DEFAULT NULL,
 	`school_id` int(11) NOT NULL,
@@ -136,6 +138,8 @@ CREATE TABLE `batches` (
 	`employee_id` int(11) DEFAULT NULL ,
 
 	`is_active` bool DEFAULT true,
+	`is_deleted` bool DEFAULT false,
+
 	`created_at` datetime DEFAULT NULL,
 	`updated_at` datetime DEFAULT NULL,
 	`school_id` int(11) NOT NULL,
