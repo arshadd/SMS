@@ -103,7 +103,7 @@
   </div>
   <!-- END CONTAINER -->
 
-  <div id="mdlCreateStudent" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="true" data-width="850">
+  <div id="mdlCreateStudent" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="true" data-width="950">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
       <h4 class="modal-title">Create Student</h4>

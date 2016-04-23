@@ -134,12 +134,12 @@ var ClassSubjectModule = function () {
                 name: {
                     required: true
                 },
-                max_weekly_classes: {
+               /* max_weekly_classes: {
                     required: true
                 },
                 credit_hours: {
                     required: true
-                }
+                }*/
             },
 
             invalidHandler: function (event, validator) { //display error alert on form submit
@@ -213,6 +213,8 @@ var ClassSubjectModule = function () {
 
                     reloadGrid();
                     ModalCreateSubject.modal('hide');
+
+                    ClassEmployeeModule.refresh();
                 }else {
                     ShowMessage("error", result.message);
                 }

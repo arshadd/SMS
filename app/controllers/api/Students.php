@@ -63,6 +63,19 @@ class Students extends REST_Controller {
         $this->response(array("status" => "success", "message" => "", "data" => $student));
     }
 
+    function new_roll_no_get($batch_id)
+    {
+        if (is_null($batch_id)) {
+            $this->response(array("status" => "false", "message" => "Invalid batch id", "data" => null));
+        } else {
+            //Get logged school id
+            $school_id = $this->session->userdata('school_id');
+
+            $new_student_rollno = $this->students_m->new_roll_no($school_id, $batch_id);
+            $this->response(array("status" => "success", "message" => "", "data" => $new_student_rollno));
+        }
+    }
+
     function save_post()
     {
         //Get logged school id

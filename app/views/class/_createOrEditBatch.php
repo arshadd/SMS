@@ -43,6 +43,14 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            Roll No Prefix :
+                        </label>
+                        <div class="col-md-9">
+                            <input type="text" id="roll_no_prefix" name="roll_no_prefix" class="form-control"/>
+                        </div>
+                    </div>
 
                     <div class="form-actions fluid">
                         <div class="col-md-offset-3 col-md-9">

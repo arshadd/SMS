@@ -1,5 +1,5 @@
 <?php
-    $title = "Classes List";
+    $title = "Batches List";
     
     $pageCss  = array(
         '<link href="' . base_url() . 'assets/plugins/select2/select2_conquer.css" rel="stylesheet" type="text/css" />'
@@ -36,17 +36,21 @@
       <div class="page-content">
         <!-- BEGIN PAGE HEADER-->
         <h3 class="page-title">
-          Classes
+          Class / Batch
         </h3>
         <div class="page-bar">
           <ul class="page-breadcrumb breadcrumb">
             <li>
               <i class="fa fa-cogs"></i>
-              <a href="#">Acadamic</a>
+              <a href="#">Class / Batch</a>
               <i class="fa fa-angle-right"></i>
             </li>
             <li>
-              <a href="#">Batches</a>
+              <a href="../../classes/index">Class List</a>
+              <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+              <a href="#">Batch List</a>
             </li>
           </ul>
         </div>
@@ -76,6 +80,7 @@
                     <th class='hidden-xs'>Batch Name</th>
                     <th class='hidden-xs'>Start Date</th>
                     <th class='hidden-xs'>End Date</th>
+                    <th class='hidden-xs'>RollNo Refix</th>
                     <th class="hidden-xs">Manage</th>
                   </tr>
                   </thead>
@@ -113,6 +118,14 @@
     <div class="modal-body">
       <form class="form-horizontal" method="post">
         <div class="form-body">
+          
+          <div class="alert alert-danger display-hide">
+            <button class="close" data-close="alert"></button>
+                <span>
+                   You have some form errors. Please check below.
+                </span>
+          </div>
+
           <div class="alert alert-info display">
               <span>
                  Are you sure want to delete?

@@ -42,15 +42,15 @@ include(VIEW_PATH . 'header.php');
                 <ul class="page-breadcrumb breadcrumb">
                     <li>
                         <i class="fa fa-cogs"></i>
-                        <a href="#">Acadamics</a>
+                        <a href="#">Class / Batch</a>
                         <i class="fa fa-angle-right"></i>
                     </li>
                     <li>
-                        <a href="<?php echo base_url() . '/index.php/classes/index' ?>">Class</a>
+                        <a href="#" id="lnkBatchList">Batch List</a>
                         <i class="fa fa-angle-right"></i>
                     </li>
                     <li>
-                        <a href="#">Edit Class</a>
+                        <a href="#">Class Management</a>
                     </li>
                 </ul>
             </div>
@@ -97,12 +97,12 @@ include(VIEW_PATH . 'header.php');
                     <div class="tabbable tabbable-custom">
                         <ul class="nav nav-tabs">
 
-                            <li class="">
+                            <li class="active">
                                 <a href="#tab_1_4" data-toggle="tab">
                                     <i class="fa fa-sitemap"></i> Subjects
                                 </a>
                             </li>
-                            <li class="active">
+                            <li class="">
                                 <a href="#tab_1_5" data-toggle="tab">
                                     <i class="fa fa-female"></i> Teachers
                                 </a>
@@ -133,14 +133,14 @@ include(VIEW_PATH . 'header.php');
                         <div class="tab-content">
 
                             <!--end tab-pane-->
-                            <div class="tab-pane " id="tab_1_4">
+                            <div class="tab-pane active" id="tab_1_4">
 
                                 <?php include('_subject.php'); ?>
 
                             </div>
 
                             <!--end tab-pane-->
-                            <div class="tab-pane active" id="tab_1_5">
+                            <div class="tab-pane " id="tab_1_5">
 
                                 <?php include('_teacherSubject.php'); ?>
 

@@ -16,7 +16,7 @@
             </div>
             <div class="actions">
               <a href="#" class="btn btn-primary" id="btnAddSubject" onclick="ClassEmployeeModule.addView();">
-                <i class="fa fa-pencil-square-o"></i> Add New Subject
+                <i class="fa fa-pencil-square-o"></i> Add New Teacher's Subject
               </a>
             </div>
           </div>

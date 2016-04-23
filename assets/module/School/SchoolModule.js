@@ -148,9 +148,9 @@ var SchoolModule = function () {
                 //alert(result.data);
 
                 if(result.status == "success"){
-                    var logo = result.data['logo'];
+                   /* var logo = result.data['logo'];
                     if(logo != null)
-                        LogoFld.attr("src", baseAppImageUrl+ logo);
+                        LogoFld.attr("src", baseAppImageUrl+ logo);*/
 
                     ShowMessage("success", result.message);
                 }else {

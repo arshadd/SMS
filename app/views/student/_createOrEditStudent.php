@@ -213,40 +213,83 @@
             </div>
         </div>
 
+        <h4 class="form-section">Guardian Detail</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-4">
+                        Father name:<span class="required">*</span>
+                    </label>
+                    <div class="col-md-8">
+                        <input type="text" id="father_name" name="father_name" class="form-control" placeholder="Father name"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-4">
+                        Father contact:<span class="required">*</span>
+                    </label>
+                    <div class="col-md-8">
+                        <input type="text" id="father_contact" name="father_contact" class="form-control" placeholder="Father contact"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-4">
+                        Mother name:<span class="required">*</span>
+                    </label>
+                    <div class="col-md-8">
+                        <input type="text" id="mother_name" name="mother_name" class="form-control" placeholder="Mother name"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label col-md-4">
+                        Mother contact:<span class="required">*</span>
+                    </label>
+                    <div class="col-md-8">
+                        <input type="text" id="mother_contact" name="mother_contact" class="form-control" placeholder="Mother contact"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <h4 class="form-section">Class & Batch Detail</h4>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <label class="control-label col-md-4">
-                        Class:<span class="required">*</span>
+                    <label class="control-label col-md-2">
+                        Class / Batch:<span class="required">*</span>
                     </label>
-                    <div class="col-md-8">
-                        <select id="class_id" name="class_id" class='form-control'></select>
+                    <div class="col-md-10">
+                        <select id="batch_id" name="batch_id" class='form-control select2me'></select>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <div class="form-group">
-                    <label class="control-label col-md-4">
-                        Batch:<span class="required">*</span>
-                    </label>
-                    <div class="col-md-8">
-                        <select id="batch_id" name="batch_id" class='form-control'></select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label class="control-label col-md-4">
+                    <label class="control-label col-md-2">
                         Roll #:
                     </label>
-                    <div class="col-md-8">
-                        <input type="text" id="class_roll_no" name="class_roll_no" class="form-control"
+                    <label id="roll_no_prefix"  class="control-label col-md-1">
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" id="class_roll_no" name="class_roll_no" class="form-control input-small"
                                placeholder="Roll #"/>
                     </div>
                 </div>
             </div>
         </div>
+
 
         <h4 class="form-section">Settings</h4>
 
@@ -278,48 +321,34 @@
         <h4 class="form-section">Upload Picture Detail</h4>
         <div class="row">
             <div class="col-md-12">
-                <div class="form-group">
-                    <label class="control-label col-md-2">
-                        Picture:<span class="required">*</span>
-                    </label>
-                    <div class="col-md-10">
-                        <div class="thumbnail" style="width: 150px;">
-                            <img id="photo" name="photo" alt="" src=""/>
-                        </div>
-                        <div class="margin-top-10 fileupload fileupload-new" data-provides="fileupload" id="fileupload">
-                            <div class="input-group input-group-fixed">
-            <span class="input-group-btn">
-              <span class="uneditable-input">
-                <i class="fa fa-file fileupload-exists"></i>
-                <span class="fileupload-preview">
-                </span>
-              </span>
-            </span>
-            <span class="btn btn-default btn-file">
-              <span class="fileupload-new">
-                <i class="fa fa-paper-clip"></i> Select file
-              </span>
-              <span class="fileupload-exists">
-                <i class="fa fa-undo"></i> Change
-              </span>
-              <input type="file" class="default" id="StudentPhoto" name="StudentPhoto"/>
-
-            </span>
-                                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">
-                                    <i class="fa fa-trash-o"></i> Remove
-                                </a>
+                <div class="form-group ">
+                    <label class="control-label col-md-3">Photo</label>
+                    <div class="col-md-9">
+                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                <img id="photo" name="photo"  src="../../assets/resource/default/student.png" alt=""/>
+                            </div>
+                            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
+                            </div>
+                            <div>
+                            <span class="btn btn-default btn-file">
+                                <span class="fileupload-new">
+                                    <i class="fa fa-paper-clip"></i> Select image
+                                </span>
+                                <span class="fileupload-exists">
+                                    <i class="fa fa-undo"></i> Change
+                                </span>
+                                <input type="file" id="StudentPhoto" name="StudentPhoto" class="default"/>
+                            </span>
+                                <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
                             </div>
                         </div>
-        <span class="help-block">
-          Provide photo
-        </span>
-
-        <span class="label label-danger">
-          NOTE!
-        </span>
-        <span>
-          Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only
-        </span>
+                    <span class="label label-danger">
+                         NOTE!
+                    </span>
+                    <span>
+                         Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only
+                    </span>
                     </div>
                 </div>
             </div>

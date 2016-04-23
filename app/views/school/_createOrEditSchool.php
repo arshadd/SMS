@@ -97,59 +97,45 @@
       </div>
     </div>-->
 
-    <div class="form-group">
-      <label class="control-label col-md-3">
-        Photo:
-        <span class="required">
-          *
-        </span>
-      </label>
-      <div class="col-md-6">
-        <div class="thumbnail" style="width: 150px;">
-          <img id="logo" name="logo" alt="" />
-        </div>
-        <div class="margin-top-10 fileupload fileupload-new" data-provides="fileupload" id="fileupload">
-          <div class="input-group input-group-fixed">
-            <span class="input-group-btn">
-              <span class="uneditable-input">
-                <i class="fa fa-file fileupload-exists"></i>
-                <span class="fileupload-preview">
-                </span>
-              </span>
-            </span>
-            <span class="btn btn-default btn-file">
-              <span class="fileupload-new">
-                <i class="fa fa-paper-clip"></i> Select file
-              </span>
-              <span class="fileupload-exists">
-                <i class="fa fa-undo"></i> Change
-              </span>
-              <input type="file" class="default" id="Photo" name="Photo" />
 
-            </span>
-            <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload">
-              <i class="fa fa-trash-o"></i> Remove
-            </a>
+    <div class="form-group last">
+      <label class="control-label col-md-3">Photo</label>
+      <div class="col-md-9">
+        <div class="fileupload fileupload-new" data-provides="fileupload">
+          <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+            <img id="logo" name="logo" src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""/>
+          </div>
+          <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
+          </div>
+          <div>
+													<span class="btn btn-default btn-file">
+														<span class="fileupload-new">
+															<i class="fa fa-paper-clip"></i> Select image
+														</span>
+														<span class="fileupload-exists">
+															<i class="fa fa-undo"></i> Change
+														</span>
+														<input type="file" id="Photo" name="Photo" class="default"/>
+													</span>
+            <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
           </div>
         </div>
-        <span class="help-block">
-          Provide photo
-        </span>
-
         <span class="label label-danger">
-          NOTE!
+             NOTE!
         </span>
         <span>
-          Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only
+             Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only
         </span>
       </div>
     </div>
+  </div>
+
 
     <div class="form-actions fluid">
       <div class="col-md-offset-3 col-md-9">
-        <a href="#" data-dismiss="modal" class="btn btn-default">
+        <!--<a href="#" data-dismiss="modal" class="btn btn-default">
           <i class="fa fa-mail-reply"></i> Close
-        </a>
+        </a>-->
         <button class="btn btn-success" type="submit">
           <i class="fa fa-save"></i> Save
         </button>
@@ -158,5 +144,5 @@
       </div>
     </div>
   </div>
-  
+
 </form>

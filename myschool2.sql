@@ -67,6 +67,8 @@ CREATE TABLE `classes` (
 	`section_name` varchar(50) DEFAULT NULL,
 
 	`is_active` bool DEFAULT true,
+	`is_deleted` bool DEFAULT false,
+
 	`created_at` datetime DEFAULT NULL,
 	`updated_at` datetime DEFAULT NULL,
 	`school_id` int(11) NOT NULL,
@@ -77,32 +79,50 @@ CREATE TABLE `classes` (
 
 -- DROP TABLE IF EXISTS `employees`;
 CREATE TABLE `employees` (
-	`employee_id` int(11) NOT NULL AUTO_INCREMENT,
-	`name` varchar(50) DEFAULT NULL,
-	`code` varchar(10) DEFAULT NULL,
-	`first_name` varchar(50) DEFAULT NULL,
-	`middle_name` varchar(50) DEFAULT NULL,
-	`last_name` varchar(50) DEFAULT NULL,
-
-	`joining_date` datetime DEFAULT NULL,
-	`job_title` varchar(50) DEFAULT NULL,
-	`gender` bit DEFAULT 0,
-
-	`user_id` int(11) NOT NULL,
-
-	`is_active` bool DEFAULT true,
-	`created_at` datetime DEFAULT NULL,
-	`updated_at` datetime DEFAULT NULL,
-	`school_id` int(11) NOT NULL,
-	PRIMARY KEY (`employee_id`),
-    
-    -- KEY `fk_employee_user_id` (`user_id`),
-	CONSTRAINT `fk_employee_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-    
-    -- KEY `fk_employee_school_id` (`school_id`),
-	CONSTRAINT `fk_employee_school_id` FOREIGN KEY (`school_id`) REFERENCES `schools` (`school_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+  `employee_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `code` varchar(10) DEFAULT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `middle_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `joining_date` datetime DEFAULT NULL,
+  `gender` bit(1) DEFAULT b'0',
+  `user_id` int(11) NOT NULL,
+  `is_active` tinyint(1) DEFAULT '1',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `school_id` int(11) NOT NULL,
+  `biometric_id` int(11) DEFAULT NULL,
+  `job_title` varchar(50) DEFAULT NULL,
+  `employee_position_id` int(11) DEFAULT NULL,
+  `employee_department_id` int(11) DEFAULT NULL,
+  `reporting_manager_id` int(11) DEFAULT NULL,
+  `qualification` varchar(50) DEFAULT NULL,
+  `experience_detail` text CHARACTER SET latin1,
+  `experience_year` int(11) DEFAULT NULL,
+  `experience_month` int(11) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  `status_description` varchar(500) DEFAULT NULL,
+  `date_of_birth` datetime DEFAULT NULL,
+  `marital_status` int(11) DEFAULT NULL,
+  `children_count` int(11) DEFAULT NULL,
+  `father_name` varchar(100) DEFAULT NULL,
+  `mother_name` varchar(100) DEFAULT NULL,
+  `husband_name` varchar(100) DEFAULT NULL,
+  `blood_group` varchar(10) DEFAULT NULL,
+  `home_address_line1` varchar(500) DEFAULT NULL,
+  `home_address_line2` varchar(500) DEFAULT NULL,
+  `mobile_phone` varchar(20) DEFAULT NULL,
+  `home_phone` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `photo` varchar(1000) DEFAULT NULL,
+  `library_card` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`employee_id`),
+  KEY `fk_employee_school_id` (`school_id`),
+  KEY `fk_employee_user_id` (`user_id`),
+  CONSTRAINT `fk_employee_school_id` FOREIGN KEY (`school_id`) REFERENCES `schools` (`school_id`),
+  CONSTRAINT `fk_employee_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `batches`;
 CREATE TABLE `batches` (
@@ -112,10 +132,14 @@ CREATE TABLE `batches` (
 	`end_date` datetime DEFAULT NULL,
 	`grading_type` varchar(10) DEFAULT NULL,
 
-   	`class_id` int(11) NOT NULL,
+	`roll_no_prefix` varchar(10) DEFAULT NULL,
+
+  `class_id` int(11) NOT NULL,
 	`employee_id` int(11) DEFAULT NULL ,
 
 	`is_active` bool DEFAULT true,
+	`is_deleted` bool DEFAULT false,
+
 	`created_at` datetime DEFAULT NULL,
 	`updated_at` datetime DEFAULT NULL,
 	`school_id` int(11) NOT NULL,
@@ -192,6 +216,12 @@ CREATE TABLE `students` (
 
 	`passport_number` varchar(50) DEFAULT NULL,
 	`biometric_id` varchar(100) DEFAULT NULL,
+
+  `father_name` varchar(50) DEFAULT NULL,
+  `father_contact` varchar(12) DEFAULT NULL,
+
+  `mother_name` varchar(50) DEFAULT NULL,
+  `monther_contact` varchar(12) DEFAULT NULL,
 
 	`is_active` bool DEFAULT true,
 	`created_at` datetime DEFAULT NULL,
@@ -296,11 +326,10 @@ CREATE TABLE `employees_subjects` (
   KEY `fk_employees_subjects_subject_id` (`subject_id`),
   CONSTRAINT `fk_employees_subjects_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`subject_id`),
 
-  KEY `fk_employees_subjects_employee_id` (`school_id`),
+  KEY `fk_employees_subjects_employee_id` (`employee_id`),
   CONSTRAINT `fk_employees_subjects_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`)
 
 ) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
-
 
 
 

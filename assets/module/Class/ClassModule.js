@@ -270,7 +270,24 @@ var ClassModule = function () {
             success.html(message);
             success.show();
         }
-        
+    }
+
+    function ShowDeleteMessage(type, message){
+        if (message == 'undefined') return;
+
+        var error = $('#mdlDeleteClass .alert-danger');
+        var success = $('#mdlDeleteClass .alert-success');
+
+        message = '<button data-close="alert" class="close"></button>'+ message;
+
+        if (type == "error") {
+            error.html(message);
+            error.show();
+        }else if(type=="success")
+        {
+            success.html(message);
+            success.show();
+        }
     }
 
     var edit = function (id) {
@@ -310,6 +327,9 @@ var ClassModule = function () {
     function showDelete(id) {
         if (id == null) return;
 
+        var error = $('#mdlDeleteClass .alert-danger');
+        error.hide();
+        
         //Set values
         ClassIdFld.val(id);
     }
@@ -331,7 +351,7 @@ var ClassModule = function () {
         //alert(id);
 
         var cls = Class;
-        //debugger;
+        debugger;
 
         //Get values
         cls.class_id = id;
@@ -345,7 +365,7 @@ var ClassModule = function () {
             data : cls,
             dataType: 'jsonp',
             success : function(result){
-                //debugger;
+                debugger;
                 loaderDelete.hide();
 
                 if(result.status == "success"){
@@ -356,7 +376,7 @@ var ClassModule = function () {
                     reloadGrid();
                     $('#mdlDeleteClass').modal('hide');
                 }else {
-                    ShowMessage("error", result.message);
+                    ShowDeleteMessage("error", result.message);
                 }
 
                 //$('#mdlCreateClass').modal('hide');
