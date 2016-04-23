@@ -454,7 +454,7 @@ var BatchModule = function () {
     }
 
     function setClassName(){
-        debugger;
+
         var class_id = fetchClassId();
 
         var loadDDUrl = baseApiUrl + "classes/find_class/"+class_id;
