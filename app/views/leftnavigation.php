@@ -46,6 +46,14 @@
                 School
               </a>
             </li>
+            <li  class="" data-menu-item="edit">
+              <a href="<?php echo base_url();?>index.php/employee_departments/index">
+                <span class="badge badge-success">
+                  new
+                </span>
+                Departments
+              </a>
+            </li>
           </ul>
         </li>
         <li class="" data-menu="classes">

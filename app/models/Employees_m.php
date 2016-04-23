@@ -25,6 +25,7 @@ class Employees_m extends CI_Model {
     {
         $this->db->from('employees');
         $this->db->where('employee_id', $employee_id);
+        $this->db->where('school_id', $school_id);
         $this->db->where('is_active', true);
 
         $employee = $this->db->get()->result();
