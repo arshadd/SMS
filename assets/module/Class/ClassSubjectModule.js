@@ -107,7 +107,7 @@ var ClassSubjectModule = function () {
     //--------------------End Grid Functions-----------------------//
 
 
-    //--------------------Form Validation Functions-----------------------//
+    //------------------Form Validation Functions------------------//
     var handleValidation = function () {
         //load All dropdowns
         //loadAll();

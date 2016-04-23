@@ -212,11 +212,12 @@ var ClassAttendanceModule = function () {
             contentType: false,
 
             success : function(result){
-                //debugger;
+                debugger;
                 loader.hide();
                 $("#lblAttendanceDate").text(attendance_date);
 
-                summary = result.summary[0];
+
+                var summary = result.summary[0];
 
                 if(summary!=null){
                     $("#lblPresent").text(summary.present_count);
@@ -316,12 +317,14 @@ var ClassAttendanceModule = function () {
     });
 
     var fetchBatchId = function(){
-        var pathname = window.location.pathname;
-        var params = pathname.split('/');
+        // var pathname = window.location.pathname;
+        // var params = pathname.split('/');
+        //
+        // //set in global
+        // var batch_id = params[params.length - 1];
+        // return batch_id;
 
-        //set in global
-        var batch_id = params[params.length - 1];
-        return batch_id;
+        return 2; //should be removed
     }
 
     //--------------------End Other Functions-----------------------//
@@ -331,6 +334,8 @@ var ClassAttendanceModule = function () {
         //main function to initiate the module
         init : function(){
             handleValidation();
+            handleDateTime();
+
             var d = new Date();
             AttendanceDateFld.val(GetDateFormatOnly(d.yyyymmdd()));
 

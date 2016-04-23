@@ -29,17 +29,109 @@
             <!--<span class="selected"></span>-->
           </a>
         </li>
-        <li class="" data-menu="school">
+
+        <li class="" data-menu="administration">
+          <a href="javascript:">
+            <i class="fa fa-cogs"></i>
+            <span class="title">
+              Administration
+            </span>
+          </a>
+          <ul class="sub-menu">
+            <li class="" data-menu-item="settings">
+              <a href="<?php echo base_url();?>index.php/administration/settings/index">
+                <i class="fa fa-cog"></i>
+                Setting
+              </a>
+            </li>
+            <li  class="" data-menu-item="user">
+              <a href="<?php echo base_url();?>index.php/administration/user/index">
+                <i class="fa fa-user"></i>
+                User Management
+              </a>
+            </li>
+            <li  class="" data-menu-item="hr">
+              <a href="<?php echo base_url();?>index.php/administration/hr/index">
+                <i class="fa fa-group"></i>
+                Human Resource
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="" data-menu="academics">
+          <a href="javascript:">
+            <i class="fa fa-book"></i>
+            <span class="title">
+              Academics
+            </span>
+          </a>
+          <ul class="sub-menu">
+            <li  class="" data-menu-item="edit">
+              <a href="#">
+                <i class="fa fa-user"></i>
+                My Profile
+              </a>
+            </li>
+            <li class="" data-menu-item="class_batch">
+              <a href="<?php echo base_url();?>index.php/academics/class_batch/index">
+                <i class="fa fa-bookmark"></i>
+                Class / Batch
+              </a>
+            </li>
+            <li class="" data-menu-item="batch_summary">
+              <a href="#">
+                <i class="fa fa-list-alt"></i>
+                Batch Summary
+              </a>
+            </li>
+            <li class="" data-menu-item="attendance">
+              <a href="<?php echo base_url();?>index.php/academics/attendance/index">
+                <i class="fa fa-check-square-o"></i>
+                Attendance
+              </a>
+            </li>
+            <li  class="" data-menu-item="subject">
+              <a href="#">
+                <i class="fa fa-building"></i>
+                Subject
+              </a>
+            </li>
+            <li class="" data-menu-item="student">
+              <a href="<?php echo base_url();?>index.php/academics/student/index">
+                <i class="fa fa-group"></i>
+                Student
+              </a>
+            </li>
+            <li  class="" data-menu-item="timetable">
+              <a href="#">
+                <i class="fa fa-calendar"></i>
+                Timetable
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="" data-menu="sitemap">
+          <a href="<?php echo base_url();?>index.php/sitemap/index">
+            <i class="fa fa-sitemap"></i>
+            <span class="title">
+              Sitemap
+            </span>
+          </a>
+        </li>
+
+        <!--<li class="" data-menu="school">
           <a href="javascript:;">
             <i class="fa fa-cogs"></i>
             <span class="title">
               Settings
             </span>
-            <!--<span class="arrow "></span>-->
+
           </a>
           <ul class="sub-menu">
             <li  class="" data-menu-item="edit">
-              <a href="<?php echo base_url();?>index.php/school/edit">
+              <a href="<?php /*echo base_url();*/?>index.php/school/edit">
                 <span class="badge badge-success">
                   new
                 </span>
@@ -62,11 +154,11 @@
             <span class="title">
               Class / Batch
             </span>
-            <!--<span class="arrow "></span>-->
+
           </a>
           <ul class="sub-menu">
             <li class="" data-menu-item ="index">
-              <a href="<?php echo base_url();?>index.php/classes/index">
+              <a href="<?php /*echo base_url();*/?>index.php/classes/index">
                 <span class="badge badge-warning">
                   new
                 </span>
@@ -82,11 +174,11 @@
             <span class="title">
               Employee 
             </span>
-            <!--<span class="arrow "></span>-->
+
           </a>
           <ul class="sub-menu">
             <li class="" data-menu-item ="index">
-              <a href="<?php echo base_url();?>index.php/employees/index">
+              <a href="<?php /*echo base_url();*/?>index.php/employees/index">
               <span class="badge badge-succcess">
                 new
               </span>
@@ -102,11 +194,11 @@
             <span class="title">
               Student
             </span>
-            <!--<span class="arrow "></span>-->
+
           </a>
           <ul class="sub-menu">
             <li class="" data-menu-item="index">
-              <a href="<?php echo base_url();?>index.php/student/index">
+              <a href="<?php /*echo base_url();*/?>index.php/student/index">
                 <span class="badge badge-danger">
                   new
                 </span>
@@ -121,11 +213,11 @@
             <span class="title">
               Attendance
             </span>
-            <!--<span class="arrow "></span>-->
+
           </a>
           <ul class="sub-menu">
             <li class="" data-menu-item ="index">
-              <a href="<?php echo base_url();?>index.php/employeeattendance/index">
+              <a href="<?php /*echo base_url();*/?>index.php/employeeattendance/index">
               <span class="badge badge-succcess">
                 new
               </span>
@@ -140,7 +232,7 @@
             <span class="title">
               Fees
             </span>
-            <!--<span class="arrow "></span>-->
+
           </a>
           <ul class="sub-menu">
             <li  class="" data-menu-item ="asdfsdd">
@@ -157,7 +249,7 @@
             <span class="title">
               Expense
             </span>
-            <!--<span class="arrow "></span>-->
+
           </a>
           <ul class="sub-menu">
             <li class="" data-menu-item ="dd">
@@ -168,24 +260,24 @@
           </ul>
         </li>
 
-        
-
         <li id="lnkReport" class="" data-menu="report">
           <a href="javascript:;">
             <i class="fa fa-table"></i>
             <span class="title">
               Reports
             </span>
-            <!--<span class="arrow "></span>-->
+
           </a>
           <ul class="sub-menu">
             <li class="" data-menu-item ="attendance">
-              <a href="<?php echo base_url();?>index.php/report/attendance">
+              <a href="<?php /*echo base_url();*/?>index.php/report/attendance">
                 Attendances
               </a>
             </li>
           </ul>
-        </li>
+        </li>-->
+
+
       </ul>
       <!-- END SIDEBAR MENU -->
     </div>

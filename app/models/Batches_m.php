@@ -110,9 +110,9 @@ class Batches_m extends CI_Model
         $response = array('result' => TRUE, 'message'=>'');
 
         //------------------ for check subject or students ----------------------//
-        $sql = "SELECT s.batch_id FROM subjects s WHERE s.batch_id = ?
+        $sql = "SELECT s.batch_id FROM subjects s WHERE s.batch_id = ? AND is_deleted = false
                 UNION
-                SELECT st.batch_id FROM students st WHERE st.batch_id = ?";
+                SELECT st.batch_id FROM students st WHERE st.batch_id = ? AND is_deleted = false";
 
         $query = $this->db->query($sql, array($batch_id, $batch_id));
 

@@ -97,6 +97,7 @@ class Classes_m extends CI_Model
         //------------------ for check batches ----------------------//
         $this->db->from('batches');
         $this->db->where('class_id', $class_id);
+        $this->db->where('is_deleted', false);
 
         $result = $this->db->get()->result();
 

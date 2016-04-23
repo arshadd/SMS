@@ -117,7 +117,14 @@ Font Awesome Icons
     font-size: 14px;
     *margin-right: .3em;
     line-height: 14px;
+
 }
+
+[class^="fa-"].icon-large,
+[class*=" fa-"].icon-large {
+    font-size:1.120em;
+}
+
 
 /***
 Make font awesome icons fixed width(latest version issue)
@@ -129,11 +136,11 @@ li [class*=" fa-"] {
     text-align: center;
 }
 
-    li [class^="fa-"].icon-large,
-    li [class*=" fa-"].icon-large {
-        /* increased font size for icon-large */
-        width: 1.5625em;
-    }
+li [class^="fa-"].icon-large,
+li [class*=" fa-"].icon-large {
+    /* increased font size for icon-large */
+    width: 1.5625em;
+}
 /***
 Close icon used for modal dialog and other UI element close buttons
 ***/
