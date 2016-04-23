@@ -1,6 +1,7 @@
 <?php
     $title = "Dashboard";
-    
+    $body_class ="page-header-fixed";
+
     $pageCss  = array(
         '<link href="' . base_url() . 'assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />'
         ,'<link href="' . base_url() . 'assets/plugins/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css" />'
@@ -13,7 +14,7 @@
 ?>
 
 <!-- BEGIN BODY -->
-<body class="page-header-fixed">
+
   <!-- BEGIN HEADER -->
   <div class="header navbar navbar-inverse navbar-fixed-top">
     

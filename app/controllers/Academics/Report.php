@@ -1,6 +1,6 @@
 <?php
 
-class Class_Batch extends CI_Controller{
+class Report extends CI_Controller{
 
   public function __construct()
   {
@@ -19,21 +19,8 @@ class Class_Batch extends CI_Controller{
    */
   function Index() {
 
-    $this->load->view('Academics/Class_Batch/Index');
+    $this->load->view('Academics/Report/Index');
   }
 
-  function classes() {
 
-    $this->load->view('Academics/Class_Batch/Class/classList');
-  }
-
-  function batches() {
-
-    $this->load->view('Academics/Class_Batch/Class/batchList');
-  }
-
-  function report() {
-
-    $this->load->view('Academics/Class_Batch/Report/Index');
-  }
 }

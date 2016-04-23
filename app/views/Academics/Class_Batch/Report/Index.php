@@ -1,5 +1,5 @@
 <?php
-$title = "Attendance";
+$title = "Report Management";
 $body_class ="page-header-fixed";
 
 $pageCss  = array(
@@ -15,7 +15,6 @@ $pageCss  = array(
 
 
 );
-
 
 include(VIEW_PATH.'header.php');
 ?>
@@ -40,8 +39,8 @@ include(VIEW_PATH.'header.php');
 		<div class="page-content">
 			<!-- BEGIN PAGE HEADER-->
 			<h3 class="page-title">
-				<i class="fa fa-check-square-o icon-large"></i>
-				Attendance
+				<i class="fa fa-print icon-large"></i>
+				Report
 			</h3>
 			<div class="page-bar">
 				<ul class="page-breadcrumb breadcrumb">
@@ -51,7 +50,11 @@ include(VIEW_PATH.'header.php');
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="#">Attendance</a>
+						<a href="<?php echo base_url() . 'index.php/academics/class_batch/index'; ?>">Class / Batch</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					<li>
+						<a href="#">Report</a>
 					</li>
 				</ul>
 			</div>
@@ -63,13 +66,19 @@ include(VIEW_PATH.'header.php');
 							<div class="form-body well">
 								<div class="row">
 									<div class="col-md-4">
-										<h3><i class="fa fa-file-text icon-large"></i><a href="<?php echo base_url();?>index.php/academics/attendance/mark_attendance">Attendance Register</a></h3>
+										<h3><i class="fa fa-file-text icon-large"></i><a href="<?php echo base_url();?>index.php/academics/class_batch/class">Class List Report</a></h3>
 										<p>
 											Manage attendance register.
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3><i class="fa fa-print icon-large"></i><a href="#">Attendance Report</a></h3>
+										<h3><i class="fa fa-file-text icon-large"></i><a href="<?php echo base_url();?>index.php/academics/class_batch/batches">Batch List Report</a></h3>
+										<p>
+											Manage attendance report.
+										</p>
+									</div>
+									<div class="col-md-4">
+										<h3><i class="fa fa-file-text icon-large"></i><a href="<?php echo base_url();?>index.php/academics/class_batch/batches">Group Class Batch Report</a></h3>
 										<p>
 											Manage attendance report.
 										</p>

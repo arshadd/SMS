@@ -1,5 +1,6 @@
 <?php
 $title = "Employee Attendance";
+$body_class ="page-header-fixed";
 
 $pageCss  = array(
     '<link href="' . base_url() . 'assets/plugins/select2/select2_conquer.css" rel="stylesheet" type="text/css" />'
@@ -18,7 +19,7 @@ include(VIEW_PATH.'header.php');
 ?>
 
 <!-- BEGIN BODY -->
-<body class="page-header-fixed">
+
 <!-- BEGIN HEADER -->
 <div class="header navbar navbar-inverse navbar-fixed-top">
 

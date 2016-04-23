@@ -1,6 +1,8 @@
 <?php
 
     $title = "Login";
+	$body_class ="login";
+
     $pageCss  = array(
         '<link href="' . base_url() . 'assets/css/pages/login.css" rel="stylesheet" type="text/css" />'
         ,'<link href="' . base_url() . 'assets/plugins/select2/select2_conquer.css" rel="stylesheet" type="text/css" />'
@@ -11,8 +13,6 @@
 ?>
 
 
-<body class="login">
-  
 <!-- BEGIN LOGO -->
 <div class="logo">
 	<img src="<?php echo base_url();?>assets/img/logo.png" alt=""/>

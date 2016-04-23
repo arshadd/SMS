@@ -40,8 +40,14 @@
 ?>
 <!-- END PAGE LEVEL SCRIPTS -->
 
-
+<?php /*if ($body_class=="")
+{
+    $body_class = "page-header-fixed";
+}*/?>
 
 <link rel="shortcut icon" href="<?php echo base_url();?>favicon.html"/>
 </head>
+
+<body class="<?php echo $body_class; ?>">
+
 <!-- BEGIN BODY -->
