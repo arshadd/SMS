@@ -1,6 +1,6 @@
 <?php
 
-class Subject extends CI_Controller{
+class Report extends CI_Controller{
 
   public function __construct()
   {
@@ -17,10 +17,9 @@ class Subject extends CI_Controller{
    * After a user logs in, show_main() is called and the main
    * application screen is set up.
    */
-  function Index() {
+  function index() {
 
-    $this->load->view('Academics/Subject/Index');
+    $this->load->view('Administration/Settings/Report/Index');
   }
-
 
 }

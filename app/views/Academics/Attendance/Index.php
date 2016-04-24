@@ -63,13 +63,15 @@ include(VIEW_PATH.'header.php');
 							<div class="form-body well">
 								<div class="row">
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i><a href="<?php echo base_url();?>index.php/academics/attendance/mark_attendance">Attendance Register</a></h3>
+										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i>
+											<a href="<?php echo base_url();?>index.php/academics/attendance/mark_attendance">Attendance Register</a></h3>
 										<p>
 											Manage attendance register.
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-print icon-large"></i><a href="#">Attendance Report</a></h3>
+										<h3 class="page-title"><i class="fa fa-print icon-large"></i>
+											<a href="#">Attendance Report</a></h3>
 										<p>
 											Manage attendance report.
 										</p>

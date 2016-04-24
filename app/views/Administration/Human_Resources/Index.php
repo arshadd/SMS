@@ -62,19 +62,22 @@ include(VIEW_PATH.'header.php');
 							<div class="form-body well">
 								<div class="row">
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-plus-circle icon-large"></i><a href="#">Employee Admission</a></h3>
+										<h3 class="page-title"><i class="fa fa-plus-circle icon-large"></i>
+											<a href="#">Employee Admission</a></h3>
 										<p>
 											Employee admission form.
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-plane icon-large"></i><a href="#">Leave Management</a></h3>
+										<h3 class="page-title"><i class="fa fa-plane icon-large"></i>
+											<a href="#">Leave Management</a></h3>
 										<p>
 											Manage employee attendance and leaves.
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-cog icon-large"></i><a href="#">HR Settings</a></h3>
+										<h3 class="page-title"><i class="fa fa-cog icon-large"></i>
+											<a href="#">HR Settings</a></h3>
 										<p>
 											Set up and maintain Human Resources.
 										</p>
@@ -83,19 +86,22 @@ include(VIEW_PATH.'header.php');
 
 								<div class="row">
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-money icon-large"></i><a href="#">Payroll/Payslip Management</a></h3>
+										<h3 class="page-title"><i class="fa fa-money icon-large"></i>
+											<a href="#">Payroll Management</a></h3>
 										<p>
 											Set up employee payroll and generate payslips.
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-check-circle icon-large"></i><a href="<?php echo base_url();?>index.php/administration/hr/employee_attendance">Employee Attendance</a></h3>
+										<h3 class="page-title"><i class="fa fa-check-circle icon-large"></i>
+											<a href="<?php echo base_url();?>index.php/administration/hr/manage/employee_attendance">Employee Attendance</a></h3>
 										<p>
 											Set up employee attendances.
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-search icon-large"></i><a href="<?php echo base_url();?>index.php/administration/hr/employee_search">Employee Search</a></h3>
+										<h3 class="page-title"><i class="fa fa-search icon-large"></i>
+											<a href="<?php echo base_url();?>index.php/administration/hr/manage/employee_search">Employee Search</a></h3>
 										<p>
 											Search, view, and maintain employee records.
 										</p>
@@ -104,13 +110,15 @@ include(VIEW_PATH.'header.php');
 
 								<div class="row">
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-anchor icon-large"></i><a href="#">Subject Association</a></h3>
+										<h3 class="page-title"><i class="fa fa-anchor icon-large"></i>
+											<a href="#">Subject Association</a></h3>
 										<p>
 											Assign an employee with one or more subjects.
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-print icon-large"></i><a href="#">Report</a></h3>
+										<h3 class="page-title"><i class="fa fa-print icon-large"></i>
+											<a href="<?php echo base_url();?>index.php/administration/hr/report/index">Report</a></h3>
 										<p>
 											View report.
 										</p>

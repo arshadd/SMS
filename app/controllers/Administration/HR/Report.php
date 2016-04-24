@@ -1,6 +1,6 @@
 <?php
 
-class Student extends CI_Controller{
+class Report extends CI_Controller{
 
   public function __construct()
   {
@@ -17,14 +17,18 @@ class Student extends CI_Controller{
    * After a user logs in, show_main() is called and the main
    * application screen is set up.
    */
-  function Index() {
+  function index() {
 
-    $this->load->view('Academics/Student/Index');
+    $this->load->view('Administration/Human_Resources/Report/Index');
   }
 
-  function search() {
+  function all_employee() {
 
-    $this->load->view('Academics/Student/Student_Search/List');
+    $this->load->view('Administration/Human_Resources/Report/Employee_List');
   }
 
+  function employee_detail() {
+
+    $this->load->view('Administration/Human_Resources/Report/Employee_Detail');
+  }
 }

@@ -74,7 +74,8 @@ include(VIEW_PATH.'header.php');
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i><a href="<?php echo base_url();?>index.php/academics/class_batch/report/batches">Batch List Report</a></h3>
+										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i>
+											<a href="<?php echo base_url();?>index.php/academics/class_batch/report/batches">Batch List Report</a></h3>
 										<p>
 											Manage attendance report.
 										</p>

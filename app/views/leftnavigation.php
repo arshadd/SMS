@@ -39,7 +39,7 @@
           </a>
           <ul class="sub-menu">
             <li class="" data-menu-item="settings">
-              <a href="<?php echo base_url();?>index.php/administration/settings/index">
+              <a href="<?php echo base_url();?>index.php/administration/settings/manage/index">
                 <i class="fa fa-cog"></i>
                 Setting
               </a>
@@ -51,7 +51,7 @@
               </a>
             </li>
             <li  class="" data-menu-item="hr">
-              <a href="<?php echo base_url();?>index.php/administration/hr/index">
+              <a href="<?php echo base_url();?>index.php/administration/hr/manage/index">
                 <i class="fa fa-group"></i>
                 Human Resource
               </a>
@@ -92,13 +92,13 @@
               </a>
             </li>
             <li  class="" data-menu-item="subject">
-              <a href="#">
+              <a href="<?php echo base_url();?>index.php/academics/subject/manage/index">
                 <i class="fa fa-building"></i>
                 Subject
               </a>
             </li>
             <li class="" data-menu-item="student">
-              <a href="<?php echo base_url();?>index.php/academics/student/index">
+              <a href="<?php echo base_url();?>index.php/academics/student/manage/index">
                 <i class="fa fa-group"></i>
                 Student
               </a>

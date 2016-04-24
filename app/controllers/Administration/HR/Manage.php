@@ -1,6 +1,6 @@
 <?php
 
-class Settings extends CI_Controller{
+class Manage extends CI_Controller{
 
   public function __construct()
   {
@@ -19,11 +19,15 @@ class Settings extends CI_Controller{
    */
   function Index() {
 
-    $this->load->view('Administration/Settings/Index');
+    $this->load->view('Administration/Human_Resources/Index');
   }
 
-  function general_settings() {
+  function employee_search() {
 
-    $this->load->view('Administration/Settings/General_Settings/School/edit');
+    $this->load->view('Administration/Human_Resources/Employee_Search/list');
+  }
+  function employee_attendance() {
+
+    $this->load->view('Administration/Human_Resources/Employee_Attendance/list');
   }
 }

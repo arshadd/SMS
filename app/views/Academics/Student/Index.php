@@ -62,19 +62,22 @@ include(VIEW_PATH.'header.php');
 							<div class="form-body well">
 								<div class="row">
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-plus-circle icon-large"></i><a href="#">Student Admission</a></h3>
+										<h3 class="page-title"><i class="fa fa-plus-circle icon-large"></i>
+											<a href="#">Student Admission</a></h3>
 										<p>
 											Student admission form.
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-search icon-large"></i><a href="<?php echo base_url();?>index.php/academics/student/search">Student Search</a></h3>
+										<h3 class="page-title"><i class="fa fa-search icon-large"></i>
+											<a href="<?php echo base_url();?>index.php/academics/student/manage/search">Student Search</a></h3>
 										<p>
 											Search, view, and maintain student records.
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-list-ol icon-large"></i><a href="#">Manage Roll number</a></h3>
+										<h3 class="page-title"><i class="fa fa-list-ol icon-large"></i>
+											<a href="#">Manage Roll number</a></h3>
 										<p>
 											Manage student's roll numbers.
 										</p>
@@ -83,7 +86,8 @@ include(VIEW_PATH.'header.php');
 
 								<div class="row">
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-print icon-large"></i><a href="#">Report</a></h3>
+										<h3 class="page-title"><i class="fa fa-print icon-large"></i>
+											<a href="<?php echo base_url();?>index.php/academics/student/report/index">Report</a></h3>
 										<p>
 											Student's Report.
 										</p>

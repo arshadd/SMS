@@ -1,6 +1,6 @@
 <?php
 
-class HR extends CI_Controller{
+class Manage extends CI_Controller{
 
   public function __construct()
   {
@@ -19,15 +19,12 @@ class HR extends CI_Controller{
    */
   function Index() {
 
-    $this->load->view('Administration/Human_Resources/Index');
+    $this->load->view('Academics/Subject/Index');
   }
 
-  function employee_search() {
+  function search() {
 
-    $this->load->view('Administration/Human_Resources/Employee_Search/list');
+    $this->load->view('Academics/Subject/Subject_Search/List');
   }
-  function employee_attendance() {
 
-    $this->load->view('Administration/Human_Resources/Employee_Attendance/list');
-  }
 }

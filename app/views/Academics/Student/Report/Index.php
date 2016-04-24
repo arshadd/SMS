@@ -1,5 +1,5 @@
 <?php
-$title = "Subject Management";
+$title = "Report Management";
 $body_class ="page-header-fixed";
 
 $pageCss  = array(
@@ -39,8 +39,8 @@ include(VIEW_PATH.'header.php');
 		<div class="page-content">
 			<!-- BEGIN PAGE HEADER-->
 			<h3 class="page-title">
-				<i class="fa fa-building icon-large"></i>
-				Subject
+				<i class="fa fa-print icon-large"></i>
+				Report
 			</h3>
 			<div class="page-bar">
 				<ul class="page-breadcrumb breadcrumb">
@@ -50,7 +50,11 @@ include(VIEW_PATH.'header.php');
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="#">Subject</a>
+						<a href="<?php echo base_url() . 'index.php/academics/student/manage/index'; ?>">Student</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					<li>
+						<a href="#">Report</a>
 					</li>
 				</ul>
 			</div>
@@ -62,49 +66,31 @@ include(VIEW_PATH.'header.php');
 							<div class="form-body well">
 								<div class="row">
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-plus-circle icon-large"></i>
-											<a href="#">Create Subject</a></h3>
+										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i>
+											<a href="<?php echo base_url();?>index.php/academics/student/report/all_student">All Student Report</a>
+										</h3>
 										<p>
-											Subject admission form.
+											Print all students report.
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-search icon-large"></i>
-											<a href="<?php echo base_url();?>index.php/academics/subject/manage/search">Subject Search</a></h3>
+										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i>
+											<a href="<?php echo base_url();?>index.php/academics/student/report/student_detail">Student Detail Report</a>
+										</h3>
 										<p>
-											Search, view, and maintain Subject records.
+											Print student's detail report.
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-anchor icon-large"></i>
-											<a href="#">Subject Association</a></h3>
+										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i>
+											<a href="#">Class / Batch Student</a>
+										</h3>
 										<p>
-											Manage Employee subject association.
+											Print all class / batch student report.
 										</p>
 									</div>
 								</div>
 
-								<div class="row">
-									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-print icon-large"></i>
-											<a href="<?php echo base_url();?>index.php/academics/subject/report/index">Report</a></h3>
-										<p>
-											Subject's Report.
-										</p>
-									</div>
-									<!--<div class="col-md-4">
-										<h3><i class="fa fa-search icon-large"></i><a href="#">Subject Search</a></h3>
-										<p>
-											Search, view, and maintain Subject records.
-										</p>
-									</div>
-									<div class="col-md-4">
-										<h3><i class="fa fa-list-ol icon-large"></i><a href="#">Manage Roll number</a></h3>
-										<p>
-											Manage Subject's roll numbers.
-										</p>
-									</div>-->
-								</div>
 							</div>
 						</div>
 					</div>

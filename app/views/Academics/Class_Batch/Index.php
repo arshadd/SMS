@@ -61,20 +61,23 @@ include(VIEW_PATH.'header.php');
 							<div class="form-body well">
 								<div class="row">
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-shield icon-large"></i><a href="<?php echo base_url();?>index.php/academics/class_batch/manage/classes">Manage Class</a></h3>
+										<h3 class="page-title"><i class="fa fa-shield icon-large"></i>
+											<a href="<?php echo base_url();?>index.php/academics/class_batch/manage/classes">Manage Class</a></h3>
 										<p>
 											Manage classes.
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-gavel icon-large"></i><a href="<?php echo base_url();?>index.php/academics/class_batch/manage/batches">Manage Batches</a></h3>
+										<h3 class="page-title"><i class="fa fa-gavel icon-large"></i>
+											<a href="<?php echo base_url();?>index.php/academics/class_batch/manage/batches">Manage Batches</a></h3>
 										<p>
 											Manage batches.
 										</p>
 									</div>
 
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-print icon-large"></i><a href="<?php echo base_url();?>index.php/academics/class_batch/report/index">Report</a></h3>
+										<h3 class="page-title"><i class="fa fa-print icon-large"></i>
+											<a href="<?php echo base_url();?>index.php/academics/class_batch/report/index">Report</a></h3>
 										<p>
 											User report.
 										</p>

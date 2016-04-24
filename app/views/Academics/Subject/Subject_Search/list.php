@@ -1,5 +1,5 @@
 <?php
-    $title = "Student Search";
+    $title = "Search Subject";
     $body_class ="page-header-fixed";
 
     $pageCss  = array(
@@ -38,8 +38,8 @@
     <div class="page-content-wrapper">
       <div class="page-content">
         <!-- BEGIN PAGE HEADER-->
-        <h3 class="page-title"><i class="fa fa-user icon-large"></i>
-          Search Student
+        <h3 class="page-title"><i class="fa fa-search icon-large"></i>
+          Search Subject
         </h3>
         <div class="page-bar">
           <ul class="page-breadcrumb breadcrumb">
@@ -49,7 +49,7 @@
               <i class="fa fa-angle-right"></i>
             </li>
               <li>
-                  <a href="<?php echo base_url();?>index.php/academics/student/manage/index">Student</a>
+                  <a href="<?php echo base_url();?>index.php/academics/subject/manage/index">Subject</a>
                   <i class="fa fa-angle-right"></i>
               </li>
             <li>
@@ -69,13 +69,13 @@
               <div class="portlet-title">
                 <div class="caption">
                   <i class="fa fa-list-alt"></i>
-                  Student List
+                  Subject List
                 </div>
                 <div class="actions">
 <!--                  <a class="btn btn-default" data-target="#mdlCreateStudent" data-toggle="modal">View Demo</a>
 -->
                   <a href="#" class="btn btn-primary"  onclick="StudentModule.addView();">
-                    <i class="fa fa-pencil-square-o"></i> Add New Student
+                    <i class="fa fa-pencil-square-o"></i> Add New Subject
                   </a>
                 </div>
               </div>
