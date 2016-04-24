@@ -1,5 +1,5 @@
 <!-- BEGIN COPYRIGHT -->
-<div class="footer">
+<div class="footer hidden-print">
   <div class="footer-inner">
     2016 &copy; School Management System by Codaira.
   </div>

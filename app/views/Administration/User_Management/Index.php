@@ -61,19 +61,19 @@ include(VIEW_PATH.'header.php');
 							<div class="form-body well">
 								<div class="row">
 									<div class="col-md-4">
-										<h3><i class="fa fa-list icon-large"></i><a href="#">Users List</a></h3>
+										<h3 class="page-title"><i class="fa fa-list icon-large"></i><a href="#">Users List</a></h3>
 										<p>
 											Manage user list.
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3><i class="fa fa-lock icon-large"></i><a href="#">Lock Accounts</a></h3>
+										<h3 class="page-title"><i class="fa fa-lock icon-large"></i><a href="#">Lock Accounts</a></h3>
 										<p>
 											Lock user's account.
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3><i class="fa fa-print icon-large"></i><a href="#">Report</a></h3>
+										<h3 class="page-title"><i class="fa fa-print icon-large"></i><a href="#">Report</a></h3>
 										<p>
 											User report.
 										</p>
@@ -111,7 +111,7 @@ $pagePlugin  = array(
 );
 
 $pageJsScript  = array(
-	'<script type="text/javascript" src="' . base_url() . 'assets/module/util.js" ></script>'
+	'<script type="text/javascript" src="' . base_url() . 'assets/js/util.js" ></script>'
 );
 
 $pageJsCalls  = array(

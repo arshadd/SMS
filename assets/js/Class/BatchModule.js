@@ -73,7 +73,7 @@ var BatchModule = function () {
                 //Table Column Header Collection
                 {
                     data: null, render: function (data, type, row) {
-                    return '<a href="../../classes/edit/'+ data.batch_id +'" >'+ data.name +'</a>';
+                    return '<a href="../../manage/classes/edit/'+ data.batch_id +'" >'+ data.name +'</a>';
                 }
                 },
                 {

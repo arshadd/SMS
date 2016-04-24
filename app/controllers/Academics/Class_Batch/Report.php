@@ -1,6 +1,6 @@
 <?php
 
-class Class_Batch extends CI_Controller{
+class Report extends CI_Controller{
 
   public function __construct()
   {
@@ -17,23 +17,17 @@ class Class_Batch extends CI_Controller{
    * After a user logs in, show_main() is called and the main
    * application screen is set up.
    */
-  function Index() {
+  function index() {
 
-    $this->load->view('Academics/Class_Batch/Index');
+    $this->load->view('Academics/Class_Batch/Report/Index');
   }
-
   function classes() {
 
-    $this->load->view('Academics/Class_Batch/Class/classList');
+    $this->load->view('Academics/Class_Batch/Report/Class_List');
   }
 
   function batches() {
 
-    $this->load->view('Academics/Class_Batch/Class/batchList');
-  }
-
-  function report() {
-
-    $this->load->view('Academics/Class_Batch/Report/Index');
+    $this->load->view('Academics/Class_Batch/Report/Batch_List');
   }
 }

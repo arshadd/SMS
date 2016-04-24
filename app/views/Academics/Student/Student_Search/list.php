@@ -147,8 +147,8 @@
     );
     
     $pageJsScript  = array(
-      '<script type="text/javascript" src="' . base_url() . 'assets/module/util.js" ></script>'
-      ,'<script type="text/javascript" src="' . base_url() . 'assets/module/Student/StudentModule.js" ></script>'
+      '<script type="text/javascript" src="' . base_url() . 'assets/js/util.js" ></script>'
+      ,'<script type="text/javascript" src="' . base_url() . 'assets/js/Student/StudentModule.js" ></script>'
       );
       
     $pageJsCalls  = array(

@@ -61,19 +61,19 @@ include(VIEW_PATH.'header.php');
 							<div class="form-body well">
 								<div class="row">
 									<div class="col-md-4">
-										<h3><i class="fa fa-cog icon-large"></i><a href="<?php echo base_url();?>index.php/administration/settings/general_settings">General Settings</a></h3>
+										<h3 class="page-title"><i class="fa fa-cog icon-large"></i><a href="<?php echo base_url();?>index.php/administration/settings/general_settings">General Settings</a></h3>
 										<p>
 											Set some general configuration related to institution / school etc.
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3><i class="fa fa-comments icon-large"></i><a href="#">SMS Settings</a></h3>
+										<h3 class="page-title"><i class="fa fa-comments icon-large"></i><a href="#">SMS Settings</a></h3>
 										<p>
 											Enable/disable SMS settings.
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3><i class="fa fa-print icon-large"></i><a href="#">Report</a></h3>
+										<h3 class="page-title"><i class="fa fa-print icon-large"></i><a href="#">Report</a></h3>
 										<p>
 											Report.
 										</p>
@@ -111,7 +111,7 @@ $pagePlugin  = array(
 );
 
 $pageJsScript  = array(
-	'<script type="text/javascript" src="' . base_url() . 'assets/module/util.js" ></script>'
+	'<script type="text/javascript" src="' . base_url() . 'assets/js/util.js" ></script>'
 );
 
 $pageJsCalls  = array(

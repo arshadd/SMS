@@ -127,7 +127,7 @@
     
     $pageJsScript  = array(
       '<script type="text/javascript" src="' . base_url() . 'assets/plugins/custom-datatable/DT_bootstrap.js" ></script>'
-      ,'<script type="text/javascript" src="' . base_url() . 'assets/module/util.js" ></script>'
+      ,'<script type="text/javascript" src="' . base_url() . 'assets/js/util.js" ></script>'
         ,'<script type="text/javascript" src="' . base_url() . 'assets/scripts/StudentAttendance.js" ></script>'
       );
       

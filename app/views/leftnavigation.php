@@ -1,5 +1,5 @@
 <!-- BEGIN SIDEBAR -->
-<div class="page-sidebar-wrapper">
+<div class="page-sidebar-wrapper hidden-print">
   <div class="page-sidebar-wrapper">
     <div class="page-sidebar navbar-collapse collapse">
       <!-- BEGIN SIDEBAR MENU -->
@@ -74,7 +74,7 @@
               </a>
             </li>
             <li class="" data-menu-item="class_batch">
-              <a href="<?php echo base_url();?>index.php/academics/class_batch/index">
+              <a href="<?php echo base_url();?>index.php/academics/class_batch/manage/index">
                 <i class="fa fa-bookmark"></i>
                 Class / Batch
               </a>

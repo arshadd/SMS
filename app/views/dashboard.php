@@ -2103,7 +2103,7 @@
     );
     
     $pageJsScript  = array(
-        '<script type="text/javascript" src="' . base_url() . 'assets/module/util.js" ></script>'
+        '<script type="text/javascript" src="' . base_url() . 'assets/js/util.js" ></script>'
 
       ,'<script type="text/javascript" src="' . base_url() . 'assets/scripts/index.js" ></script>'
       ,'<script type="text/javascript" src="' . base_url() . 'assets/scripts/tasks.js" ></script>'

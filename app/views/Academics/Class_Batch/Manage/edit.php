@@ -204,14 +204,14 @@ include(VIEW_PATH . 'header.php');
 
     $pageJsScript = array(
 
-        '<script type="text/javascript" src="' . base_url() . 'assets/module/util.js" ></script>'
+        '<script type="text/javascript" src="' . base_url() . 'assets/js/util.js" ></script>'
 
-    , '<script type="text/javascript" src="' . base_url() . 'assets/module/Class/BatchModule.js" ></script>'
-    , '<script type="text/javascript" src="' . base_url() . 'assets/module/Class/ClassSubjectModule.js" ></script>'
-    , '<script type="text/javascript" src="' . base_url() . 'assets/module/Class/ClassEmployeeModule.js" ></script>'
+    , '<script type="text/javascript" src="' . base_url() . 'assets/js/Class/BatchModule.js" ></script>'
+    , '<script type="text/javascript" src="' . base_url() . 'assets/js/Class/ClassSubjectModule.js" ></script>'
+    , '<script type="text/javascript" src="' . base_url() . 'assets/js/Class/ClassEmployeeModule.js" ></script>'
 
-    , '<script type="text/javascript" src="' . base_url() . 'assets/module/Class/ClassStudentModule.js" ></script>'
-    , '<script type="text/javascript" src="' . base_url() . 'assets/module/Class/ClassAttendanceModule.js" ></script>'
+    , '<script type="text/javascript" src="' . base_url() . 'assets/js/Class/ClassStudentModule.js" ></script>'
+    , '<script type="text/javascript" src="' . base_url() . 'assets/js/Class/ClassAttendanceModule.js" ></script>'
 
     );
 

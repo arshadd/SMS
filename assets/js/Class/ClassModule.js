@@ -40,7 +40,7 @@ var ClassModule = function () {
                 { data: "code" },
                 {
                     data: null, render: function (data, type, row) {
-                    return '<a href="../class_batch/batches/'+ data.class_id +'" >'+ data.name +'</a>';
+                    return '<a href="../manage/batches/'+ data.class_id +'" >'+ data.name +'</a>';
                 }
                 },
                 { data: "section_name" },

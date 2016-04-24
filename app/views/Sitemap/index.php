@@ -132,7 +132,7 @@ $pagePlugin  = array(
 );
 
 $pageJsScript  = array(
-	'<script type="text/javascript" src="' . base_url() . 'assets/module/util.js" ></script>'
+	'<script type="text/javascript" src="' . base_url() . 'assets/js/util.js" ></script>'
 );
 
 $pageJsCalls  = array(
