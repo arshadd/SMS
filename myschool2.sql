@@ -332,6 +332,24 @@ CREATE TABLE `employees_subjects` (
 ) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 
 
+CREATE TABLE `sms` (
+  `sms_id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
+  `attendance_date` datetime DEFAULT NULL,
+  `sms_sentdate` datetime DEFAULT NULL,
+  `gatewayreply` varchar(2000) DEFAULT NULL,
+  `toNumber` varchar(20) DEFAULT NULL,
+  `sms_text` varchar(4000 DEFAULT NULL,
+  `smsType` varchar(10) DEFAULT NULL, -- from where the sms sent attendance or custome
+  `smssentstatus` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`sms_id`),
+   KEY `fk_sms_student_id` (`student_id`),
+  KEY `fk_sms_school_id` (`school_id`),
+  CONSTRAINT `fk_sms_student_id` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`),
+  CONSTRAINT `fk_sms_school_id` FOREIGN KEY (`school_id`) REFERENCES `schools` (`school_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
 
 
 
