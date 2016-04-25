@@ -50,7 +50,7 @@ include(VIEW_PATH.'header.php');
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="<?php echo base_url() . 'index.php/academics/class_batch/manage/index'; ?>">Class / Batch</a>
+						<a href="<?php echo site_url() . '/academics/class_batch/manage/index'; ?>">Class / Batch</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
@@ -67,7 +67,7 @@ include(VIEW_PATH.'header.php');
 								<div class="row">
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i>
-											<a href="<?php echo base_url();?>index.php/academics/class_batch/report/classes">Class List Report</a>
+											<a href="<?php echo site_url();?>/academics/class_batch/report/classes">Class List Report</a>
 										</h3>
 										<p>
 											Manage attendance register.
@@ -75,7 +75,7 @@ include(VIEW_PATH.'header.php');
 									</div>
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i>
-											<a href="<?php echo base_url();?>index.php/academics/class_batch/report/batches">Batch List Report</a></h3>
+											<a href="<?php echo site_url();?>/academics/class_batch/report/batches">Batch List Report</a></h3>
 										<p>
 											Manage attendance report.
 										</p>

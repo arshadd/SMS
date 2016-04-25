@@ -19,12 +19,12 @@ class Manage extends CI_Controller{
    */
   function Index() {
 
-    $this->load->view('Academics/Student/Index');
+    $this->load->view('academics/student/Index');
   }
 
   function search() {
 
-    $this->load->view('Academics/Student/Student_Search/List');
+    $this->load->view('academics/student/student_search/Student_List');
   }
 
 }

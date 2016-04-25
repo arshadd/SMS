@@ -43,11 +43,11 @@
               <i class="fa fa-angle-right"></i>
             </li>
             <li>
-              <a href="<?php echo base_url();?>index.php/academics/student/manage/index">Student</a>
+              <a href="<?php echo site_url();?>/academics/student/manage/index">Student</a>
               <i class="fa fa-angle-right"></i>
             </li>
             <li>
-              <a href="<?php echo base_url() . 'index.php/academics/student/report/index'; ?>">Report</a>
+              <a href="<?php echo site_url() . '/academics/student/report/index'; ?>">Report</a>
               <i class="fa fa-angle-right"></i>
             </li>
             <li>

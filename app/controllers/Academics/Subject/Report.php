@@ -19,16 +19,16 @@ class Report extends CI_Controller{
    */
   function index() {
 
-    $this->load->view('Academics/Subject/Report/Index');
+    $this->load->view('academics/subject/report/Index');
   }
 
   function all_subject() {
 
-    $this->load->view('Academics/Subject/Report/Subject_List');
+    $this->load->view('academics/subject/report/subject_list');
   }
 
   function subject_detail() {
 
-    $this->load->view('Academics/Subject/Report/Subject_Detail');
+    $this->load->view('academics/subject/report/Subject_detail');
   }
 }

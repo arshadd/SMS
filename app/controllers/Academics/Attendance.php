@@ -19,11 +19,11 @@ class Attendance extends CI_Controller{
    */
   function Index() {
 
-    $this->load->view('Academics/Attendance/Index');
+    $this->load->view('academics/attendance/Index');
   }
 
   function mark_attendance() {
 
-    $this->load->view('Academics/Attendance/Mark_Attendance/_attendance');
+    $this->load->view('academics/attendance/mark_attendance/Attendance');
   }
 }

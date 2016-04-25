@@ -43,11 +43,11 @@
               <i class="fa fa-angle-right"></i>
             </li>
             <li>
-              <a href="<?php echo base_url() . 'index.php/academics/class_batch/manage/index'; ?>">Class / Batch</a>
+              <a href="<?php echo site_url() . '/academics/class_batch/manage/index'; ?>">Class / Batch</a>
               <i class="fa fa-angle-right"></i>
             </li>
             <li>
-              <a href="<?php echo base_url() . 'index.php/academics/class_batch/report/index'; ?>">Report</a>
+              <a href="<?php echo site_url() . '/academics/class_batch/report/index'; ?>">Report</a>
               <i class="fa fa-angle-right"></i>
             </li>
             <li>

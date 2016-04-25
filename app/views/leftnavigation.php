@@ -21,7 +21,7 @@
           </form>
         </li>
         <li class="start" data-menu="dashboard">
-          <a href="<?php echo base_url();?>">
+          <a href="<?php echo site_url();?>">
             <i class="fa fa-home"></i>
             <span class="title">
               Dashboard
@@ -39,19 +39,19 @@
           </a>
           <ul class="sub-menu">
             <li class="" data-menu-item="settings">
-              <a href="<?php echo base_url();?>index.php/administration/settings/manage/index">
+              <a href="<?php echo site_url();?>/administration/settings/manage/index">
                 <i class="fa fa-cog"></i>
                 Setting
               </a>
             </li>
             <li  class="" data-menu-item="user">
-              <a href="<?php echo base_url();?>index.php/administration/user/index">
+              <a href="<?php echo site_url();?>/administration/user/index">
                 <i class="fa fa-user"></i>
                 User Management
               </a>
             </li>
             <li  class="" data-menu-item="hr">
-              <a href="<?php echo base_url();?>index.php/administration/hr/manage/index">
+              <a href="<?php echo site_url();?>/administration/hr/manage/index">
                 <i class="fa fa-group"></i>
                 Human Resource
               </a>
@@ -74,31 +74,31 @@
               </a>
             </li>
             <li class="" data-menu-item="class_batch">
-              <a href="<?php echo base_url();?>index.php/academics/class_batch/manage/index">
+              <a href="<?php echo site_url();?>/academics/class_batch/manage/index">
                 <i class="fa fa-bookmark"></i>
                 Class / Batch
               </a>
             </li>
             <li class="" data-menu-item="batch_summary">
-              <a href="<?php echo base_url();?>index.php/academics/batch_summary/manage/index">
+              <a href="<?php echo site_url();?>/academics/batch_summary/manage/index">
                 <i class="fa fa-list-alt"></i>
                 Batch Summary
               </a>
             </li>
             <li class="" data-menu-item="attendance">
-              <a href="<?php echo base_url();?>index.php/academics/attendance/index">
+              <a href="<?php echo site_url();?>/academics/attendance/index">
                 <i class="fa fa-check-square-o"></i>
                 Attendance
               </a>
             </li>
             <li  class="" data-menu-item="subject">
-              <a href="<?php echo base_url();?>index.php/academics/subject/manage/index">
+              <a href="<?php echo site_url();?>/academics/subject/manage/index">
                 <i class="fa fa-building"></i>
                 Subject
               </a>
             </li>
             <li class="" data-menu-item="student">
-              <a href="<?php echo base_url();?>index.php/academics/student/manage/index">
+              <a href="<?php echo site_url();?>/academics/student/manage/index">
                 <i class="fa fa-group"></i>
                 Student
               </a>
@@ -113,7 +113,7 @@
         </li>
 
         <li class="" data-menu="sitemap">
-          <a href="<?php echo base_url();?>index.php/sitemap/index">
+          <a href="<?php echo site_url();?>/sitemap/index">
             <i class="fa fa-sitemap"></i>
             <span class="title">
               Sitemap
@@ -139,7 +139,7 @@
               </a>
             </li>
             <li  class="" data-menu-item="edit">
-              <a href="<?php echo base_url();?>index.php/employee_departments/index">
+              <a href="<?php echo base_url();?>/employee_departments/index">
                 <span class="badge badge-success">
                   new
                 </span>

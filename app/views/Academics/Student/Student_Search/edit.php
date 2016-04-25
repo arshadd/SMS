@@ -41,11 +41,15 @@
           <ul class="page-breadcrumb breadcrumb">
             <li>
               <i class="fa fa-cogs"></i>
-              <a href="#">Employee</a>
+              <a href="#">Acadamic</a>
               <i class="fa fa-angle-right"></i>
             </li>
             <li>
-              <a href="~/Employee/List">Employee Detail</a>
+              <a href="<?php echo site_url();?>/academics/student/manage/index">Student</a>
+              <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+              <a href="#">Search</a>
             </li>
           </ul>
         </div>
@@ -96,7 +100,7 @@
               <div class="tab-content">
                 <div class="tab-pane active" id="tab_1_1">
 
-                  <?php include('_createOrEditStudent.php');?>
+                  <?php include('Create_edit_student.php');?>
 
                 </div>
                 <!--tab_1_2-->

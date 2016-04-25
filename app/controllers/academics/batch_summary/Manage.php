@@ -19,7 +19,7 @@ class Manage extends CI_Controller{
    */
   function Index() {
 
-    $this->load->view('Academics/Batch_Summary/Index');
+    $this->load->view('academics/batch_summary/Index');
   }
 
   

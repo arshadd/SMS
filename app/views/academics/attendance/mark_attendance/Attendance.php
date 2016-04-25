@@ -50,7 +50,7 @@ include(VIEW_PATH.'header.php');
             <i class="fa fa-angle-right"></i>
           </li>
           <li>
-            <a href="<?php echo base_url();?>index.php/academics/attendance/index">Attendance Register</a>
+            <a href="<?php echo site_url();?>/academics/attendance/index">Attendance Register</a>
             <i class="fa fa-angle-right"></i>
           </li>
           <li>

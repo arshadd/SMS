@@ -19,15 +19,15 @@ class Manage extends CI_Controller{
    */
   function Index() {
 
-    $this->load->view('Administration/Settings/Index');
+    $this->load->view('administration/settings/Index');
   }
 
   function general_settings() {
 
-    $this->load->view('Administration/Settings/General_Settings/School/edit');
+    $this->load->view('administration/settings/general_settings/school/Edit_school');
   }
   function sms() {
 
-    $this->load->view('Administration/Settings/General_Settings/School/edit');
+    $this->load->view('administration/settings/general_settings/school/Edit_school');
   }
 }

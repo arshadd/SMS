@@ -43,11 +43,11 @@
               <i class="fa fa-angle-right"></i>
             </li>
             <li>
-              <a href="<?php echo base_url();?>index.php/administration/hr/manage/index">HR Management</a>
+              <a href="<?php echo site_url();?>/administration/hr/manage/index">HR Management</a>
               <i class="fa fa-angle-right"></i>
             </li>
             <li>
-              <a href="<?php echo base_url() . 'index.php/administration/hr/report/index'; ?>">Report</a>
+              <a href="<?php echo site_url() . '/administration/hr/report/index'; ?>">Report</a>
               <i class="fa fa-angle-right"></i>
             </li>
             <li>

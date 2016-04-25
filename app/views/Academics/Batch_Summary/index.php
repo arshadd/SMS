@@ -37,21 +37,18 @@ include(VIEW_PATH . 'header.php');
         <div class="page-content">
             <!-- BEGIN PAGE HEADER-->
             <h3 class="page-title">
-                Class / Batch
+                <i class="fa fa-list-alt icon-large"></i>
+                Batch Summary
             </h3>
             <div class="page-bar">
                 <ul class="page-breadcrumb breadcrumb">
                     <li>
                         <i class="fa fa-cogs"></i>
-                        <a href="#">Class / Batch</a>
+                        <a href="#">Batch Summary</a>
                         <i class="fa fa-angle-right"></i>
                     </li>
                     <li>
-                        <a href="#" id="lnkBatchList">Batch List</a>
-                        <i class="fa fa-angle-right"></i>
-                    </li>
-                    <li>
-                        <a href="#">Class Management</a>
+                        <a href="#">Summary</a>
                     </li>
                 </ul>
             </div>
@@ -136,21 +133,21 @@ include(VIEW_PATH . 'header.php');
                             <!--end tab-pane-->
                             <div class="tab-pane active" id="tab_1_4">
 
-                                <?php include('_subject.php'); ?>
+                                <?php include('Subject.php'); ?>
 
                             </div>
 
                             <!--end tab-pane-->
                             <div class="tab-pane " id="tab_1_5">
 
-                                <?php include('_teacherSubject.php'); ?>
+                                <?php include('TeacherSubject.php'); ?>
 
                             </div>
 
                             <!--end tab-pane-->
                             <div class="tab-pane " id="tab_1_6">
 
-                                <?php include('_student.php'); ?>
+                                <?php include('Student.php'); ?>
 
                             </div>
                             <!--end tab-pane-->
@@ -171,7 +168,7 @@ include(VIEW_PATH . 'header.php');
                             <!--end tab-pane-->
                             <div class="tab-pane " id="tab_1_9">
 
-                                <?php include('_attendance.php'); ?>
+                                <?php include('Attendance.php'); ?>
 
                             </div>
                             <!--end tab-pane-->

@@ -94,14 +94,14 @@ include(VIEW_PATH.'header.php');
 									</div>
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-check-circle icon-large"></i>
-											<a href="<?php echo base_url();?>index.php/administration/hr/manage/employee_attendance">Employee Attendance</a></h3>
+											<a href="<?php echo site_url();?>/administration/hr/manage/employee_attendance">Employee Attendance</a></h3>
 										<p>
 											Set up employee attendances.
 										</p>
 									</div>
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-search icon-large"></i>
-											<a href="<?php echo base_url();?>index.php/administration/hr/manage/employee_search">Employee Search</a></h3>
+											<a href="<?php echo site_url();?>/administration/hr/manage/employee_search">Employee Search</a></h3>
 										<p>
 											Search, view, and maintain employee records.
 										</p>
@@ -118,7 +118,7 @@ include(VIEW_PATH.'header.php');
 									</div>
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-print icon-large"></i>
-											<a href="<?php echo base_url();?>index.php/administration/hr/report/index">Report</a></h3>
+											<a href="<?php echo site_url();?>/administration/hr/report/index">Report</a></h3>
 										<p>
 											View report.
 										</p>

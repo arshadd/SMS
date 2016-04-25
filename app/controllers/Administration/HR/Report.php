@@ -19,16 +19,16 @@ class Report extends CI_Controller{
    */
   function index() {
 
-    $this->load->view('Administration/Human_Resources/Report/Index');
+    $this->load->view('administration/human_resources/report/Index');
   }
 
   function all_employee() {
 
-    $this->load->view('Administration/Human_Resources/Report/Employee_List');
+    $this->load->view('administration/human_resources/report/Employee_list');
   }
 
   function employee_detail() {
 
-    $this->load->view('Administration/Human_Resources/Report/Employee_Detail');
+    $this->load->view('administration/human_resources/report/Employee_detail');
   }
 }

@@ -19,15 +19,15 @@ class Report extends CI_Controller{
    */
   function index() {
 
-    $this->load->view('Academics/Class_Batch/Report/Index');
+    $this->load->view('academics/class_batch/report/Index');
   }
   function classes() {
 
-    $this->load->view('Academics/Class_Batch/Report/Class_List');
+    $this->load->view('academics/class_batch/report/Class_list');
   }
 
   function batches() {
 
-    $this->load->view('Academics/Class_Batch/Report/Batch_List');
+    $this->load->view('academics/class_batch/report/Batch_list');
   }
 }

@@ -19,17 +19,17 @@ class Manage extends CI_Controller{
    */
   function Index() {
 
-    $this->load->view('Academics/Class_Batch/Index');
+    $this->load->view('academics/class_batch/Index');
   }
 
   function classes() {
 
-    $this->load->view('Academics/Class_Batch/Manage/classList');
+    $this->load->view('academics/class_batch/manage/Class_list');
   }
 
   function batches() {
 
-    $this->load->view('Academics/Class_Batch/Manage/batchList');
+    $this->load->view('academics/class_batch/manage/Batch_list');
   }
 
 }

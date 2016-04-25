@@ -62,7 +62,7 @@ include(VIEW_PATH.'header.php');
 								<div class="row">
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-cog icon-large"></i>
-											<a href="<?php echo base_url();?>index.php/administration/settings/manage/general_settings">General Settings</a></h3>
+											<a href="<?php echo site_url();?>/administration/settings/manage/general_settings">General Settings</a></h3>
 										<p>
 											Set some general configuration related to institution / school etc.
 										</p>
@@ -76,7 +76,7 @@ include(VIEW_PATH.'header.php');
 									</div>
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-print icon-large"></i>
-											<a href="<?php echo base_url();?>index.php/administration/settings/report/index">Report</a></h3>
+											<a href="<?php echo site_url();?>/administration/settings/report/index">Report</a></h3>
 										<p>
 											Report.
 										</p>

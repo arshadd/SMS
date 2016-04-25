@@ -19,7 +19,7 @@ class Report extends CI_Controller{
    */
   function index() {
 
-    $this->load->view('Administration/Settings/Report/Index');
+    $this->load->view('administration/settings/report/Index');
   }
 
 }

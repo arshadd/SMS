@@ -50,7 +50,7 @@ include(VIEW_PATH.'header.php');
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="<?php echo base_url() . 'index.php/academics/student/manage/index'; ?>">Student</a>
+						<a href="<?php echo site_url() . '/academics/student/manage/index'; ?>">Student</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
@@ -67,7 +67,7 @@ include(VIEW_PATH.'header.php');
 								<div class="row">
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i>
-											<a href="<?php echo base_url();?>index.php/academics/student/report/all_student">All Student Report</a>
+											<a href="<?php echo site_url();?>/academics/student/report/all_student">All Student Report</a>
 										</h3>
 										<p>
 											Print all students report.
@@ -75,7 +75,7 @@ include(VIEW_PATH.'header.php');
 									</div>
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i>
-											<a href="<?php echo base_url();?>index.php/academics/student/report/student_detail">Student Detail Report</a>
+											<a href="<?php echo site_url();?>/academics/student/report/student_detail">Student Detail Report</a>
 										</h3>
 										<p>
 											Print student's detail report.

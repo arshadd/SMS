@@ -50,7 +50,7 @@ include(VIEW_PATH.'header.php');
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="<?php echo base_url();?>index.php/administration/settings/manage/index">Settings</a>
+						<a href="<?php echo site_url();?>/administration/settings/manage/index">Settings</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>

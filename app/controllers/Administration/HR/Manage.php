@@ -19,15 +19,15 @@ class Manage extends CI_Controller{
    */
   function Index() {
 
-    $this->load->view('Administration/Human_Resources/Index');
+    $this->load->view('administration/human_resources/Index');
   }
 
   function employee_search() {
 
-    $this->load->view('Administration/Human_Resources/Employee_Search/list');
+    $this->load->view('administration/human_resources/employee_search/Employee_list');
   }
   function employee_attendance() {
 
-    $this->load->view('Administration/Human_Resources/Employee_Attendance/list');
+    $this->load->view('administration/human_resources/employee_attendance/Employee_list');
   }
 }

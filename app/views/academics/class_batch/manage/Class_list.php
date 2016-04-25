@@ -42,7 +42,7 @@
               <i class="fa fa-angle-right"></i>
             </li>
             <li>
-              <a href="<?php echo base_url() . 'index.php/academics/class_batch/manage/index'; ?>">Class / Batch</a>
+              <a href="<?php echo site_url() . '/academics/class_batch/manage/index'; ?>">Class / Batch</a>
               <i class="fa fa-angle-right"></i>
             </li>
             <li>
@@ -100,7 +100,7 @@
       <h4 class="modal-title">Create Class</h4>
     </div>
     <div class="modal-body">
-      <?php include('_createOrEditClass.php');?>
+      <?php include('Create_edit_class.php');?>
     </div>
   </div>
 

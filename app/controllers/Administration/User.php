@@ -19,6 +19,6 @@ class User extends CI_Controller{
    */
   function Index() {
 
-    $this->load->view('Administration/User_Management/Index');
+    $this->load->view('administration/user_management/Index');
   }
 }

@@ -70,7 +70,7 @@ include(VIEW_PATH.'header.php');
 									</div>
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-search icon-large"></i>
-											<a href="<?php echo base_url();?>index.php/academics/student/manage/search">Student Search</a></h3>
+											<a href="<?php echo site_url();?>/academics/student/manage/search">Student Search</a></h3>
 										<p>
 											Search, view, and maintain student records.
 										</p>
@@ -87,7 +87,7 @@ include(VIEW_PATH.'header.php');
 								<div class="row">
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-print icon-large"></i>
-											<a href="<?php echo base_url();?>index.php/academics/student/report/index">Report</a></h3>
+											<a href="<?php echo site_url();?>/academics/student/report/index">Report</a></h3>
 										<p>
 											Student's Report.
 										</p>

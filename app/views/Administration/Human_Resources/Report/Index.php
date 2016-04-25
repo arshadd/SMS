@@ -50,7 +50,7 @@ include(VIEW_PATH.'header.php');
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="<?php echo base_url();?>index.php/administration/hr/manage/index">HR Management</a>
+						<a href="<?php echo site_url();?>/administration/hr/manage/index">HR Management</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
@@ -67,7 +67,7 @@ include(VIEW_PATH.'header.php');
 								<div class="row">
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i>
-											<a href="<?php echo base_url();?>index.php/administration/hr/report/all_employee">All Employee Report</a>
+											<a href="<?php echo site_url();?>/administration/hr/report/all_employee">All Employee Report</a>
 										</h3>
 										<p>
 											Print all employee's report.
@@ -75,7 +75,7 @@ include(VIEW_PATH.'header.php');
 									</div>
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i>
-											<a href="<?php echo base_url();?>index.php/administration/hr/report/employee_detail">Employee Detail Report</a>
+											<a href="<?php echo site_url();?>/administration/hr/report/employee_detail">Employee Detail Report</a>
 										</h3>
 										<p>
 											Print all employee's report.
