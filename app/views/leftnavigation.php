@@ -80,7 +80,7 @@
               </a>
             </li>
             <li class="" data-menu-item="batch_summary">
-              <a href="#">
+              <a href="<?php echo base_url();?>index.php/academics/batch_summary/manage/index">
                 <i class="fa fa-list-alt"></i>
                 Batch Summary
               </a>
