@@ -13,7 +13,7 @@ CREATE TABLE `ci_sessions` (
   KEY `last_activity_idx` (`last_activity`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
- 
+
 
 -- DROP TABLE IF EXISTS `schools`;
 CREATE TABLE `schools` (
