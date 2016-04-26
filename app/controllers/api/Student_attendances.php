@@ -34,10 +34,10 @@ class Student_attendances extends REST_Controller {
         //$this->response(array("status" => "false", "message" => "Invalid attendance date", "data" => $attendance_date));
 
         if (is_null($batch_id) || $batch_id == 0) {
-            $this->response(array("status" => "false", "message" => "Invalid batch id", "data" => null));
+            $this->response(array("status" => "false", "message" => "Invalid batch id", "data" => false));
         }
         else if (is_null($attendance_date) || $attendance_date == '') {
-            $this->response(array("status" => "false", "message" => "Invalid attendance date", "data" => null));
+            $this->response(array("status" => "false", "message" => "Invalid attendance date", "data" => false));
         }
         else {
             //Get logged school id
@@ -64,10 +64,10 @@ class Student_attendances extends REST_Controller {
         //$this->response(array("status" => "false", "message" => "Invalid attendance date", "data" => $attendance_date));
 
         if (is_null($batch_id) || $batch_id == 0) {
-            $this->response(array("status" => "false", "message" => "Invalid batch id", "data" => null));
+            $this->response(array("status" => "false", "message" => "Invalid batch id", "data" => false));
         }
         else if (is_null($from_date) || is_null($to_date)) {
-            $this->response(array("status" => "false", "message" => "Invalid from-date or to-date", "data" => null));
+            $this->response(array("status" => "false", "message" => "Invalid from-date or to-date", "data" => false));
         }
         else {
             //Get logged school id
@@ -92,10 +92,10 @@ class Student_attendances extends REST_Controller {
         //$this->response(array("status" => "false", "message" => "Invalid attendance date", "data" => $attendance_date));
 
         if (is_null($student_id) || $student_id == 0) {
-            $this->response(array("status" => "false", "message" => "Invalid student id", "data" => null));
+            $this->response(array("status" => "false", "message" => "Invalid student id", "data" => false));
         }
         else if (is_null($from_date) || is_null($to_date)) {
-            $this->response(array("status" => "false", "message" => "Invalid from-date or to-date", "data" => null));
+            $this->response(array("status" => "false", "message" => "Invalid from-date or to-date", "data" => false));
         }
         else {
             //Get logged school id

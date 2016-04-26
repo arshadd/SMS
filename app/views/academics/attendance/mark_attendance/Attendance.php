@@ -39,8 +39,8 @@ include(VIEW_PATH.'header.php');
     <div class="page-content">
       <!-- BEGIN PAGE HEADER-->
       <h3 class="page-title">
-        <i class="fa fa-check-square-o icon-large"></i>
-        Attendance
+        <i class="fa fa-thumb-tack icon-large"></i>
+        Mark Attendance
       </h3>
       <div class="page-bar">
         <ul class="page-breadcrumb breadcrumb">
@@ -50,11 +50,11 @@ include(VIEW_PATH.'header.php');
             <i class="fa fa-angle-right"></i>
           </li>
           <li>
-            <a href="<?php echo site_url();?>/academics/attendance/index">Attendance Register</a>
+            <a href="<?php echo site_url();?>/academics/attendance/index">Attendance</a>
             <i class="fa fa-angle-right"></i>
           </li>
           <li>
-            <a href="#">Attendance</a>
+            <a href="#">Mark Attendance</a>
           </li>
         </ul>
       </div>
@@ -64,33 +64,53 @@ include(VIEW_PATH.'header.php');
       <div class="row">
         <div class="col-md-12">
           <div class="portlet">
-            <div class="portlet-body text-center">
-              <form id="Form_Class_Attendances_Search"  class="form-inline" >
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="fa fa-building"></i> Class Details
+              </div>
+            </div>
+            <div class="portlet-body form">
+              <div class="form-horizontal">
+                <div class="form-body">
 
-                <div class='alert alert-success display-hide'>
-                  <button data-close='alert' class='close'></button>
+                  <div class="form-group">
+                    <label class="control-label col-md-3">
+                      Class / Batch Name:
+                    </label>
+                    <div class="col-md-9">
+                      <select id="batch_id" name="batch_id" class="form-control select2me input-xlarge">
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-md-3">
+                      Attendance Date:
+                    </label>
+                    <div class="col-md-9">
+                      <input class="form-control input-medium date-picker" id="attendance_date" name="attendance_date" size="16" type="text" data-date-format="dd-MM-yyyy" />
+                    </div>
+                   </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-md-3">
+                    </label>
+                    <div class="col-md-9">
+                      <button type="button" id="btnSearch" class="btn btn-info">
+                        <i class="fa fa-search"></i> Search
+                      </button>
+                    </div>
+                   </div>
+
+                  </div>
+
                 </div>
-
-                <div class="alert alert-danger display-hide">
-                  <button class="close" data-close="alert"></button>
-              <span>
-                 You have some form errors. Please check below.
-              </span>
-                </div>
-
-                <div class="form-group">
-                  <label for="section">Attendance Date :</label>
-
-                  <input class="form-control input-medium date-picker" id="attendance_date" name="attendance_date" size="16" type="text" data-date-format="dd-MM-yyyy" /></div>
-
-                <button type="submit" class="btn btn-info">
-                  <i class="fa fa-search"></i> Search
-                </button>
-              </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+
+
 
       <div class="row">
         <div class="col-md-12">
@@ -102,6 +122,18 @@ include(VIEW_PATH.'header.php');
               <div class="tools">
 
               </div>
+            </div>
+
+            <div class="alert alert-success display-hide">
+              <button class="close" data-close="alert"></button>
+                <span>
+                </span>
+            </div>
+            <div class="alert alert-danger display-hide">
+              <button class="close" data-close="alert"></button>
+                <span>
+                 You have some form errors. Please check below.
+                </span>
             </div>
 
 
@@ -163,7 +195,7 @@ include(VIEW_PATH.'header.php');
                 </table>
 
                 <div class="form-actions right">
-                  <button type="button" id="btnSaveAttendance" class="btn btn-success">Save Attendance</button>
+                  <button type="button" id="btnSaveAttendance" class="btn btn-success"><i class="fa fa-thumb-tack"></i> Save Attendance</button>
                   <label>
                     <div id="loader"><img src="<?php echo base_url() . '/assets/img/input-spinner.gif'; ?>"/></div>
                   </label>
@@ -203,7 +235,7 @@ $pagePlugin  = array(
 
 $pageJsScript  = array(
     '<script type="text/javascript" src="' . base_url() . 'assets/js/util.js" ></script>'
-  , '<script type="text/javascript" src="' . base_url() . 'assets/js/Class/ClassAttendanceModule.js" ></script>'
+  , '<script type="text/javascript" src="' . base_url() . 'assets/js/Academics/Attendance/Mark_Attendance/ClassAttendanceModule.js" ></script>'
 
 );
 
