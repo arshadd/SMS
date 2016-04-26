@@ -74,7 +74,7 @@ var BatchModule = function () {
                 //Table Column Header Collection
                 {
                     data: null, render: function (data, type, row) {
-                    return '<a href="../../../batch_summary/manage/index/'+ data.batch_id +'" >'+ data.name +'</a>';
+                    return '<a href='+baseAppUrl+'academics/batch_summary/manage/index/'+ data.batch_id +'>'+ data.name +'</a>';
                 }
                 },
                 {
@@ -429,6 +429,12 @@ var BatchModule = function () {
     $("#class_id").on('change', function(){
        var class_id = $(this).val();
 
+        if(class_id==0){
+            disableControl(true);
+        }else{
+            disableControl(false);
+        }
+
         var url = loadGridUrl + class_id;
         dataTable.ajax.url(url).load();
     });
@@ -459,6 +465,16 @@ var BatchModule = function () {
         });
     }
 
+    function disableControl(isDisable){
+        if(isDisable){
+            $('.addNewBatch').attr('disabled', 'disabled');
+            BatchGrid.attr('disabled','disabled');
+        }
+        else {
+            $('.addNewBatch').removeAttr('disabled');
+            BatchGrid.removeAttr('disabled');
+        }
+    }
     //--------------------End Fill dropdown Functions-----------------------//
 
     //--------------------Edit functionality-----------------------//

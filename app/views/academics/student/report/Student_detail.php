@@ -330,53 +330,6 @@ include(VIEW_PATH . 'header.php');
                         </div>
                     </div>
 
-
-                    <h4 class="form-section">Class & Batch Detail</h4>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label col-xs-2">
-                                    <strong>Class / Batch:</strong>
-                                </label>
-                                <div class="col-xs-10">
-                                    <label class="control-label">Class 1, 2000 - 2001</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label col-xs-2">
-                                    <strong>Roll #:</strong>
-                                </label>
-                                <div class="col-xs-10">
-                                    <label class="control-label">G120005</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <h4 class="form-section">Settings</h4>
-
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label class="control-label col-xs-4">
-                                    <strong>Biometric #:</strong>
-                                </label>
-                                <div class="col-xs-8">
-                                    <label class="control-label">D334X-3434X-34343343-X34343</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-
-                        </div>
-                    </div>
-
-
                 </div>
             </div>
 

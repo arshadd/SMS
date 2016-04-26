@@ -34,6 +34,7 @@ var ClassModule = function () {
             //dom: "Bfrtip",
             ajax: loadGridUrl,
             aaSorting: [], //disabled initial sorting
+            displayLength:25,
             columns: [
                 //Table Column Header Collection
 

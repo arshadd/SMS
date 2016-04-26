@@ -65,6 +65,35 @@ include(VIEW_PATH . 'header.php');
                     <div class="portlet">
                         <div class="portlet-title">
                             <div class="caption">
+                                <i class="fa fa-building"></i> Class /Batch Details
+                            </div>
+                        </div>
+                        <div class="portlet-body form">
+                            <div class="form-horizontal">
+                                <div class="form-body">
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">
+                                            Class / Batch Name:
+                                        </label>
+                                        <div class="col-md-9">
+                                            <select id="batch_id" name="batch_id" class="form-control select2me input-xlarge">
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="row">
+                <div class="col-md-12">
+                    <div class="portlet">
+                        <div class="portlet-title">
+                            <div class="caption">
                                 <i class="fa fa-building"></i> Class / Batch Details
                             </div>
                         </div>
@@ -77,7 +106,7 @@ include(VIEW_PATH . 'header.php');
                                         </label>
                                         <div class='col-md-6'>
                                             <label class="control-label"><b><span id="class_batch_name"></span></b></label>
-                                            <!--<label class="control-label"><span id="class_batch_name" class="label label-success"></span></label>-->
+                                            <!- -<label class="control-label"><span id="class_batch_name" class="label label-success"></span></label>- ->
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +114,7 @@ include(VIEW_PATH . 'header.php');
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
             <div class="row ">
                 <div class="col-md-12">
@@ -120,11 +149,11 @@ include(VIEW_PATH . 'header.php');
                                 <i class="fa fa-calendar"></i> Timetable
                               </a>
                             </li>-->
-                            <li class="">
+                           <!-- <li class="">
                                 <a href="#tab_1_9" data-toggle="tab">
                                     <i class="fa fa-thumb-tack"></i> Attendance
                                 </a>
-                            </li>
+                            </li>-->
                         </ul>
                         <div class="tab-content">
 
@@ -164,11 +193,11 @@ include(VIEW_PATH . 'header.php');
 
                             </div>
                             <!--end tab-pane-->
-                            <div class="tab-pane " id="tab_1_9">
+                            <!--<div class="tab-pane " id="tab_1_9">
 
-                                <?php include('Attendance.php'); ?>
+                                <?php /*include('Attendance.php'); */?>
 
-                            </div>
+                            </div>-->
                             <!--end tab-pane-->
                         </div>
                     </div>
@@ -201,24 +230,28 @@ include(VIEW_PATH . 'header.php');
 
         '<script type="text/javascript" src="' . base_url() . 'assets/js/util.js" ></script>'
 
-    , '<script type="text/javascript" src="' . base_url() . 'assets/js/Class/BatchModule.js" ></script>'
+    , '<script type="text/javascript" src="' . base_url() . 'assets/js/Academics/Batch_Summary/BatchSummaryModule.js" ></script>'
+
+
+   /* , '<script type="text/javascript" src="' . base_url() . 'assets/js/Class/BatchModule.js" ></script>'
     , '<script type="text/javascript" src="' . base_url() . 'assets/js/Class/ClassSubjectModule.js" ></script>'
     , '<script type="text/javascript" src="' . base_url() . 'assets/js/Class/ClassEmployeeModule.js" ></script>'
 
     , '<script type="text/javascript" src="' . base_url() . 'assets/js/Class/ClassStudentModule.js" ></script>'
-    , '<script type="text/javascript" src="' . base_url() . 'assets/js/Class/ClassAttendanceModule.js" ></script>'
+    , '<script type="text/javascript" src="' . base_url() . 'assets/js/Class/ClassAttendanceModule.js" ></script>'*/
 
     );
 
     $pageJsCalls = array(
-        //'ClassModule.validate();'
 
-      'BatchModule.edit();'
+        'BatchSummaryModule.init();'
+
+    ,/* 'BatchModule.edit();'
     , 'ClassSubjectModule.init();'
     , 'ClassEmployeeModule.init();'
 
     , 'ClassStudentModule.init();'
-    , 'ClassAttendanceModule.init();'
+    , 'ClassAttendanceModule.init();'*/
     );
 
     include(VIEW_PATH . 'footer.php');

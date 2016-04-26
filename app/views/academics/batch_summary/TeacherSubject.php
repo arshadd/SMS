@@ -14,20 +14,19 @@
             <div class="caption">
               <i class="fa fa-cogs"></i>Teacher's Subjects
             </div>
-            <div class="actions">
+            <!--<div class="actions">
               <a href="#" class="btn btn-primary" id="btnAddSubject" onclick="ClassEmployeeModule.addView();">
                 <i class="fa fa-pencil-square-o"></i> Add New Teacher's Subject
               </a>
-            </div>
+            </div>-->
           </div>
 
           <div class="portlet-body">
-            <table id="TeacherGrid" class="table table-striped table-bordered table-hover table-full-width">
+            <table id="EmployeeGrid" class="table table-striped table-bordered table-hover table-full-width">
               <thead>
               <tr>
                 <th class='hidden-xs'>Employee</th>
                 <th class='hidden-xs'>Subject</th>
-                <th class="hidden-xs">Manage</th>
               </tr>
               </thead>
               <tbody>

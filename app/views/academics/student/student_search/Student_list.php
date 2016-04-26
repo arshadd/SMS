@@ -74,9 +74,12 @@
                 <div class="actions">
 <!--                  <a class="btn btn-default" data-target="#mdlCreateStudent" data-toggle="modal">View Demo</a>
 -->
-                  <a href="#" class="btn btn-primary"  onclick="StudentModule.addView();">
+                 <!-- <a href="#" class="btn btn-primary"  onclick="StudentModule.addView();">
                     <i class="fa fa-pencil-square-o"></i> Add New Student
-                  </a>
+                  </a>-->
+                    <a href="<?php echo site_url() . '/academics/student/manage/admission'; ?>" class="btn btn-primary">
+                        <i class="fa fa-pencil-square-o"></i> Add New Student
+                    </a>
                 </div>
               </div>
               <div class="portlet-body">
@@ -102,6 +105,8 @@
             </div>
           </div>
         </div>
+          
+          
       </div>
     </div>
 
@@ -148,7 +153,7 @@
     
     $pageJsScript  = array(
       '<script type="text/javascript" src="' . base_url() . 'assets/js/util.js" ></script>'
-      ,'<script type="text/javascript" src="' . base_url() . 'assets/js/Student/StudentModule.js" ></script>'
+      ,'<script type="text/javascript" src="' . base_url() . 'assets/js/Academics/Student/Student_Search/StudentModule.js" ></script>'
       );
       
     $pageJsCalls  = array(

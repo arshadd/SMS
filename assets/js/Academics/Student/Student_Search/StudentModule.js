@@ -23,8 +23,8 @@ var StudentModule = function () {
     var ModalDeleteStudent = $('#mdlDeleteStudent');
 
     var form1 = $('#Form_Student');
-    var error = $('#mdlCreateStudent .alert-danger');
-    var success = $('#mdlCreateStudent .alert-success');
+    var error = $('.alert-danger');
+    var success = $('.alert-success');
 
     error.hide();
     success.hide();
@@ -53,6 +53,7 @@ var StudentModule = function () {
             //dom: "Bfrtip",
             ajax: loadGridUrl,
             aaSorting: [], //disabled initial sorting
+            displayLength:25,
             columns: [
                 //Table Column Header Collection
 
@@ -63,7 +64,7 @@ var StudentModule = function () {
                 },
                 {
                     data: null, render: function (data, type, row) {
-                    return '<a href="#" class="editView" data-id="' + data.student_id + '">'+ data.first_name +' '+data.middle_name +', '+ data.last_name +'</a>';
+                    return '<a href="../../student/manage/admission/'+data.student_id+'" data-id="' + data.student_id + '">'+ data.full_name+'</a>';
                 }
                 },
                 { data: "gender" },
@@ -74,8 +75,8 @@ var StudentModule = function () {
                 {
                     data: null, render: function (data, type, row) {
                     // Combine the first and last names into a single table field
-                    return '<a href="edit/'+ data.student_id +'" class="btn btn-default btn-xs purple"><i class="fa fa-key"></i> Manage</a>'+
-                        '| <a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.student_id + '"><i class="fa fa-edit"></i> Edit</a>';
+                    return '<a href="#" class="btn btn-default btn-xs purple"><i class="fa fa-key"></i> Manage</a>'+
+                        '| <a href="../../student/manage/admission/'+data.student_id+'" class="btn btn-default btn-xs purple " data-id="' + data.student_id + '"><i class="fa fa-edit"></i> Edit</a>';
                         //'| <a href="#" class="btn btn-default btn-xs purple deleteView" data-id="' + data.student_id + '"><i class="fa fa-trash-o"></i> Delete</a>';
 
                     //return '<a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.student_id + '"><i class="fa fa-edit"></i> Edit</a>';
@@ -115,10 +116,10 @@ var StudentModule = function () {
         //deleteData(id);
     });
 
-    var reloadGrid = function(){
+   /* var reloadGrid = function(){
         //debugger;
         dataTable.ajax.reload(null, false);
-    }
+    }*/
     //--------------------End Grid Functions-----------------------//
 
     function loadAll() {
@@ -240,16 +241,16 @@ var StudentModule = function () {
                 father_name: {
                     required: true
                 },
-                father_contact: {
+                /*father_contact: {
                     required: true
-                },
+                },*/
 
                 mother_name: {
                     required: true
                 },
-                mother_contact: {
+               /* mother_contact: {
                     required: true
-                },
+                },*/
 
                 batch_id: {
                     required: true
@@ -336,13 +337,20 @@ var StudentModule = function () {
                 loader.hide();
 
                 if(result.status == "success"){
+
+                    ShowMessage("success", result.message);
+
+                    debugger;
+                    StudentIdFld.val(result.data['student_id']);
+                    UserIdFld.val(result.data['user_id']);
+
                     /*var photo = result.data['photo'];
                     if(photo != null)
                         PhotoFld.attr("src", baseAppImageUrl + photo);
 
                     ShowMessage("success", result.message);*/
-                    reloadGrid();
-                    ModalCreateStudent.modal('hide');
+                    //reloadGrid();
+                    //ModalCreateStudent.modal('hide');
                 }else {
                     //alert(result.message);
                     ShowMessage("error", result.message);
@@ -435,7 +443,53 @@ var StudentModule = function () {
         //Set values
         StudentIdFld.val(id);
     }
-    function showPopup() {
+
+    var add = function(){
+        var url = newUrl;
+        $.ajax({
+            url: url,
+            accepts: 'application/json',
+            cache: false,
+            type: 'GET',
+            dataType: 'jsonp',
+            success: function (data) {
+                // debugger;
+
+                var newRecord = data.data[0];
+                AdmissionNumberFld.val(newRecord.new_student_id);
+            },
+            fail: function (result) {
+            }
+        });
+
+        StudentIdFld.val("0");
+        StudentBatchFld.select2('val','0');
+
+        UserIdFld.val("0");
+        batch_id = 0;
+        var d = new Date();
+        AdmissionDateFld.val(GetDateFormatOnly(d.yyyymmdd()));
+    }
+
+
+    function showAddEdit() {
+
+        //Get Auto increment Admission number
+
+        var student_id = fetchStudentId();
+        if(student_id==0){
+            add();
+        }else {
+            edit(student_id);
+        }
+
+        //PhotoFld.attr("src", DEFAULT_STUDENT_IMAGE);
+
+        //alert('default');
+        //Enables some fields
+        //disabledField(false);
+    }
+    /*function showPopup() {
 
         //Get Auto increment Admission number
 
@@ -479,6 +533,21 @@ var StudentModule = function () {
         $('.modal-title').html("Create Student");
         ModalCreateStudent.modal('show');
     }
+*/
+
+    var fetchStudentId = function(){
+        var pathname = window.location.pathname;
+        var params = pathname.split('/');
+
+        //set in global
+        var student_id = params[params.length - 1];
+
+        if(isNaN(student_id)){
+            student_id = 0;
+        }
+
+        return student_id;
+    }
 
     function deleteData(id) {
         loader.show();
@@ -512,8 +581,8 @@ var StudentModule = function () {
                      //alert(save_id);
                      BatchIdFld.val(save_id);*/
 
-                    reloadGrid();
-                    ModalDeleteBatch.modal('hide');
+                    //reloadGrid();
+                    //ModalDeleteBatch.modal('hide');
                 }else {
                     ShowMessage("error", result.message);
                 }
@@ -546,8 +615,7 @@ var StudentModule = function () {
         //main function to initiate the module
         init : function(){
             //Form validation
-            handleDateTime();
-            handleValidation();
+
             loadAll();
 
             //Grid loading
@@ -556,8 +624,15 @@ var StudentModule = function () {
             }
             loadGrid();
         },
-        addView: function () {
+        /*addView: function () {
             showPopup();
+        },*/
+        addEditView: function () {
+            handleDateTime();
+            handleValidation();
+            loadAll();
+
+            showAddEdit();
         },
     };
 }();

@@ -68,7 +68,7 @@
             <div class="portlet">
               <div class="portlet-title">
                 <div class="caption">
-                  <i class="fa fa-building"></i> Class / Batch Details
+                  <i class="fa fa-building"></i> Class Details
                 </div>
               </div>
               <div class="portlet-body form">
@@ -85,8 +85,6 @@
 
                       </div>
                     </div>
-
-
                   </div>
                 </div>
               </div>
@@ -102,7 +100,7 @@
                   Batches List
                 </div>
                 <div class="actions">
-                  <a href="#" class="btn btn-primary" onclick="BatchModule.addView();">
+                  <a href="#" class="btn btn-primary addNewBatch" onclick="BatchModule.addView();">
                     <i class="fa fa-pencil-square-o"></i> Add New Batch
                   </a>
                 </div>

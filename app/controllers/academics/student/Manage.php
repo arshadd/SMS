@@ -27,4 +27,9 @@ class Manage extends CI_Controller{
     $this->load->view('academics/student/student_search/Student_list');
   }
 
+  function admission() {
+
+    $this->load->view('academics/student/student_admission/Create_edit_student');
+  }
+
 }

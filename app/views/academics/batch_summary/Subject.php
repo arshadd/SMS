@@ -14,11 +14,11 @@
             <div class="caption">
               <i class="fa fa-cogs"></i>Class's Subjects
             </div>
-            <div class="actions">
+            <!--<div class="actions">
               <a href="#" class="btn btn-primary" id="btnAddSubject" onclick="ClassSubjectModule.addView();">
                 <i class="fa fa-pencil-square-o"></i> Add New Subject
               </a>
-            </div>
+            </div>-->
           </div>
 
           <div class="portlet-body">
@@ -29,7 +29,6 @@
                   <th class='hidden-xs'>Subject Name</th>
                   <th class='hidden-xs'>Max Weekly Classes</th>
                   <th class='hidden-xs'>Credit Hours</th>
-                  <th class="hidden-xs">Manage</th>
                 </tr>
               </thead>
               <tbody>
