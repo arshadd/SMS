@@ -77,7 +77,6 @@ include(VIEW_PATH . 'header.php');
                                         </label>
                                         <div class='col-md-6'>
                                             <label class="control-label"><b><span id="class_batch_name"></span></b></label>
-
                                             <!--<label class="control-label"><span id="class_batch_name" class="label label-success"></span></label>-->
                                         </div>
                                     </div>
@@ -86,7 +85,6 @@ include(VIEW_PATH . 'header.php');
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="row ">

@@ -19,7 +19,7 @@ class Sitemap extends CI_Controller{
    */
   function index() {
 
-    $this->load->view('sitemap/index');
+    $this->load->view('sitemap/Index');
   }
 
 }

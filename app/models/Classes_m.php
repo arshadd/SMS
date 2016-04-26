@@ -18,6 +18,7 @@ class Classes_m extends CI_Model
             $this->db->order_by('c.created_at', 'desc');*/
     function all_classes($school_id)
     {
+        $this->db->select('classes.*, concat(classes.name," - ", classes.section_name) as full_name');
         $this->db->from('classes');
         $this->db->where('school_id', $school_id);
         $this->db->where('is_active', true);
@@ -34,6 +35,7 @@ class Classes_m extends CI_Model
 
     function find_class($school_id, $class_id)
     {
+        $this->db->select('classes.*, concat(classes.name," - ", classes.section_name) as full_name');
         $this->db->from('classes');
         $this->db->where('class_id', $class_id);
         $this->db->where('is_active', true);

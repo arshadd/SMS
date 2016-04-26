@@ -53,10 +53,11 @@ var BatchModule = function () {
 
     //--------------------Grid Functions-----------------------//
     var dataTable = null;
-    var loadGrid = function () {
+    var loadGrid = function (class_id) {
         //ShowSuccessMessage();
 
-        var class_id = fetchClassId();
+        //var class_id = $('#class_id').select2('val');
+        //alert(class_id);
 
         loadGridUrl = loadGridUrl + class_id;
         var dataSet = [];
@@ -73,7 +74,7 @@ var BatchModule = function () {
                 //Table Column Header Collection
                 {
                     data: null, render: function (data, type, row) {
-                    return '<a href="../../manage/classes/edit/'+ data.batch_id +'" >'+ data.name +'</a>';
+                    return '<a href="../../../batch_summary/manage/index/'+ data.batch_id +'" >'+ data.name +'</a>';
                 }
                 },
                 {
@@ -342,7 +343,10 @@ var BatchModule = function () {
 
     function showPopup() {
         $('#Form_Batch').clearForm();
-        ClassIdFld.val(fetchClassId());
+
+        var class_id = $('#class_id').val();
+        //alert(class_id);
+        ClassIdFld.val(class_id);
         BatchIdFld.val("0");
 
         $('#mdlCreateBatch .modal-title').html("Create Batch");
@@ -412,22 +416,61 @@ var BatchModule = function () {
 
         //set in global
         var class_id = params[params.length - 1];
+
+        if(isNaN(class_id)){
+            class_id = 0;
+        }
+
         return class_id;
     }
     //--------------------End Other Functions-----------------------//
 
+    //--------------------Fill dropdown Functions-----------------------//
+    $("#class_id").on('change', function(){
+       var class_id = $(this).val();
 
+        var url = loadGridUrl + class_id;
+        dataTable.ajax.url(url).load();
+    });
+    function fillDropDownClass() {
+        var loadDDUrl = baseApiUrl + "classes/all_classes";
+
+        $("#class_id").empty();
+        $("#class_id").append($("<option     />").val("0").text("Select..."));
+        $("#class_id").select2('val','0');
+
+        var url = loadDDUrl;
+        $.ajax({
+            url: url,
+            accepts: 'application/json',
+            cache: false,
+            type: 'GET',
+            dataType: 'jsonp',
+            success: function (result) {
+                // Handle the complete event
+                $.each(result.data, function () {
+                    $("#class_id").append($("<option     />").val(this.class_id).text(this.full_name));
+                });
+
+                $("#class_id").select2('val', fetchClassId());
+                $("#class_id").trigger('change');
+
+            }
+        });
+    }
+
+    //--------------------End Fill dropdown Functions-----------------------//
 
     //--------------------Edit functionality-----------------------//
-    var fetchBatchId = function(){
+    /*var fetchBatchId = function(){
         var pathname = window.location.pathname;
         var params = pathname.split('/');
 
         //set in global
         var batch_id = params[params.length - 1];
         return batch_id;
-    }
-    function setBatchName(){
+    }*/
+    /*function setBatchName(){
         //debugger;
         var batch_id = fetchBatchId();
 
@@ -451,9 +494,9 @@ var BatchModule = function () {
                 //ClassBatchFld.text(data.class_name +' - '+data.name+' ('+ GetDateFormatOnly(data.start_date) +' to '+ GetDateFormatOnly(data.end_date) +' )');
             }
         });
-    }
+    }*/
 
-    function setClassName(){
+    /*function setClassName(){
 
         var class_id = fetchClassId();
 
@@ -472,7 +515,7 @@ var BatchModule = function () {
                 ClassFld.text(data.name);
             }
         });
-    }
+    }*/
     //--------------------End Edit functionality-----------------------//
 
     return {
@@ -481,13 +524,15 @@ var BatchModule = function () {
             //Form validation
             handleDateTime();
             handleValidation();
+            fillDropDownClass();
 
-            setClassName();
+
+            //setClassName();
             //Grid loading
             if (!jQuery().dataTable) {
                 return;
             }
-            loadGrid();
+            loadGrid(0);
         },
         edit : function(){
             setBatchName();

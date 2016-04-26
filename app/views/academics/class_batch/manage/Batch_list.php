@@ -68,7 +68,38 @@
             <div class="portlet">
               <div class="portlet-title">
                 <div class="caption">
-                  Batches List for Class '<span id="class_name"></span>'
+                  <i class="fa fa-building"></i> Class / Batch Details
+                </div>
+              </div>
+              <div class="portlet-body form">
+                <div class="form-horizontal">
+                  <div class="form-body">
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3">
+                        Class Name:
+                      </label>
+                      <div class="col-md-9">
+                        <select id="class_id" name="class_id" class="form-control select2me input-xlarge">
+                        </select>
+
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="portlet">
+              <div class="portlet-title">
+                <div class="caption">
+                  Batches List
                 </div>
                 <div class="actions">
                   <a href="#" class="btn btn-primary" onclick="BatchModule.addView();">

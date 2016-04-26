@@ -24,7 +24,7 @@ class Manage extends CI_Controller{
 
   function search() {
 
-    $this->load->view('academics/student/student_search/Student_List');
+    $this->load->view('academics/student/student_search/Student_list');
   }
 
 }

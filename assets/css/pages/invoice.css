@@ -37,3 +37,14 @@ Invoice page
   margin-top: 20px;
   font-size: 14px;
 }
+
+.invoice .invoice-address {
+  padding:0px 0;
+  font-size:15px;
+  margin-top: 18px;
+}
+
+.invoice .invoice-heading h2{
+  text-align: center;
+  text-decoration: underline;
+}

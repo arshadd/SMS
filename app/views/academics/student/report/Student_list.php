@@ -3,12 +3,8 @@
     $body_class ="page-header-fixed";
 
     $pageCss  = array(
-            '<link href="' . base_url() . 'assets/plugins/select2/select2_conquer.css" rel="stylesheet" type="text/css" />'
-            ,'<link href="' . base_url() . 'assets/plugins/custom-datatable/DT_bootstrap.css" rel="stylesheet" type="text/css" />'
-
-        ,'<link href="' . base_url() . 'assets/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css" rel="stylesheet" type="text/css" />'
-        ,'<link href="' . base_url() . 'assets/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" type="text/css" />'
-
+        '<link href="' . base_url() . 'assets/plugins/select2/select2_conquer.css" rel="stylesheet" type="text/css" />'
+    , '<link href="' . base_url() . 'assets/css/pages/invoice.css" rel="stylesheet" type="text/css" />'
         );
     include(VIEW_PATH.'header.php');
 ?>
@@ -57,18 +53,10 @@
         </div>
         <!-- END PAGE HEADER-->
 
-        <div class="row invoice invoice-logo">
-          <div class="col-xs-4 invoice-logo-space">
-            <img src="<?php echo base_url();?>/assets/img/logo.png" style="width:150px;height:85px;" alt="" />
-          </div>
-          <div class="col-xs-6">
-            <h2>Student List</h2>
-          </div>
-          <div class="col-xs-2">
-            <span>12 March, 2016</span>
-            </div>
-        </div>
-        <hr/>
+        <?php
+        $report_title = "Student List";
+        include(VIEW_PATH.'report_header.php');
+        ?>
 
         <div class="row">
           <div class="col-md-12">
@@ -132,54 +120,12 @@
                 
           </div>
         </div>
-<!--        <hr/>
--->
-        <!--<div class="row invoice">
-          <div class="col-xs-12">
-            Loop, Inc. 795 Park Ave, Suite 120 San Francisco, CA 94107, Phone: (234) 145-1810
-          </div>
-        </div>-->
 
-        <div class="row invoice">
-          <div class="col-xs-4">
-            <div class="well">
-              <address>
-                <strong>Averrose Academy Inc.</strong><br/>
-                Ghauri Town Phase V<br/>
-                Islamabad, Pakistan<br/>
-                <abbr title="Phone">P:</abbr> (+92) 312-2213-163
-                <!--<br/><strong>Noman Azeem</strong>
-                <br/>
-                <a href="mailto:#">syed.noman.azeem@gmail.com</a>-->
-              </address>
-            </div>
-          </div>
-          <div class="col-xs-6 invoice-block">
-          </div>
-          <div class="col-xs-2 invoice-block">
-            <!--<ul class="list-unstyled amounts">
-                      <li>
-                        <strong>Sub - Total amount:</strong> $9265
-                      </li>
-                      <li>
-                        <strong>Discount:</strong> 12.9%
-                      </li>
-                      <li>
-                        <strong>VAT:</strong> -----
-                      </li>
-                      <li>
-                        <strong>Grand Total:</strong> $12489
-                      </li>
-                    </ul>-->
-            <!--<br/>-->
-            <a class="btn btn-lg btn-info hidden-print" onclick="javascript:window.print();">
-              Print <i class="fa fa-print"></i>
-            </a>
-            <!--<a class="btn btn-lg btn-success hidden-print">
-               PDF <i class="fa fa-file-text-o"></i>
-           </a>-->
-          </div>
-        </div>
+
+        <?php
+        include(VIEW_PATH.'report_footer.php');
+        ?>
+
       </div>
 
     </div>
@@ -190,13 +136,6 @@
   <?php
 
     $pagePlugin  = array(
-      '<script type="text/javascript" src="' . base_url() . 'assets/plugins/custom-datatable/jquery.dataTables.min.js" ></script>'
-      ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/custom-datatable/DT_bootstrap.js" ></script>'
-      ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/jquery-validation/dist/jquery.validate.min.js" ></script>'
-      ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/select2/select2.min.js" ></script>'
-
-    ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-modal/js/bootstrap-modalmanager.js" ></script>'
-    ,'<script type="text/javascript" src="' . base_url() . 'assets/plugins/bootstrap-modal/js/bootstrap-modal.js"" ></script>'
 
     );
     
