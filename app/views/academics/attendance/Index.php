@@ -71,7 +71,7 @@ include(VIEW_PATH.'header.php');
 									</div>
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-print icon-large"></i>
-											<a href="#">Attendance Report</a></h3>
+											<a href="<?php echo site_url();?>/academics/attendance/attendance_report">Attendance Report</a></h3>
 										<p>
 											Manage attendance report.
 										</p>

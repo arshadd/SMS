@@ -1,5 +1,5 @@
 <?php
-$title = "Human Resources";
+$title = "HR Settings";
 $body_class ="page-header-fixed";
 
 $pageCss  = array(
@@ -39,8 +39,8 @@ include(VIEW_PATH.'header.php');
 		<div class="page-content">
 			<!-- BEGIN PAGE HEADER-->
 			<h3 class="page-title">
-				<i class="fa fa-group icon-large"></i>
-				HR Management
+				<i class="fa fa-cog icon-large"></i>
+				HR Settings
 			</h3>
 			<div class="page-bar">
 				<ul class="page-breadcrumb breadcrumb">
@@ -50,7 +50,11 @@ include(VIEW_PATH.'header.php');
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="#">HR Management</a>
+						<a href="<?php echo site_url();?>/administration/hr/manage/index">Human Resource</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					<li>
+						<a href="#">HR Settings</a>
 					</li>
 				</ul>
 			</div>
@@ -62,74 +66,29 @@ include(VIEW_PATH.'header.php');
 							<div class="form-body well">
 								<div class="row">
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-plus-circle icon-large"></i>
-											<a href="#">Employee Admission</a></h3>
+										<h3 class="page-title"><i class="fa fa-building icon-large"></i>
+											<a href="<?php echo site_url();?>/administration/hr/settings/department">Department Management</a></h3>
 										<p>
-											Employee admission form.
+											Employee department management.
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-plane icon-large"></i>
-											<a href="#">Leave Management</a></h3>
+										<h3 class="page-title"><i class="fa fa-cogs icon-large"></i>
+											<a href="#">Designation Management</a></h3>
 										<p>
-											Manage employee attendance and leaves.
-										</p>
-									</div>
-									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-cog icon-large"></i>
-											<a href="<?php echo site_url();?>/administration/hr/settings/index">HR Settings</a></h3>
-										<p>
-											Set up and maintain Human Resources.
-										</p>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-money icon-large"></i>
-											<a href="#">Payroll Management</a></h3>
-										<p>
-											Set up employee payroll and generate payslips.
-										</p>
-									</div>
-									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-check-circle icon-large"></i>
-											<a href="<?php echo site_url();?>/administration/hr/manage/employee_attendance">Employee Attendance</a></h3>
-										<p>
-											Set up employee attendances.
-										</p>
-									</div>
-									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-search icon-large"></i>
-											<a href="<?php echo site_url();?>/administration/hr/manage/employee_search">Employee Search</a></h3>
-										<p>
-											Search, view, and maintain employee records.
-										</p>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-anchor icon-large"></i>
-											<a href="#">Subject Association</a></h3>
-										<p>
-											Assign an employee with one or more subjects.
-										</p>
-									</div>
-									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-print icon-large"></i>
-											<a href="<?php echo site_url();?>/administration/hr/report/index">Report</a></h3>
-										<p>
-											View report.
+											Manage designation management.
 										</p>
 									</div>
 									<!--<div class="col-md-4">
-										<h3><i class="fa fa-money icon-large"></i><a href="#">Employee Search</a></h3>
+										<h3 class="page-title"><i class="fa fa-cog icon-large"></i>
+											<a href="#">HR Settings</a></h3>
 										<p>
-											Set up employee payroll and generate payslips.
+											Set up and maintain Human Resources.
 										</p>
 									</div>-->
 								</div>
+
+
 
 							</div>
 						</div>

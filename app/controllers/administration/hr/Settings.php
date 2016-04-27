@@ -1,6 +1,6 @@
 <?php
 
-class Attendance extends CI_Controller{
+class Settings extends CI_Controller{
 
   public function __construct()
   {
@@ -19,15 +19,15 @@ class Attendance extends CI_Controller{
    */
   function Index() {
 
-    $this->load->view('academics/attendance/Index');
+    $this->load->view('administration/human_resources/settings/Index');
   }
 
-  function mark_attendance() {
+  function department() {
 
-    $this->load->view('academics/attendance/mark_attendance/Attendance');
+    $this->load->view('administration/human_resources/settings/department/Department_list');
   }
-  function attendance_report() {
+  function designation() {
 
-    $this->load->view('academics/attendance/report/Attendance');
+    $this->load->view('administration/human_resources/settings/designation/Designation_List');
   }
 }

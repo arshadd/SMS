@@ -43,11 +43,11 @@
                 Dashboard <small>statistics and more</small>
               </h3>
               <ul class="page-breadcrumb breadcrumb">
-                <li>
+                <!--<li>
                   <i class="fa fa-home"></i>
                   <a href="index.html">Home</a>
                   <i class="fa fa-angle-right"></i>
-                </li>
+                </li>-->
                 <li>
                   <a href="#">Dashboard</a>
                 </li>
