@@ -2345,9 +2345,22 @@ Dashboard stats
 
     .stats-overview .details {
         color: #888;
+        text-align: center;
     }
 
-        .stats-overview .details .title {
+.stats-overview .details h4 {
+    font-size: 18px;
+
+}
+
+.stats-overview .details i {
+    color: #777;
+    margin-right: 2px;
+
+}
+
+
+       /* .stats-overview .details .title {
             color: #777;
             font-size: 12px;
             font-weight: normal;
@@ -2355,9 +2368,10 @@ Dashboard stats
         }
 
             .stats-overview .details .title i {
-                color: #999;
+                color: #0b94ea;
                 margin-right: 2px;
-            }
+
+            }*/
 
         .stats-overview .details .numbers {
             color: #777;

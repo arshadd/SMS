@@ -294,10 +294,10 @@ var Index = function () {
 
                 var plot_statistics = $.plot($("#site_statistics"), [{
                         data: pageviews,
-                        label: "Unique Visits"
+                        label: "Last Year"
                     }, {
                         data: visitors,
-                        label: "Page Views"
+                        label: "This Year"
                     }
                 ], {
                     series: {

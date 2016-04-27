@@ -1,4 +1,4 @@
-<div class="row invoice">
+<div class="row invoice  hidden-print">
     <div class="col-xs-4">
         <!--<div class="well">
           <address>
@@ -30,7 +30,7 @@
                   </li>
                 </ul>-->
         <!--<br/>-->
-        <a class="btn btn-lg btn-info hidden-print" onclick="javascript:window.print();">
+        <a class="btn btn-lg btn-info" onclick="javascript:window.print();">
             Print <i class="fa fa-print"></i>
         </a>
         <!--<a class="btn btn-lg btn-success hidden-print">

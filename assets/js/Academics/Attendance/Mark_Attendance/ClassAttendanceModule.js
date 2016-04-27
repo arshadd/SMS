@@ -145,7 +145,7 @@ var ClassAttendanceModule = function () {
         //alert(url);
         dataTable.ajax.url(url).load();
 
-        //fillSummary(attendance_date, url);
+        fillSummary(attendance_date, url);
     }
     function fillSummary(attendance_date, url){
 
@@ -163,11 +163,10 @@ var ClassAttendanceModule = function () {
                 loader.hide();
                 $("#lblAttendanceDate").text(attendance_date);
 
-                if(result.summary == null) return;
+                //debugger;
+                if(result.summary != null && result.summary[0] != null){
+                    var summary = result.summary[0];
 
-                var summary = result.summary[0];
-
-                if(summary!=null){
                     $("#lblPresent").text(summary.present_count);
                     $("#lblAbsent").text(summary.absent_count);
                 }
