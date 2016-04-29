@@ -171,7 +171,10 @@ class Students_m extends CI_Model
                 //$result = false;
             } else {
                 //Insert
-
+                if(array_key_exists('photo', $student)===false)
+                {
+                    $student = array_merge($student, array('photo' => STUDENT_DEFAULT_IMAGE));
+                }
                 //-----------Insert User's Info---------------//
                 $user = array_merge($user, array('username' => $student['admission_no']));
                 $user = array_merge($user, array('password_hash' => DEFAULT_PASSWORD));

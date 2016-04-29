@@ -77,12 +77,18 @@ class Employees_m extends CI_Model {
             unset($employee['user_id']);
             //update
             $this->db->where('employee_id', $employee_id);
-            $result = $this->db->update('employees', $employee);
+            $result = $this->db->update('employees1', $employee);
             //-----------End Update Employee's Info---------------//
 
             //$result = false;
         } else {
             //Insert
+                if(array_key_exists('photo', $employee)===false)
+                {
+//                    $employee['photo']=EMPLOYEE_DEFAULT_IMAGE;
+                    $employee = array_merge($employee, array('photo' => EMPLOYEE_DEFAULT_IMAGE));
+                    //var_dump($employee);
+                }
 
             //-----------Insert User's Info---------------//
             $user = array_merge($user, array('username' => $employee['code']));

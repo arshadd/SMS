@@ -84,7 +84,7 @@ class Students extends REST_Controller {
         //Get primary key
         $student_id = $this->post('student_id');
 
-        $_POST['photo'] = STUDENT_DEFAULT_IMAGE;
+//        $_POST['photo'] = STUDENT_DEFAULT_IMAGE;
         //-------------File uploading---------------//
         //if (!is_dir($config['upload_path'])) die("THE UPLOAD DIRECTORY DOES NOT EXIST");
         if (empty($_FILES['StudentPhoto'])===FALSE) {

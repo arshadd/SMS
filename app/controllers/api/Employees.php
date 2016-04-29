@@ -55,11 +55,10 @@ class Employees extends REST_Controller
         //Get primary key
         $employee_id = $this->post('employee_id');
 
-        $_POST['photo'] = EMPLOYEE_DEFAULT_IMAGE;
+        //$_POST['photo'] = EMPLOYEE_DEFAULT_IMAGE;
         //-------------File uploading---------------//
         //if (!is_dir($config['upload_path'])) die("THE UPLOAD DIRECTORY DOES NOT EXIST");
         if (empty($_FILES['employeePhoto'])===FALSE) {
-
             $config['upload_path'] = 'assets/resource/employees/';
             $config['allowed_types'] = 'png|jpg|jpeg|gif|bmp';
             $config['max_size'] = '2048000';
