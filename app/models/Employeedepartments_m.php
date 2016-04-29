@@ -8,7 +8,7 @@ class Employeedepartments_m extends CI_Model
         $this->db->from('employee_departments');
         $this->db->where('school_id', $school_id);
         $this->db->where('status', true);
-
+        $this->db->where('is_deleted',false);
 
         $departments = $this->db->get()->result();
 
@@ -24,6 +24,7 @@ class Employeedepartments_m extends CI_Model
         $this->db->select("employee_department_id, code, name, CASE WHEN status = 1 THEN 'True' ELSE 'False' END as status");
         $this->db->from('employee_departments');
         $this->db->where('school_id', $school_id);
+        $this->db->where('is_deleted',false);
 //        $this->db->where('status', true);
 
 
@@ -120,6 +121,7 @@ class Employeedepartments_m extends CI_Model
         if ($employee_department_id > 0) {
 
             $response = $this->delete_check($employee_department_id);
+
             if($response['result']===FALSE){
                 $result = FALSE;
                 $message = $response['message'];
@@ -130,7 +132,7 @@ class Employeedepartments_m extends CI_Model
                 $employeedpeartment = array('is_deleted' => true);
 
                 //update
-                $this->db->where('class_id', $employee_department_id);
+                $this->db->where('employee_department_id', $employee_department_id);
                 $this->db->where('school_id', $school_id);
                 $result = $this->db->update('employee_departments', $employeedpeartment);
 
@@ -146,7 +148,7 @@ class Employeedepartments_m extends CI_Model
         $response = array(
             'result' => $result,
             'message' => $message,
-            'data' => array('class_id' => $employee_department_id)
+            'data' => array('employee_department_id' => $employee_department_id)
         );
 
         return $response;

@@ -79,12 +79,13 @@ class Employeedepartments extends REST_Controller
 
         //Delete
         $response = $this->employeedepartments_m->delete($school_id, $employee_department_id);
-
-        if ($response['result']=== FALSE) {
-            $this->response(array("status" => "failed", "message" => $response['message'], "data" => null));
-        } else {
-            $this->response(array("status" => "success", "message" => $response['message'], "data" => $response['data']));
-        }
+        $this->response(array("status" => "success", "message" => '', "data" => $response));
+//
+//        if ($response['result']=== FALSE) {
+//            $this->response(array("status" => "failed", "message" => $response['message'], "data" => null));
+//        } else {
+//            $this->response(array("status" => "success", "message" => $response['message'], "data" => $response['data']));
+//        }
 //        $this->response(array("status" => "failed", "message" => '', "data" => $_POST));
 
     }
