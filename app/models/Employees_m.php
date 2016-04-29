@@ -4,7 +4,7 @@ class Employees_m extends CI_Model {
 
     function all_employees($school_id)
     {
-        $this->db->select('e.*, concat(e.first_name," ", e.middle_name, " ", e.last_name) as full_name, ed.name as department_name');
+        $this->db->select('e.*, concat(e.first_name," ", e.middle_name, " ", e.last_name) as full_name, ed.name as department_name, CASE WHEN gender = 0 THEN \'Female\' ELSE \'Male\' END as gender_text ');
         $this->db->from('employees e');
         $this->db->join('employee_departments ed', 'ed.employee_department_id = e.employee_department_id');
 
@@ -72,7 +72,9 @@ class Employees_m extends CI_Model {
             //Updated_at date
             $employee = array_merge($employee, array('updated_at' => date('Y-m-d H:i:s')));
             //Remove unnecessary elements
-            unset($_POST['code']);
+            unset($employee['code']);
+            unset($employee['employee_id']);
+            unset($employee['user_id']);
             //update
             $this->db->where('employee_id', $employee_id);
             $result = $this->db->update('employees', $employee);

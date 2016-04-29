@@ -70,25 +70,22 @@ include(VIEW_PATH.'header.php');
           <div class="portlet">
             <div class="portlet-title">
               <div class="caption">
-                <i class="fa fa-list-alt"></i>
                 Department List
               </div>
               <div class="actions">
-                <a href="#" class="btn btn-primary" onclick="EmployeeModule.addView();">
+                <a href="#" class="btn btn-primary" onclick="DepartmentsModule.addView();">
                   <i class="fa fa-pencil-square-o"></i> Add New Department
                 </a>
               </div>
             </div>
             <div class="portlet-body">
-              <table id="EmployeeGrid" class="table table-striped table-bordered table-hover table-full-width">
+              <table id="DepartmentGrid" class="table table-striped table-bordered table-hover table-full-width">
                 <thead>
                 <tr>
-                  <th class='hidden-xs'>employee_id</th>
-                  <th class='hidden-xs'>Photo</th>
-                  <th class='hidden-xs'>Full Name</th>
-                  <th class='hidden-xs'>Gender</th>
-                  <th class='hidden-xs'>Job Title</th>
-                  <th class="hidden-xs">Manage</th>
+                  <th class='hidden-xs'>Code</th>
+                  <th class='hidden-xs'>Name</th>
+                  <th class='hidden-xs'>Status</th>
+                  <th class="hidden-xs">Edit</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -106,17 +103,55 @@ include(VIEW_PATH.'header.php');
 </div>
 <!-- END CONTAINER -->
 
-<div id="mdlCreateEmployee" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="true" data-width="850">
+<div id="mdlCreateDepartment" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="true" data-width="400">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title">Create Employee</h4>
+    <h4 class="modal-title">Create Department</h4>
   </div>
   <div class="modal-body">
-    <?php include('_createOrEdit.php');?>
+    <?php include('_createOrEditDepartments.php');?>
   </div>
-
 </div>
 
+
+<div id="mdlDeleteClass" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="true" data-width="400">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    <h4 class="modal-title">Confirm Delete</h4>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal" method="post">
+      <div class="form-body">
+        <div class="alert alert-danger display-hide">
+          <button class="close" data-close="alert"></button>
+                <span>
+                   You have some form errors. Please check below.
+                </span>
+        </div>
+
+        <div class="alert alert-info display">
+              <span>
+                 Are you sure want to delete?
+              </span>
+        </div>
+        <input type="hidden" id="employee_department_id" name="employee_department_id" class="form-control"/>
+        <div class="form-actions fluid">
+          <div class="col-md-offset-3 col-md-9">
+            <a href="#" data-dismiss="modal" class="btn btn-default">
+              <i class="fa fa-mail-reply"></i> Close
+            </a>
+            <button class="btn btn-success" id="btnDelete" type="button">
+              <i class="fa fa-trash-o"></i> Delete
+            </button>
+            <label>
+              <div id="loaderDelete"><img src="<?php echo base_url() . '/assets/img/input-spinner.gif'; ?>"/></div>
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 
 <?php
 
@@ -134,11 +169,11 @@ $pagePlugin  = array(
 
 $pageJsScript  = array(
     '<script type="text/javascript" src="' . base_url() . 'assets/js/util.js" ></script>'
-,'<script type="text/javascript" src="' . base_url() . 'assets/js/Employee/EmployeeModule.js" ></script>'
+,'<script type="text/javascript" src="' . base_url() . 'assets/js/Administration/human_resources/settings/DepartmentsModule.js" ></script>'
 );
 
 $pageJsCalls  = array(
-    'EmployeeModule.init();'
+    'DepartmentsModule.init();'
 );
 
 include(VIEW_PATH.'footer.php');

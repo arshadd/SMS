@@ -25,9 +25,9 @@ var baseApiUrl = window.location.href.substring(0, window.location.href.indexOf(
 var baseAppUrl = window.location.href.substring(0, window.location.href.indexOf("index"))+"index.php/";
 var baseAppImageUrl = window.location.href.substring(0, window.location.href.indexOf("index"));
 
-var DEFAULT_SCHOOL_IMAGE = baseAppImageUrl + "/assets/resource/default/school.png";
-var DEFAULT_STUDENT_IMAGE = baseAppImageUrl + "/assets/resource/default/student.png";
-var DEFAULT_EMPLOYEE_IMAGE = baseAppImageUrl + "/assets/resource/default/employee.png";
+var DEFAULT_SCHOOL_IMAGE = baseAppImageUrl + "assets/resource/default/school.png";
+var DEFAULT_STUDENT_IMAGE = baseAppImageUrl + "assets/resource/default/student.png";
+var DEFAULT_EMPLOYEE_IMAGE = baseAppImageUrl + "assets/resource/default/employee.png";
 
 
 Date.prototype.yyyymmdd = function() {

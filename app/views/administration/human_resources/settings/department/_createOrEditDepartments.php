@@ -36,7 +36,11 @@
                             Status:
                         </label>
                         <div class="col-md-9">
-                            <input type="text" id="status" name="status" class="form-control"/>
+<!--                            <input type="text" id="status" name="status" class="form-control"/>-->
+                            <select id="status" name="status" class="form-control">
+                                <option value="1">Enable</option>
+                                <option value="0">Disable</option>
+                            </select>
                         </div>
                     </div>
 

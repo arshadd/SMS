@@ -89,7 +89,7 @@ class Students extends REST_Controller {
         //if (!is_dir($config['upload_path'])) die("THE UPLOAD DIRECTORY DOES NOT EXIST");
         if (empty($_FILES['StudentPhoto'])===FALSE) {
 
-            $config['upload_path'] = './assets/resource/student/';
+            $config['upload_path'] = 'assets/resource/student/';
             $config['allowed_types'] = 'png|jpg|jpeg|gif|bmp';
             $config['max_size'] = '2048000';
             /*$config['max_width'] = '1024';

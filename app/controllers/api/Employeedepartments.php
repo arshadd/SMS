@@ -15,14 +15,16 @@ class Employeedepartments extends REST_Controller
             redirect('/login/show_login');
         }
     }
-    function all_employeedepartments_get()
+    function all_employeedepartments_get($show=null)
     {
         //Get logged school id
         $school_id = $this->session->userdata('school_id');
-
-        $employeedepartments = $this->employeedepartments_m->all_employeedepartments($school_id);
-        
-
+        if (is_null($show)) {
+            $employeedepartments = $this->employeedepartments_m->all_employeedepartments($school_id);
+        }
+        else{
+            $employeedepartments = $this->employeedepartments_m->all_employeedepartmentall($school_id);
+        }
         $this->response(array("status" => "success", "message" => "", "data" => $employeedepartments));
     }
 
@@ -65,6 +67,26 @@ class Employeedepartments extends REST_Controller
         } else {
             $this->response(array("status" => "success",  "message" => $response['message'], "data" => $response['data']));
         }
+    }
+
+    function delete_post()
+    {
+        //Get logged school id
+        $school_id = $this->session->userdata('school_id');
+
+        //Get primary key
+        $employee_department_id = $this->post('employee_department_id');
+
+        //Delete
+        $response = $this->employeedepartments_m->delete($school_id, $employee_department_id);
+
+        if ($response['result']=== FALSE) {
+            $this->response(array("status" => "failed", "message" => $response['message'], "data" => null));
+        } else {
+            $this->response(array("status" => "success", "message" => $response['message'], "data" => $response['data']));
+        }
+//        $this->response(array("status" => "failed", "message" => '', "data" => $_POST));
+
     }
 
 //    function save_post()

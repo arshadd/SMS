@@ -309,7 +309,7 @@ var StudentModule = function () {
     function save() {
         loader.show();
 
-        debugger;
+        
 
         //Get values
 
@@ -340,7 +340,7 @@ var StudentModule = function () {
 
                     ShowMessage("success", result.message);
 
-                    debugger;
+                    
                     StudentIdFld.val(result.data['student_id']);
                     UserIdFld.val(result.data['user_id']);
 
@@ -367,8 +367,9 @@ var StudentModule = function () {
     }
 
     function ShowMessage(type, message){
+        alert(message);
         if (message == 'undefined') return;
-
+        alert(message);
         message = '<button data-close="alert" class="close"></button>'+ message;
 
         error.hide();

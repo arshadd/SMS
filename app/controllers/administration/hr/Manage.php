@@ -30,4 +30,9 @@ class Manage extends CI_Controller{
 
     $this->load->view('administration/human_resources/employee_attendance/Employee_list');
   }
+
+  function admission() {
+
+    $this->load->view('administration/human_resources/employee_admission/Create_edit_employee');
+  }
 }

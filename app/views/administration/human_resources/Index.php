@@ -63,7 +63,7 @@ include(VIEW_PATH.'header.php');
 								<div class="row">
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-plus-circle icon-large"></i>
-											<a href="#">Employee Admission</a></h3>
+											<a href="<?php echo site_url();?>/administration/hr/manage/admission">Employee Admission</a></h3>
 										<p>
 											Employee admission form.
 										</p>

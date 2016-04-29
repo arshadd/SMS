@@ -12,12 +12,11 @@
         );
     include(VIEW_PATH.'header.php');
 ?>
-
 <!-- BEGIN BODY -->
 
   <!-- BEGIN HEADER -->
   <div class="header navbar navbar-inverse navbar-fixed-top">
-    
+
     <?php $this->load->view('topheader') ?>
 
   </div>
@@ -43,11 +42,11 @@
               <i class="fa fa-angle-right"></i>
             </li>
             <li>
-              <a href="<?php echo site_url();?>/administration/hr/manage/index">HR Management</a>
+              <a href="<?php echo base_url();?>index.php/administration/hr/manage/index">HR Management</a>
               <i class="fa fa-angle-right"></i>
             </li>
             <li>
-              <a href="<?php echo site_url() . '/administration/hr/report/index'; ?>">Report</a>
+              <a href="<?php echo base_url() . 'index.php/administration/hr/report/index'; ?>">Report</a>
               <i class="fa fa-angle-right"></i>
             </li>
             <li>
@@ -65,67 +64,86 @@
             <h2>Employee List</h2>
           </div>
           <div class="col-xs-2">
-            <span>12 March, 2016</span>
-            </div>
+            <?php
+              date_default_timezone_set('Asia/Karachi');
+              $today = date("M j,Y H:i:s", mktime(date("H"), date("i"), date("s"), date("m"), date("d"), date("Y")));
+            ?>
+            <span><?php echo $today;?></span>
+          </div>
         </div>
         <hr/>
-
         <div class="row">
           <div class="col-md-12">
 
                 <table id="ClassGrid" class="table table-striped table-bordered table-hover table-full-width">
                   <thead>
-                    <tr>
+                    <tr style="background-color: #999ba2" >
                       <th>S.No</th>
-                      <th>Code</th>
-                      <th>Class Name</th>
-                      <th>Sections</th>
-                      <th>Batches</th>
-                      <th>Students</th>
-                      <th>Male</th>
-                      <th>Female</th>
+                      <th>EMP_Code</th>
+                      <th>Employee Name</th>
+                      <th>Gender</th>
+                      <th>Designation</th>
+                      <th>Employee Level </th>
+                      <th>Date Joining</th>
+                      <th>Contact No</th>
+                      <th>Address</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td>1</td>
-                      <td>G-01</td>
-                      <td>Class 1</td>
-                      <td>Green House</td>
-                      <td>5</td>
-                      <td>10</td>
-                      <td>7</td>
-                      <td>3</td>
+                      <td>Emp-01</td>
+                      <td>Abdul Hakeem</td>
+                      <td>Male</td>
+                      <td>Science Teacher</td>
+                      <td>Senior Staff</td>
+                      <td>19-Dec-2008</td>
+                      <td>xxxx-xxxxxxxx</td>
+                      <td>ABC Street,Sector G-7/4, Islamabad</td>
                     </tr>
                     <tr>
                       <td>2</td>
-                      <td>G-02</td>
-                      <td>Class 2</td>
-                      <td>Green House</td>
-                      <td>5</td>
-                      <td>10</td>
-                      <td>7</td>
-                      <td>3</td>
+                      <td>Emp-02</td>
+                      <td>Madeeha Shaha</td>
+                      <td>Female</td>
+                      <td>Head Mistress</td>
+                      <td>Senior Staff</td>
+                      <td>01-Jan-2007</td>
+                      <td>xxxx-xxxxxxxx</td>
+                      <td>XYZ Street,stalite Town, Rawalpindi</td>
                     </tr>
                     <tr>
                       <td>3</td>
-                      <td>G-03</td>
-                      <td>Class 3</td>
-                      <td>Green House</td>
-                      <td>5</td>
-                      <td>10</td>
-                      <td>7</td>
-                      <td>3</td>
+                      <td>Emp-03</td>
+                      <td>Zeeshan Ali</td>
+                      <td>Male</td>
+                      <td>Teacher</td>
+                      <td>Junior Staff</td>
+                      <td>5-March-2011</td>
+                      <td>xxxx-xxxxxxxx</td>
+                      <td>ABC Street,Sector G-7/4, Islamabad</td>
                     </tr>
                     <tr>
                       <td>4</td>
-                      <td>G-04</td>
-                      <td>Class 4</td>
-                      <td>Green House</td>
+                      <td>Emp-04</td>
+                      <td>Batool Begum</td>
+                      <td>Female</td>
+                      <td>Arts Teacher</td>
+                      <td>Junior Staff</td>
+                      <td>01-March-2014</td>
+                      <td>xxxx-xxxxxxxx</td>
+                      <td>Xyz Street,House.No.abc, Islamabad</td>
+                    </tr>
+                    <tr>
                       <td>5</td>
-                      <td>10</td>
-                      <td>7</td>
-                      <td>3</td>
+                      <td>Emp-05</td>
+                      <td>Abdul Hakeem</td>
+                      <td>Male</td>
+                      <td>Science Teacher</td>
+                      <td>Senior Staff</td>
+                      <td>19-Aug-2008</td>
+                      <td>xxxx-xxxxxxxx</td>
+                      <td>ABC Street,Sector G-7/4, Islamabad</td>
                     </tr>
                   </tbody>
                 </table>
@@ -144,8 +162,8 @@
           <div class="col-xs-4">
             <div class="well">
               <address>
-                <strong>Averrose Academy Inc.</strong><br/>
-                Ghauri Town Phase V<br/>
+                <strong>ABC Academy Inc.</strong><br/>
+                XYZ<br/>
                 Islamabad, Pakistan<br/>
                 <abbr title="Phone">P:</abbr> (+92) 312-2213-163
                 <!--<br/><strong>Noman Azeem</strong>

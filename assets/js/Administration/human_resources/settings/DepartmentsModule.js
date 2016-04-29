@@ -1,13 +1,14 @@
 var DepartmentsModule = function () {
 
     //Create Batch
-    var School = { school_id: 0, code: '', name: '', description: '', address: '', phone:'', email:'', website:'', logo:''};
+    var EmployeeDepartment = { employee_department_id: 0, code: '', name: '', status: 1, school_id: ''};
 
     //Field Declaration Section
 
-    var EmployeeDepartmentIdFld = $('#Form_Departments #employee_department_id');
-    var CodeFld = $('#Form_Departments #code');
+    var StatusIdFld = $('#Form_Departments #status');
+    var EmployeeDepartmentIdFld = $('#employee_department_id');
 
+    var loaderDelete = $('#loaderDelete');
     var loader = $("#Form_Departments #loader");
     loader.hide();
 
@@ -17,7 +18,7 @@ var DepartmentsModule = function () {
 var loadGridUrl =  baseApiUrl + "employeedepartments/all_employeedepartments";
     var editUrl = baseApiUrl + "employeedepartments/find_department/";
     var saveUrl = baseApiUrl + "employeedepartments/save";
-    var deleteUrl = baseApiUrl + "schools/delete";
+    var deleteUrl = baseApiUrl + "employeedepartments/delete";
     var listUrl = baseAppUrl + "Employee_Department/index";
 
 
@@ -30,7 +31,7 @@ var loadGridUrl =  baseApiUrl + "employeedepartments/all_employeedepartments";
 
         dataTable = $('#DepartmentGrid').DataTable({
             //dom: "Bfrtip",
-            ajax: loadGridUrl,
+            ajax: loadGridUrl+'/all',
             aaSorting: [], //disabled initial sorting
             columns: [
                 //Table Column Header Collection
@@ -239,16 +240,72 @@ var loadGridUrl =  baseApiUrl + "employeedepartments/all_employeedepartments";
         ModalUploadFile.modal('show');
     });
 
+    // Delete record
+    $('#DepartmentGrid').on( 'click', 'a.deleteView', function (e) {
+        var id = $(this).data('id');
+        EmployeeDepartmentIdFld.val(id);
+        loaderDelete.hide();
 
-    /* function showDelete(id) {
-     if (id == null) return;
+        $('#mdlDeleteClass').modal('show');
 
-     //Set values
-     BatchIdFld.val(id);
-     }
-     $('.modal').on('hidden.bs.modal', function(){
-     $(this).find('form')[0].reset();
-     });*/
+
+    });
+
+    $('#btnDelete').click(function(){
+
+        deleteData(EmployeeDepartmentIdFld.val());
+    });
+
+    function deleteData(id) {
+
+        loaderDelete.show();
+
+        var dept = EmployeeDepartment;
+
+        //Get values
+        dept.employee_department_id = id;
+
+        var url = deleteUrl;
+        $.ajax({
+            url: url,
+            accepts: 'application/json',
+            cache: false,
+            type: 'POST',
+            data : dept,
+            dataType: 'jsonp',
+            success : function(result){
+
+                loaderDelete.hide();
+
+                if(result.status == "success"){
+
+                    reloadGrid();
+                    $('#mdlDeleteClass').modal('hide');
+                }else {
+                    ShowDeleteMessage("error", result.message);
+                }
+
+            },
+
+        });
+    }
+    function ShowDeleteMessage(type, message){
+        if (message == 'undefined') return;
+
+        var error = $('#mdlDeleteClass .alert-danger');
+        var success = $('#mdlDeleteClass .alert-success');
+
+        message = '<button data-close="alert" class="close"></button>'+ message;
+
+        if (type == "error") {
+            error.html(message);
+            error.show();
+        }else if(type=="success")
+        {
+            success.html(message);
+            success.show();
+        }
+    }
     function showPopup() {
         $('#Form_Departments').trigger("reset");
         EmployeeDepartmentIdFld.val("0");

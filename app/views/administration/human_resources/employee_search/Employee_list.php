@@ -70,9 +70,10 @@ include(VIEW_PATH.'header.php');
                 Employee List
               </div>
               <div class="actions">
-                <a href="#" class="btn btn-primary" onclick="EmployeeModule.addView();">
+                <a href="<?php echo site_url() . '/administration/hr/manage/admission'; ?>" class="btn btn-primary">
                   <i class="fa fa-pencil-square-o"></i> Add New Employee
                 </a>
+
               </div>
             </div>
             <div class="portlet-body">
@@ -108,7 +109,9 @@ include(VIEW_PATH.'header.php');
     <h4 class="modal-title">Create Employee</h4>
   </div>
   <div class="modal-body">
-    <?php include('_createOrEdit.php');?>
+
+    <?php echo (VIEW_PATH.'app\views/employee/_createOrEdit.php');?>
+    <?php include(VIEW_PATH.'app/views/employee/_createOrEdit.php');?>
   </div>
 
 </div>
@@ -130,7 +133,7 @@ $pagePlugin  = array(
 
 $pageJsScript  = array(
     '<script type="text/javascript" src="' . base_url() . 'assets/js/util.js" ></script>'
-,'<script type="text/javascript" src="' . base_url() . 'assets/js/Employee/EmployeeModule.js" ></script>'
+, '<script type="text/javascript" src="' . base_url() . 'assets/js/Administration/human_resources/employee_crud/EmployeeModule.js" ></script>'
 );
 
 $pageJsCalls  = array(

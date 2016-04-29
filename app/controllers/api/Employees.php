@@ -60,7 +60,7 @@ class Employees extends REST_Controller
         //if (!is_dir($config['upload_path'])) die("THE UPLOAD DIRECTORY DOES NOT EXIST");
         if (empty($_FILES['employeePhoto'])===FALSE) {
 
-            $config['upload_path'] = './assets/resource/employees/';
+            $config['upload_path'] = 'assets/resource/employees/';
             $config['allowed_types'] = 'png|jpg|jpeg|gif|bmp';
             $config['max_size'] = '2048000';
             /*$config['max_width'] = '1024';
@@ -90,6 +90,12 @@ class Employees extends REST_Controller
         //Save date in date format
         $_POST['joining_date'] = date('Y-m-d', strtotime($this->post('joining_date')));
         $_POST['date_of_birth'] = date('Y-m-d', strtotime($this->post('date_of_birth')));
+        $_POST['gender'] = (int)$this->post('gender');
+        $_POST['employee_department_id'] = (int)$this->post('employee_department_id');
+        $_POST['employee_position_id'] = (int)$this->post('employee_position_id');
+        $_POST['experience_year'] = (int)$this->post('experience_year');
+        $_POST['experience_month'] = (int)$this->post('experience_month');
+
 
         //Save
         $response = $this->employees_m->save($school_id, $employee_id, $_POST);
@@ -99,6 +105,7 @@ class Employees extends REST_Controller
         } else {
             $this->response(array("status" => "success",  "message" => $response['message'], "data" => $response['data']));
         }
+
     }
 
     function delete_post()
