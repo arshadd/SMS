@@ -93,7 +93,7 @@
     
     $pageJsScript  = array(
       '<script type="text/javascript" src="' . base_url() . 'assets/js/util.js" ></script>'
-      ,'<script type="text/javascript" src="' . base_url() . 'assets/js/School/SchoolModule.js" ></script>'
+      ,'<script type="text/javascript" src="' . base_url() . 'assets/js/Administration/Settings/General_Settings/SchoolModule.js" ></script>'
     );
       
     $pageJsCalls  = array(

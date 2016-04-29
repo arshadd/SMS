@@ -1,5 +1,5 @@
 <?php
-    $title = "Search Subject";
+    $title = "Subject's Association";
     $body_class ="page-header-fixed";
 
     $pageCss  = array(
@@ -38,8 +38,8 @@
     <div class="page-content-wrapper">
       <div class="page-content">
         <!-- BEGIN PAGE HEADER-->
-        <h3 class="page-title"><i class="fa fa-search icon-large"></i>
-          Search Subject
+        <h3 class="page-title"><i class="fa fa-anchor icon-large"></i>
+            Employee's Subject Association
         </h3>
         <div class="page-bar">
           <ul class="page-breadcrumb breadcrumb">
@@ -53,7 +53,7 @@
                   <i class="fa fa-angle-right"></i>
               </li>
             <li>
-              <a href="#">Search</a>
+              <a href="#">Subject Association</a>
             </li>
           </ul>
         </div>
@@ -98,22 +98,20 @@
               <div class="portlet-title">
                 <div class="caption">
                   <i class="fa fa-list-alt"></i>
-                  Subject List
+                  Employee's Subject Association List
                 </div>
                 <div class="actions">
-                  <a href="#" class="btn btn-primary addNewSubject"  onclick="SubjectModule.addView();">
-                    <i class="fa fa-pencil-square-o"></i> Add New Subject
+                  <a href="#" class="btn btn-primary addNewSubject"  onclick="SubjectAssociationModule.addView();">
+                    <i class="fa fa-pencil-square-o"></i> Add New Subject Association
                   </a>
                 </div>
               </div>
               <div class="portlet-body">
-                  <table id="SubjectGrid" class="table table-striped table-bordered table-hover table-full-width">
+                  <table id="SubjectAssociationGrid" class="table table-striped table-bordered table-hover table-full-width">
                       <thead>
                       <tr>
-                          <th class='hidden-xs'>Code</th>
-                          <th class='hidden-xs'>Subject Name</th>
-                          <th class='hidden-xs'>Max Weekly Classes</th>
-                          <th class='hidden-xs'>Credit Hours</th>
+                          <th class='hidden-xs'>Employee</th>
+                          <th class='hidden-xs'>Subject</th>
                           <th class="hidden-xs">Manage</th>
                       </tr>
                       </thead>
@@ -131,13 +129,13 @@
   </div>
   <!-- END CONTAINER -->
 
-  <div id="mdlCreateSubject" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="true" data-width="500">
+  <div id="mdlCreateSubjectAssociation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="true" data-width="500">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-      <h4 class="modal-title">Create Subject</h4>
+      <h4 class="modal-title">Create Subject Association</h4>
     </div>
     <div class="modal-body">
-      <?php include('Create_edit_subject.php');?>
+      <?php include('Create_edit_subject_association.php');?>
     </div>
    <!-- <div class="modal-footer">
       <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
@@ -146,7 +144,7 @@
   </div>
 
 
-<div id="mdlDeleteSubject" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="true" data-width="400">
+<div id="mdlDeleteSubjectAssociation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="true" data-width="400">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
         <h4 class="modal-title">Confirm Delete</h4>
@@ -210,11 +208,11 @@
     
     $pageJsScript  = array(
       '<script type="text/javascript" src="' . base_url() . 'assets/js/util.js" ></script>'
-      ,'<script type="text/javascript" src="' . base_url() . 'assets/js/Academics/Subject/Subject_Search/SubjectModule.js" ></script>'
+      ,'<script type="text/javascript" src="' . base_url() . 'assets/js/Academics/Subject/Subject_Association/SubjectAssociationModule.js" ></script>'
       );
       
     $pageJsCalls  = array(
-        'SubjectModule.init();'
+        'SubjectAssociationModule.init();'
     );
     
     include(VIEW_PATH.'footer.php');

@@ -12,7 +12,7 @@
 
           <div class="portlet-title">
             <div class="caption">
-              <i class="fa fa-cogs"></i>Teacher's Subjects
+              <i class="fa fa-cogs"></i>Employee's Subjects
             </div>
             <!--<div class="actions">
               <a href="#" class="btn btn-primary" id="btnAddSubject" onclick="ClassEmployeeModule.addView();">

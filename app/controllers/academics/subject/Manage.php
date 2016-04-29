@@ -26,5 +26,8 @@ class Manage extends CI_Controller{
 
     $this->load->view('academics/subject/subject_search/Subject_list');
   }
+  function association() {
 
+    $this->load->view('academics/subject/subject_association/Subject_association_list');
+  }
 }

@@ -62,6 +62,7 @@ class Employees_subjects_m extends CI_Model
             //$result = false;
         } else {
             //Insert
+            $employees_subjects = array_merge($employees_subjects, array('school_id'=> $school_id));
 
             //Insert
             $result = $this->db->insert('employees_subjects', $employees_subjects);
@@ -87,9 +88,9 @@ class Employees_subjects_m extends CI_Model
         return $response;
     }
 
-    function delete($subject_id)
+    function delete($employees_subjects_id)
     {
-        if ($subject_id > 0) {
+        if ($employees_subjects_id > 0) {
 
             //Delete
 
@@ -97,7 +98,7 @@ class Employees_subjects_m extends CI_Model
             $subject = array('is_active'=> false);
 
             //update
-            $this->db->where('subject_id', $subject_id);
+            $this->db->where('employees_subjects_id', $employees_subjects_id);
             $result = $this->db->update('subjects', $subject);
 
             //return $result;

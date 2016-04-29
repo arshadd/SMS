@@ -3,8 +3,14 @@ $title = "Attendance Report";
 $body_class ="page-header-fixed";
 
 $pageCss  = array(
-    '<link href="' . base_url() . 'assets/plugins/select2/select2_conquer.css" rel="stylesheet" type="text/css" />'
+
+      '<link href="' . base_url() . 'assets/plugins/select2/select2_conquer.css" rel="stylesheet" type="text/css" />'
+
 , '<link href="' . base_url() . 'assets/css/pages/invoice.css" rel="stylesheet" type="text/css" />'
+
+, '<link href="' . base_url() . 'assets/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" type="text/css" />'
+, '<link href="' . base_url() . 'assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />'
+
 );
 include(VIEW_PATH.'header.php');
 ?>
@@ -49,10 +55,7 @@ include(VIEW_PATH.'header.php');
       </div>
       <!-- END PAGE HEADER-->
 
-      <?php
-      $report_title = "Daily Attendance";
-      include(VIEW_PATH.'report_header.php');
-      ?>
+
 
       <div class="row hidden-print">
         <div class="col-md-12">
@@ -70,37 +73,12 @@ include(VIEW_PATH.'header.php');
               <form id="Form_Report" class="form-horizontal" method="post">
 
                 <div class="form-body">
-
-                  <!--<h4>Search</h4>-->
-
-
-                  <div class="form-group">
-                    <label class="control-label col-md-2">
-                      Report Type:<span class="required">*</span>
-                    </label>
-                    <div class="col-md-10">
-                      <select id="type" class="form-control input-medium">
-                        <option value="class">Class</option>
-                        <option value="student">Student</option>
-                        <option value="employee">Employee</option>
-                      </select>
-                    </div>
-                  </div>
-
                   <div class="form-group batch-class-selection">
-                    <!--<label class="control-label col-md-2">
-                        Class:<span class="required">*</span>
-                    </label>
-                    <div class="col-md-2">
-                        <select id="class_id" name="class_id" class="form-control input-medium">
-                        </select>
-                    </div>-->
-
                     <label class="control-label col-md-2">
                       Class / Batch:<span class="required">*</span>
                     </label>
                     <div class="col-md-10">
-                      <select id="batch_id" name="batch_id" class="form-control select2me input-medium">
+                      <select id="batch_id" name="batch_id" class="form-control select2me input-xlarge">
                       </select>
                     </div>
                   </div>
@@ -113,35 +91,13 @@ include(VIEW_PATH.'header.php');
                       <div id="reportrange" class="btn btn-default">
                         <i class="fa fa-calendar"></i>
                         &nbsp;
-												<span>
-												</span>
+                        <span>
+                        </span>
                         <b class="fa fa-angle-down"></b>
                       </div>
 
                     </div>
                   </div>
-
-                  <div class="form-group student-selection">
-                    <label class="control-label col-md-2">
-                      Student:<span class="required">*</span>
-                    </label>
-                    <div class="col-md-10">
-                      <select id="student_id" name="student_id" class="form-control select2me input-xlarge">
-                      </select>
-                    </div>
-                  </div>
-
-                  <!--<div class="form-group">
-                      <label class="control-label col-md-2">
-                          Employee:<span class="required">*</span>
-                      </label>
-                      <div class="col-md-10">
-                          <select id="employee_id" name="employee_id" class="form-control input-medium">
-                          </select>
-                      </div>
-                  </div>-->
-
-
 
                   <div class="form-actions fluid">
                     <div class="col-md-offset-3 col-md-9">
@@ -163,14 +119,18 @@ include(VIEW_PATH.'header.php');
         </div>
       </div>
 
+      <?php
+      $report_title = "Attendance Report";
+      include(VIEW_PATH.'report_header.php');
+      ?>
+
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-xs-12">
           <table id="ClassAttendanceSummaryGrid" class="table table-striped table-bordered table-hover">
             <thead>
             <tr>
               <th class="class_name"></th>
               <th class="date_ranges"></th>
-              <th></th>
             </tr>
             </thead>
           </table>
@@ -215,7 +175,7 @@ $pagePlugin  = array(
 
 $pageJsScript  = array(
     '<script type="text/javascript" src="' . base_url() . 'assets/js/util.js" ></script>'
-, '<script type="text/javascript" src="' . base_url() . 'assets/js/Report/AttendanceModule.js" ></script>'
+  , '<script type="text/javascript" src="' . base_url() . 'assets/js/Academics/Attendance/Report/AttendanceModule.js" ></script>'
 
 //,'<script type="text/javascript" src="' . base_url() . 'assets/js/Academics/Class_Batch/Report/ClassBatchReportModule.js" ></script>'
 );

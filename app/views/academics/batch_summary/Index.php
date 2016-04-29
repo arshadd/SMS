@@ -129,7 +129,7 @@ include(VIEW_PATH . 'header.php');
                             </li>
                             <li class="">
                                 <a href="#tab_1_5" data-toggle="tab">
-                                    <i class="fa fa-female"></i> Teachers
+                                    <i class="fa fa-female"></i> Employee's Subjects
                                 </a>
                             </li>
                             <li class="">

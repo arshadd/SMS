@@ -61,13 +61,13 @@ include(VIEW_PATH.'header.php');
 						<div class="portlet-body">
 							<div class="form-body well">
 								<div class="row">
-									<div class="col-md-4">
+									<!--<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-plus-circle icon-large"></i>
 											<a href="#">Create Subject</a></h3>
 										<p>
 											Subject admission form.
 										</p>
-									</div>
+									</div>-->
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-search icon-large"></i>
 											<a href="<?php echo site_url();?>/academics/subject/manage/search">Subject Search</a></h3>
@@ -77,7 +77,7 @@ include(VIEW_PATH.'header.php');
 									</div>
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-anchor icon-large"></i>
-											<a href="#">Subject Association</a></h3>
+											<a href="<?php echo site_url();?>/academics/subject/manage/association">Subject Association</a></h3>
 										<p>
 											Manage Employee subject association.
 										</p>

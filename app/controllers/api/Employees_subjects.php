@@ -72,18 +72,18 @@ class Employees_subjects extends REST_Controller {
         $employees_subjects_id = $this->post('employees_subjects_id');
         
         //Make array
-        $employees_subjects = array(
+        /*$employees_subjects = array(
             'employees_subjects_id' => $employees_subjects_id,
             'employee_id' => $this->post('employee_id'),
-            'subject_id' => $this->post('subject_id1'),
+            'subject_id' => $this->post('subject_id'),
             'school_id' => $school_id
-        );
+        );*/
 
         //$this->response(array("status" => "success",  "message" => "", "data" => $employees_subjects));
 
 
         //Save
-        $response = $this->employees_subjects_m->save($school_id, $employees_subjects_id, $employees_subjects);
+        $response = $this->employees_subjects_m->save($school_id, $employees_subjects_id, $_POST);
 
         if ($response['result'] === FALSE) {
             $this->response(array("status" => "failed", "message" => $response['message'], "data" => null));
@@ -106,7 +106,7 @@ class Employees_subjects extends REST_Controller {
         if ($response['result']=== FALSE) {
             $this->response(array("status" => "failed", "message" => $response['message'], "data" => null));
         } else {
-            $this->response(array("status" => "success", "message" => $response['message'], "data" => $subject_id));
+            $this->response(array("status" => "success", "message" => $response['message'], "data" => $employees_subjects_id));
         }
     }
 

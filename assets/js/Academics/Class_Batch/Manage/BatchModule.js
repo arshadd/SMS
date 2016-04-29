@@ -468,11 +468,11 @@ var BatchModule = function () {
     function disableControl(isDisable){
         if(isDisable){
             $('.addNewBatch').attr('disabled', 'disabled');
-            BatchGrid.attr('disabled','disabled');
+            //BatchGrid.attr('disabled','disabled');
         }
         else {
             $('.addNewBatch').removeAttr('disabled');
-            BatchGrid.removeAttr('disabled');
+            //BatchGrid.removeAttr('disabled');
         }
     }
     //--------------------End Fill dropdown Functions-----------------------//
