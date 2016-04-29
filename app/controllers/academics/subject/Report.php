@@ -31,4 +31,9 @@ class Report extends CI_Controller{
 
     $this->load->view('academics/subject/report/Subject_detail');
   }
+
+  function batch_subjects() {
+
+    $this->load->view('academics/subject/report/Batch_subjects');
+  }
 }

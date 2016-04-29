@@ -31,4 +31,14 @@ class Report extends CI_Controller{
 
     $this->load->view('academics/student/report/Student_detail');
   }
+
+  function batch_students() {
+
+    $this->load->view('academics/student/report/Batch_students');
+  }
+
+  function attendance() {
+
+    $this->load->view('academics/student/report/Attendance');
+  }
 }

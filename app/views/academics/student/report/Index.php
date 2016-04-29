@@ -83,12 +83,39 @@ include(VIEW_PATH.'header.php');
 									</div>
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i>
-											<a href="#">Class / Batch Student</a>
+											<a href="<?php echo site_url();?>/academics/student/report/batch_students">Class / Batch Student</a>
 										</h3>
 										<p>
 											Print all class / batch student report.
 										</p>
 									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-4">
+										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i>
+											<a href="<?php echo site_url();?>/academics/student/report/attendance">Student's Attendance</a>
+										</h3>
+										<p>
+											Print all students's Attendance report.
+										</p>
+									</div>
+									<!--<div class="col-md-4">
+										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i>
+											<a href="<?php /*echo site_url();*/?>/academics/student/report/student_detail">Student Detail Report</a>
+										</h3>
+										<p>
+											Print student's detail report.
+										</p>
+									</div>
+									<div class="col-md-4">
+										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i>
+											<a href="#">Class / Batch Student</a>
+										</h3>
+										<p>
+											Print all class / batch student report.
+										</p>
+									</div>-->
 								</div>
 
 							</div>
