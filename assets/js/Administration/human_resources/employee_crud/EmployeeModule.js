@@ -72,7 +72,7 @@ var EmployeeModule = function () {
                 },
                 {
                     data: null, render: function (data, type, row) {
-                    return '<a href="'+baseAppUrl+'administration/hr/manage/admission/'+ data.employee_id +'" class="editView" data-id="' + data.employee_id + '">'+ data.first_name +' '+data.middle_name +', '+ data.last_name +'</a>';
+                    return '<a href="'+baseAppUrl+'administration/hr/manage/admission/'+ data.employee_id +'" data-id="' + data.employee_id + '">'+ data.first_name +' '+data.middle_name +', '+ data.last_name +'</a>';
                 }
                 },
                 { data: "gender_text" },
@@ -80,7 +80,7 @@ var EmployeeModule = function () {
                 {
                     data: null, render: function (data, type, row) {
                     return '<a href="edit/'+ data.employee_id +'" class="btn btn-default btn-xs purple"><i class="fa fa-key"></i> Manage</a>'+
-                        '| <a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.employee_id + '"><i class="fa fa-edit"></i> Edit</a>';
+                        '| <a href="#" class="btn btn-default btn-xs purple" data-id="' + data.employee_id + '"><i class="fa fa-edit"></i> Edit</a>';
                     /*return '<a href="edit/'+ data.employee_id +'" class="btn btn-default btn-xs purple"><i class="fa fa-key"></i> Manage</a>'+
                         '| <a href="#" class="btn btn-default btn-xs purple editView" data-id="' + data.employee_id + '"><i class="fa fa-edit"></i> Edit</a>'+
                         '| <a href="#" class="btn btn-default btn-xs purple deleteView" data-id="' + data.employee_id + '"><i class="fa fa-trash-o"></i> Delete</a>';*/

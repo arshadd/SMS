@@ -110,8 +110,8 @@ include(VIEW_PATH.'header.php');
   </div>
   <div class="modal-body">
 
-    <?php echo (VIEW_PATH.'app\views/employee/_createOrEdit.php');?>
-    <?php include(VIEW_PATH.'app/views/employee/_createOrEdit.php');?>
+<!--    --><?php //echo (VIEW_PATH.'app\views/employee/_createOrEdit.php');?>
+<!--    --><?php //include(VIEW_PATH.'app/views/employee/_createOrEdit.php');?>
   </div>
 
 </div>
