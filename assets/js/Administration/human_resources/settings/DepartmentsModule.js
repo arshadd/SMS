@@ -223,7 +223,7 @@ var loadGridUrl =  baseApiUrl + "employeedepartments/all_employeedepartments";
     function showEdit(data) {
         if (data == null) return;
 
-        alert(data.employee_department_id);
+        //alert(data.employee_department_id);
         $.each(data, function(key, val){
             //console.log("key:"+key, ", val:"+val);
             $('#'+key).val(val);
