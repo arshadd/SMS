@@ -42,7 +42,7 @@ class Employeedepartments_m extends CI_Model
         $this->db->from('employee_departments');
         $this->db->where('employee_department_id', $employee_department_id);
         $this->db->where('school_id', $school_id);
-        $this->db->where('status', true);
+        $this->db->where('is_deleted', false);
 
         $departmenets = $this->db->get()->result();
 

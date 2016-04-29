@@ -7,7 +7,7 @@ var DepartmentsModule = function () {
 
     var StatusIdFld = $('#Form_Departments #status');
     var EmployeeDepartmentIdFld = $('#employee_department_id');
-
+    var EmployeeDepartmentEditIdFld = $('#Form_Departments #employee_department_id');
     var loaderDelete = $('#loaderDelete');
     var loader = $("#Form_Departments #loader");
     loader.hide();
@@ -69,7 +69,7 @@ var loadGridUrl =  baseApiUrl + "employeedepartments/all_employeedepartments";
         var id = $(this).data('id');
 
         edit(id);
-        $('.modal-title').html("Edit Student");
+        $('.modal-title').html("Edit Department");
         $('#mdlCreateDepartment').modal('show');
     });
 
@@ -223,12 +223,13 @@ var loadGridUrl =  baseApiUrl + "employeedepartments/all_employeedepartments";
     function showEdit(data) {
         if (data == null) return;
 
-
+        alert(data.employee_department_id);
         $.each(data, function(key, val){
             //console.log("key:"+key, ", val:"+val);
             $('#'+key).val(val);
         });
 
+        EmployeeDepartmentEditIdFld.val(data.employee_department_id);
         //Fire class on change, fills the batches
         //StudentClassFld.trigger('change');
 

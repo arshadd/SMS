@@ -24,7 +24,7 @@
 
                     <div class="form-group">
                         <label class="control-label col-md-3">
-                            Class Name:<span class="required">*</span>
+                            Department Name:<span class="required">*</span>
                         </label>
                         <div class="col-md-9">
                             <input type="text" id="name" name="name" class="form-control"/>
