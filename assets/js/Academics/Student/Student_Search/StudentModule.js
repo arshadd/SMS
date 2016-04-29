@@ -367,9 +367,9 @@ var StudentModule = function () {
     }
 
     function ShowMessage(type, message){
-        alert(message);
+        // alert(message);
         if (message == 'undefined') return;
-        alert(message);
+        // alert(message);
         message = '<button data-close="alert" class="close"></button>'+ message;
 
         error.hide();

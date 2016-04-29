@@ -208,6 +208,26 @@ var EmployeeModule = function () {
                 },
                 last_name: {
                     required: true
+                },
+                gender:{
+                    required: true
+                },
+                employee_department_id:{
+                    min:1
+                },
+                employee_position_id: {
+                    min:1
+                },
+                experience_year:{
+                  min:1
+                },
+                qualification:{
+                    required: true
+                },
+                messages:{
+                    employee_department_id:{
+                        min: 'select dept'
+                    }
                 }
             },
 
