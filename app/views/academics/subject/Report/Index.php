@@ -83,7 +83,7 @@ include(VIEW_PATH.'header.php');
 									</div>
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i>
-											<a href="#">Class / Batch Subject</a>
+											<a href="<?php echo site_url();?>/academics/subject/report/batch_subjects">Class / Batch Subject</a>
 										</h3>
 										<p>
 											Print all class / batch subject report.
@@ -92,14 +92,14 @@ include(VIEW_PATH.'header.php');
 								</div>
 
 								<div class="row">
-									<div class="col-md-4">
+									<!--<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i>
 											<a href="#">Subject Association</a>
 										</h3>
 										<p>
 											Print all employee subject report.
 										</p>
-									</div>
+									</div>-->
 									<!--<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-file-text icon-large"></i>
 											<a href="<?php /*echo base_url();*/?>index.php/academics/subject/report/subject_detail">Subject Detail Report</a>

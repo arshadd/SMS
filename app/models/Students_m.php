@@ -4,7 +4,7 @@ class Students_m extends CI_Model
 {
     function all_students($school_id)
     {
-        $this->db->select('s.*, concat(s.first_name," ", s.middle_name, " ", s.last_name) as full_name, b.name as batch_name, c.class_id, c.name as class_name, c.code');
+        $this->db->select('s.*, concat(c.code, IFNULL(roll_no_prefix,"")) as roll_prefix,  concat(c.code, IFNULL(roll_no_prefix,""), s.class_roll_no) as full_roll_no, concat(s.first_name," ", s.middle_name, " ", s.last_name) as full_name, b.name as batch_name, c.class_id, c.name as class_name, c.code');
         $this->db->from('students s');
         $this->db->join('batches b', 'b.batch_id = s.batch_id', 'left');
         $this->db->join('classes c', 'c.class_id = b.class_id', 'left');
@@ -24,7 +24,7 @@ class Students_m extends CI_Model
 
     function all_batch_students($school_id, $batch_id)
     {
-        $this->db->select('s.*, concat(s.first_name," ", s.middle_name, " ", s.last_name) as full_name, b.name as batch_name, c.class_id, c.name as class_name, c.code');
+        $this->db->select('s.*, concat(c.code, IFNULL(roll_no_prefix,"")) as roll_prefix,  concat(c.code, IFNULL(roll_no_prefix,""), s.class_roll_no) as full_roll_no, concat(s.first_name," ", s.middle_name, " ", s.last_name) as full_name, b.name as batch_name, c.class_id, c.name as class_name, c.code');
         $this->db->from('students s');
         $this->db->join('batches b', 'b.batch_id = s.batch_id', 'left');
         $this->db->join('classes c', 'c.class_id = b.class_id', 'left');
@@ -52,7 +52,7 @@ class Students_m extends CI_Model
 
     function find_student($student_id)
     {
-        $this->db->select('s.*, concat(s.first_name," ", s.middle_name, " ", s.last_name) as full_name, b.name as batch_name, c.class_id, c.name as class_name, c.code');
+        $this->db->select('s.*, concat(c.code, IFNULL(roll_no_prefix,"")) as roll_prefix,  concat(c.code, IFNULL(roll_no_prefix,""), s.class_roll_no) as full_roll_no, concat(s.first_name," ", s.middle_name, " ", s.last_name) as full_name, b.name as batch_name, c.class_id, c.name as class_name, c.code');
         $this->db->from('students s');
         $this->db->join('batches b', 'b.batch_id = s.batch_id', 'left');
         $this->db->join('classes c', 'c.class_id = b.class_id', 'left');

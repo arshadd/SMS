@@ -52,13 +52,14 @@ var ClassAttendanceModule = function () {
                     return counter;
                 }
                 },
-                {
+                /*{
                     data: null, render: function (data, type, row) {
                     return '<img src="' + baseAppImageUrl+ data.photo + '" style="width:30px;heigh:30px;" />';
                 }
-                },
+                },*/
                 {data: "full_name"},
-                {data: "class_roll_no"},
+                {data: "full_roll_no"},
+                {data: "admission_no"},
                 {data: null, render: function ( data, type, full, meta ) {
 
                     var name = "attendance_status_"+ data.student_id;

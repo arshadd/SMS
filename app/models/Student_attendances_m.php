@@ -5,14 +5,26 @@ class Student_attendances_m extends CI_Model
 {
     function all_batch_students($school_id, $batch_id, $attendance_date)
     {
-        $sql = "SELECT sa.*, s.photo, s.class_roll_no, s.student_id, concat(s.first_name, ' ', s.middle_name, ', ', s.last_name) As full_name 
+/*        $sql = "SELECT sa.*, s.photo, s.class_roll_no, s.student_id, concat(s.first_name, ' ', s.middle_name, ', ', s.last_name) As full_name
                     FROM `batch_student` `bs`
                      LEFT JOIN `student_attendances` `sa` ON `bs`.`student_id` = `sa`.`student_id`
                          and `bs`.`batch_id` = `sa`.`batch_id`
                          and `sa`.`attendance_date` = ?
                      LEFT JOIN `students` s on `s`.`student_id` = `bs`.`student_id`
                      WHERE `bs`.`school_id` = ?
-                     AND `bs`.`batch_id` =? ;";
+                     AND `bs`.`batch_id` =? ;";*/
+
+        $sql = "SELECT sa.*, s.photo, s.admission_no, concat(c.code, IFNULL(roll_no_prefix,\"\"), s.class_roll_no) as full_roll_no, s.class_roll_no, s.student_id, concat(s.first_name, ' ', s.middle_name, ' ', s.last_name) As full_name 
+                FROM batch_student bs
+                 LEFT JOIN student_attendances sa ON bs.student_id = sa.student_id
+                     and bs.batch_id = sa.batch_id
+                     and sa.attendance_date = ?
+                 LEFT JOIN students s on s.student_id = bs.student_id
+                 INNER JOIN batches b on b.batch_id =  s.batch_id
+                 INNER JOIN classes c on c.class_id = b.class_id
+                 WHERE bs.school_id = ?
+                 AND bs.batch_id = ? ";
+
 
         $query = $this->db->query($sql, array($attendance_date, $school_id, $batch_id));
 

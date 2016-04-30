@@ -121,10 +121,10 @@ var SubjectAssociationModule = function () {
             ignore: "",
             rules: {
                 //Field Validation Rule
-                code: {
+                employee_id: {
                     required: true
                 },
-                name: {
+                subject_id: {
                     required: true
                 },
                 /* max_weekly_classes: {
@@ -277,6 +277,9 @@ var SubjectAssociationModule = function () {
         $('#Form_Subject_Association').clearForm();
 
         EmployeeSubjectIdFld.val("0");
+        $('#subject_id').select2('val','0');
+        $('#employee_id').select2('val','0');
+
 
         $('#mdlCreateSubjectAssociation .modal-title').html("Create Subject Association");
         ModalCreateSubject.modal('show');
@@ -329,7 +332,9 @@ var SubjectAssociationModule = function () {
         var loadDDUrl = baseApiUrl + "employees/all_employees";
 
         EmployeeFld.empty();
-        EmployeeFld.append($("<option     />").val(0).text("Select ..."));
+        EmployeeFld.append($("<option     />").val('').text("Select ..."));
+        EmployeeFld.select2('val','');
+
         var url = loadDDUrl;
         $.ajax({
             url: url,
@@ -350,7 +355,9 @@ var SubjectAssociationModule = function () {
         var loadDDUrl = baseApiUrl + "subjects/all_batch_subjects/"+batch_id;
 
         SubjectFld.empty();
-        SubjectFld.append($("<option     />").val(0).text("Select ..."));
+        SubjectFld.append($("<option     />").val('').text("Select ..."));
+        SubjectFld.select2('val','');
+
         var url = loadDDUrl;
         $.ajax({
             url: url,

@@ -71,7 +71,7 @@ var StudentModule = function () {
                 { data: "admission_no" },
                 { data: "class_name" },
                 { data: "batch_name" },
-                { data: "class_roll_no" },
+                { data: "full_roll_no" },
                 {
                     data: null, render: function (data, type, row) {
                     // Combine the first and last names into a single table field

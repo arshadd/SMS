@@ -158,9 +158,9 @@ include(VIEW_PATH.'header.php');
                   </tr>
                   <tr>
                     <th class='hidden-xs'>#</th>
-                    <th class='hidden-xs'>Photo</th>
                     <th class='hidden-xs'>Full Name</th>
                     <th class='hidden-xs'>Roll #</th>
+                    <th class='hidden-xs'>Admission #</th>
 
                     <th class='hidden-xs'>Attendance</th>
                     <th class='hidden-xs'>Comments</th>
