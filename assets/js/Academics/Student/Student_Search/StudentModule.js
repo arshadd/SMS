@@ -379,6 +379,7 @@ var StudentModule = function () {
             error.show();
         }else if(type=="success")
         {
+            message = message+'<br/><span><a href='+baseAppUrl+ 'academics/student/manage/search class="btn btn-link btn-sm active">Goto Student List</a></span>';
             success.html(message);
             success.show();
         }

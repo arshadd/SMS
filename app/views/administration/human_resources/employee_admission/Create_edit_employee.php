@@ -90,6 +90,7 @@ include(VIEW_PATH . 'header.php');
         <div class="alert alert-success display-hide">
             <button class="close" data-close="alert"></button>
       <span>
+          select list
       </span>
         </div>
         <div class="alert alert-danger display-hide">

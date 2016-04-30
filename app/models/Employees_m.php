@@ -77,7 +77,7 @@ class Employees_m extends CI_Model {
             unset($employee['user_id']);
             //update
             $this->db->where('employee_id', $employee_id);
-            $result = $this->db->update('employees1', $employee);
+            $result = $this->db->update('employees', $employee);
             //-----------End Update Employee's Info---------------//
 
             //$result = false;

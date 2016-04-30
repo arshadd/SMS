@@ -159,6 +159,7 @@ var EmployeeModule = function () {
 
     function fillDropDownPositions() {
         //var class_id = StudentClassFld.val();
+        
         var loadDDUrl = baseApiUrl + "employeepositions/all_employeepositions";
 
         EmployeePositionFld.empty();
@@ -323,6 +324,8 @@ var EmployeeModule = function () {
             error.show();
         }else if(type=="success")
         {
+            message = message+'<br/><span><a href='+baseAppUrl+ 'administration/hr/manage/employee_search class="btn btn-link btn-sm active">Goto Employee List</a>' ;
+            message = message+'<a href='+baseAppUrl+ 'academics/subject/manage/association class="btn btn-link btn-sm active">Associate Class Subjects</a></span>' ;
             success.html(message);
             success.show();
         }
@@ -397,7 +400,7 @@ var EmployeeModule = function () {
          EmployeePositionFld.val(employee_position_id);
         // GenderFld.val(gender);
         //Disabled some fields
-        disabledField(true);
+        //disabledField(true);
     }
 
     $('#btnDelete').click(function(){

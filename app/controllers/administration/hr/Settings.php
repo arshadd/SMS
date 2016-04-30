@@ -28,6 +28,6 @@ class Settings extends CI_Controller{
   }
   function designation() {
 
-    $this->load->view('administration/human_resources/settings/designation/Designation_List');
+    $this->load->view('administration/human_resources/settings/designation/Designation_list');
   }
 }

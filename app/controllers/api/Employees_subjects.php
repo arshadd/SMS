@@ -54,7 +54,7 @@ class Employees_subjects extends REST_Controller {
         if (is_null($employee_subject_id)) {
             $this->response(array("status" => "false", "message" => "Invalid employee subject id", "data" => null));
         } else {
-
+    
             //Get logged school id
             $school_id = $this->session->userdata('school_id');
 
