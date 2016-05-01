@@ -14,11 +14,11 @@
             <div class="caption">
               <i class="fa fa-cogs"></i>Class's Subjects
             </div>
-            <!--<div class="actions">
-              <a href="#" class="btn btn-primary" id="btnAddSubject" onclick="ClassSubjectModule.addView();">
-                <i class="fa fa-pencil-square-o"></i> Add New Subject
+            <div class="actions">
+              <a href="<?php echo site_url();?>/academics/subject/manage/search" class="btn btn-primary">
+                <i class="fa fa-building"></i> Subject Management
               </a>
-            </div>-->
+            </div>
           </div>
 
           <div class="portlet-body">

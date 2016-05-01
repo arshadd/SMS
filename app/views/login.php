@@ -423,7 +423,7 @@
     );
     
     $pageJsScript  = array(
-      '<script src="' . base_url() . 'assets/scripts/login.js" type="text/javascript"></script>'
+      '<script src="' . base_url() . 'assets/js/login.js" type="text/javascript"></script>'
       );
     
     $pageJsCalls  = array(

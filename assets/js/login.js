@@ -7,11 +7,11 @@ var Login = function () {
             focusInvalid: false, // do not focus the last invalid input
             rules: {
                 username: {
-                    minlength: 5,
+                    //minlength: 5,
                     required: true
                 },
                 password: {
-                    minlength: 5,
+                    //minlength: 5,
                     required: true
                 },
                 remember: {

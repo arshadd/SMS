@@ -14,6 +14,14 @@
             <div class="caption">
               <i class="fa fa-cogs"></i>Employee's Subjects
             </div>
+            <div class="actions">
+              <a href="<?php echo site_url();?>/administration/hr/manage/employee_search" class="btn btn-primary">
+                <i class="fa fa-group"></i> Employee Management
+              </a>
+              <a href="<?php echo site_url();?>/academics/subject/manage/association" class="btn btn-primary">
+                <i class="fa fa-anchor"></i> Subject Association
+              </a>
+            </div>
             <!--<div class="actions">
               <a href="#" class="btn btn-primary" id="btnAddSubject" onclick="ClassEmployeeModule.addView();">
                 <i class="fa fa-pencil-square-o"></i> Add New Teacher's Subject

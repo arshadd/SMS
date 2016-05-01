@@ -13,6 +13,11 @@
             <div class="caption">
               <i class="fa fa-cogs"></i>Class's Students
             </div>
+            <div class="actions">
+              <a href="<?php echo site_url();?>/academics/student/manage/search" class="btn btn-primary">
+                <i class="fa fa-user"></i> Student Management
+              </a>
+            </div>
             <!--<div class="actions">
               <a href="#" class="btn btn-primary" onclick="StudentModule.addView();">
                 <i class="fa fa-pencil-square-o"></i> Add New Student

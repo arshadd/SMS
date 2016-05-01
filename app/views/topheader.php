@@ -461,7 +461,7 @@
             </li>-->
           </li>
         <li>
-          <a href="<?php echo site_url() ?>login/logout_user"><i class="icon-key"></i> Logout
+          <a href="<?php echo site_url().'/login/logout_user'?>"><i class="icon-key"></i> Logout
           </a>
         </li>
       </ul>

@@ -111,7 +111,7 @@ include(VIEW_PATH.'header.php');
 								<div class="row">
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-anchor icon-large"></i>
-											<a href="#">Subject Association</a></h3>
+											<a href="<?php echo site_url();?>/academics/subject/manage/association">Subject Association</a></h3>
 										<p>
 											Assign an employee with one or more subjects.
 										</p>
