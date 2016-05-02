@@ -107,11 +107,13 @@ class Students_m extends CI_Model
 
     }
 
-    function already_exists($student_id, $admission_no)
+    function already_exists($school_id, $student_id, $admission_no)
     {
         $this->db->from('students');
         $this->db->where('student_id !=', $student_id);
         $this->db->where('admission_no', $admission_no);
+        $this->db->where('school_id', $school_id);
+
 
         $result = $this->db->get()->result();
 
@@ -125,7 +127,7 @@ class Students_m extends CI_Model
     function save($school_id, $student_id, $student)
     {
         //Validation
-        $result = $this->already_exists($student_id, $student['admission_no']);
+        $result = $this->already_exists($school_id, $student_id, $student['admission_no']);
         if($result===TRUE){
 
             $response = array(
