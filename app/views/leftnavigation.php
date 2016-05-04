@@ -104,9 +104,15 @@
               </a>
             </li>
             <li  class="" data-menu-item="timetable">
-              <a href="#">
+              <a href="<?php echo site_url();?>/academics/timetable/manage/index">
                 <i class="fa fa-calendar"></i>
                 Timetable
+              </a>
+            </li>
+            <li  class="" data-menu-item="exam">
+              <a href="<?php echo site_url();?>/academics/exam/manage/index">
+                <i class="fa fa-tags"></i>
+                Exam
               </a>
             </li>
           </ul>

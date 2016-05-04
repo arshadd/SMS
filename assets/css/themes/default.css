@@ -31,13 +31,13 @@ Page header
 }
 .header .search-form .form-control,
 .page-sidebar-menu .search-form .form-control {
-  color: #7e818a;
+  color: #cecfd3;
   background-color: #4d4f55;
   border-color: #1d1d1f;
 }
 .header .search-form .input-icon > i,
 .page-sidebar-menu .search-form .input-icon > i {
-  color: #292a2d;
+  color: #cecfd3;
 }
 /***
 Page sidebar

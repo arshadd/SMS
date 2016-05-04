@@ -8,6 +8,8 @@
         ,'<link href="' . base_url() . 'assets/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css" />'
         ,'<link href="' . base_url() . 'assets/plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" />'
         ,'<link href="' . base_url() . 'assets/css/pages/tasks.css" rel="stylesheet" type="text/css" />'
+        ,'<link href="' . base_url() . 'assets/css/pages/dashboard.css" rel="stylesheet" type="text/css" />'
+
     );
     
     include("header.php");
@@ -67,19 +69,103 @@
           <!-- BEGIN OVERVIEW STATISTIC BARS-->
           <div class="row stats-overview-cont">
 
-
-            <div class="col-md-2 col-sm-4">
+           <!-- <div class="col-md-2 col-sm-4">
               <div class="stats-overview stat-block">
-                  <div class="details">
-                   <h4><i class="fa fa-shield icon-large"></i> Classes</h4>
-                    <div class="numbers">
-                      1360
-                    </div>
+                <div class="display stat good huge">
+                                    <span class="line-chart" style="display: inline;"><span style="display: none;"><span style="display: none;"><span style="display: none;">
+                                        2,6,8,12, 11, 15, 16, 11, 16, 11, 10, 3, 7, 8, 12, 19
+                                    </span><canvas width="50" height="20"></canvas></span><canvas width="50" height="20"></canvas></span><canvas width="40" height="20"></canvas></span>
+                  <div class="percent">
+                    +16%
                   </div>
+                </div>
+                <div class="details">
+                  <div class="title">
+                    Exec. Cost
+                  </div>
+                  <div class="numbers">
+                    1800
+                  </div>
+                  <div class="progress">
+                      <span style="width: 16%;" class="progress-bar progress-bar-warning" aria-valuenow="16" aria-valuemin="0" aria-valuemax="100">
+                          <span class="sr-only">
+                              16% Complete
+                          </span>
+                      </span>
+                  </div>
+                </div>
               </div>
+            </div>-->
+
+            <div class="col-md-3 col-sm-4">
+              <a class="dashboard-stat dashboard-stat-v2 blue" href="#">
+                <div class="visual">
+                  <i class="fa fa-shield"></i>
+                </div>
+                <div class="details">
+                  <div class="number">
+                    <span data-counter="counterup" data-value="12">12</span>
+                  </div>
+                  <div class="desc"> Classes </div>
+                </div>
+              </a>
             </div>
 
-            <div class="col-md-2 col-sm-4">
+
+            <div class="col-md-3 col-sm-4">
+              <a class="dashboard-stat dashboard-stat-v2 green" href="#">
+                <div class="visual">
+                  <i class="fa fa-user"></i>
+                </div>
+                <div class="details">
+                  <div class="number">
+                    <span data-counter="counterup" data-value="1349">1349</span>
+                  </div>
+                  <div class="desc"> Students </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-md-3 col-sm-4">
+              <a class="dashboard-stat dashboard-stat-v2 red" href="#">
+                <div class="visual">
+                  <i class="fa fa-group"></i>
+                </div>
+                <div class="details">
+                  <div class="number">
+                    <span data-counter="counterup" data-value="50">50</span>
+                  </div>
+                  <div class="desc"> Employees </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="col-md-3 col-sm-4">
+              <a class="dashboard-stat dashboard-stat-v2 purple" href="#">
+                <div class="visual">
+                  <i class="fa fa-user"></i>
+                </div>
+                <div class="details">
+                  <div class="number">
+                    <span data-counter="counterup" data-value="159">159</span>
+                  </div>
+                  <div class="desc"> Parents </div>
+                </div>
+              </a>
+            </div>
+
+          <!-- <div class="col-md-2 col-sm-4">
+              <div class="stats-overview stat-block">
+                <div class="details">
+                  <h4><i class="fa fa-shield icon-large"></i> Classes</h4>
+                  <div class="numbers">
+                    1360
+                  </div>
+                </div>
+              </div>
+            </div>-->
+
+            <!--<div class="col-md-2 col-sm-4">
               <div class="stats-overview stat-block">
                 <div class="details">
                   <h4><i class="fa fa-gavel icon-large"></i> Batches</h4>
@@ -132,7 +218,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div>-->
 
           </div>
           <!-- END OVERVIEW STATISTIC BARS-->

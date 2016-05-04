@@ -418,6 +418,16 @@
           </ul>
         </li>
 -->        <!-- END TODO DROPDOWN -->
+          <!--<li class="dropdown">
+              <div class="search-form input-icon right">
+                  <i class="fa fa-calendar"></i>
+                  <select id="sad" class="form-control">
+                      <option >Batch 2001 - 2002</option>
+                      <option >Batch 2002 - 2003</option>
+                      <option >Batch 2003 - 2004</option>
+                  </select>
+              </div>
+          </li>-->
         <li class="devider">
           &nbsp;
         </li>
