@@ -1,5 +1,5 @@
 <?php
-$title = "Settings";
+$title = "SMS Management";
 $body_class ="page-header-fixed";
 
 $pageCss  = array(
@@ -39,8 +39,8 @@ include(VIEW_PATH.'header.php');
 		<div class="page-content">
 			<!-- BEGIN PAGE HEADER-->
 			<h3 class="page-title">
-				<i class="fa fa-cog icon-large"></i>
-				Settings
+				<i class="fa fa-comments icon-large"></i>
+				SMS
 			</h3>
 			<div class="page-bar">
 				<ul class="page-breadcrumb breadcrumb">
@@ -50,7 +50,11 @@ include(VIEW_PATH.'header.php');
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="#">Settings</a>
+						<a href="<?php echo site_url();?>/administration/settings/manage/index">Settings</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					<li>
+						<a href="#">SMS</a>
 					</li>
 				</ul>
 			</div>
@@ -62,23 +66,23 @@ include(VIEW_PATH.'header.php');
 								<div class="row">
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-cog icon-large"></i>
-											<a href="<?php echo site_url();?>/administration/settings/manage/general_settings">General Settings</a></h3>
-										<p>
-											Set some general configuration related to institution / school etc.
-										</p>
-									</div>
-									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-comments icon-large"></i>
-											<a href="<?php echo site_url();?>/administration/settings/sms/index">SMS</a></h3>
+											<a href="<?php echo site_url();?>/administration/settings/sms/settings">Settings</a></h3>
 										<p>
 											Enable/disable SMS settings.
 										</p>
 									</div>
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-print icon-large"></i>
-											<a href="<?php echo site_url();?>/administration/settings/report/index">Report</a></h3>
+										<h3 class="page-title"><i class="fa fa-comments icon-large"></i>
+											<a href="<?php echo site_url();?>/administration/settings/sms/send">Send SMS</a></h3>
 										<p>
-											Report.
+											Send SMS.
+										</p>
+									</div>
+									<div class="col-md-4">
+										<h3 class="page-title"><i class="fa fa-external-link-square icon-large"></i>
+											<a href="<?php echo site_url();?>/administration/settings/sms/log">SMS Log</a></h3>
+										<p>
+											SMS Log.
 										</p>
 									</div>
 								</div>
