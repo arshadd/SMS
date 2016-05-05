@@ -22,16 +22,30 @@ class Manage extends CI_Controller{
     $this->load->view('academics/exam/Index');
   }
 
-  function exam() {
 
-    $this->load->view('academics/exam/manage_exam/Exam_list');
-  }
-  function grade() {
+  function system_exam() {
 
-    $this->load->view('academics/exam/manage_grade/Grade_list');
+    $this->load->view('academics/exam/system_exam/Exam_list');
   }
-  function marks() {
+  function system_grade() {
 
-    $this->load->view('academics/exam/manage_marks/Marks_list');
+    $this->load->view('academics/exam/system_grade/Grade_list');
   }
+
+
+  function class_exam() {
+
+    $this->load->view('academics/exam/class_exam/Exam_list');
+  }
+  function class_grade() {
+
+    $this->load->view('academics/exam/class_grade/Grade_list');
+  }
+
+  function class_marks() {
+
+    $this->load->view('academics/exam/class_marks/Marks_list');
+  }
+
+
 }

@@ -1,5 +1,5 @@
 <?php
-$title = "Grade List";
+$title = "System Grade List";
 $body_class ="page-header-fixed";
 
 $pageCss  = array(
@@ -40,7 +40,7 @@ include(VIEW_PATH.'header.php');
         <div class="page-content">
             <!-- BEGIN PAGE HEADER-->
             <h3 class="page-title"><i class="fa fa-bookmark icon-large"></i>
-                Grade List
+                System Grade List
             </h3>
             <div class="page-bar">
                 <ul class="page-breadcrumb breadcrumb">
@@ -54,7 +54,7 @@ include(VIEW_PATH.'header.php');
                         <i class="fa fa-angle-right"></i>
                     </li>
                     <li>
-                        <a href="#">Grade List</a>
+                        <a href="#">System Grade List</a>
                     </li>
                 </ul>
             </div>
@@ -267,7 +267,7 @@ $pagePlugin  = array(
 
 $pageJsScript  = array(
     '<script type="text/javascript" src="' . base_url() . 'assets/js/util.js" ></script>'
-    ,    '<script type="text/javascript" src="' . base_url() . 'assets/js/Academics/Exam/Manage_Grade/GradeModule.js" ></script>'
+    ,    '<script type="text/javascript" src="' . base_url() . 'assets/js/Academics/Exam/System_Grade/GradeModule.js" ></script>'
 
 );
 

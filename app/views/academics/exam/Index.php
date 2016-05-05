@@ -62,24 +62,48 @@ include(VIEW_PATH.'header.php');
 							<div class="form-body well">
 								<div class="row">
 									<div class="col-md-4">
-										<h3 class="page-title"><i class="fa fa-tags icon-large"></i>
-											<a href="<?php echo site_url();?>/academics/exam/manage/exam">Manage Exams</a></h3>
+										<h3 class="page-title"><i class="fa fa-tag icon-large"></i>
+											<a href="<?php echo site_url();?>/academics/exam/manage/system_exam">System Exams</a></h3>
 										<p>
-											Manage Exam.
+											Manage System Exam.
 										</p>
 									</div>
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-bookmark icon-large"></i>
-											<a href="<?php echo site_url();?>/academics/exam/manage/grade">Manage Grade</a></h3>
+											<a href="<?php echo site_url();?>/academics/exam/manage/system_grade">System Grade</a></h3>
 										<p>
-											Manage Grade.
+											Manage System Grade.
+										</p>
+									</div>
+									<!--<div class="col-md-4">
+										<h3 class="page-title"><i class="fa fa-arrow-right icon-large"></i>
+											<a href="<?php /*echo site_url();*/?>/academics/exam/manage/marks">Manage Exams Marks</a></h3>
+										<p>
+											Manage Exam's Marks.
+										</p>
+									</div>-->
+								</div>
+
+								<div class="row">
+									<div class="col-md-4">
+										<h3 class="page-title"><i class="fa fa-tags icon-large"></i>
+											<a href="<?php echo site_url();?>/academics/exam/manage/class_exam">Class Exams</a></h3>
+										<p>
+											Manage Class Exam.
+										</p>
+									</div>
+									<div class="col-md-4">
+										<h3 class="page-title"><i class="fa fa-bookmark-o icon-large"></i>
+											<a href="<?php echo site_url();?>/academics/exam/manage/class_grade">Class Grade</a></h3>
+										<p>
+											Manage Class Grade.
 										</p>
 									</div>
 									<div class="col-md-4">
 										<h3 class="page-title"><i class="fa fa-arrow-right icon-large"></i>
-											<a href="<?php echo site_url();?>/academics/exam/manage/marks">Manage Exams Marks</a></h3>
+											<a href="<?php echo site_url();?>/academics/exam/manage/class_marks">Class Exams Marks</a></h3>
 										<p>
-											Manage Exam's Marks.
+											Manage Class Exam's Marks.
 										</p>
 									</div>
 								</div>

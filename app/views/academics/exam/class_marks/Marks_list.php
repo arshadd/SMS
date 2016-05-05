@@ -1,5 +1,5 @@
 <?php
-$title = "Manage Exam Marks";
+$title = "Manage Class Exam Marks";
 $body_class ="page-header-fixed";
 
 $pageCss  = array(
@@ -39,7 +39,7 @@ include(VIEW_PATH.'header.php');
             <!-- BEGIN PAGE HEADER-->
             <h3 class="page-title">
                 <i class="fa fa-arrow-right icon-large"></i>
-                Manage Exam Marks
+                Class Exam Marks
             </h3>
             <div class="page-bar">
                 <ul class="page-breadcrumb breadcrumb">
@@ -53,7 +53,7 @@ include(VIEW_PATH.'header.php');
                         <i class="fa fa-angle-right"></i>
                     </li>
                     <li>
-                        <a href="#">Manage Exam Marks</a>
+                        <a href="#">Class Exam Marks</a>
                     </li>
                 </ul>
             </div>
@@ -129,7 +129,15 @@ include(VIEW_PATH.'header.php');
                 </div>
             </div>
 
-
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="note note-success">
+                        <p>
+                            Exam list for Class : 'Class 1'
+                        </p>
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-12">
@@ -145,28 +153,28 @@ include(VIEW_PATH.'header.php');
 
                         <div class="alert alert-success display-hide">
                             <button class="close" data-close="alert"></button>
-                <span>
-                </span>
+                            <span>
+                            </span>
                         </div>
                         <div class="alert alert-danger display-hide">
                             <button class="close" data-close="alert"></button>
-                <span>
-                 You have some form errors. Please check below.
-                </span>
+                            <span>
+                             You have some form errors. Please check below.
+                            </span>
                         </div>
 
-                        <div class="portlet-body form">
-                            <form id="Form_Marks" class="form-horizontal" method="post">
+
+
+                        <div class="portlet-body">
+                            <!--<div class="note note-success">
+                                <p>
+                                    Exam list for Class : 'Class 1'
+                                </p>
+                            </div>-->
+
+                           <form id="Form_Marks" class="form-horizontal" method="post">
                                 <table id="MarksGrid" class="table table-striped table-bordered table-hover table-full-width">
                                     <thead>
-                                    <tr>
-                                        <th class="hidden-xs" colspan="6">
-                                            <h4>
-                                                <span class="label label-primary">Marks for 1st Terms, Class 1 : Subject : English</span>
-                                            </h4>
-                                        </th>
-                                    </tr>
-
                                     <tr>
                                         <th class='hidden-xs'>#</th>
                                         <th class='hidden-xs'>Full Name</th>
@@ -189,7 +197,7 @@ include(VIEW_PATH.'header.php');
                                     </label>
                                 </div>
 
-                            </form>
+                           </form>
                         </div>
                     </div>
                 </div>
@@ -222,7 +230,7 @@ $pagePlugin  = array(
 
 $pageJsScript  = array(
     '<script type="text/javascript" src="' . base_url() . 'assets/js/util.js" ></script>'
-, '<script type="text/javascript" src="' . base_url() . 'assets/js/Academics/Exam/Manage_Marks/ExamMarksModule.js" ></script>'
+, '<script type="text/javascript" src="' . base_url() . 'assets/js/Academics/Exam/Class_Marks/ExamMarksModule.js" ></script>'
 
 );
 

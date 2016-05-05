@@ -40,7 +40,7 @@ include(VIEW_PATH.'header.php');
         <div class="page-content">
             <!-- BEGIN PAGE HEADER-->
             <h3 class="page-title"><i class="fa fa-tags icon-large"></i>
-                Exam List
+                System Exam List
             </h3>
             <div class="page-bar">
                 <ul class="page-breadcrumb breadcrumb">
@@ -54,7 +54,7 @@ include(VIEW_PATH.'header.php');
                         <i class="fa fa-angle-right"></i>
                     </li>
                     <li>
-                        <a href="#">Exam List</a>
+                        <a href="#">System Exam List</a>
                     </li>
                 </ul>
             </div>
@@ -208,7 +208,7 @@ $pagePlugin  = array(
 
 $pageJsScript  = array(
     '<script type="text/javascript" src="' . base_url() . 'assets/js/util.js" ></script>'
-    ,    '<script type="text/javascript" src="' . base_url() . 'assets/js/Academics/Exam/Manage_Exam/ExamModule.js" ></script>'
+    ,    '<script type="text/javascript" src="' . base_url() . 'assets/js/Academics/Exam/System_Exam/ExamModule.js" ></script>'
 
 );
 
